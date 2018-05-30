@@ -68,9 +68,26 @@ https://drive.google.com/file/d/1cNlZvRILFI8ZCnV7I573nbwftEYLVFOV/view
 Cada desenvolvedor possui uma branch de desenvolvimento com o seu nome. Para acessar esta branch:
 ```
 git fetch origin
-git checkout "seunome"
+git checkout seunome
 ```
 Para atualizar sua branch com o mais recente desenvolvido:
 ```
 git merge origin/develop
+```
+
+### Realizar upload dos desenvolvimento realizado
+Realize o commit do trabalho realizado
+```
+git status (para visualizar os arquivos modificados - em vermelho)
+git add caminho/do/arquivo (realize essa etapa para todos os arquivos em vermelho que deseja adicionar - caso deseje adicionar todos os arquivos em vermelho, utilize o comando "git add .")
+
+git commit -m "Mensagem do commit, entre aspas duplas"
+
+git push (entre com o seu usuário e senha do gitHub)
+```
+### Restaurar versão de arquivos modificados
+Caso mexeu indevidamente em um arquivo e deseja restaurar a versão anterior, realize os seguintes passos:
+```
+git status (encontre o arquivo que deseja)
+git checkout -- caminho/do/arquivo
 ```
