@@ -4,7 +4,7 @@ Projeto final de Desenvolvimento de Aplicações Corporativas - UFPR
 Este repositório contém apenas arquivos de desenvolvimento. Para que você os adicione ao seu projeto local (já configurado, usando NetBeans), crie os projetos com os mesmos nomes fornecidos neste repositório e clone o projeto dentro da pasta raíz, onde os repositórios se encontram.
 
 ### Instalando o git
-```bash
+```
 Abra o Bash do Ubuntu no Windows 10:
 
 sudo apt-get update
@@ -12,7 +12,7 @@ sudo apt-get install git
 ```
 
 ### Configurando o arquivo gitignore
-```bash
+```
 sudo apt-get update
 sudo apt-get install nano
 
@@ -36,11 +36,12 @@ Adicionar as seguintes linhas ao arquivo aberto:
 /foreveralone/web/META-INF/*
 /foreveralone/web/WEB-INF/*
 ```
+
 ### Nome dos projetos
 ```
 Crie os projetos com os seguintes nomes: 
-alwaystogether
-foreveralone
+###alwaystogether
+###foreveralone
 ```
 
 ### Configurando o versionamento dos projetos
