@@ -90,4 +90,6 @@ Caso mexeu indevidamente em um arquivo e deseja restaurar a versão anterior, re
 ```
 git status (encontre o arquivo que deseja)
 git checkout -- caminho/do/arquivo
+OU
+git checkout -- . (para todos os arquivos em vermelho)
 ```
