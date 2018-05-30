@@ -4,9 +4,8 @@ Projeto final de Desenvolvimento de Aplicações Corporativas - UFPR
 Este repositório contém apenas arquivos de desenvolvimento. Para que você os adicione ao seu projeto local (já configurado, usando NetBeans), crie os projetos com os mesmos nomes fornecidos neste repositório e clone o projeto dentro da pasta raíz, onde os repositórios se encontram.
 
 ### Instalando o git
-```
 Abra o Bash do Ubuntu no Windows 10:
-
+```
 sudo apt-get update
 sudo apt-get install git
 ```
@@ -18,9 +17,9 @@ sudo apt-get install nano
 
 git config --global core.excludesfile ~/.gitignore 
 nano ~/.gitignore
-
+```
 Adicionar as seguintes linhas ao arquivo aberto: 
-
+```
 /alwaystogether/build/*
 /alwaystogether/dist/*
 /alwaystogether/nbproject/*
@@ -38,8 +37,8 @@ Adicionar as seguintes linhas ao arquivo aberto:
 ```
 
 ### Nome dos projetos
-```
 Crie os projetos com os seguintes nomes: 
+```
 alwaystogether
 foreveralone
 ```
@@ -60,13 +59,12 @@ Você pode baixar os arquivos necessários para funcionalidade do projeto neste 
 https://drive.google.com/file/d/1cNlZvRILFI8ZCnV7I573nbwftEYLVFOV/view
 
 ### Preparar versionamento para desenvolvimento
-```
 Cada desenvolvedor possui uma branch de desenvolvimento com o seu nome. Para acessar esta branch:
-
+```
 git fetch origin
 git checkout "seunome"
-
+```
 Para atualizar sua branch com o mais recente desenvolvido:
-
+```
 git merge origin/develop
 ```
