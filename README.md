@@ -54,3 +54,8 @@ git remote add origin https://github.com/lgehlen/DAC_Projeto.git
 git fetch origin master
 git merge origin/master
 ```
+
+### Bibliotecas necessárias para o projeto
+```
+https://drive.google.com/file/d/1cNlZvRILFI8ZCnV7I573nbwftEYLVFOV/view
+```
