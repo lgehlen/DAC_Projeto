@@ -58,3 +58,15 @@ git merge origin/master
 ### Bibliotecas necessárias para o projeto
 Você pode baixar os arquivos necessários para funcionalidade do projeto neste link:
 https://drive.google.com/file/d/1cNlZvRILFI8ZCnV7I573nbwftEYLVFOV/view
+
+### Preparar versionamento para desenvolvimento
+```
+Cada desenvolvedor possui uma branch de desenvolvimento com o seu nome. Para acessar esta branch:
+
+git fetch origin
+git checkout "seunome"
+
+Para atualizar sua branch com o mais recente desenvolvido:
+
+git merge origin/develop
+```
