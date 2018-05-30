@@ -56,5 +56,5 @@ git merge origin/master
 ```
 
 ### Bibliotecas necessárias para o projeto
-Vocês podem baixar os arquivos necessários para funcionalidade do projeto neste link:
+Você pode baixar os arquivos necessários para funcionalidade do projeto neste link:
 https://drive.google.com/file/d/1cNlZvRILFI8ZCnV7I573nbwftEYLVFOV/view
