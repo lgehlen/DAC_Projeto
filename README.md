@@ -4,21 +4,24 @@ Projeto final de Desenvolvimento de Aplicações Corporativas - UFPR
 Este repositório contém apenas arquivos de desenvolvimento. Para que você os adicione ao seu projeto local (já configurado, usando NetBeans), crie os projetos com os mesmos nomes fornecidos neste repositório e clone o projeto dentro da pasta raíz, onde os repositórios se encontram.
 
 ### Instalando o git
-Abra o Bash do Ubuntu no Windows 10:
+Abra o Bash do Ubuntu no Windows 10 e instale o git:
 ```
 sudo apt-get update
 sudo apt-get install git
 ```
 
 ### Configurando o arquivo gitignore
+Instale o nano (ou outro editor à sua disposição):
 ```
 sudo apt-get update
 sudo apt-get install nano
-
+```
+Configure o gitignore no seu git local e crie um novo arquivo gitignore
+```
 git config --global core.excludesfile ~/.gitignore 
 nano ~/.gitignore
 ```
-Adicionar as seguintes linhas ao arquivo aberto: 
+Adicionar as seguintes linhas ao arquivo gitignore aberto: 
 ```
 /alwaystogether/build/*
 /alwaystogether/dist/*
@@ -44,11 +47,14 @@ foreveralone
 ```
 
 ### Configurando o versionamento dos projetos
+Inicie o versionamento do projeto no local onde os projetos já existem:
 ```
 cd ../../mnt/c/Users/"SEU USUÁRIO"/"CAMINHO DOS PROJETOS"
 
 git init
-
+```
+Adicione o repositório do projeto:
+```
 git remote add origin https://github.com/lgehlen/DAC_Projeto.git
 git fetch origin master
 git merge origin/master
