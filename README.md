@@ -11,11 +11,44 @@ sudo apt-get update
 sudo apt-get install git
 ```
 
-### Configurando o versionamento dos projetos
+### Configurando o arquivo gitignore
 ```bash
+sudo apt-get update
+sudo apt-get install nano
+
+git config --global core.excludesfile ~/.gitignore 
+nano ~/.gitignore
+
+Adicionar as seguintes linhas ao arquivo aberto: 
+
+/alwaystogether/build/*
+/alwaystogether/dist/*
+/alwaystogether/nbproject/*
+/alwaystogether/src/conf/*
+/alwaystogether/test/*
+/alwaystogether/web/META-INF/*
+/alwaystogether/web/WEB-INF/*
+/foreveralone/build/*
+/foreveralone/dist/*
+/foreveralone/nbproject/*
+/foreveralone/src/conf/*
+/foreveralone/test/*
+/foreveralone/web/META-INF/*
+/foreveralone/web/WEB-INF/*
+```
+### Nome dos projetos
+```
+Crie os projetos com os seguintes nomes: 
+alwaystogether
+foreveralone
+```
+
+### Configurando o versionamento dos projetos
+```
 cd ../../mnt/c/Users/"SEU USUÁRIO"/"CAMINHO DOS PROJETOS"
 
 git init
+
 git remote add origin https://github.com/lgehlen/DAC_Projeto.git
 git fetch origin master
 git merge origin/master
