@@ -40,8 +40,8 @@ Adicionar as seguintes linhas ao arquivo aberto:
 ### Nome dos projetos
 ```
 Crie os projetos com os seguintes nomes: 
-###alwaystogether
-###foreveralone
+alwaystogether
+foreveralone
 ```
 
 ### Configurando o versionamento dos projetos
