@@ -1,0 +1,14 @@
+/alwaystogether/build/*
+/alwaystogether/dist/*
+/alwaystogether/nbproject/*
+/alwaystogether/src/conf/*
+/alwaystogether/test/*
+/alwaystogether/web/META-INF/*
+/alwaystogether/web/WEB-INF/*
+/foreveralone/build/*
+/foreveralone/dist/*
+/foreveralone/nbproject/*
+/foreveralone/src/conf/*
+/foreveralone/test/*
+/foreveralone/web/META-INF/*
+/foreveralone/web/WEB-INF/*

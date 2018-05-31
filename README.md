@@ -10,7 +10,7 @@ sudo apt-get update
 sudo apt-get install git
 ```
 
-### Configurando o arquivo gitignore
+### Configurando o arquivo gitignore 
 Instale o nano (ou outro editor à sua disposição):
 ```
 sudo apt-get update
@@ -19,10 +19,10 @@ sudo apt-get install nano
 Configure o gitignore no seu git local e crie um novo arquivo gitignore
 ```
 git config --global core.excludesfile ~/.gitignore 
+```
+Adicionar as seguintes linhas ao arquivo gitignore aberto (NÃO PRECISA FAZER SE VOCÊ NÃO FOR O LUCAS): 
+```
 nano ~/.gitignore
-```
-Adicionar as seguintes linhas ao arquivo gitignore aberto: 
-```
 /alwaystogether/build/*
 /alwaystogether/dist/*
 /alwaystogether/nbproject/*
@@ -56,8 +56,8 @@ git init
 Adicione o repositório do projeto:
 ```
 git remote add origin https://github.com/lgehlen/DAC_Projeto.git
-git fetch origin master
-git merge origin/master
+git fetch origin develop
+git merge origin/develop
 ```
 
 ### Bibliotecas necessárias para o projeto
