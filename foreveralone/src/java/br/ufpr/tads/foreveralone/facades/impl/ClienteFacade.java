@@ -42,59 +42,58 @@ public class ClienteFacade {
     }
     
     public Cidade buscarCidadesPorEstado(Estado estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getCidadeDao().buscarCidadesPorEstado(estado);
     }
 
     
     public void criarCliente(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getClienteDao().criarCliente(cliente);
     }
 
     
     public void deletarCliente(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getClienteDao().deletarCliente(id);
     }
 
     
     public void atualizarCliente(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getClienteDao().atualizarCliente(cliente);
     }
 
     
     public List<Cliente> listarClientes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getClienteDao().listarClientes();
     }
 
     
     public Cliente buscarClientePorId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getClienteDao().buscarClientePorId(id);
     }
 
     
     public Cliente buscarClientePorEmail(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getClienteDao().buscarClientePorEmail(email);
     }
 
     
     public void criaAtributo(Atributo atributo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getAtributoDao().criaAtributo(atributo);
     }
 
     
     public void alteraAtributo(Atributo atributo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getAtributoDao().alteraAtributo(atributo);
     }
 
     
     public List<Atributo> listaAtributo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getAtributoDao().listaAtributo();
     }
 
     
     public List<Estado> buscarEstados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+        return getEstadoDao().buscarEstados();
+    }    
     /**
      * @return the clienteDao
      */
