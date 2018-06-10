@@ -1,0 +1,329 @@
+
+/*Estrutura das páginas Cabeçalho ,Rodapé e estilos em comum em todas as página*/
+
+html, body {
+    height: 100%;
+}
+
+#logo{
+	margin-left: 20px;
+	margin-top: -10px;
+}
+
+.home {
+  overflow: hidden;
+  background-color:#B22222;
+  padding: 10px 5px;
+  color: white;
+}
+
+.container-conteudo{
+ background-color: white;
+ margin-right: 200px;
+ margin-left: 200px;
+ border-radius: 10px;
+ color: inherit;
+ font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.dropdown-menu{
+	position: relative;
+}
+
+.btn-primary.btn-lg {
+	background-color: #B22222;
+	border-width:0px;
+    border-right:0px;
+    border-top:0px;
+    border-left:0px;
+    margin-top: 0px
+}
+#dropdown{
+	background-color: #B22222;
+	border-width:0px;
+    border-right:0px;
+    border-top:0px;
+    border-left:0px;
+    margin-top: 0px
+}
+
+.row{
+ margin-left: 10px;
+ margin-right: 10px;
+}
+
+.archives{
+border-radius: 10px;
+}
+
+
+#filtros{
+	border-style: groove;
+	margin-top: 10px;
+	border-color: lightgrey;
+	border-radius: 10px;
+	height:100px;
+	border-radius: 10px;
+	opacity: 2;
+	}
+
+.container-conteudo1{
+	margin-right: 100px;
+ 	margin-left: 100px;
+}
+
+#problema{
+
+	display: none;
+}
+
+#componenteid{
+
+	display: none;
+}
+
+#video{
+	display: none;
+}
+
+#estilorodape{
+	color:#fff;
+	background-color: #273443;
+	font-family:sans-serif;
+	font-size: 14px;
+	text-align:center;
+}
+
+#controdape{
+	color:lightgrey;
+	font-family:sans-serif;
+	font-size: 14px;
+	text-align:center;
+
+}
+
+#linksrodape{
+	color:white;
+}
+
+.rodapef{
+	color:#fff;
+	font-family:sans-serif;
+	font-size: 14px;
+	background-color:#232f3c;
+	text-align:center;
+
+}
+
+a{
+color:black;
+}
+
+#footer{
+height:auto;
+position:absolute;
+width:100%;
+}
+
+.foto-perfil{
+  background-color: #ddd;
+  border-radius: 100%;
+  height: 200px;
+  object-fit: cover;
+  width: 200px;  
+}
+
+/*Excessão:Página Login*/
+
+#container-login{
+	margin-top: 100px;
+	padding-top: 100px;
+	padding-left:20px;
+	padding-right:20px;
+	background-color: lightgrey;
+	border-radius: 10px;
+	margin-top: 20px;
+	
+	width: 500px ;
+}
+
+#foto-login{
+	background-color: #ddd;
+  	border-radius: 100%;
+  	height: 200px;
+  	object-fit: cover;
+ 	width: 200px; 
+ 	padding-right: auto;
+ 	padding-left: auto;
+ 	margin-left: 100px;
+
+}
+
+#glypicon-login{
+	margin-left: 20px;
+}
+
+/*Página Cadastro Dados Pessoais - Coleta_dados-Caracteristicas*/
+
+#Cadastro{
+	padding-left:20px;
+	padding-right:20px;
+	background-color: lightgrey;
+	border-radius: 10px;
+}
+
+#cpf{
+	margin-top: -80px;
+	margin-left: 193px;
+}
+
+#nascimento{
+	margin-top: -13px;
+	margin-left: 193px;
+}
+
+#foto-dados-pessoais{
+	background-color: #ddd;
+  	border-radius: 100%;
+  	height: 150px;
+  	object-fit: cover;
+ 	width: 150px; 
+ 	padding-right: auto;
+ 	padding-left: auto;
+ }
+ 	
+#endereco, #email,#titleescolaridade,#calendario,#titledate{
+	margin-top:33px;
+}
+
+#escolaridade{
+	margin-left: -55px;
+	margin-top:33px;
+}
+
+/*Página Manter Preferencias*/
+
+#container-manter-preferencias{
+	padding-left:20px;
+	padding-right:20px;
+	background-color: lightgrey;
+	border-radius: 10px;
+	margin-top: 20px;
+	margin-left: 200px;
+	margin-right:200px;
+}
+
+#radios{
+	margin-left: -30px;
+}
+
+#glypicon-preferencia{
+	margin-left: 280px;
+}
+
+/*Página encontros*/
+
+#container-encontros{
+	padding-left:20px;
+	padding-right:20px;
+	background-color: lightgrey;
+	border-radius: 10px;
+	margin-top: 20px;
+	margin-left: 200px;
+	margin-right:200px;
+}
+
+#solicitacoesencontro{
+	border-radius: 10px;
+	border-color: red;
+	background-color:lightgrey;
+}
+
+#glypicon-encontro{
+	margin-left: -250px;
+}
+
+/*Página Pesquisa Pares*/
+
+#container-pesquisa-pares{
+	padding-left:20px;
+	padding-right:20px;
+	background-color: lightgrey;
+	border-radius: 10px;
+	margin-top: 20px;
+	margin-left: 200px;
+	margin-right:200px;
+}
+
+#pesquisa{
+	text-align:center;
+}
+
+#colunas-pesquisa{
+	text-align:center;
+}
+
+/*Pagina Pares-Compativeis*/
+
+#glypicon-pares-compativeis{
+	margin-left: -320px;
+}
+
+/*Casamento*/
+
+#glypicon-casamento{
+	margin-left: 280px;
+}
+
+/*Cadastra Funcionário*/
+
+#glypicon-cadastra-funcionario{
+	margin-left: 280px;
+}
+
+/*Cadastra Funcionário*/
+
+#relatorios{
+	border-bottom: 1px solid black;
+}
+
+/*Gestão Clientes */
+
+/*Modal*/
+#modal-clientes{
+	border-bottom: 1px solid black;
+}
+
+/*Gestão Funcionarios */
+
+#glypicon-gestaofunc{
+	margin-left: -320px;
+}
+
+/*Cadastra Evento */
+#container-cadastra-evento{
+	padding-left:20px;
+	padding-right:20px;
+	background-color: lightgrey;
+	border-radius: 10px;
+	margin-top: 20px;
+	margin-left: 200px;
+	margin-right:200px;
+}
+
+#glypicon-evento{
+		margin-left: 280px;
+}
+
+
+/*gerencia_usuarios */
+
+#container-gerencia-usuarios{
+	padding-left:20px;
+	padding-right:20px;
+	background-color: lightgrey;
+	border-radius: 10px;
+	margin-top: 20px;
+	margin-left: 200px;
+	margin-right:200px;
+}
