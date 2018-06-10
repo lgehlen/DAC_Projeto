@@ -30,7 +30,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("INSERT INTO always.Funcionario (nomeFuncionario, email, senha, regra)"
+            st = con.prepareStatement("INSERT INTO Always.Funcionario (nomeFuncionario, email, senha, regra)"
                                         + " VALUES (?, ?, ?, ?, ?)");
             st.setString(1, funcionario.getNome());
             st.setString(2, funcionario.getEmail());
@@ -48,7 +48,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("DELETE * FROM always.Funcionario WHERE idFuncionario = ?");
+            ps = con.prepareStatement("DELETE * FROM Always.Funcionario WHERE idFuncionario = ?");
             ps.setInt(1, funcionario.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -61,7 +61,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("UPDATE always.Funcionario SET nomeFuncionario = ?, email = ?, senha = ?, regra = ?"
+            st = con.prepareStatement("UPDATE Always.Funcionario SET nomeFuncionario = ?, email = ?, senha = ?, regra = ?"
                                         + " WHERE idFuncionario = ?");
             st.setString(1, funcionario.getNome());
             st.setString(2, funcionario.getEmail());
@@ -79,7 +79,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, email, senha, idFuncionario, regra FROM always.funcionario ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, email, senha, idFuncionario, regra FROM Always.funcionario ");
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
             while (rs.next()) {
@@ -103,7 +103,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, regra, email, senha FROM always.funcionario WHERE idFuncionario = ? ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, regra, email, senha FROM Always.funcionario WHERE idFuncionario = ? ");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
@@ -127,7 +127,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, regra, email, idFuncionario, senha FROM always.funcionario WHERE email = ? ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, regra, email, idFuncionario, senha FROM Always.funcionario WHERE email = ? ");
             ps.setString(1, email);
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
