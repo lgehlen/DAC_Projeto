@@ -6,6 +6,8 @@
 package br.ufpr.tads.foreveralone.facades.impl;
 
 import br.ufpr.tads.foreveralone.beans.Encontro;
+import br.ufpr.tads.foreveralone.daos.EncontroDao;
+import br.ufpr.tads.foreveralone.daos.impl.DefaultEncontroDao;
 import java.util.List;
 
 /**
@@ -13,28 +15,49 @@ import java.util.List;
  * @author gqueiroz
  */
 public class EncontroFacade {
+    
+    private static EncontroDao encontroDao;
 
+    public EncontroFacade()
+    {
+        encontroDao = new DefaultEncontroDao();
+    }
+    
     public void criarEncontro(Encontro encontro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getEncontroDao().criarEncontro(encontro);
     }
 
     
     public void deletarEncontro(Encontro encontro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getEncontroDao().deletarEncontro(encontro);
     }
 
     
     public void atualizarEncontro(Encontro encontro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getEncontroDao().atualizarEncontro(encontro);
     }
 
     
     public List<Encontro> listarEncontros() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getEncontroDao().listarEncontros();
     }
 
     
     public Encontro buscarEncontroPorId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getEncontroDao().buscarEncontroPorId(id);
+    }
+
+    /**
+     * @return the encontroDao
+     */
+    public static EncontroDao getEncontroDao() {
+        return encontroDao;
+    }
+
+    /**
+     * @param aEncontroDao the encontroDao to set
+     */
+    public static void setEncontroDao(EncontroDao aEncontroDao) {
+        encontroDao = aEncontroDao;
     }
 }

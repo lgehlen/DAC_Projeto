@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author gqueiroz
  */
-public class DefualtOrcamentoDao implements OrcamentoDao {
+public class DefaultOrcamentoDao implements OrcamentoDao {
 
     @Override
     public void criarOrcamento(Orcamento orcamento) {
@@ -36,7 +36,7 @@ public class DefualtOrcamentoDao implements OrcamentoDao {
     }
 
     @Override
-    public void buscarOrcamentoPorId(int id) {
+    public Orcamento buscarOrcamentoPorId(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

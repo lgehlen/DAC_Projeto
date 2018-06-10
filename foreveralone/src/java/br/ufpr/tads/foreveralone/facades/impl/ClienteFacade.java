@@ -9,6 +9,14 @@ import br.ufpr.tads.foreveralone.beans.Atributo;
 import br.ufpr.tads.foreveralone.beans.Cidade;
 import br.ufpr.tads.foreveralone.beans.Cliente;
 import br.ufpr.tads.foreveralone.beans.Estado;
+import br.ufpr.tads.foreveralone.daos.AtributoDao;
+import br.ufpr.tads.foreveralone.daos.CidadeDao;
+import br.ufpr.tads.foreveralone.daos.ClienteDao;
+import br.ufpr.tads.foreveralone.daos.EstadoDao;
+import br.ufpr.tads.foreveralone.daos.impl.DefaultAtributoDao;
+import br.ufpr.tads.foreveralone.daos.impl.DefaultCidadeDao;
+import br.ufpr.tads.foreveralone.daos.impl.DefaultClienteDao;
+import br.ufpr.tads.foreveralone.daos.impl.DefaultEstadoDao;
 import java.util.List;
 
 /**
@@ -16,7 +24,23 @@ import java.util.List;
  * author gqueiroz
  */
 public class ClienteFacade {
+    
+    private static ClienteDao clienteDao;
+    
+    private static EstadoDao estadoDao;
+    
+    private static CidadeDao cidadeDao;
+    
+    private static AtributoDao atributoDao;
 
+    public ClienteFacade()
+    {
+        clienteDao = new DefaultClienteDao();
+        estadoDao = new DefaultEstadoDao();
+        cidadeDao = new DefaultCidadeDao();
+        atributoDao = new DefaultAtributoDao();
+    }
+    
     public Cidade buscarCidadesPorEstado(Estado estado) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -69,5 +93,61 @@ public class ClienteFacade {
     
     public List<Estado> buscarEstados() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the clienteDao
+     */
+    public static ClienteDao getClienteDao() {
+        return clienteDao;
+    }
+
+    /**
+     * @param aClienteDao the clienteDao to set
+     */
+    public static void setClienteDao(ClienteDao aClienteDao) {
+        clienteDao = aClienteDao;
+    }
+
+    /**
+     * @return the estadoDao
+     */
+    public static EstadoDao getEstadoDao() {
+        return estadoDao;
+    }
+
+    /**
+     * @param aEstadoDao the estadoDao to set
+     */
+    public static void setEstadoDao(EstadoDao aEstadoDao) {
+        estadoDao = aEstadoDao;
+    }
+
+    /**
+     * @return the cidadeDao
+     */
+    public static CidadeDao getCidadeDao() {
+        return cidadeDao;
+    }
+
+    /**
+     * @param aCidadeDao the cidadeDao to set
+     */
+    public static void setCidadeDao(CidadeDao aCidadeDao) {
+        cidadeDao = aCidadeDao;
+    }
+
+    /**
+     * @return the atributoDao
+     */
+    public static AtributoDao getAtributoDao() {
+        return atributoDao;
+    }
+
+    /**
+     * @param aAtributoDao the atributoDao to set
+     */
+    public static void setAtributoDao(AtributoDao aAtributoDao) {
+        atributoDao = aAtributoDao;
     }
 }

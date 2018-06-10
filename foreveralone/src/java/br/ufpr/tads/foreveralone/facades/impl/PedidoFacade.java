@@ -6,6 +6,8 @@
 package br.ufpr.tads.foreveralone.facades.impl;
 
 import br.ufpr.tads.foreveralone.beans.Orcamento;
+import br.ufpr.tads.foreveralone.daos.OrcamentoDao;
+import br.ufpr.tads.foreveralone.daos.impl.DefaultOrcamentoDao;
 import java.util.List;
 
 /**
@@ -14,27 +16,48 @@ import java.util.List;
  */
 public class PedidoFacade {
     
+    private static OrcamentoDao orcamentoDao;
+            
+    public PedidoFacade()
+    {
+        orcamentoDao = new DefaultOrcamentoDao();
+    }
+    
     public void criarOrcamento(Orcamento orcamento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getOrcamentoDao().criarOrcamento(orcamento);
     }
 
     
     public void deletarOrcamento(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getOrcamentoDao().deletarOrcamento(id);
     }
 
     
     public void atualizarOrcamento(Orcamento orcamento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getOrcamentoDao().atualizarOrcamento(orcamento);
     }
 
     
     public List<Orcamento> buscarOrcamentos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getOrcamentoDao().buscarOrcamentos();
     }
 
     
-    public void buscarOrcamentoPorId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Orcamento buscarOrcamentoPorId(int id) {
+        return getOrcamentoDao().buscarOrcamentoPorId(id);
+    }
+
+    /**
+     * @return the orcamentoDao
+     */
+    public static OrcamentoDao getOrcamentoDao() {
+       return orcamentoDao; 
+    }
+
+    /**
+     * @param aOrcamentoDao the orcamentoDao to set
+     */
+    public static void setOrcamentoDao(OrcamentoDao aOrcamentoDao) {
+        orcamentoDao = aOrcamentoDao;
     }
 }
