@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +29,21 @@ public class DefaultEventoDao implements EventoDao {
     
     @Override
     public void criarEvento(Evento evento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("INSERT INTO forever.Atributo (data, horario, Convidado_idPar, Funcioario_idFuncionario, Endereco_idEndereco, Endereco_cidade_idCidade, idEvento) "
+                    + " VALUES(?,?,?,?,?,?)");
+            st.setDate(1, new java.sql.Date(evento.getData().getTime()));
+            st.setString(2, evento.getHorario());
+            st.setInt(3, 1);
+            st.setInt(4, 1);
+            st.setInt(5, 1);
+            st.setInt(6, evento.getId());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -45,7 +61,20 @@ public class DefaultEventoDao implements EventoDao {
 
     @Override
     public void atualizarEvento(Evento evento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("UPDATE forever.Atributo SET data = ? , horario = ?, Funcioario_idFuncionario = ?, Endereco_idEndereco = ?, Endereco_cidade_idCidade = ? WHERE idEvento = ? ");
+            st.setDate(1, new java.sql.Date(evento.getData().getTime()));
+            st.setString(2, evento.getHorario());
+            st.setInt(3, 1);
+            st.setInt(4, 1);
+            st.setInt(5, 1);
+            st.setInt(6, evento.getId());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -74,12 +103,51 @@ public class DefaultEventoDao implements EventoDao {
 
     @Override
     public Evento buscarEventoPorId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT data, horario, local, Convidado_idPar, Funcioario_idFuncionario, Endereco_idEndereco, Endereco_cidade_idCidade FROM forever.Evento WHERE idEvento = ? ");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            List<Evento> list = new ArrayList<Evento>();
+            while (rs.next()) {
+                Evento evento = new Evento();
+                evento.setData(rs.getDate("data"));
+                evento.setHorario(rs.getString("horario"));
+                //evento.setLocal(list);
+                //evento.setConvidados(convidados);
+                list.add(evento);
+            }
+            return list.get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public List<Evento> buscarEventosPorCliente(int idCliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idEvento, data, horario, local, Convidado_idPar, Funcioario_idFuncionario, Endereco_idEndereco FROM forever.Evento WHERE Convidado_idPar = ?");
+            ps.setInt(1, idCliente);
+            rs = ps.executeQuery();
+            List<Evento> list = new ArrayList<Evento>();
+            while (rs.next()) {
+                Evento evento = new Evento();
+                evento.setData(rs.getDate("data"));
+                evento.setHorario(rs.getString("horario"));
+                evento.setId(rs.getInt("idEvento"));
+                //evento.setLocal(list);
+                //evento.setConvidados(convidados);
+                list.add(evento);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     
 }

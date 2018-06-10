@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +28,20 @@ public class DefaultEncontroDao implements EncontroDao {
     
     @Override
     public void criarEncontro(Encontro encontro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("INSERT INTO forever.Encontro (data, horario, Endereco_idEndereco, Endereco_Cidade_idCidade)"
+                                        + " VALUES (?, ?, ?, ?)");
+            st.setDate(1, new java.sql.Date(encontro.getData().getTime()));
+            st.setString(2, encontro.getHorario());
+            st.setInt(3, /*encontro.getLocal()*/ 0);
+            st.setInt(4, 0);
+            
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -44,7 +59,20 @@ public class DefaultEncontroDao implements EncontroDao {
 
     @Override
     public void atualizarEncontro(Encontro encontro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("UPDATE forever.Encontro set data = ?, horario = ?, Endereco_idEndereco = ?, Endereco_Cidade_idCidade = ? WHERE idEncontro = ?");
+            st.setDate(1, new java.sql.Date(encontro.getData().getTime()));
+            st.setString(2, encontro.getHorario());
+            st.setInt(3, /*encontro.getLocal()*/ 0);
+            st.setInt(4, 0);
+            st.setInt(5,encontro.getId());
+            
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -74,7 +102,28 @@ public class DefaultEncontroDao implements EncontroDao {
 
     @Override
     public Encontro buscarEncontroPorId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idEncontro, local, data, horario, Endereco_idEndereco, Endereco_Cidade_idCidade FROM forever.Encontro WHERE idEncontro = ?  ");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            List<Encontro> list = new ArrayList<Encontro>();
+            while (rs.next()) {
+                Encontro encontro = new Encontro();
+                encontro.setData(rs.getDate("data"));
+                encontro.setHorario(rs.getString("horario"));
+                encontro.setId(rs.getInt("idEncontro"));
+                //encontro.setIdCliente1(rs.getInt("Convidado_idPar"));
+                //encontro.setIdCliente2(rs.getInt("idEvento"));
+                //encontro.setLocal(list);
+                list.add(encontro);
+            }
+            return list.get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     
 }

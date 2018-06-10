@@ -28,11 +28,14 @@ public class DefaultEstadoDao implements EstadoDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM ");
+            ps = con.prepareStatement("SELECT idEstado, uf, nome FROM forever.Estado");
             rs = ps.executeQuery();
             List<Estado> list = new ArrayList<Estado>();
             while (rs.next()) {
                 Estado estado = new Estado();
+                estado.setId(rs.getInt("idEstado"));
+                estado.setNome(rs.getString("nome"));
+                estado.setUf(rs.getString("uf"));
                 list.add(estado);
             }
             return list;

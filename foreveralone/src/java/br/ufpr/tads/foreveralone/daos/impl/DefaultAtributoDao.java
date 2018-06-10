@@ -26,15 +26,16 @@ public class DefaultAtributoDao implements AtributoDao {
     Connection con = new ConnectionFactory().getConnection();
      
     @Override
-    public void criaAtributo(Atributo atributo) {
+    public void alteraAtributo(Atributo atributo) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("UPDATE forever.Atributo SET corDeCabelo = ?, codDePele = ?, sexo = ?, descricao = ?");
+            st = con.prepareStatement("UPDATE forever.Atributo SET corDeCabelo = ?, codDePele = ?, sexo = ?, descricao = ? WHERE idAtributo = ?");
             st.setString(1, atributo.getCorDeCabelo());
             st.setString(2, atributo.getCorDePele());
             st.setString(3, atributo.getSexo());
             st.setString(4, atributo.getDescricao());
+            st.setInt(5, atributo.getIdAtributo());
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -42,7 +43,7 @@ public class DefaultAtributoDao implements AtributoDao {
     }
 
     @Override
-    public void alteraAtributo(Atributo atributo) {
+    public void criaAtributo(Atributo atributo) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {

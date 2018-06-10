@@ -10,6 +10,8 @@ package br.ufpr.tads.foreveralone.beans;
  * @author gqueiroz
  */
 public class Atributo {
+    private int idAtributo;
+    
     private String corDeCabelo;
     
     private String corDePele;
@@ -72,5 +74,19 @@ public class Atributo {
      */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    /**
+     * @return the idAtributo
+     */
+    public int getIdAtributo() {
+        return idAtributo;
+    }
+
+    /**
+     * @param idAtributo the idAtributo to set
+     */
+    public void setIdAtributo(int idAtributo) {
+        this.idAtributo = idAtributo;
     }
 }
