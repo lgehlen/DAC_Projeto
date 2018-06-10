@@ -41,7 +41,7 @@ public class ClienteFacade {
         atributoDao = new DefaultAtributoDao();
     }
     
-    public Cidade buscarCidadesPorEstado(Estado estado) {
+    public List<Cidade> buscarCidadesPorEstado(Estado estado) {
         return getCidadeDao().buscarCidadesPorEstado(estado);
     }
 

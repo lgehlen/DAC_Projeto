@@ -7,11 +7,12 @@ package br.ufpr.tads.foreveralone.daos;
 
 import br.ufpr.tads.foreveralone.beans.Cidade;
 import br.ufpr.tads.foreveralone.beans.Estado;
+import java.util.List;
 
 /**
  *
  * @author gqueiroz
  */
 public interface CidadeDao {
-   Cidade buscarCidadesPorEstado(Estado estado);
+   List<Cidade> buscarCidadesPorEstado(Estado estado);
 }

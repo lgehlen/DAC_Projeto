@@ -6,7 +6,13 @@
 package br.ufpr.tads.foreveralone.daos.impl;
 
 import br.ufpr.tads.foreveralone.beans.Estado;
+import br.ufpr.tads.foreveralone.daos.ConnectionFactory;
 import br.ufpr.tads.foreveralone.daos.EstadoDao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,10 +20,26 @@ import java.util.List;
  * @author gqueiroz
  */
 public class DefaultEstadoDao implements EstadoDao {
+    
+    Connection con = new ConnectionFactory().getConnection();
 
     @Override
     public List<Estado> buscarEstados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT * FROM ");
+            rs = ps.executeQuery();
+            List<Estado> list = new ArrayList<Estado>();
+            while (rs.next()) {
+                Estado estado = new Estado();
+                list.add(estado);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     
 }
