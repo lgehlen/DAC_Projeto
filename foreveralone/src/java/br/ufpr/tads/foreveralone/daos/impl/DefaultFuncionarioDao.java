@@ -6,6 +6,7 @@
 package br.ufpr.tads.foreveralone.daos.impl;
 
 import br.ufpr.tads.foreveralone.beans.Funcionario;
+import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.daos.ConnectionFactory;
 import br.ufpr.tads.foreveralone.daos.FuncionarioDao;
 import java.sql.Connection;
@@ -141,6 +142,25 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
                 list.add(funcionario);
             }
             return list.get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Login buscarPorLogin(String nome, String senha) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idFuncionario, nomeFuncionario FROM Forever.funcionario WHERE nomeFuncionario = ? AND senha = ?");
+            ps.setString(1, nome);
+            ps.setString(2, senha);
+            rs = ps.executeQuery();
+            Login login = new Login();
+                login.setId(rs.getInt("idFuncionario"));
+                login.setNome(rs.getString("nomeFuncionario"));
+            return login;
         } catch (SQLException e) {
             e.printStackTrace();
         }
