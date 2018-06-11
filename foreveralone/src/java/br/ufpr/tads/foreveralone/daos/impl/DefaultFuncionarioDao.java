@@ -80,7 +80,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, senha, idFuncionario FROM Forever.funcionario ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, senha, idFuncionario FROM forever.funcionario ");
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
             while (rs.next()) {
@@ -104,7 +104,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, senha FROM Forever.funcionario WHERE idFuncionario = ? ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, senha FROM forever.funcionario WHERE idFuncionario = ? ");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
@@ -128,7 +128,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, idFuncionario, senha FROM Forever.funcionario WHERE email = ? ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, idFuncionario, senha FROM forever.funcionario WHERE email = ? ");
             ps.setString(1, email);
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
@@ -149,17 +149,18 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
     }
 
     @Override
-    public Login buscarPorLogin(String nome, String senha) {
+    public Login buscarPorLogin(String email, String senha) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idFuncionario, nomeFuncionario FROM Forever.funcionario WHERE nomeFuncionario = ? AND senha = ?");
-            ps.setString(1, nome);
+            ps = con.prepareStatement("SELECT idFuncionario, nomeFuncionario FROM funcionario WHERE email = ? AND senha = ?");
+            ps.setString(1, email);
             ps.setString(2, senha);
             rs = ps.executeQuery();
             Login login = new Login();
                 login.setId(rs.getInt("idFuncionario"));
                 login.setNome(rs.getString("nomeFuncionario"));
+                login.setTipo("funcionario");
             return login;
         } catch (SQLException e) {
             e.printStackTrace();

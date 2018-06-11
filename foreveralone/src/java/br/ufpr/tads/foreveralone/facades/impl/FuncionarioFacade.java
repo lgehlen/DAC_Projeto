@@ -7,6 +7,7 @@ package br.ufpr.tads.foreveralone.facades.impl;
 
 import br.ufpr.tads.foreveralone.beans.Evento;
 import br.ufpr.tads.foreveralone.beans.Funcionario;
+import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.daos.EventoDao;
 import br.ufpr.tads.foreveralone.daos.FuncionarioDao;
 import br.ufpr.tads.foreveralone.daos.impl.DefaultEventoDao;
@@ -114,5 +115,9 @@ return getFuncionarioDao().listarFuncionarios();
      */
     public static void setEventoDao(EventoDao aEventoDao) {
         eventoDao = aEventoDao;
+    }
+    
+    public Login getLogin(String email, String senha) {
+         return funcionarioDao.buscarPorLogin(email, senha);
     }
 }
