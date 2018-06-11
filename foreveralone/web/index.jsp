@@ -28,9 +28,9 @@
 	<br>
 	<div class="container" id="container-login">
             
-                <c:out value="">${msg}</c:out>
-                <c:out value="">${login.nome}</c:out>
-                <c:out value="">${login.id}</c:out>
+                <c:out value="${msg}"></c:out>
+                <c:out value="${loginBean.nome}"></c:out>
+                <c:out value="${loginBean.id}"></c:out>
 		<div class="row">
 			<div class="col-sm-4"><h4> <img id="foto-login" src="./imagens/usuario.jpg" width="100" height="50"></h4></div>
 		</div>
