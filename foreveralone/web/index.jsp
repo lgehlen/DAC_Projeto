@@ -27,11 +27,15 @@
 	<br>
 	<br>
 	<div class="container" id="container-login">
+            
+                <c:out value="">${msg}</c:out>
+                <c:out value="">${login.nome}</c:out>
+                <c:out value="">${login.id}</c:out>
 		<div class="row">
 			<div class="col-sm-4"><h4> <img id="foto-login" src="./imagens/usuario.jpg" width="100" height="50"></h4></div>
 		</div>
 		<div class="row">
-			<form>
+			<form action="login" method="post">
 	    		<div class="input-group">
 	      			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 	      			<input id="email" type="text" class="form-control" name="email" placeholder="Email">
@@ -42,15 +46,16 @@
 	      			<input id="password" type="password" class="form-control" name="password" placeholder="Senha">
 	    		</div>
 	    		<br>
-	 	 	</form>
+	 	 	
 		</div>	
 		<div class="row" id="glypicon-login">
 		    <div class="col-sm-4"></div>
 		    <div class="col-sm-2">	
-		      	<a href="index.html" class="btn btn-info btn-lg">
+		      	<button type="submit" class="btn btn-info btn-lg">
 		      		<span class="glyphicon glyphicon-play-circle"></span> Entrar
-		      	</a>
+		      	</button>
 		    </div>
+                    </form>
 	     </div>
 	     <br>
 	     <div class="row" id="glypicon-login">

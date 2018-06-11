@@ -5,13 +5,17 @@
  */
 package br.ufpr.tads.foreveralone.servlets;
 
+import br.ufpr.tads.foreveralone.beans.Login;
+import br.ufpr.tads.foreveralone.facades.impl.FuncionarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,6 +36,30 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        FuncionarioFacade funcionario = new FuncionarioFacade();
+        
+        String email = request.getParameter("email");
+        String sen = request.getParameter("password"); 
+        
+        Login login = new Login();
+        login =  funcionario.getLogin(email, sen);
+        
+        if (login.getNome() == null) 
+            {                
+                RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+                request.setAttribute("msg", "Usuário/Senha inválidos.");
+                rd.forward(request, response);    
+            }
+        
+        HttpSession session = request.getSession();
+            session.setAttribute("loginBean", login);
+            
+            RequestDispatcher rd = request.
+                            getRequestDispatcher("/index.jsp");
+                    request.setAttribute("loginBean", login);
+                    request.setAttribute("msg", "Deu certo");
+                    rd.forward(request, response);
         
             
     }

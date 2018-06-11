@@ -6,6 +6,7 @@
 package br.ufpr.tads.foreveralone.daos;
 
 import br.ufpr.tads.foreveralone.beans.Funcionario;
+import br.ufpr.tads.foreveralone.beans.Login;
 import java.util.List;
 
 /**
@@ -24,4 +25,6 @@ public interface FuncionarioDao {
     List<Funcionario> listarFuncionariosPorId(int id);
     
     Funcionario buscarPorEmail(String email);
+    
+    Login buscarPorLogin(String email, String senha);
 }
