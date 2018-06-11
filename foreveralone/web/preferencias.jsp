@@ -21,7 +21,6 @@
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
 </head>
-
 <body >
 	<!-- Header -->
 	<header class="home">
