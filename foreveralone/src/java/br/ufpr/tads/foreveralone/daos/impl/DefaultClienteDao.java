@@ -6,6 +6,7 @@
 package br.ufpr.tads.foreveralone.daos.impl;
 
 import br.ufpr.tads.foreveralone.beans.Cliente;
+import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.daos.ClienteDao;
 import br.ufpr.tads.foreveralone.daos.ConnectionFactory;
 import java.sql.Connection;
@@ -159,6 +160,34 @@ public class DefaultClienteDao implements ClienteDao {
                 list.add(cliente);
             }
             return list.get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Login getLogin(String email, String sen) {
+        System.out.println("email " + email);
+        System.out.println("senha " + sen);
+        System.out.println("T " + con);
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idCliente, nomeCliente FROM forever.Cliente WHERE email = ? AND senha = ?");
+            ps.setString(1, email);
+            ps.setString(2, sen);
+            rs = ps.executeQuery();
+            System.out.println("teste");
+            Login login = new Login();
+            while (rs.next()) {
+                System.out.println("NOME " + rs.getString("nomeFuncionario"));
+                System.out.println("ID " + rs.getInt("idFuncionario"));
+                login.setId(rs.getInt("idFuncionario"));
+                login.setNome(rs.getString("nomeFuncionario"));
+                login.setTipo("funcionario");
+            }
+            return login;
         } catch (SQLException e) {
             e.printStackTrace();
         }
