@@ -84,7 +84,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, senha, idFuncionario FROM forever.funcionario ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, senha, idFuncionario FROM forever.Funcionario ");
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
             while (rs.next()) {
@@ -108,7 +108,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, senha FROM forever.funcionario WHERE idFuncionario = ? ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, senha FROM forever.Funcionario WHERE idFuncionario = ? ");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
@@ -132,7 +132,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, idFuncionario, senha FROM forever.funcionario WHERE email = ? ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, idFuncionario, senha FROM forever.Funcionario WHERE email = ? ");
             ps.setString(1, email);
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
@@ -160,7 +160,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idFuncionario, nomeFuncionario FROM funcionario WHERE email = ? AND senha = ?");
+            ps = con.prepareStatement("SELECT idFuncionario, nomeFuncionario FROM forever.Funcionario WHERE email = ? AND senha = ?");
             ps.setString(1, email);
             ps.setString(2, senha);
             rs = ps.executeQuery();

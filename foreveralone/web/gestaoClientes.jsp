@@ -83,7 +83,7 @@
 		<br>
 		<div class="row" id="relatorios">
 			<div class="col-sm-1"><h4>24</h4></div>
-			<div class="col-sm-10"><h4> Gabriel e Luisa</h4></div>
+			<div class="col-sm-10"><h4> Gabriel e</h4></div>
 			<div class="col-sm-1">
 				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
 					<span class="glyphicon glyphicon-info-sign"></span>
