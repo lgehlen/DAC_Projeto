@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,9 +20,10 @@
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
+	
 </head>
 
-<body >
+<body>
 	<!-- Header -->
 	<header class="home">
 		<div class="bg-img" >
@@ -56,8 +57,8 @@
 	    						<button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span>
 	    						<span class="caret"></span></button>
 	   							<ul class="dropdown-menu">
-	   								<li><a> <span class="glyphicon glyphicon-user"></span>   User   </a></li>
-	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo:Funcionário  </a></li>
+                                                                    <li><a> <span class="glyphicon glyphicon-user"></span>   <c:out value="${login.nome}"></c:out>   </a></li>
+	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo: <c:out value="${login.tipo}"></c:out>   </a></li>
 		      						<li><a href="/">Home</a></li>
 		      						<li class="divider"></li>
 		      						<li><a href="#"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
@@ -151,157 +152,7 @@
 			</div>
 		</div>
 		<br>
-		<div class="row" id="relatorios">
-			<div class="col-sm-1"><h4>24</h4></div>
-			<div class="col-sm-9"><h4> Gabriel Vieira</h4></div>
-			<!--Modal-->
-			<div class="col-sm-1">
-				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#excluifunc">
-					<span class="glyphicon glyphicon-trash"></span>
-				</button>
-
-				<!-- Modal -->
-  				<div class="modal fade" id="excluifunc" role="dialog">
-    				<div class="modal-dialog">
-      			<!-- Modal content-->
-      					<div class="modal-content">
-        					<div class="modal-header">
-          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">Aviso do Sistema!</h4>
-        					</div>
-        					<div class="modal-body">
-        						<div class="row">
-	        						<div class="col-sm-1"></div>
-	        						<div class="col-sm-9" style="text-align: center;">
-	         							<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
-	         						</div>
-	         						<div class="col-sm-2"></div>
-	         					</div>
-	         					<div class="row">
-	        						<div class="col-sm-3"></div>
-	        						<div class="col-sm-2" style="text-align: center;">
-	         							<h3><a href="#"><span class="glyphicon glyphicon-ok"></span></a></span></h3>
-	         						</div>
-	         						<div class="col-sm-2"></div>
-	        						<div class="col-sm-2" style="text-align: center;">
-	         							<h3><a href="#"><span class="glyphicon glyphicon-remove"></span></a></span></h3>
-	         						</div>
-	         					</div>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        					</div>
-      					</div>
-    				</div>
-  				</div>
-		</div>
-			<div class="col-sm-1">
-				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
-					<span class="glyphicon glyphicon-info-sign"></span>
-				</button>
-				<!-- Modal -->
-  				<div class="modal fade" id="myModal" role="dialog">
-    				<div class="modal-dialog">
-      			<!-- Modal content-->
-      					<div class="modal-content">
-        					<div class="modal-header">
-          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">Detalhes</h4>
-        					</div>
-        					<div class="modal-body">
-         						<div class="row">
-									<div class="col-sm-5">
-										<img class="foto-perfil" src="imagens/usuario.jpg" alt="" />
-									</div>
-									<div class="col-sm-5">
-										CPF:<h4>104-912-559.26</h4>
-									</div>
-								</div>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        					</div>
-      					</div>
-    				</div>
-  				</div>
-			</div>
-		</div>
-		<br>
-		<div class="row" id="relatorios">
-			<div class="col-sm-1"><h4>24</h4></div>
-			<div class="col-sm-9"><h4> Gabriel Vieira</h4></div>
-			<!--Modal-->
-			<div class="col-sm-1">
-				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#excluifunc">
-					<span class="glyphicon glyphicon-trash"></span>
-				</button>
-
-				<!-- Modal -->
-  				<div class="modal fade" id="excluifunc" role="dialog">
-    				<div class="modal-dialog">
-      			<!-- Modal content-->
-      					<div class="modal-content">
-        					<div class="modal-header">
-          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">Aviso do Sistema!</h4>
-        					</div>
-        					<div class="modal-body">
-        						<div class="row">
-	        						<div class="col-sm-1"></div>
-	        						<div class="col-sm-9" style="text-align: center;">
-	         							<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
-	         						</div>
-	         						<div class="col-sm-2"></div>
-	         					</div>
-	         					<div class="row">
-	        						<div class="col-sm-3"></div>
-	        						<div class="col-sm-2" style="text-align: center;">
-	         							<h3><a href="#"><span class="glyphicon glyphicon-ok"></span></a></span></h3>
-	         						</div>
-	         						<div class="col-sm-2"></div>
-	        						<div class="col-sm-2" style="text-align: center;">
-	         							<h3><a href="#"><span class="glyphicon glyphicon-remove"></span></a></span></h3>
-	         						</div>
-	         					</div>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        					</div>
-      					</div>
-    				</div>
-  				</div>
-		</div>
-			<div class="col-sm-1">
-				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
-					<span class="glyphicon glyphicon-info-sign"></span>
-				</button>
-				<!-- Modal -->
-  				<div class="modal fade" id="myModal" role="dialog">
-    				<div class="modal-dialog">
-      			<!-- Modal content-->
-      					<div class="modal-content">
-        					<div class="modal-header">
-          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">Detalhes</h4>
-        					</div>
-        					<div class="modal-body">
-         						<div class="row">
-									<div class="col-sm-5">
-										<img class="foto-perfil" src="imagens/usuario.jpg" alt="" />
-									</div>
-									<div class="col-sm-5">
-										CPF:<h4>104-912-559.26</h4>
-									</div>
-								</div>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        					</div>
-      					</div>
-    				</div>
-  				</div>
-			</div>
-		</div>
+		
 		<br>
 		<div class="row" id="glypicon-cadastra-funcionario">
 		    <div class="col-sm-9"></div>
@@ -379,4 +230,4 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
-</html>
+</html

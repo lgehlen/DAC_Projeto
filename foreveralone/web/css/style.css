@@ -6,21 +6,20 @@ html, body {
 }
 
 #logo{
-	margin-left: 20px;
-	margin-top: -10px;
+	margin-left: 2%
 }
 
 .home {
   overflow: hidden;
   background-color:#B22222;
-  padding: 10px 5px;
+  padding: -5% 1%;
   color: white;
 }
 
 .container-conteudo{
  background-color: white;
- margin-right: 200px;
- margin-left: 200px;
+ margin-right: 20%;
+ margin-left: 20%;
  border-radius: 10px;
  color: inherit;
  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -123,6 +122,7 @@ color:black;
 height:auto;
 position:absolute;
 width:100%;
+bottom: 0;
 }
 
 .foto-perfil{
@@ -138,7 +138,7 @@ width:100%;
 #container-login{
 	margin-top: 100px;
 	padding-top: 100px;
-	padding-left:20px;
+	padding-left: 20px;
 	padding-right:20px;
 	background-color: lightgrey;
 	border-radius: 10px;
@@ -204,13 +204,11 @@ width:100%;
 /*Página Manter Preferencias*/
 
 #container-manter-preferencias{
-	padding-left:20px;
-	padding-right:20px;
+	padding-left:2%;
+	padding-right:2%;
 	background-color: lightgrey;
 	border-radius: 10px;
-	margin-top: 20px;
-	margin-left: 200px;
-	margin-right:200px;
+	margin-top: 2%;
 }
 
 #radios{
@@ -224,13 +222,11 @@ width:100%;
 /*Página encontros*/
 
 #container-encontros{
-	padding-left:20px;
-	padding-right:20px;
+	padding-left:2%;
+	padding-right:2%;
 	background-color: lightgrey;
 	border-radius: 10px;
-	margin-top: 20px;
-	margin-left: 200px;
-	margin-right:200px;
+	margin-top: 2%;
 }
 
 #solicitacoesencontro{
@@ -246,13 +242,11 @@ width:100%;
 /*Página Pesquisa Pares*/
 
 #container-pesquisa-pares{
-	padding-left:20px;
-	padding-right:20px;
+	padding-left:2%;
+	padding-right:2%;
 	background-color: lightgrey;
 	border-radius: 10px;
-	margin-top: 20px;
-	margin-left: 200px;
-	margin-right:200px;
+	margin-top: 2%;
 }
 
 #pesquisa{
@@ -302,13 +296,11 @@ width:100%;
 
 /*Cadastra Evento */
 #container-cadastra-evento{
-	padding-left:20px;
-	padding-right:20px;
+	padding-left:2%;
+	padding-right:2%;
 	background-color: lightgrey;
 	border-radius: 10px;
-	margin-top: 20px;
-	margin-left: 200px;
-	margin-right:200px;
+	margin-top: 2%;
 }
 
 #glypicon-evento{
@@ -319,11 +311,9 @@ width:100%;
 /*gerencia_usuarios */
 
 #container-gerencia-usuarios{
-	padding-left:20px;
-	padding-right:20px;
+	padding-left:2%;
+	padding-right:2%;
 	background-color: lightgrey;
 	border-radius: 10px;
-	margin-top: 20px;
-	margin-left: 200px;
-	margin-right:200px;
+	margin-top: 2%;
 }
