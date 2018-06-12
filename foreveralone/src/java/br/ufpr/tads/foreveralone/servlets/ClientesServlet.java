@@ -60,12 +60,12 @@ public class ClientesServlet extends HttpServlet {
             }
             
             String action = request.getParameter("action");
-            String url = "/clientesListar.jsp";
+            String url = "/gerenciaUsuarios.jsp";
             int formType = 0;
                                    
             if (action == null || action.isEmpty() || action.equals("list")){    
                 request.setAttribute("clientes", this.clientesFacade.listarClientes());
-                url = "/clientesListar.jsp";  
+                url = "/gerenciaUsuarios.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
@@ -106,22 +106,27 @@ public class ClientesServlet extends HttpServlet {
                 cliente.setCpf(request.getParameter("cpf"));
                 cliente.setEmail(request.getParameter("email"));
                 cliente.setNome(request.getParameter("nome"));
+                cliente.setEscolaridade(request.getParameter("escolaridade "));
                 cliente.getEndereço().setRua(request.getParameter("rua"));
+                cliente.getEndereço().setLogradouro(request.getParameter("logradouro"));
+                cliente.setSenha(request.getParameter("senha"));
                 
                 cliente.getEndereço().getCidade().setId(Integer.parseInt(request.getParameter("cidade")));
                 cliente.getEndereço().getCidade().getEstado().setId(Integer.parseInt(request.getParameter("estado")));    
                 cliente.setId(Integer.parseInt(request.getParameter("id")));
                 
+                //Falta fazer os atributos
 
-                System.out.println("asda");
+                
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                System.out.println("asda");
+                
                 try {
                     cliente.setDataNasc(formatter.parse(request.getParameter("data")));
                 } catch (ParseException ex) {
                     Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("asda");
+                
+                
                 this.clientesFacade.atualizarCliente(cliente);
                 
                 response.sendRedirect("clientes");                
@@ -142,11 +147,16 @@ public class ClientesServlet extends HttpServlet {
                 cliente.setCpf(request.getParameter("cpf"));
                 cliente.setEmail(request.getParameter("email"));
                 cliente.setNome(request.getParameter("nome"));
+                cliente.setEscolaridade(request.getParameter("escolaridade "));
                 cliente.getEndereço().setRua(request.getParameter("rua"));
+                cliente.getEndereço().setLogradouro(request.getParameter("logradouro"));
+                cliente.setSenha(request.getParameter("senha"));
                 
                 cliente.getEndereço().getCidade().setId(Integer.parseInt(request.getParameter("cidade")));
-                cliente.getEndereço().getCidade().getEstado().setId(Integer.parseInt(request.getParameter("estado")));
-
+                cliente.getEndereço().getCidade().getEstado().setId(Integer.parseInt(request.getParameter("estado")));    
+                cliente.setId(Integer.parseInt(request.getParameter("id")));
+                
+                //Falta fazer os atributos
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     cliente.setDataNasc(formatter.parse(request.getParameter("data")));
