@@ -58,8 +58,8 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("loginBean", login);
             
             RequestDispatcher rd = request.
-                            getRequestDispatcher("/index.jsp");
-                    request.setAttribute("loginBean", login);
+                            getRequestDispatcher("/gerenciaUsuarios.jsp");
+                    request.setAttribute("login", login);
                     request.setAttribute("msg", "Deu certo");
                     rd.forward(request, response);
         
