@@ -5,6 +5,7 @@
  */
 package br.ufpr.tads.foreveralone.servlets;
 
+import br.ufpr.tads.foreveralone.beans.Atributo;
 import br.ufpr.tads.foreveralone.beans.Cidade;
 import br.ufpr.tads.foreveralone.beans.Cliente;
 import br.ufpr.tads.foreveralone.beans.Estado;
@@ -102,6 +103,9 @@ public class ClientesServlet extends HttpServlet {
                 
                 Cliente cliente = new Cliente();
                 
+                Atributo preferencias = new Atributo();
+                Atributo caracteristicas = new Atributo();
+                
                 cliente.getEndereço().setCep(request.getParameter("cep"));
                 cliente.setCpf(request.getParameter("cpf"));
                 cliente.setEmail(request.getParameter("email"));
@@ -116,7 +120,22 @@ public class ClientesServlet extends HttpServlet {
                 cliente.setId(Integer.parseInt(request.getParameter("id")));
                 
                 //Falta fazer os atributos
-
+                preferencias.setCorDeCabelo("");
+                preferencias.setCorDePele("");
+                preferencias.setDescricao("");
+                preferencias.setSexo("");
+                preferencias.setIdAtributo(0);
+                
+                cliente.setPreferencias(preferencias);
+                
+                caracteristicas.setCorDeCabelo("");
+                caracteristicas.setCorDePele("");
+                caracteristicas.setDescricao("");
+                caracteristicas.setSexo("");
+                caracteristicas.setIdAtributo(0);
+                
+                cliente.setCaracteristicas(caracteristicas);
+                
                 
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 
@@ -126,6 +145,8 @@ public class ClientesServlet extends HttpServlet {
                     Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
+                this.clientesFacade.alteraAtributo(caracteristicas);
+                this.clientesFacade.alteraAtributo(preferencias);
                 
                 this.clientesFacade.atualizarCliente(cliente);
                 
@@ -142,7 +163,10 @@ public class ClientesServlet extends HttpServlet {
             }
             else if (action.equals("new")){
                 Cliente cliente = new Cliente();
-                    
+                                    
+                Atributo preferencias = new Atributo();
+                Atributo caracteristicas = new Atributo();
+                
                 cliente.getEndereço().setCep(request.getParameter("cep"));
                 cliente.setCpf(request.getParameter("cpf"));
                 cliente.setEmail(request.getParameter("email"));
@@ -156,13 +180,30 @@ public class ClientesServlet extends HttpServlet {
                 cliente.getEndereço().getCidade().getEstado().setId(Integer.parseInt(request.getParameter("estado")));    
                 cliente.setId(Integer.parseInt(request.getParameter("id")));
                 
-                //Falta fazer os atributos
+                preferencias.setCorDeCabelo("");
+                preferencias.setCorDePele("");
+                preferencias.setDescricao("");
+                preferencias.setSexo("");
+                preferencias.setSexo("");
+                preferencias.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                this.clientesFacade.criaAtributo(preferencias);
+                cliente.setPreferencias(preferencias);
+                
+                caracteristicas.setCorDeCabelo("");
+                caracteristicas.setCorDePele("");
+                caracteristicas.setDescricao("");
+                caracteristicas.setSexo("");
+                caracteristicas.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                this.clientesFacade.criaAtributo(caracteristicas);
+                cliente.setCaracteristicas(caracteristicas);
+                
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     cliente.setDataNasc(formatter.parse(request.getParameter("data")));
                 } catch (ParseException ex) {
                     Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
                 this.clientesFacade.criarCliente(cliente);
                 
                 response.sendRedirect("clientes");                

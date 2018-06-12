@@ -17,5 +17,7 @@ public interface AtributoDao {
     
     void alteraAtributo(Atributo atributo);
     
+    int buscaProximoIdAtributo();
+    
     List<Atributo> listaAtributo();
 }
