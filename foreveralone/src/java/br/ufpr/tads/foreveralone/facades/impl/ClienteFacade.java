@@ -65,6 +65,10 @@ public class ClienteFacade {
         return getClienteDao().listarClientes();
     }
 
+    public int buscaProximoIdAtributo() {
+        return getAtributoDao().buscaProximoIdAtributo();
+    }
+    
     
     public Cliente buscarClientePorId(int id) {
         return getClienteDao().buscarClientePorId(id);

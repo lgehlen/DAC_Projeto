@@ -81,5 +81,25 @@ public class DefaultAtributoDao implements AtributoDao {
         }
         return null;
     }
+
+    @Override
+    public int buscaProximoIdAtributo() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT AUTO_INCREMENT FROM   information_schema.tables " +
+                                        " WHERE  table_name = 'Atributo'" +
+                                        " AND    table_schema = 'forever'");
+            rs = ps.executeQuery();
+            if(rs.next())
+            {
+                return rs.getInt("AUTO_INCREMENT");
+            }
+            return -1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
     
 }
