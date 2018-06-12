@@ -9,7 +9,7 @@ package br.ufpr.tads.foreveralone.beans;
  *
  * @author gqueiroz
  */
-class Endereco {
+public class Endereco {
     private int id;
     
     private String rua;
