@@ -181,11 +181,11 @@ public class DefaultClienteDao implements ClienteDao {
             System.out.println("teste");
             Login login = new Login();
             while (rs.next()) {
-                System.out.println("NOME " + rs.getString("nomeFuncionario"));
-                System.out.println("ID " + rs.getInt("idFuncionario"));
-                login.setId(rs.getInt("idFuncionario"));
-                login.setNome(rs.getString("nomeFuncionario"));
-                login.setTipo("funcionario");
+                System.out.println("NOME " + rs.getString("nomeCliente"));
+                System.out.println("ID " + rs.getInt("idCliente"));
+                login.setId(rs.getInt("idCliente"));
+                login.setNome(rs.getString("nomeCliente"));
+                login.setTipo("cliente");
             }
             return login;
         } catch (SQLException e) {
