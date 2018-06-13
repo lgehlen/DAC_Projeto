@@ -6,6 +6,7 @@
 package br.ufpr.tads.foreveralone.daos.impl;
 
 import br.ufpr.tads.foreveralone.beans.Cliente;
+import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.daos.ClienteDao;
 import br.ufpr.tads.foreveralone.daos.ConnectionFactory;
 import java.sql.Connection;
@@ -30,17 +31,18 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("INSERT INTO forever.Cliente (nomeCliente, CPF, datanasc, email, escolaridade, dataCada, senha, Endereco_idEndereco, Endereco_Cidade_idCliente1)"
-                    + " VALUES(?,?,?,?,?,?,?,?,?)");
-            st.setInt(1, cliente.getId());
-            st.setString(2, cliente.getNome());
-            st.setString(3, cliente.getCpf());
-            st.setDate(4, new java.sql.Date(cliente.getDataNasc().getTime()));
-            st.setString(5, cliente.getEmail());
-            st.setString(6, cliente.getEscolaridade());
-            st.setDate(7, new java.sql.Date(cliente.getDataCad().getTime()));
-            st.setString(8, cliente.getSenha());
-            st.setString(9, null);
+            st = con.prepareStatement("INSERT INTO forever.Cliente (nomeCliente, CPF, datanasc, email, escolaridade, dataCada, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?,?)");
+            st.setString(1, cliente.getNome());
+            st.setString(2, cliente.getCpf());
+            st.setDate(3, new java.sql.Date(cliente.getDataNasc().getTime()));
+            st.setString(4, cliente.getEmail());
+            st.setString(5, cliente.getEscolaridade());
+            st.setDate(6, new java.sql.Date(cliente.getDataCad().getTime()));
+            st.setString(7, cliente.getSenha());
+            st.setString(8, null);
+            st.setInt(9, cliente.getPreferencias().getIdAtributo());
+            st.setInt(10, cliente.getCaracteristicas().getIdAtributo());
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,7 +68,7 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("UPDATE forever.Cliente SET nomeCliente = ?, CPF = ?, datanasc = ?, email = ?, escolaridade = ?, dataCada = ?, senha = ?, Endereco_idEndereco = ?, Endereco_Cidade_idCliente1 = ? WHERE idCliente = ?");
+            st = con.prepareStatement("UPDATE forever.Cliente SET nomeCliente = ?, CPF = ?, datanasc = ?, email = ?, escolaridade = ?, dataCada = ?, senha = ?, Endereco_idEndereco = ?, Atributo_IdAtributoPreferencia = ?, Atributo_IdAtributoAtributo = ?, WHERE idCliente = ?");
             st.setString(1, cliente.getNome());
             st.setString(2, cliente.getCpf());
             st.setDate(3, new java.sql.Date(cliente.getDataNasc().getTime()));
@@ -75,7 +77,9 @@ public class DefaultClienteDao implements ClienteDao {
             st.setDate(6, new java.sql.Date(cliente.getDataCad().getTime()));
             st.setString(7, cliente.getSenha());
             st.setString(8, null);
-            st.setInt(9, cliente.getId());
+            st.setInt(9, cliente.getPreferencias().getIdAtributo());
+            st.setInt(10, cliente.getCaracteristicas().getIdAtributo());
+            st.setInt(11, cliente.getId());
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,18 +91,22 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCada, senha, Endereco_idEndereco, Endereco_Cidade_idCliente1 FROM forever.Cliente");
+            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM cliente");
             rs = ps.executeQuery();
             List<Cliente> list = new ArrayList<Cliente>();
             while (rs.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setId(0);
+                cliente.setId(rs.getInt("IdCliente"));
                 cliente.setCpf(rs.getString("CPF"));
-                cliente.setDataCad(rs.getDate("dataCada"));
+                cliente.setDataCad(rs.getDate("dataCad"));
                 cliente.setDataNasc(rs.getDate("datanasc"));
                 cliente.setEmail(rs.getString("email"));
                 cliente.setEscolaridade(rs.getString("escolaridade"));
                 cliente.setNome(rs.getString("nomeCliente"));
+                cliente.setCaracteristicas(null);
+                cliente.setPreferencias(null);
+                cliente.setEndereço(null);
+                
                 list.add(cliente);
             }
             return list;
@@ -156,6 +164,34 @@ public class DefaultClienteDao implements ClienteDao {
                 list.add(cliente);
             }
             return list.get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Login getLogin(String email, String sen) {
+        System.out.println("email " + email);
+        System.out.println("senha " + sen);
+        System.out.println("T " + con);
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idCliente, nomeCliente FROM forever.Cliente WHERE email = ? AND senha = ?");
+            ps.setString(1, email);
+            ps.setString(2, sen);
+            rs = ps.executeQuery();
+            System.out.println("teste");
+            Login login = new Login();
+            while (rs.next()) {
+                System.out.println("NOME " + rs.getString("nomeCliente"));
+                System.out.println("ID " + rs.getInt("idCliente"));
+                login.setId(rs.getInt("idCliente"));
+                login.setNome(rs.getString("nomeCliente"));
+                login.setTipo("cliente");
+            }
+            return login;
         } catch (SQLException e) {
             e.printStackTrace();
         }

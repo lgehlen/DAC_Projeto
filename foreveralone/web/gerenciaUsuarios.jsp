@@ -76,9 +76,9 @@
 			<div class="col-sm-4"><h4> Lista de Clientes</h4></div>
 		</div>
 		<br>
+                <c:forEach items="${clientes}" var="x">
 		<div class="row" id="relatorios">
-			<div class="col-sm-1"><h4>24</h4></div>
-			<div class="col-sm-9"><h4> Gabriel Vieira</h4></div>
+			<div class="col-sm-9"><h4> ${x.nome} </h4></div>
 			<!--Modal-->
 			<div class="col-sm-1">
 				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#excluifunc">
@@ -139,7 +139,16 @@
 										<img class="foto-perfil" src="imagens/usuario.jpg" alt="" />
 									</div>
 									<div class="col-sm-5">
-										CPF:<h4>104-912-559.26</h4>
+										Nome<h4>${x.nome}</h4>
+									</div>
+                                                                        <div class="col-sm-5">
+										CPF<h4>${x.cpf}</h4>
+									</div>
+                                                                        <div class="col-sm-5">
+										Email<h4>${x.email}</h4>
+									</div>
+                                                                        <div class="col-sm-5">
+										Escolaridade<h4>${x.escolaridade}</h4>
 									</div>
 								</div>
         					</div>
@@ -152,7 +161,8 @@
 			</div>
 		</div>
 		<br>
-		
+            </c:forEach>
+                
 		<br>
 		<div class="row" id="glypicon-cadastra-funcionario">
 		    <div class="col-sm-9"></div>
@@ -196,36 +206,7 @@
 	</div>
 	<br>
 	<br>
-	<footer id="footer">
-		<div id="estilorodape">
-	
-			<div class="row">
-				<div class="col-sm-6" id="controdape"><h5 >Conteudo X </h5>
-					<h5><a id="linksrodape" href="#"> Rasckspace</a></h5>
-					<h5><a id="linksrodape" href="#"> Rasckspace</a></h5>
-				</div>
-				<div class="col-sm-6" id="controdape"><h5 >EMPRESA</h5>
-					<h5> <a id="linksrodape" href="https://www.liguesite.com.br/sobre-nos/">Sobre</a></h5>
-					<h5> <a id="linksrodape" href="https://www.liguesite.com.br/blog/">Blog</a></h5>
-				</div>
-			</div>
-			<div class="rodapef">
-				<div class="row">
-					<div class="col-sm-2" ></div>
-					<div class="col-sm-2" >
-						<h4> 2018 © ForeverAlone Inc.</h4>
-					</div>
-					<div class="col-sm-2" >
-						<h5> <a id="linksrodape" href="#">Termos de Compromisso</a></h5>
-					</div>
-					<div class="col-sm-2" >
-						<h5>SAC:sac@forever.com.br</h5>
-					</div>
-				</div>
-				<br>
-			</div>
-		</div>
-	</footer>
+        
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

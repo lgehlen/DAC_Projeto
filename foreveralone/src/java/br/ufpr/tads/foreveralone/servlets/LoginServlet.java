@@ -6,6 +6,7 @@
 package br.ufpr.tads.foreveralone.servlets;
 
 import br.ufpr.tads.foreveralone.beans.Login;
+import br.ufpr.tads.foreveralone.facades.impl.ClienteFacade;
 import br.ufpr.tads.foreveralone.facades.impl.FuncionarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,6 +39,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         FuncionarioFacade funcionario = new FuncionarioFacade();
+        ClienteFacade cliente = new ClienteFacade();
         
         String email = request.getParameter("email");
         System.out.println("email " + email);
@@ -47,23 +49,37 @@ public class LoginServlet extends HttpServlet {
         Login login = new Login();
         login =  funcionario.getLogin(email, sen);
         
-        if (login.getNome() == null) 
-            {                
-                RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-                request.setAttribute("msg", "Usuário/Senha inválidos.");
-                rd.forward(request, response);    
-            }
         
-        HttpSession session = request.getSession();
+        if (login.getNome() != null) 
+        {        
+            HttpSession session = request.getSession();
             session.setAttribute("loginBean", login);
-            
             RequestDispatcher rd = request.
-                            getRequestDispatcher("/gerenciaUsuarios.jsp");
+                            getRequestDispatcher("/clientes");
                     request.setAttribute("login", login);
-                    request.setAttribute("msg", "Deu certo");
-                    rd.forward(request, response);
-        
+                    rd.forward(request, response);    
+        }
+        else{
+            login = cliente.getLogin(email, sen);
+
+            if (login.getNome() != null) 
+            {       
+                HttpSession session = request.getSession();
+                session.setAttribute("loginBean", login);
+                RequestDispatcher rd = request.
+                                getRequestDispatcher("/paresCompativeis.jsp");
+                        request.setAttribute("login", login);
+                        request.setAttribute("msg", "Deu certo");
+                        rd.forward(request, response);    
+            }
+        }
             
+        if (login.getNome() == null) 
+        {    
+            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+            request.setAttribute("msg", "Usuário/Senha inválidos.");
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

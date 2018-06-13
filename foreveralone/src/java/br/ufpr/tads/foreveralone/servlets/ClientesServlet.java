@@ -5,12 +5,14 @@
  */
 package br.ufpr.tads.foreveralone.servlets;
 
+import br.ufpr.tads.foreveralone.beans.Atributo;
 import br.ufpr.tads.foreveralone.beans.Cidade;
 import br.ufpr.tads.foreveralone.beans.Cliente;
 import br.ufpr.tads.foreveralone.beans.Estado;
 import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.facades.impl.ClienteFacade;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -29,7 +31,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author luis_
  */
-@WebServlet(name = "ClientesServlet", urlPatterns = {"/ClientesServlet"})
+@WebServlet(name = "ClientesServlet", urlPatterns = {"/clientes"})
 public class ClientesServlet extends HttpServlet {
 
     private ClienteFacade clientesFacade;
@@ -53,7 +55,7 @@ public class ClientesServlet extends HttpServlet {
        HttpSession session = request.getSession(false);
            
             
-            if (session == null || ((Login) session.getAttribute("login") == null)) {
+            if (session == null || ((Login) session.getAttribute("loginBean") == null)) {
                 RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
                 request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema");
                 rd.forward(request, response);
@@ -66,6 +68,7 @@ public class ClientesServlet extends HttpServlet {
             if (action == null || action.isEmpty() || action.equals("list")){    
                 request.setAttribute("clientes", this.clientesFacade.listarClientes());
                 url = "/gerenciaUsuarios.jsp";  
+                System.out.println("Lista: " + this.clientesFacade.listarClientes());
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
@@ -102,6 +105,9 @@ public class ClientesServlet extends HttpServlet {
                 
                 Cliente cliente = new Cliente();
                 
+                Atributo preferencias = new Atributo();
+                Atributo caracteristicas = new Atributo();
+                
                 cliente.getEndereço().setCep(request.getParameter("cep"));
                 cliente.setCpf(request.getParameter("cpf"));
                 cliente.setEmail(request.getParameter("email"));
@@ -116,7 +122,22 @@ public class ClientesServlet extends HttpServlet {
                 cliente.setId(Integer.parseInt(request.getParameter("id")));
                 
                 //Falta fazer os atributos
-
+                preferencias.setCorDeCabelo("");
+                preferencias.setCorDePele("");
+                preferencias.setDescricao("");
+                preferencias.setSexo("");
+                preferencias.setIdAtributo(0);
+                
+                cliente.setPreferencias(preferencias);
+                
+                caracteristicas.setCorDeCabelo("");
+                caracteristicas.setCorDePele("");
+                caracteristicas.setDescricao("");
+                caracteristicas.setSexo("");
+                caracteristicas.setIdAtributo(0);
+                
+                cliente.setCaracteristicas(caracteristicas);
+                
                 
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 
@@ -126,6 +147,8 @@ public class ClientesServlet extends HttpServlet {
                     Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
+                this.clientesFacade.alteraAtributo(caracteristicas);
+                this.clientesFacade.alteraAtributo(preferencias);
                 
                 this.clientesFacade.atualizarCliente(cliente);
                 
@@ -142,7 +165,10 @@ public class ClientesServlet extends HttpServlet {
             }
             else if (action.equals("new")){
                 Cliente cliente = new Cliente();
-                    
+                                    
+                Atributo preferencias = new Atributo();
+                Atributo caracteristicas = new Atributo();
+                
                 cliente.getEndereço().setCep(request.getParameter("cep"));
                 cliente.setCpf(request.getParameter("cpf"));
                 cliente.setEmail(request.getParameter("email"));
@@ -156,13 +182,30 @@ public class ClientesServlet extends HttpServlet {
                 cliente.getEndereço().getCidade().getEstado().setId(Integer.parseInt(request.getParameter("estado")));    
                 cliente.setId(Integer.parseInt(request.getParameter("id")));
                 
-                //Falta fazer os atributos
+                preferencias.setCorDeCabelo("");
+                preferencias.setCorDePele("");
+                preferencias.setDescricao("");
+                preferencias.setSexo("");
+                preferencias.setSexo("");
+                preferencias.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                this.clientesFacade.criaAtributo(preferencias);
+                cliente.setPreferencias(preferencias);
+                
+                caracteristicas.setCorDeCabelo("");
+                caracteristicas.setCorDePele("");
+                caracteristicas.setDescricao("");
+                caracteristicas.setSexo("");
+                caracteristicas.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                this.clientesFacade.criaAtributo(caracteristicas);
+                cliente.setCaracteristicas(caracteristicas);
+                
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     cliente.setDataNasc(formatter.parse(request.getParameter("data")));
                 } catch (ParseException ex) {
                     Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
                 this.clientesFacade.criarCliente(cliente);
                 
                 response.sendRedirect("clientes");                

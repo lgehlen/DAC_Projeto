@@ -9,6 +9,7 @@ import br.ufpr.tads.foreveralone.beans.Atributo;
 import br.ufpr.tads.foreveralone.beans.Cidade;
 import br.ufpr.tads.foreveralone.beans.Cliente;
 import br.ufpr.tads.foreveralone.beans.Estado;
+import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.daos.AtributoDao;
 import br.ufpr.tads.foreveralone.daos.CidadeDao;
 import br.ufpr.tads.foreveralone.daos.ClienteDao;
@@ -65,6 +66,10 @@ public class ClienteFacade {
         return getClienteDao().listarClientes();
     }
 
+    public int buscaProximoIdAtributo() {
+        return getAtributoDao().buscaProximoIdAtributo();
+    }
+    
     
     public Cliente buscarClientePorId(int id) {
         return getClienteDao().buscarClientePorId(id);
@@ -94,6 +99,11 @@ public class ClienteFacade {
     public List<Estado> buscarEstados() {
         return getEstadoDao().buscarEstados();
     }    
+    
+    public Login getLogin(String email, String sen) {
+        return getClienteDao().getLogin(email,sen);
+    }
+    
     /**
      * @return the clienteDao
      */
