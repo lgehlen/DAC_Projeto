@@ -91,18 +91,22 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCada, senha, Endereco_idEndereco, Endereco_Cidade_idCliente1 FROM forever.Cliente");
+            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM cliente");
             rs = ps.executeQuery();
             List<Cliente> list = new ArrayList<Cliente>();
             while (rs.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setId(0);
+                cliente.setId(rs.getInt("IdCliente"));
                 cliente.setCpf(rs.getString("CPF"));
-                cliente.setDataCad(rs.getDate("dataCada"));
+                cliente.setDataCad(rs.getDate("dataCad"));
                 cliente.setDataNasc(rs.getDate("datanasc"));
                 cliente.setEmail(rs.getString("email"));
                 cliente.setEscolaridade(rs.getString("escolaridade"));
                 cliente.setNome(rs.getString("nomeCliente"));
+                cliente.setCaracteristicas(null);
+                cliente.setPreferencias(null);
+                cliente.setEndereço(null);
+                
                 list.add(cliente);
             }
             return list;

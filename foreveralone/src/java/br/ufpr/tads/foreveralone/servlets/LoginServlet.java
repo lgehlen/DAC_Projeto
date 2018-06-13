@@ -49,33 +49,37 @@ public class LoginServlet extends HttpServlet {
         Login login = new Login();
         login =  funcionario.getLogin(email, sen);
         
+        
         if (login.getNome() != null) 
-        {       
+        {        
             HttpSession session = request.getSession();
             session.setAttribute("loginBean", login);
             RequestDispatcher rd = request.
-                            getRequestDispatcher("/gerenciaUsuarios.jsp");
+                            getRequestDispatcher("/clientes");
                     request.setAttribute("login", login);
-                    request.setAttribute("msg", "Deu certo");
                     rd.forward(request, response);    
         }
-        
-        login = cliente.getLogin(email, sen);
-       
-        if (login.getNome() != null) 
-        {       
-            HttpSession session = request.getSession();
-            session.setAttribute("loginBean", login);
-            RequestDispatcher rd = request.
-                            getRequestDispatcher("/paresCompativeis.jsp");
-                    request.setAttribute("login", login);
-                    request.setAttribute("msg", "Deu certo");
-                    rd.forward(request, response);    
+        else{
+            login = cliente.getLogin(email, sen);
+
+            if (login.getNome() != null) 
+            {       
+                HttpSession session = request.getSession();
+                session.setAttribute("loginBean", login);
+                RequestDispatcher rd = request.
+                                getRequestDispatcher("/paresCompativeis.jsp");
+                        request.setAttribute("login", login);
+                        request.setAttribute("msg", "Deu certo");
+                        rd.forward(request, response);    
+            }
         }
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-        request.setAttribute("msg", "Usuário/Senha inválidos.");
-        rd.forward(request, response);
+            
+        if (login.getNome() == null) 
+        {    
+            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+            request.setAttribute("msg", "Usuário/Senha inválidos.");
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
