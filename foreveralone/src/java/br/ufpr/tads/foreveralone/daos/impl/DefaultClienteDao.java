@@ -93,7 +93,7 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM cliente");
+            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM Cliente");
             rs = ps.executeQuery();
             List<Cliente> list = new ArrayList<Cliente>();
             while (rs.next()) {
