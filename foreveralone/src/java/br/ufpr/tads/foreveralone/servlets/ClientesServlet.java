@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.jasper.tagplugins.jstl.ForEach;
 
 
 /**
@@ -62,13 +64,14 @@ public class ClientesServlet extends HttpServlet {
             }
             
             String action = request.getParameter("action");
-            String url = "/gerenciaUsuarios.jsp";
+            String url = "/gestaoClientes.jsp";
             int formType = 0;
                                    
             if (action == null || action.isEmpty() || action.equals("list")){    
-                request.setAttribute("clientes", this.clientesFacade.listarClientes());
-                url = "/gerenciaUsuarios.jsp";  
-                System.out.println("Lista: " + this.clientesFacade.listarClientes());
+                List<Cliente> c = new ArrayList<Cliente>();
+                c = this.clientesFacade.listarClientes();
+                request.setAttribute("clientes", c);
+                url = "/gestaoClientes.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }

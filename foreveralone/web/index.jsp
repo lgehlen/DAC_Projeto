@@ -33,7 +33,7 @@
 			<div class="col-sm-4"><h4> <img id="foto-login" src="./imagens/user.jpg" width="100" height="50"></h4></div>
 		</div>
 		<div class="row">
-			<form>
+			<form action="login" method="post">
 	    		<div class="input-group">
 	      			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 	      			<input id="email" type="text" class="form-control" name="email" placeholder="Email">
@@ -44,14 +44,15 @@
 	      			<input id="password" type="password" class="form-control" name="password" placeholder="Senha">
 	    		</div>
 	    		<br>
-	 	 	</form>
+	 	 	
 		</div>	
 		<div class="row" id="glypicon-login">
 		    <div class="col-sm-4"></div>
 		    <div class="col-sm-2">	
-		      	<a href="index.html" class="btn btn-info btn-lg">
+		      	<button type="submit" class="btn btn-info btn-lg">
 		      		<span class="glyphicon glyphicon-play-circle"></span> Entrar
-		      	</a>
+		      	</button>
+                        </form>
 		    </div>
 	     </div>
 	     <br>

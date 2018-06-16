@@ -28,7 +28,8 @@
 
 <body >
 	<!-- Header -->
-	<header class="home">
+        <header class="home">
+
 		<div class="bg-img" >
 			<div class="overlay"></div>
 		</div>
@@ -37,31 +38,36 @@
 	  		<br>
 	  		<div id="cabe">
 	  			<!--LOGO -->
-	  			<div class="col-sm-1" > <a href="/"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
+	  			<div class="col-sm-1"> <a href="/"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
 		  		<div class="container">
 					<div class="row">
-		  				<div class="col-sm-3">
-		  					<a href="/" class="btn btn-primary btn-lg">
+		  				<div class="col-sm-1">
+		  					<a href="index.html" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-home"></span> Home
 		  					</a>
 		  				</div>
-		  				<div class="col-sm-4">
+		  				<div class="col-sm-3" id="correcao-menu">
+		  					<a href="gestao_relatoriosA" class="btn btn-primary btn-lg">
+		  						<span class="glyphicon glyphicon-open"></span> Gerenciar Relatórios
+		  					</a>
+		  				</div>
+		  				<div class="col-sm-3" id="correcao-menu">
 		  					<a href="#" class="btn btn-primary btn-lg">
-		  						<span class="glyphicon glyphicon-user"></span> Gerenciar Usuários
+		  						<span class="glyphicon glyphicon-user"></span> Gerenciar Clientes
 		  					</a>
 		  				</div>
-		  				<div class="col-sm-3">
-		  					<a href="cadastro_evento.html" class="btn btn-primary btn-lg">
-		  						<span class="glyphicon glyphicon-fire"></span> Criar Evento/Festas
+		  				<div class="col-sm-3" id="correcao-menu">
+		  					<a href="gestaofuncionarios.html" class="btn btn-primary btn-lg">
+		  						<span class="glyphicon glyphicon-link"></span> Gerenciar Funcionários
 		  					</a>
 		  				</div>
-		  				<div class="col-sm-1"> 
+		  				<div class="col-sm-1" id="dropdown-menu"> 
 	    					<div class="dropdown">
 	    						<button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span>
 	    						<span class="caret"></span></button>
 	   							<ul class="dropdown-menu">
 	   								<li><a> <span class="glyphicon glyphicon-user"></span>   User   </a></li>
-	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo:Funcionário  </a></li>
+	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo:Administrador </a></li>
 		      						<li><a href="/">Home</a></li>
 		      						<li class="divider"></li>
 		      						<li><a href="#"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
@@ -77,18 +83,25 @@
 	<div class="container" id="container-pesquisa-pares">
 		<form>
 			<div class="row">
-				<div class="col-sm-4"><h4> Lista de Clientes</h4></div>
-			</div>
-			<br>
+				<div id="titleclientes" class="col-sm-2"><h4> Lista de Clientes</h4></div>
+			
+                            <div id="btnadcionar" class="col-sm-4">
+				<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#excluifunc">
+                                    <span class="glyphicon glyphicon-plus">Adicionar</span>
+                                </button>
+                            </div>
+                        </div>
+                                <br>
+                        <c:forEach items="${clientes}" var="x">
 			<div class="row" id="relatorios">
-				<div class="col-sm-1"><h4>24</h4></div>
-				<div class="col-sm-9"><h4> Gabriel Vieira</h4></div>
+                            <div class="col-sm-1"><h4><c:out value="${x.id}"/></h4></div>
+				<div class="col-sm-9"><h4><c:out value="${x.nome}"/></h4></div>
 				<!--Modal-->
 				<div class="col-sm-1">
-					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc">
-						<span class="glyphicon glyphicon-trash"></span>
-					</button>
-
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#excluifunc">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                        
 					<!-- Modal -->
 	  				<div class="modal fade" id="excluifunc" role="dialog">
 	    				<div class="modal-dialog">
@@ -102,7 +115,7 @@
 	        						<div class="row">
 		        						<div class="col-sm-1"></div>
 		        						<div class="col-sm-9" style="text-align: center;">
-		         							<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
+		         							<h3><span class="glyphicon glyphicon-alert"> Excluir Cliente?</span></h3>
 		         						</div>
 		         						<div class="col-sm-2"></div>
 		         					</div>
@@ -132,8 +145,11 @@
 					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
 						<span class="glyphicon glyphicon-info-sign"></span>
 					</button>
+                            
+                                    
+                                    
 					<!-- Modal -->
-	  				<div class="modal fade" id="myModal" role="dialog">
+	  				div class="modal fade" id="myModal" role="dialog">
 	    				<div class="modal-dialog">
 	      			<!-- Modal content-->
 	      					<div class="modal-content">
@@ -144,8 +160,34 @@
 	        					<div class="modal-body">
 	         						<div class="row">
 										<div class="col-sm-5">
-											CPF:<h4>104-912-559.26</h4>
+											ID:<h4><c:out value="${x.id}"/></h4>
 										</div>
+                                                                                <div class="col-sm-5">
+											Email:<h4><c:out value="${x.email}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Nome:<h4><c:out value="${x.nome}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											CPF:<h4><c:out value="${x.cpf}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+                                                                                    Aniversário:<h4><fmt:formatDate value="${x.dataNasc}" pattern="dd/MM/yy"/></h4>
+										</div>
+                                                                                
+                                                                                <div class="col-sm-5">
+											Escolaridade:<h4><c:out value="${x.escolaridade}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Data de Cadastro<h4><fmt:formatDate value="${x.dataCad}" pattern="dd/MM/yy"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Id Caracteristica<h4><c:out value="${x.caracteristicas.idAtributo}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Id Preferencia<h4><c:out value="${x.preferencias.idAtributo}"/></h4>
+										</div>
+                                                                                
 									</div>
 	        					</div>
 	        					<div class="modal-footer">
@@ -155,162 +197,13 @@
 	    				</div>
 	  				</div>
 				</div>
+                                                                               	
 			</div>
+                                                                               
 			<br>
-			<div class="row" id="relatorios">
-				<div class="col-sm-1"><h4>24</h4></div>
-				<div class="col-sm-9"><h4> Gabriel Vieira</h4></div>
-				<!--Modal-->
-				<div class="col-sm-1">
-					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc">
-						<span class="glyphicon glyphicon-trash"></span>
-					</button>
-
-					<!-- Modal -->
-	  				<div class="modal fade" id="excluifunc" role="dialog">
-	    				<div class="modal-dialog">
-	      			<!-- Modal content-->
-	      					<div class="modal-content">
-	        					<div class="modal-header">
-	          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-	          						<h4 class="modal-title">Aviso do Sistema!</h4>
-	        					</div>
-	        					<div class="modal-body">
-	        						<div class="row">
-		        						<div class="col-sm-1"></div>
-		        						<div class="col-sm-9" style="text-align: center;">
-		         							<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
-		         						</div>
-		         						<div class="col-sm-2"></div>
-		         					</div>
-		         					<div class="row">
-		        						<div class="col-sm-3"></div>
-		        						<div class="col-sm-2" id="popup-gerenciausuarios">
-		         							<button  type="button" class="btn btn-default btn-sm">
-	          									<span class="glyphicon glyphicon-remove"></span>
-	        								</button>
-		         						</div>
-		         						<div class="col-sm-2"></div>
-		        						<div class="col-sm-2" id="popup-gerenciausuarios">
-		         							<button  type="button" class="btn btn-default btn-sm">
-	          									<span class="glyphicon glyphicon-remove"></span>
-	        								</button>
-		         						</div>
-		         					</div>
-	        					</div>
-	        					<div class="modal-footer">
-	          						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-	        					</div>
-	      					</div>
-	    				</div>
-	  				</div>
-			</div>
-				<div class="col-sm-1">
-					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
-						<span class="glyphicon glyphicon-info-sign"></span>
-					</button>
-					<!-- Modal -->
-	  				<div class="modal fade" id="myModal" role="dialog">
-	    				<div class="modal-dialog">
-	      			<!-- Modal content-->
-	      					<div class="modal-content">
-	        					<div class="modal-header">
-	          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-	          						<h4 class="modal-title">Detalhes</h4>
-	        					</div>
-	        					<div class="modal-body">
-	         						<div class="row">
-										<div class="col-sm-5">
-											CPF:<h4>104-912-559.26</h4>
-										</div>
-									</div>
-	        					</div>
-	        					<div class="modal-footer">
-	          						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-	        					</div>
-	      					</div>
-	    				</div>
-	  				</div>
-				</div>
-			</form>
-		</div>
-		<br>
-		<div class="row" id="relatorios">
-			<div class="col-sm-1"><h4>24</h4></div>
-			<div class="col-sm-9"><h4> Gabriel Vieira</h4></div>
-			<!--Modal-->
-			<div class="col-sm-1">
-				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc">
-					<span class="glyphicon glyphicon-trash"></span>
-				</button>
-
-				<!-- Modal -->
-  				<div class="modal fade" id="excluifunc" role="dialog">
-    				<div class="modal-dialog">
-      			<!-- Modal content-->
-      					<div class="modal-content">
-        					<div class="modal-header">
-          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">Aviso do Sistema!</h4>
-        					</div>
-        					<div class="modal-body">
-        						<div class="row">
-	        						<div class="col-sm-1"></div>
-	        						<div class="col-sm-9" style="text-align: center;">
-	         							<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
-	         						</div>
-	         						<div class="col-sm-2"></div>
-	         					</div>
-	         					<div class="row">
-	        						<div class="col-sm-3"></div>
-	        						<div class="col-sm-2" id="popup-gerenciausuarios">
-		         						<button  type="button" class="btn btn-default btn-sm">
-	          								<span class="glyphicon glyphicon-remove"></span>
-	        							</button>
-		         					</div>
-	         						<div class="col-sm-2"></div>
-	        						<div class="col-sm-2" id="popup-gerenciausuarios">
-		         						<button  type="button" class="btn btn-default btn-sm">
-	          								<span class="glyphicon glyphicon-remove"></span>
-	        							</button>
-		         					</div>
-	         					</div>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        					</div>
-      					</div>
-    				</div>
-  				</div>
-		</div>
-			<div class="col-sm-1">
-				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
-					<span class="glyphicon glyphicon-info-sign"></span>
-				</button>
-				<!-- Modal -->
-  				<div class="modal fade" id="myModal" role="dialog">
-    				<div class="modal-dialog">
-      			<!-- Modal content-->
-      					<div class="modal-content">
-        					<div class="modal-header">
-          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">Detalhes</h4>
-        					</div>
-        					<div class="modal-body">
-         						<div class="row">
-									<div class="col-sm-5">
-										CPF:<h4>104-912-559.26</h4>
-									</div>
-								</div>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        					</div>
-      					</div>
-    				</div>
-  				</div>
-			</div>
-		</div>
+                          </c:forEach>
+                                    
+		 
 		<br>
 		<div class="row" id="glypicon-gerencia-usuarios">
 		    <div class="col-sm-9"></div>
