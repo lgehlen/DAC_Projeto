@@ -5,7 +5,9 @@
  */
 package br.ufpr.tads.foreveralone.daos.impl;
 
+import br.ufpr.tads.foreveralone.beans.Atributo;
 import br.ufpr.tads.foreveralone.beans.Cliente;
+import br.ufpr.tads.foreveralone.beans.Endereco;
 import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.daos.ClienteDao;
 import br.ufpr.tads.foreveralone.daos.ConnectionFactory;
@@ -95,6 +97,9 @@ public class DefaultClienteDao implements ClienteDao {
             rs = ps.executeQuery();
             List<Cliente> list = new ArrayList<Cliente>();
             while (rs.next()) {
+                Endereco endereco = new Endereco();
+                Atributo caracteristicas = new Atributo();
+                Atributo preferencias = new Atributo();
                 Cliente cliente = new Cliente();
                 cliente.setId(rs.getInt("IdCliente"));
                 cliente.setCpf(rs.getString("CPF"));
@@ -103,10 +108,15 @@ public class DefaultClienteDao implements ClienteDao {
                 cliente.setEmail(rs.getString("email"));
                 cliente.setEscolaridade(rs.getString("escolaridade"));
                 cliente.setNome(rs.getString("nomeCliente"));
-                cliente.setCaracteristicas(null);
-                cliente.setPreferencias(null);
-                cliente.setEndereço(null);
-                
+                caracteristicas.setIdAtributo(rs.getInt("Atributo_IdAtributoAtributo"));
+                preferencias.setIdAtributo(rs.getInt("Atributo_IdAtributoPreferencia"));
+                endereco.setId(rs.getInt("Endereco_idEndereco"));
+                cliente.setCaracteristicas(caracteristicas);
+                cliente.setPreferencias(preferencias);
+                cliente.setEndereço(endereco);
+                System.out.println("Preferencia: " + cliente.getPreferencias().getIdAtributo());
+                System.out.println("Caracteristica: " + cliente.getCaracteristicas().getIdAtributo());
+                System.out.println("Endereco: " + cliente.getEndereço().getId());
                 list.add(cliente);
             }
             return list;

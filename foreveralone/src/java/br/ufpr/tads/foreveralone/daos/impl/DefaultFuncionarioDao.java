@@ -163,8 +163,6 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
             rs = ps.executeQuery();
             Login login = new Login();
             while (rs.next()) {
-                System.out.println("NOME " + rs.getString("nomeFuncionario"));
-                System.out.println("ID " + rs.getInt("idFuncionario"));
                 login.setId(rs.getInt("idFuncionario"));
                 login.setNome(rs.getString("nomeFuncionario"));
                 login.setTipo("funcionario");

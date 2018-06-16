@@ -42,9 +42,7 @@ public class LoginServlet extends HttpServlet {
         ClienteFacade cliente = new ClienteFacade();
         
         String email = request.getParameter("email");
-        System.out.println("email " + email);
         String sen = request.getParameter("password"); 
-        System.out.println("password " + sen);
         
         Login login = new Login();
         login =  funcionario.getLogin(email, sen);

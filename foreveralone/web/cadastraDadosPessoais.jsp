@@ -12,12 +12,14 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Abertura de Ticket Ligue</title>
+	<title>Cadastro de dados pessoais</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -32,21 +34,18 @@
 						<div class="col-sm-12"> <h4>Dados Pessoais</h4></div>
 		  			</div>
 		  			<div class="row">
-		  				<div class="col-sm-1">
-		  					<h4> <img id="foto-dados-pessoais" src="./imagens/usuario.jpg" width="100" height="50"></h4>
-		  				</div>
-		  				<div class="col-sm-3"></div>
-						<!--Coleta o Nome do Usuário -->
-						<div class="col-sm-8">
+						<div class="col-sm-10">
 							<input name="Nome" id="name" type="text" class="form-control" placeholder="Nome Completo">
 						</div>
 					</div> 
+					<br>
 					<div class="row">
 						<!--Coleta o CPF do usuário -->
 						<div class="col-sm-7">
 							<input name="CPF" id="cpf" type="text" class="form-control" placeholder="CPF">
 						</div>
 					</div> 
+					<br>
 					<div class="row">
 						<!--Coleta a data de nascimento do usuário -->
 						<div class="col-sm-7">
@@ -77,6 +76,7 @@
 						</select>
 						</div>
 					</div> 
+					<br>
 					<div class="row">
 						<div class="col-sm-7">
 							<h5>Data de Cadastro:<input type="date"><span class="glyphicon glyphicon-calendar"></span></h5>
@@ -163,13 +163,5 @@
 		</div>
 		<br>
 </div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js'></script>
-		<script>
- 			$('.input-group.date').datepicker({format: "dd.mm.yyyy"});
-		</script>
-		 
-
 </body>
 </html>

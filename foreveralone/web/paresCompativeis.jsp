@@ -20,6 +20,8 @@
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body >
@@ -34,7 +36,7 @@
 	  		<br>
 	  		<div id="cabe">
 	  			<!--LOGO -->
-	  			<div class="col-sm-1" id="logo"> <a href="/"><img id="logo" src="logo-forever.png" alt="logo" width="120" height="100"></a></div>
+	  			<div class="col-sm-1"> <a href="/"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
 		  		<div class="container">
 					<div class="row">
 		  				<div class="col-sm-2">
@@ -88,65 +90,39 @@
 		<br>
 		<div class="row">
 			<div class="col-sm-3">
-				<img class="foto-perfil" src="imagens/usuario.jpg" alt="" />
+				<img class="foto-perfil" src="imagens/user.jpg" alt="" />
 			</div>
 			<!--Nome do usuário que deu match-->
 			<div class="col-sm-9">
 				<!--Nome do usuário que deu match-->
 				<strong>Primeiro Nome:</strong><h4>Ana</h4>
 				<p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dignissim mattis consequat. Phasellus sit amet enim vitae est consectetur tincidunt quis et diam. Nam et dolor est. Aenean magna nunc, vulputate vel dapibus sed, laoreet et lacus. Phasellus sed urna non dui euismod volutpat quis id leo. Fusce dolor nulla, cursus id massa tempus, volutpat luctus ipsum. Cras in nulla sed augue rhoncus convallis. Donec a rutrum lorem, nec posuere neque. Aenean dui nunc, tempor et porta nec, condimentum eu lacus. Aliquam vitae maximus dui, at interdum tellus. Nulla eleifend faucibus venenatis. Mauris egestas consectetur sapien, et porttitor est ornare id. Aliquam eu lectus eget nulla efficitur tincidunt eu vel ante.
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dignissim mattis consequat. Phasellus sit amet enim vitae est consectetur tincidunt quis et diam. Nam et dolor est. Aenean magna nunc, vulputate vel dapibus sed, laoreet et lacus. Phasellus sed urna non dui euismod volutpat quis id leo. Fusce dolor nulla, cursus id massa tempus, volutpat luctus ipsum. Cras in nulla sed augue rhoncus convallis. Donec a rutrum lorem, nec posuere neque. Aenean dui nunc, tempor et porta nec, condimentum eu lacus. Aliquam vitae maximus dui, at interdum tellus. Nulla eleifend faucibus venenatis. Mauris egestas consectetur sapien, et porttitor est ornare id. Aliquam eu lectus eget nulla efficitur tincidunt eu vel ante.
+				um dolor sit amet, consectetur adipiscing elit. Pellentesque dignissim mattis consequat. Phasellus sit amet enim vitae est consectetur tincidunt quis et diam. Nam et dolor est. Aenean magna nunc, vulputate vel dapibus sed, laoreet et lacus. Phasellus sed urna non dui euismod volutpat quis id leo. Fusce dolor nulla, cursus id massa tempus, volutpat luctus ipsum. Cras in nulla sed augue rhoncus convallis. Donec a rutrum lorem, nec posuere neque. Aenean dui nunc, tempor et porta nec, condimentum eu lacus. Aliquam vitae maximus dui, at interdum tellus. Nulla eleifend faucibus venenatis. Mauris egestas consectetur sapien, et porttitor est ornare id. Aliquam eu lectus eget nulla efficitur tincidunt eu vel ante.
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dignissim mattis consequat. Phasellus sit amet enim vitae est consectetur tincidunt quis e
+
 				</p>
 			</div>
 		</div>
-		<br>
-		<br>
 		<div class="row" id="glypicon-pares-compativeis">
 	      	<div class="col-sm-10"></div>
 	      	<div class="col-sm-1">	
-	      		<a href="#" class="btn btn-info btn-lg">
+	      		<a href="#" class="btn btn-default btn-lg">
          		 <span class="glyphicon glyphicon-heart-empty"></span>Chamar
         		</a>
 	      	</div>
 	      	<div class="col-sm-1">	
-	      		<a href="encontros.html" class="btn btn-info btn-lg">
+	      		<a href="encontros.html" class="btn btn-default btn-lg">
 	      			<span class="glyphicon glyphicon-chevron-left"></span> Voltar 
 	      		</a>
 	      	</div>
 	    </div>
 	</div>
 	<br>
-	<footer id="footer">
-		<div id="estilorodape">
-	
-			<div class="row">
-				<div class="col-sm-6" id="controdape"><h5 >Conteudo X </h5>
-					<h5><a id="linksrodape" href="#"> Rasckspace</a></h5>
-					<h5><a id="linksrodape" href="#"> Rasckspace</a></h5>
-				</div>
-				<div class="col-sm-6" id="controdape"><h5 >EMPRESA</h5>
-					<h5> <a id="linksrodape" href="https://www.liguesite.com.br/sobre-nos/">Sobre</a></h5>
-					<h5> <a id="linksrodape" href="https://www.liguesite.com.br/blog/">Blog</a></h5>
-				</div>
-			</div>
-			<div class="rodapef">
-				<div class="row">
-					<div class="col-sm-2" ></div>
-					<div class="col-sm-2" >
-						<h4> 2018 © ForeverAlone Inc.</h4>
-					</div>
-					<div class="col-sm-2" >
-						<h5> <a id="linksrodape" href="#">Termos de Compromisso</a></h5>
-					</div>
-					<div class="col-sm-2" >
-						<h5>SAC:sac@forever.com.br</h5>
-					</div>
-				</div>
-				<br>
-			</div>
-		</div>
+	<footer class="container-fluid text-center">
+        <jsp:useBean id="configuracao" scope="application" class="br.ufpr.tads.foreveralone.beans.ConfigBean" />
+        <p>Em caso de problemas contactar o administrador: 
+            <jsp:getProperty name="configuracao" property="adminEmail" /> </p>
 	</footer>
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
