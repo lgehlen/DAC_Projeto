@@ -51,7 +51,7 @@ public class ClientesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(false);
            
             
             if (session == null || ((Login) session.getAttribute("login") == null)) {
@@ -64,7 +64,7 @@ public class ClientesServlet extends HttpServlet {
             String url = "/gerenciaUsuarios.jsp";
             int formType = 0;
                                    
-            if (action == null || action.isEmpty() || action.equals("list")){    
+            if (action == null || action.isEmpty() || action.equals("list")) {    
                 request.setAttribute("clientes", this.clientesFacade.listarClientes());
                 url = "/gerenciaUsuarios.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
