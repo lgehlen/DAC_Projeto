@@ -455,7 +455,7 @@
 		</div>
 	<br>
 	<footer class="container-fluid text-center">
-        <jsp:useBean id="configuracao" scope="application" class="com.ufpr.tads.web2.beans.ConfigBean" />
+        <jsp:useBean id="configuracao" scope="application" class="br.ufpr.tads.foreveralone.beans.ConfigBean" />
         <p>Em caso de problemas contactar o administrador: 
             <jsp:getProperty name="configuracao" property="adminEmail" /> </p>
 	</footer>
