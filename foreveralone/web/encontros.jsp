@@ -20,6 +20,10 @@
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> -->
 </head>
 
 <body >
@@ -34,7 +38,7 @@
 	  		<br>
 	  		<div id="cabe">
 	  			<!--LOGO -->
-	  			<div class="col-sm-1" id="logo"> <a href="/"><img id="logo" src="logo-forever.png" alt="logo" width="120" height="100"></a></div>
+	  			<div class="col-sm-1"> <a href="/"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
 		  		<div class="container">
 
 					<div class="row">
@@ -91,10 +95,7 @@
 			<div class="panel panel-default">
 			    <div class="panel-heading">
 			        <h4 class="panel-title">
-			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Luiza Storrer                    
-			          	<span style="padding-left: 40px; "class="glyphicon glyphicon-calendar"> 09/06/2018</span> 
-			          	<span style="padding-left: 80px; "class="glyphicon glyphicon-time"> 17:27</span>    
-			          </a>
+			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Luiza Storrer</a>
 			        </h4>
 			      </div>
 			      <div id="collapse1" class="panel-collapse collapse in">
@@ -106,10 +107,7 @@
 			    <div class="panel panel-default">
 			      <div class="panel-heading">
 			        <h4 class="panel-title">
-			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Juliana Vieira
-			          	<span style="padding-left: 40px; "class="glyphicon glyphicon-calendar"> 09/06/2018</span> 
-			          	<span style="padding-left: 80px; "class="glyphicon glyphicon-time"> 17:27</span>
-			          </a>
+			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Juliana Vieira</a>
 			        </h4>
 			      </div>
 			      <div id="collapse2" class="panel-collapse collapse">
@@ -121,10 +119,7 @@
 			    <div class="panel panel-default">
 			      <div class="panel-heading">
 			        <h4 class="panel-title">
-			         <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Juliana Vieira
-			          	<span style="padding-left: 40px; "class="glyphicon glyphicon-calendar"> 09/06/2018</span> 
-			          	<span style="padding-left: 80px; "class="glyphicon glyphicon-time"> 17:27</span>
-			          </a>
+			         <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Juliana Vieira</a>
 			        </h4>
 			      </div>
 			      <div id="collapse3" class="panel-collapse collapse">
@@ -140,97 +135,80 @@
 			<div class="col-sm-4"><h4> Solicitações Recebidas</h4></div>
 		</div>
 		<br>
-		<table class="table table-striped">
-		  <tbody>
-		    <tr>
-		      <th scope="row">Thiago Drulla</th>
-		      <td><h5><span class="glyphicon glyphicon-calendar"> 09/06/2018</span></h5></td>
-		      <td><h5><span class="glyphicon glyphicon-time"> 17:27</span></h5></td>
-		      <td>
-		      	<h4>
-			      	<a href="#"><span class="glyphicon glyphicon-ok-sign"></span></a>
-			      	<a href="#"><span class="glyphicon glyphicon-remove-sign"></span></a>
-			      	<a href="#"><span class="glyphicon glyphicon-plus-sign"></span></a>
-		      	</h4>
-		      </td>
-		    </tr>
-		    <tr>
-		      <th scope="row">Thiago Drulla</th>
-		      <td><h5><span class="glyphicon glyphicon-calendar"> 09/06/2018</span></h5></td>
-		      <td><h5><span class="glyphicon glyphicon-time"> 17:27</span></h5></td>
-		      <td>
-		      	<h4>
-			      	<a href="#"><span class="glyphicon glyphicon-ok-sign"></span></a>
-			      	<a href="#"><span class="glyphicon glyphicon-remove-sign"></span></a>
-			      	<a href="#"><span class="glyphicon glyphicon-plus-sign"></span></a>
-		      	</h4>
-		      </td>
-		    </tr>
-		    </tr>
-		    <tr>
-		      <th scope="row">Thiago Drulla</th>
-		      <td><h5><span class="glyphicon glyphicon-calendar"> 09/06/2018</span></h5></td>
-		      <td><h5><span class="glyphicon glyphicon-time"> 17:27</span></h5></td>
-		      <td>
-		      	<h4>
-			      	<a href="#"><span class="glyphicon glyphicon-ok-sign"></span></a>
-			      	<a href="#"><span class="glyphicon glyphicon-remove-sign"></span></a>
-			      	<a href="#"><span class="glyphicon glyphicon-plus-sign"></span></a>
-		      	</h4>
-		      </td>
-		    </tr>
-		    </tr>
-		  </tbody>
-		</table>
+		<form>
+			<table class="table table-striped">
+			  <tbody>
+			    <tr>
+			      <th scope="row">Thiago Drulla</th>
+			      <td><h5><span class="glyphicon glyphicon-calendar"> 09/06/2018</span></h5></td>
+			      <td><h5><span class="glyphicon glyphicon-time"> 17:27</span></h5></td>
+			      <td>
+				  	<button type="button" class="btn btn-default btn-sm">
+	          			<span class="glyphicon glyphicon-ok"></span> 
+	        		</button>
+				    <button type="button" class="btn btn-default btn-sm">
+	         	 		<span class="glyphicon glyphicon-remove"></span>
+	        		</button>
+				    <button type="button" class="btn btn-default btn-sm">
+	          			<span class="glyphicon glyphicon-plus"></span>
+	        		</button>
+			      </td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Thiago Drulla</th>
+			      <td><h5><span class="glyphicon glyphicon-calendar"> 09/06/2018</span></h5></td>
+			      <td><h5><span class="glyphicon glyphicon-time"> 17:27</span></h5></td>
+			      <td>
+			      	<button type="button" class="btn btn-default btn-sm">
+	          			<span class="glyphicon glyphicon-ok"></span> 
+	        		</button>
+				    <button type="button" class="btn btn-default btn-sm">
+	         	 		<span class="glyphicon glyphicon-remove"></span>
+	        		</button>
+				    <button type="button" class="btn btn-default btn-sm">
+	          			<span class="glyphicon glyphicon-plus"></span>
+	        		</button>
+			      </td>
+			    </tr>
+			    </tr>
+			    <tr>
+			      <th scope="row">Thiago Drulla</th>
+			      <td><h5><span class="glyphicon glyphicon-calendar"> 09/06/2018</span></h5></td>
+			      <td><h5><span class="glyphicon glyphicon-time"> 17:27</span></h5></td>
+			      <td>
+			      	<button type="button" class="btn btn-default btn-sm">
+	          			<span class="glyphicon glyphicon-ok"></span> 
+	        		</button>
+				    <button type="button" class="btn btn-default btn-sm">
+	         	 		<span class="glyphicon glyphicon-remove"></span>
+	        		</button>
+				    <button type="button" class="btn btn-default btn-sm">
+	          			<span class="glyphicon glyphicon-plus"></span>
+	        		</button>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+		</form>
 		<div class="row" id="glypicon-encontro">
 	      	<div class="col-sm-9"></div>
 	      	<div class="col-sm-1">	
-	      		<a href="#" class="btn btn-info btn-lg">
+	      		<a href="#" class="btn btn-default btn-sm">
 	      			<span class="glyphicon glyphicon-chevron-left"></span> Voltar 
 	      		</a>
 	      	</div>
 	      	<div class="col-sm-2">	
-	      		<a href="pesquisa-pares.html" class="btn btn-info btn-lg">
+	      		<a href="pesquisa-pares.html" class="btn btn-default btn-sm">
 	      			<span class="glyphicon glyphicon-plus-sign"></span> Procurar Novos Pares
 	      		</a>
 	      	</div>
 	    </div>
 	</div>
-	
-
 	<br>
-	<footer id="footer">
-		<div id="estilorodape">
-	
-			<div class="row">
-				<div class="col-sm-6" id="controdape"><h5 >Conteudo X </h5>
-					<h5><a id="linksrodape" href="#"> Rasckspace</a></h5>
-					<h5><a id="linksrodape" href="#"> Rasckspace</a></h5>
-				</div>
-				<div class="col-sm-6" id="controdape"><h5 >EMPRESA</h5>
-					<h5> <a id="linksrodape" href="https://www.liguesite.com.br/sobre-nos/">Sobre</a></h5>
-					<h5> <a id="linksrodape" href="https://www.liguesite.com.br/blog/">Blog</a></h5>
-				</div>
-			</div>
-			<div class="rodapef">
-				<div class="row">
-					<div class="col-sm-2" ></div>
-					<div class="col-sm-2" >
-						<h4> 2018 © ForeverAlone Inc.</h4>
-					</div>
-					<div class="col-sm-2" >
-						<h5> <a id="linksrodape" href="#">Termos de Compromisso</a></h5>
-					</div>
-					<div class="col-sm-2" >
-						<h5>SAC:sac@forever.com.br</h5>
-					</div>
-				</div>
-				<br>
-			</div>
-		</div>
+	<footer class="container-fluid text-center">
+        <jsp:useBean id="configuracao" scope="application" class="com.ufpr.tads.web2.beans.ConfigBean" />
+        <p>Em caso de problemas contactar o administrador: 
+            <jsp:getProperty name="configuracao" property="adminEmail" /> </p>
 	</footer>
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
