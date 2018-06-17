@@ -42,7 +42,7 @@ public class DefaultClienteDao implements ClienteDao {
             st.setString(5, cliente.getEscolaridade());
             st.setDate(6, new java.sql.Date(cliente.getDataCad().getTime()));
             st.setString(7, cliente.getSenha());
-            st.setString(8, null);
+            st.setInt(8, cliente.getEndereço().getId());
             st.setInt(9, cliente.getPreferencias().getIdAtributo());
             st.setInt(10, cliente.getCaracteristicas().getIdAtributo());
             st.executeUpdate();

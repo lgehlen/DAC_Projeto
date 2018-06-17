@@ -206,13 +206,14 @@ public class ClientesServlet extends HttpServlet {
             endereco.setCidade(cidade);
             
             cliente.setEndereço(endereco);
+            System.out.println("teste"+cliente.getEndereço().getId());
 
             if (login.getTipo().equals("funcionario")) {
                 preferencias.setCorDeCabelo("");
                 preferencias.setCorDePele("");
                 preferencias.setDescricao("");
                 preferencias.setSexo("");
-                preferencias.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                preferencias.setIdAtributo(0);
                 this.clientesFacade.criaAtributo(preferencias);
                 cliente.setPreferencias(preferencias);
 
@@ -220,7 +221,7 @@ public class ClientesServlet extends HttpServlet {
                 caracteristicas.setCorDePele("");
                 caracteristicas.setDescricao("");
                 caracteristicas.setSexo("");
-                caracteristicas.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                caracteristicas.setIdAtributo(0);
                 this.clientesFacade.criaAtributo(caracteristicas);
                 cliente.setCaracteristicas(caracteristicas);
             } else {
