@@ -29,7 +29,7 @@ $(document).ready(function() {
                             });
                         },
                         error : function(request, textStatus, errorThrown) {
-                            alert(request.status + ', Error: ' + request.statusText);
+                            //alert(request.status + ', Error: ' + request.statusText);
                              // Erro
                         }
                     });

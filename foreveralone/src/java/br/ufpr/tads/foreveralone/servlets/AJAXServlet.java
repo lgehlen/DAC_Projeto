@@ -42,7 +42,8 @@ public class AJAXServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        if(request.getParameter("estadoId") != null)
+        {
         int estado = Integer.parseInt(request.getParameter("estadoId"));
         
         
@@ -57,7 +58,8 @@ public class AJAXServlet extends HttpServlet {
         // retorna o JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);       
+        response.getWriter().write(json);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

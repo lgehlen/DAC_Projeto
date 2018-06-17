@@ -48,14 +48,14 @@ public class DefaultClienteDao implements ClienteDao {
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
     }
 
-     public void criarEndereço(Endereco e) {
+    public void criarEndereço(Endereco e) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("INSERT INTO forever.Endereço (rua,CEP,numero,Cidade_idCidade)"
+            st = con.prepareStatement("INSERT INTO forever.endereco (rua,CEP,numero,Cidade_idCidade)"
                     + " VALUES(?,?,?,?)");
             st.setString(1, e.getRua());
             st.setString(2, e.getCep());
@@ -64,9 +64,9 @@ public class DefaultClienteDao implements ClienteDao {
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
     }
-    
+
     @Override
     public void deletarCliente(int id) {
         PreparedStatement ps = null;
@@ -79,7 +79,6 @@ public class DefaultClienteDao implements ClienteDao {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void atualizarCliente(Cliente cliente) {
@@ -101,7 +100,7 @@ public class DefaultClienteDao implements ClienteDao {
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
     }
 
     @Override
@@ -220,20 +219,19 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT AUTO_INCREMENT FROM   information_schema.tables " +
-                                        " WHERE  table_name = 'endereco'" +
-                                        " AND    table_schema = 'forever'");
+            ps = con.prepareStatement("SELECT AUTO_INCREMENT FROM   information_schema.tables "
+                    + " WHERE  table_name = 'endereco'"
+                    + " AND    table_schema = 'forever'");
             rs = ps.executeQuery();
-            if(rs.next())
-            {
+            if (rs.next()) {
                 return rs.getInt("AUTO_INCREMENT");
             }
-            
+
             return -1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return -1;
     }
-    
+
 }
