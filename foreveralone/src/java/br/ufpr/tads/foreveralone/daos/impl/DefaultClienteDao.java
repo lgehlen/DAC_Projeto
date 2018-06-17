@@ -102,18 +102,17 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("UPDATE forever.Cliente SET nomeCliente = ?, CPF = ?, datanasc = ?, email = ?, escolaridade = ?, dataCada = ?, senha = ?, Endereco_idEndereco = ?, Atributo_IdAtributoPreferencia = ?, Atributo_IdAtributoAtributo = ?, WHERE idCliente = ?");
+            st = con.prepareStatement("UPDATE forever.Cliente SET nomeCliente = ?, CPF = ?, datanasc = ?, email = ?, escolaridade = ?, senha = ?, Endereco_idEndereco = ?, Atributo_IdAtributoPreferencia = ?, Atributo_IdAtributoAtributo = ?, WHERE idCliente = ?");
             st.setString(1, cliente.getNome());
             st.setString(2, cliente.getCpf());
             st.setDate(3, new java.sql.Date(cliente.getDataNasc().getTime()));
             st.setString(4, cliente.getEmail());
             st.setString(5, cliente.getEscolaridade());
-            st.setDate(6, new java.sql.Date(cliente.getDataCad().getTime()));
-            st.setString(7, cliente.getSenha());
-            st.setString(8, null);
-            st.setInt(9, cliente.getPreferencias().getIdAtributo());
-            st.setInt(10, cliente.getCaracteristicas().getIdAtributo());
-            st.setInt(11, cliente.getId());
+            st.setString(6, cliente.getSenha());
+            st.setString(7, null);
+            st.setInt(8, cliente.getPreferencias().getIdAtributo());
+            st.setInt(9, cliente.getCaracteristicas().getIdAtributo());
+            st.setInt(10, cliente.getId());
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
