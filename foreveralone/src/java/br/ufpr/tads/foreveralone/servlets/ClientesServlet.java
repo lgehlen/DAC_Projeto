@@ -239,12 +239,14 @@ public class ClientesServlet extends HttpServlet {
                 cliente.setCaracteristicas(caracteristicas);
             }
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
             try {
                 cliente.setDataNasc(formatter.parse(request.getParameter("data")));
             } catch (ParseException ex) {
                 Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            cliente.setDataCad(new DateTime());
 
             this.clientesFacade.criarCliente(cliente);
 
