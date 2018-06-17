@@ -76,16 +76,23 @@ public class ClientesServlet extends HttpServlet {
                 Atributo c = new Atributo();
                 p = this.clientesFacade.getAtributoPorId(cliente.getPreferencias().getIdAtributo());
                 c = this.clientesFacade.getAtributoPorId(cliente.getCaracteristicas().getIdAtributo());
-                if (p.getSexo().equals("F")) {
+                
+                if(p.getSexo().equals("F")){
                     p.setSexo("Feminino");
-                } else {
+                }else if (p.getSexo().equals("M")){
                     p.setSexo("Masculino");
+                }else{
+                    p.setSexo("Não Definido");
                 }
-                if (c.getSexo().equals("F")) {
+                
+                 if(c.getSexo().equals("F")){
                     c.setSexo("Feminino");
-                } else {
+                }else if (c.getSexo().equals("M")){
                     c.setSexo("Masculino");
+                }else{
+                    c.setSexo("Não Definido");
                 }
+                
                 cliente.setCaracteristicas(c);
                 cliente.setPreferencias(p);
             }
@@ -138,7 +145,7 @@ public class ClientesServlet extends HttpServlet {
             cliente.getEndereço().getCidade().setId(Integer.parseInt(request.getParameter("cidade")));
             cliente.getEndereço().getCidade().getEstado().setId(Integer.parseInt(request.getParameter("estado")));
             cliente.setId(Integer.parseInt(request.getParameter("id")));
-            this.clientesFacade.criarEndereço(cliente.getEndereço());
+            
 
             //Falta fazer os atributos
             preferencias.setCorDeCabelo("");
@@ -206,23 +213,25 @@ public class ClientesServlet extends HttpServlet {
             endereco.setLogradouro(request.getParameter("numero"));
             endereco.setCidade(cidade);
             
+             this.clientesFacade.criarEndereço(endereco);
             cliente.setEndereço(endereco);
-            System.out.println("teste"+cliente.getEndereço().getId());
+            System.out.println("teste "+ cliente.getEndereço().getId());
+            
 
             if (login.getTipo().equals("funcionario")) {
-                preferencias.setCorDeCabelo("");
-                preferencias.setCorDePele("");
-                preferencias.setDescricao("");
-                preferencias.setSexo("");
-                preferencias.setIdAtributo(0);
+                preferencias.setCorDeCabelo("Não definido");
+                preferencias.setCorDePele("Não definido");
+                preferencias.setDescricao("Não definido");
+                preferencias.setSexo("X");
+                preferencias.setIdAtributo(clientesFacade.buscaProximoIdAtributo());
                 this.clientesFacade.criaAtributo(preferencias);
                 cliente.setPreferencias(preferencias);
 
-                caracteristicas.setCorDeCabelo("");
-                caracteristicas.setCorDePele("");
-                caracteristicas.setDescricao("");
-                caracteristicas.setSexo("");
-                caracteristicas.setIdAtributo(0);
+                caracteristicas.setCorDeCabelo("Não definido");
+                caracteristicas.setCorDePele("Não definido");
+                caracteristicas.setDescricao("Não definido");
+                caracteristicas.setSexo("X");
+                caracteristicas.setIdAtributo(clientesFacade.buscaProximoIdAtributo());
                 this.clientesFacade.criaAtributo(caracteristicas);
                 cliente.setCaracteristicas(caracteristicas);
             } else {

@@ -234,9 +234,6 @@
                                         <input class="form-control" name="rangemax" type="number"  id="rangemax" placeholder="Idade Máxima" required>
                              </div>
                             <div class="col-sm-12" ><br> <br></div>
-                            <div class="col-sm-6" >
-                                <input class="form-control" name="senha" type="text"  id="input_senha" placeholder="Senha" required>
-                            </div>
                                 </c:if>
                         </div>
 
