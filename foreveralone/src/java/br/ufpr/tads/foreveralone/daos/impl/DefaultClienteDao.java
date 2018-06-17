@@ -205,13 +205,14 @@ public class DefaultClienteDao implements ClienteDao {
         ResultSet rs = null;
         try {
             ps = con.prepareStatement("SELECT AUTO_INCREMENT FROM   information_schema.tables " +
-                                        " WHERE  table_name = 'Endereco'" +
+                                        " WHERE  table_name = 'endereco'" +
                                         " AND    table_schema = 'forever'");
             rs = ps.executeQuery();
             if(rs.next())
             {
                 return rs.getInt("AUTO_INCREMENT");
             }
+            
             return -1;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -191,6 +191,7 @@ public class ClientesServlet extends HttpServlet {
             cliente.setEmail(request.getParameter("email"));
             cliente.setNome(request.getParameter("nome"));
             cliente.setEscolaridade(request.getParameter("escolaridade"));
+            System.out.println("Escolaridade: " + cliente.getEscolaridade());
             cliente.setSenha(request.getParameter("senha"));
             
             
