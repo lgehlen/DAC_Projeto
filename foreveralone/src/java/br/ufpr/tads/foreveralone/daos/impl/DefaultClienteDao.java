@@ -6,6 +6,7 @@
 package br.ufpr.tads.foreveralone.daos.impl;
 
 import br.ufpr.tads.foreveralone.beans.Atributo;
+import br.ufpr.tads.foreveralone.beans.Cidade;
 import br.ufpr.tads.foreveralone.beans.Cliente;
 import br.ufpr.tads.foreveralone.beans.Endereco;
 import br.ufpr.tads.foreveralone.beans.Login;
@@ -66,6 +67,7 @@ public class DefaultClienteDao implements ClienteDao {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 
     @Override
     public void deletarCliente(int id) {
@@ -180,22 +182,32 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCada, senha, Endereco_idEndereco, Endereco_Cidade_idCliente1 FROM forever.Cliente where idCliente = ?");
+            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM forever.Cliente where idCliente = ?");
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            List<Cliente> list = new ArrayList<Cliente>();
+            Cliente cliente = new Cliente();
             while (rs.next()) {
-                Cliente cliente = new Cliente();
+                Endereco endereco = new Endereco();
+                Atributo preferencias = new Atributo();
+                Atributo caracteristicas = new Atributo();
+                
                 cliente.setId(0);
                 cliente.setCpf(rs.getString("CPF"));
-                cliente.setDataCad(rs.getDate("dataCada"));
+                cliente.setDataCad(rs.getDate("dataCad"));
                 cliente.setDataNasc(rs.getDate("datanasc"));
                 cliente.setEmail(rs.getString("email"));
                 cliente.setEscolaridade(rs.getString("escolaridade"));
                 cliente.setNome(rs.getString("nomeCliente"));
-                list.add(cliente);
+                
+                endereco.setId(rs.getInt("Endereco_idEndereco"));
+                preferencias.setIdAtributo(rs.getInt("Atributo_IdAtributoPreferencia"));
+                caracteristicas.setIdAtributo(rs.getInt("Atributo_IdAtributoAtributo"));
+                
+                cliente.setEndereço(endereco);
+                cliente.setCaracteristicas(caracteristicas);
+                cliente.setPreferencias(preferencias);
             }
-            return list.get(0);
+            return cliente;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -269,6 +281,32 @@ public class DefaultClienteDao implements ClienteDao {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    @Override
+    public Endereco buscarEnderecoPorId(int id) {
+       PreparedStatement ps = null;
+        ResultSet rs = null;
+        System.out.println("ID: " + id);
+        try {
+            ps = con.prepareStatement("SELECT idEndereco, rua, CEP, numero, Cidade_idCidade FROM forever.endereco where idEndereco = ?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            Endereco endereco = new Endereco();
+            Cidade cidade = new Cidade();
+            while (rs.next()) {
+                endereco.setCep(rs.getString("CEP"));
+                cidade.setId(rs.getInt("Cidade_idCidade"));
+                endereco.setCidade(cidade);
+                endereco.setId(rs.getInt("idEndereco"));
+                endereco.setLogradouro(rs.getString("numero"));
+                endereco.setRua(rs.getString("rua"));
+            }
+            return endereco;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

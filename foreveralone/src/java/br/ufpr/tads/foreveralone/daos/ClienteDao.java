@@ -35,4 +35,6 @@ public interface ClienteDao {
     public void criarEndereço(Endereco e);
     
     public List<Cliente> listarClientesPorPreferencia(Atributo p);
+    
+    public Endereco buscarEnderecoPorId(int id);
 }

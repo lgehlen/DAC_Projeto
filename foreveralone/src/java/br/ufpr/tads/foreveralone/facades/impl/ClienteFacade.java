@@ -109,7 +109,11 @@ public class ClienteFacade {
     }
     
     public Cidade getCidadePorId(int id){
-        return getCidadeDao().buscarCidadePorId(id);
+        return cidadeDao.buscarCidadePorId(id);
+    }
+    
+    public Endereco getEnderecoPorId(int id){
+        return clienteDao.buscarEnderecoPorId(id);
     }
     
     public Estado getEstadoPorId(int id){

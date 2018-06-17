@@ -11,7 +11,9 @@ import java.util.Date;
  *
  * @author gqueiroz
  */
-public class Cidade {private int id;
+public class Cidade {
+    
+    private int id;
     
     private String nome;
     
