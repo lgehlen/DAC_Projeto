@@ -50,7 +50,7 @@
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="#" class="btn btn-primary btn-lg">
+		  					<a href="encontros.jsp" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-heart"></span> Encontros
 		  					</a>
 		  				</div>

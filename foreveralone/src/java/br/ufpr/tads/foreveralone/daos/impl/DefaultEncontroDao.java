@@ -126,4 +126,30 @@ public class DefaultEncontroDao implements EncontroDao {
         return null;
     }
     
+    public Encontro buscarEncontroPorIdUsuario(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idEncontro, local, data, horario, Endereco_idEndereco, Endereco_Cidade_idCidade FROM forever.Encontro WHERE Cliente_idCliente = ? OR Cliente_idCliente1 = ? ");
+            ps.setInt(1, id);
+            ps.setInt(2, id);
+            rs = ps.executeQuery();
+            List<Encontro> list = new ArrayList<Encontro>();
+            while (rs.next()) {
+                Encontro encontro = new Encontro();
+                encontro.setData(rs.getDate("data"));
+                encontro.setHorario(rs.getString("horario"));
+                encontro.setId(rs.getInt("idEncontro"));
+                //encontro.setIdCliente1(rs.getInt("Convidado_idPar"));
+                //encontro.setIdCliente2(rs.getInt("idEvento"));
+                //encontro.setLocal(list);
+                list.add(encontro);
+            }
+            return list.get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
 }
