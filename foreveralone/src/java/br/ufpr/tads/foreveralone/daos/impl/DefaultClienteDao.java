@@ -102,7 +102,7 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("UPDATE forever.Cliente SET nomeCliente = ?, CPF = ?, datanasc = ?, email = ?, escolaridade = ?, dataCada = ?, senha = ?, Endereco_idEndereco = ?, Atributo_IdAtributoPreferencia = ?, Atributo_IdAtributoAtributo = ?, WHERE idCliente = ?");
+            st = con.prepareStatement("UPDATE forever.Cliente SET nomeCliente = ?, CPF = ?, datanasc = ?, email = ?, escolaridade = ?, dataCad = ?, senha = ?, Endereco_idEndereco = ?, Atributo_IdAtributoPreferencia = ?, Atributo_IdAtributoAtributo = ?, WHERE idCliente = ?");
             st.setString(1, cliente.getNome());
             st.setString(2, cliente.getCpf());
             st.setDate(3, new java.sql.Date(cliente.getDataNasc().getTime()));

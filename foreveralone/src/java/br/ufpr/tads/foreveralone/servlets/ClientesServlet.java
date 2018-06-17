@@ -186,9 +186,8 @@ public class ClientesServlet extends HttpServlet {
             endereco.setLogradouro(request.getParameter("numero"));
             endereco.setCidade(cidade);
             
-             this.clientesFacade.criarEndereço(endereco);
+            this.clientesFacade.alterarEndereco(endereco);
             cliente.setEndereço(endereco);
-            System.out.println("teste "+ cliente.getEndereço().getId());
             
             
             if (!login.getTipo().equals("funcionario")) {
@@ -197,7 +196,8 @@ public class ClientesServlet extends HttpServlet {
                 preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
                 preferencias.setSexo(request.getParameter("sexo"));
                 preferencias.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
-                this.clientesFacade.criaAtributo(preferencias);
+                this.clientesFacade.alteraAtributo(preferencias);
+                
                 cliente.setPreferencias(preferencias);
                 
                 caracteristicas.setCorDeCabelo(request.getParameter("pcordocabelo"));
@@ -205,7 +205,7 @@ public class ClientesServlet extends HttpServlet {
                 caracteristicas.setDescricao(request.getParameter("descricao"));
                 caracteristicas.setSexo(request.getParameter("psexo"));
                 caracteristicas.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
-                this.clientesFacade.criaAtributo(caracteristicas);
+                this.clientesFacade.alteraAtributo(caracteristicas);
                 cliente.setCaracteristicas(caracteristicas);
             }
 
@@ -215,6 +215,7 @@ public class ClientesServlet extends HttpServlet {
             } catch (ParseException ex) {
                 Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             
             cliente.setDataCad(new Date());
             

@@ -56,6 +56,10 @@ public class ClienteFacade {
         getClienteDao().criarEndereço(e);
     }
     
+    public void alterarEndereco(Endereco e){
+         clienteDao.alteraEndereco(e);
+    }
+    
     public void deletarCliente(int id) {
         getClienteDao().deletarCliente(id);
     }
