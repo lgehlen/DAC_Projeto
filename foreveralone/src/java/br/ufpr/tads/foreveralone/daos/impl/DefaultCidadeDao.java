@@ -30,7 +30,8 @@ public class DefaultCidadeDao implements CidadeDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idCidade, nomeCidade FROM forever.Cidade");
+            ps = con.prepareStatement("SELECT idCidade, nomeCidade FROM forever.Cidade WHERE Estado_idEstado = ?");
+            ps.setInt(1, estado.getId());
             rs = ps.executeQuery();
             List<Cidade> list = new ArrayList<Cidade>();
             while (rs.next()) {
@@ -45,6 +46,26 @@ public class DefaultCidadeDao implements CidadeDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Cidade buscarCidadePorId(int id) {
+    PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idCidade, nomeCidade FROM forever.Cidade WHERE idCidade = ?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            Cidade cidade = new Cidade();
+            while (rs.next()) {
+                cidade.setId(rs.getInt("idCidade"));
+                cidade.setNome(rs.getString("nomeCidade"));
+            }
+            return cidade;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;   
     }
 
     

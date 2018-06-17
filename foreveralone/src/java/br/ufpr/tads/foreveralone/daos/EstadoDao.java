@@ -14,4 +14,5 @@ import java.util.List;
  */
 public interface EstadoDao {
     List<Estado> buscarEstados();
+    Estado buscarEstadoPorId(int id);
 }
