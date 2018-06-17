@@ -78,6 +78,7 @@
 		  	</div>
 		</nav>
 	</header>
+
 	<!--Corpo da página-->
 	<div class="container" id="container-pesquisa-pares">
 		<div class="row">
@@ -86,10 +87,10 @@
 		<form name="dadoscliente" action="cadastra_cliente" onsubmit="" method= "post" >
 			<div class="row">
 				<div class="col-sm-5">
-					<input class="form-control" name="senha" type="text"  id="input_nome" placeholder="Nome">
-				</div>
-				<div class="col-sm-4">
-					<input class="form-control" name="senha" type="text"  id="input_cpf" placeholder="CPF">
+					<input class="form-control" name="nome" type="text"  id="input_nome" placeholder="Nome">
+                                </div>
+				<div class="col-sm-5">
+					<input class="form-control" name="cpf" type="text"  id="input_cpf" placeholder="CPF">
 				</div>
 				<div class="col-sm-2">
 		      		<select class="form-control" id="sexo" size="1"> 
@@ -101,10 +102,9 @@
 			</div>
 			<br>
 			<div class="row">
-				<div class="col-sm-4">
+				<div class="col-sm-5">
 					<input class="form-control" name="email" type="text"  id="input_email" placeholder="Email">
 				</div>
-				<div class="col-sm-2"></div>
 				<div class="col-sm-2">
 					<select class="form-control" id="ensino" size="1"> 
 						<option value="*">Escolaridade</option>
@@ -116,14 +116,18 @@
 			</div>
 			<br>
 			<div class="row">
-				<div class="col-sm-3">
-					<h5>Data de Nascimento:<input type="date"><span class="glyphicon glyphicon-calendar"></span></h5>
+                            	<div class="col-sm-4">
+                                </div>
+                                <div class="col-sm-4">
+                                </div>
+				<div class="col-sm-4">
+					Data de Nascimento <span class="glyphicon glyphicon-calendar"></span><input type="date">
 				</div>
 			</div>
+                        <br>
 			<div class="row">
-				<div class="col-sm-5">
-			      	<input class="form-control" name="endereco" type="text"  id="input_endereco" placeholder="Endereço">
-				</div>
+
+                                <c:if test="${loginBean.tipo != 'funcionario'}">
 				<div class="col-sm-1"></div>
 				<div class="col-sm-2">
 			      	<select class="form-control" id="cor_cabelo" size="1"> 
@@ -152,13 +156,14 @@
   					</form>
 				</div>
 			</div>
+                                </c:if>
 			<div class="row" id="glypicon-cadastra-funcionario">
-		      		<div class="col-sm-8"></div>
+		      		<div class="col-sm-7"></div>
 		      		<div class="col-sm-2">	
 		      			<a href="index.html" class="btn btn-info btn-lg">
 		      				<span class="glyphicon glyphicon-remove"></span> Cancelar 
 		      			</a>
-		      		</div>
+		      		</div><div class="col-sm-1"></div>
 		      		<div class="col-sm-2">	
 		      			<a href="#" class="btn btn-info btn-lg">
 		      				<span class="glyphicon glyphicon-paperclip"></span> Cadastrar
@@ -169,35 +174,10 @@
 		
 	</div>
 	<br>
-	<footer id="footer">
-		<div id="estilorodape">
-	
-			<div class="row">
-				<div class="col-sm-6" id="controdape"><h5 >Conteudo X </h5>
-					<h5><a id="linksrodape" href="#"> Rasckspace</a></h5>
-					<h5><a id="linksrodape" href="#"> Rasckspace</a></h5>
-				</div>
-				<div class="col-sm-6" id="controdape"><h5 >EMPRESA</h5>
-					<h5> <a id="linksrodape" href="https://www.liguesite.com.br/sobre-nos/">Sobre</a></h5>
-					<h5> <a id="linksrodape" href="https://www.liguesite.com.br/blog/">Blog</a></h5>
-				</div>
-			</div>
-			<div class="rodapef">
-				<div class="row">
-					<div class="col-sm-2" ></div>
-					<div class="col-sm-2" >
-						<h4> 2018 © ForeverAlone Inc.</h4>
-					</div>
-					<div class="col-sm-2" >
-						<h5> <a id="linksrodape" href="#">Termos de Compromisso</a></h5>
-					</div>
-					<div class="col-sm-2" >
-						<h5>SAC:sac@forever.com.br</h5>
-					</div>
-				</div>
-				<br>
-			</div>
-		</div>
+	<footer class="container-fluid text-center">
+            <jsp:useBean id="configuracao" scope="application" class="br.ufpr.tads.foreveralone.beans.ConfigBean" />
+            <p>Em caso de problemas contactar o administrador: 
+            <jsp:getProperty name="configuracao" property="adminEmail" /> </p>
 	</footer>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
