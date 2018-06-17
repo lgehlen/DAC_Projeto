@@ -33,7 +33,7 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("INSERT INTO forever.Cliente (nomeCliente, CPF, datanasc, email, escolaridade, dataCada, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo)"
+            st = con.prepareStatement("INSERT INTO forever.Cliente (nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo)"
                     + " VALUES(?,?,?,?,?,?,?,?,?,?)");
             st.setString(1, cliente.getNome());
             st.setString(2, cliente.getCpf());
@@ -56,7 +56,7 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("DELETE FROM forever.Cliente WHERE idCliente = ?");
+            ps = con.prepareStatement("UPDATE forever.Cliente SET isRemovido = 1 WHERE idCliente = ?");
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -93,7 +93,7 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM Cliente");
+            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM Cliente WHERE isRemovido = 0");
             rs = ps.executeQuery();
             List<Cliente> list = new ArrayList<Cliente>();
             while (rs.next()) {
@@ -179,9 +179,6 @@ public class DefaultClienteDao implements ClienteDao {
 
     @Override
     public Login getLogin(String email, String sen) {
-        System.out.println("email " + email);
-        System.out.println("senha " + sen);
-        System.out.println("T " + con);
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -189,11 +186,8 @@ public class DefaultClienteDao implements ClienteDao {
             ps.setString(1, email);
             ps.setString(2, sen);
             rs = ps.executeQuery();
-            System.out.println("teste");
             Login login = new Login();
             while (rs.next()) {
-                System.out.println("NOME " + rs.getString("nomeCliente"));
-                System.out.println("ID " + rs.getInt("idCliente"));
                 login.setId(rs.getInt("idCliente"));
                 login.setNome(rs.getString("nomeCliente"));
                 login.setTipo("cliente");
@@ -203,6 +197,26 @@ public class DefaultClienteDao implements ClienteDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public int buscaProximoIdEndereco() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT AUTO_INCREMENT FROM   information_schema.tables " +
+                                        " WHERE  table_name = 'Endereco'" +
+                                        " AND    table_schema = 'forever'");
+            rs = ps.executeQuery();
+            if(rs.next())
+            {
+                return rs.getInt("AUTO_INCREMENT");
+            }
+            return -1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
     
 }

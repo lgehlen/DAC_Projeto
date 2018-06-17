@@ -104,8 +104,20 @@ public class ClienteFacade {
         return getClienteDao().getLogin(email,sen);
     }
     
+    public Cidade getCidadePorId(int id){
+        return getCidadeDao().buscarCidadePorId(id);
+    }
+    
+    public Estado getEstadoPorId(int id){
+        return estadoDao.buscarEstadoPorId(id);
+    }
+    
      public Atributo getAtributoPorId(int id){
         return atributoDao.buscaAtributoPorId(id);
+    }
+     
+    public int getProximoIdEndereco(){
+        return clienteDao.buscaProximoIdEndereco();
     }
     
     /**

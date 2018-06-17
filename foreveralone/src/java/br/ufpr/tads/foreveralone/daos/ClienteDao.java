@@ -27,4 +27,6 @@ public interface ClienteDao {
     Cliente buscarClientePorEmail(String email); 
 
     public Login getLogin(String email, String sen);
+    
+    public int buscaProximoIdEndereco();
 }

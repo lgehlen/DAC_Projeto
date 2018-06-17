@@ -15,4 +15,5 @@ import java.util.List;
  */
 public interface CidadeDao {
    List<Cidade> buscarCidadesPorEstado(Estado estado);
+   Cidade buscarCidadePorId(int id);
 }

@@ -44,5 +44,26 @@ public class DefaultEstadoDao implements EstadoDao {
         }
         return null;
     }
+
+    @Override
+    public Estado buscarEstadoPorId(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Estado estado = new Estado();
+        try {
+            ps = con.prepareStatement("SELECT idEstado, uf, nome FROM forever.Estado WHERE idEstado = ?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                estado.setId(rs.getInt("idEstado"));
+                estado.setNome(rs.getString("nome"));
+                estado.setUf(rs.getString("uf"));
+            }
+            return estado;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
 }

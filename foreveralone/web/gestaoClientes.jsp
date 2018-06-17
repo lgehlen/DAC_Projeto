@@ -42,22 +42,22 @@
 		  		<div class="container">
 					<div class="row">
 		  				<div class="col-sm-1">
-		  					<a href="index.html" class="btn btn-primary btn-lg">
+		  					<a href="clientes" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-home"></span> Home
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-3" id="correcao-menu">
-		  					<a href="gestao_relatoriosA" class="btn btn-primary btn-lg">
+		  					<a onclick="popupfuncionario()" href="#" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-open"></span> Gerenciar Relatórios
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-3" id="correcao-menu">
-		  					<a href="#" class="btn btn-primary btn-lg">
+		  					<a href="clientes" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-user"></span> Gerenciar Clientes
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-3" id="correcao-menu">
-		  					<a href="gestaofuncionarios.html" class="btn btn-primary btn-lg">
+		  					<a onclick="popupfuncionario()" href="#" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-link"></span> Gerenciar Funcionários
 		  					</a>
 		  				</div>
@@ -66,11 +66,11 @@
 	    						<button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span>
 	    						<span class="caret"></span></button>
 	   							<ul class="dropdown-menu">
-	   								<li><a> <span class="glyphicon glyphicon-user"></span>   User   </a></li>
-	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo:Administrador </a></li>
+	   								<li><a> <span class="glyphicon glyphicon-user"></span>   ${login.nome}   </a></li>
+	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  ${login.tipo} </a></li>
 		      						<li><a href="/">Home</a></li>
 		      						<li class="divider"></li>
-		      						<li><a href="#"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
+		      						<li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
 	    						</ul>
 	  						</div>
     					</div>
@@ -86,9 +86,9 @@
 				<div id="titleclientes" class="col-sm-2"><h4> Lista de Clientes</h4></div>
 			
                             <div id="btnadcionar" class="col-sm-4">
-				<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#excluifunc">
+				<a href="clientes?action=formNew" class="btn btn-success btn-lg">
                                     <span class="glyphicon glyphicon-plus">Adicionar</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                                 <br>
@@ -122,9 +122,9 @@
 		         					<div class="row">
 		        						<div class="col-sm-3"></div>
 		        						<div class="col-sm-2" id="popup-gerenciausuarios">
-		         							<button  type="button" class="btn btn-default btn-sm">
+		         							<a  href="clientes?action=remove&id=${x.id}" class="btn btn-default btn-sm">
 	          									<span class="glyphicon glyphicon-ok"></span>
-	        								</button>
+	        								</a>
 		         						</div>
 		         						<div class="col-sm-2"></div>
 		        						<div class="col-sm-2" id="popup-gerenciausuarios">
@@ -252,5 +252,6 @@
         <p>Em caso de problemas contactar o administrador: 
             <jsp:getProperty name="configuracao" property="adminEmail" /> </p>
 	</footer>
+         <script src="js/custom.js"></script>
 </body>
 </html>
