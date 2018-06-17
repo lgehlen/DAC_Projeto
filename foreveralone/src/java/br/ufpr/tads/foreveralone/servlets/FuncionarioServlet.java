@@ -9,6 +9,7 @@ import br.ufpr.tads.foreveralone.beans.Atributo;
 import br.ufpr.tads.foreveralone.beans.Cidade;
 import br.ufpr.tads.foreveralone.beans.Cliente;
 import br.ufpr.tads.foreveralone.beans.Estado;
+import br.ufpr.tads.foreveralone.beans.Funcionario;
 import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.facades.impl.FuncionarioFacade;
 import java.io.IOException;
@@ -55,29 +56,74 @@ public class FuncionarioServlet extends HttpServlet {
         }
         
         String action = request.getParameter("action");
-        String url = "/gerenciaUsuarios.jsp";
+        String url = "/gestaoFuncionarios.jsp";
         int formType = 0;
         
             if (action == null || action.isEmpty() || action.equals("list")) {    
-
+                request.setAttribute("funcionarios", this.FuncionarioFacade().listarFuncionarios());
+                url = "/gestaoFuncionarios.jsp";  
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
             else if (action.equals("show")){
-
+                final int id = Integer.parseInt(request.getParameter("id"));
+                Funcionario funcionario = this.FuncionarioFacade().buscarFuncionarioPorId(id);
+                request.setAttribute("funcionario", funcionario);
+                url = "/gestaoFuncionarios.jsp";
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
             else if (action.equals("formUpdate")){
-
+                final int id = Integer.parseInt(request.getParameter("id"));
+                Funcionario funcionario = this.FuncionarioFacade().buscarFuncionarioPorId(id);
+                request.setAttribute("funcionario", funcionario);
+                url = "/gestaoFuncionarios.jsp";
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
             else if (action.equals("remove")){
-
+                final int id = Integer.parseInt(request.getParameter("id"));
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(id);
+                this.FuncionarioFacade().deletarFuncionario(funcionario);
+                response.sendRedirect("gestaoFuncionarios");
             }
             else if (action.equals("update")){
-           
-            }            
-            else if (action.equals("formNew")){
-
+                Funcionario funcionario = new Funcionario();
+                funcionario.setCpf(url);
+                funcionario.setEmail(url);
+                funcionario.setNome(url);
+                funcionario.setSenha(url);
+                funcionario.setId(formType);
+                
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    funcionario.setDataNasc(formatter.parse(request.getParameter("data")));
+                } catch (ParseException ex) {
+                    Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                this.FuncionarioFacade().criarFuncionario(funcionario);
+                
+                response.sendRedirect("funcionarios");
             }
             else if (action.equals("new")){
-        
+                Funcionario funcionario = new Funcionario();
+                funcionario.setCpf(url);
+                funcionario.setEmail(url);
+                funcionario.setNome(url);
+                funcionario.setSenha(url);
+                
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    funcionario.setDataNasc(formatter.parse(request.getParameter("data")));
+                } catch (ParseException ex) {
+                    Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                this.FuncionarioFacade().criarFuncionario(funcionario);
+                
+                response.sendRedirect("funcionarios");
             }
     }
 
