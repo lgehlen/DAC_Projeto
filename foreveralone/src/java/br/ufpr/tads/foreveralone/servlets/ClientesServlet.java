@@ -66,9 +66,33 @@ public class ClientesServlet extends HttpServlet {
             String action = request.getParameter("action");
             String url = "/gestaoClientes.jsp";
             int formType = 0;
-            if (action == null || action.isEmpty() || action.equals("list")) {    
-                request.setAttribute("clientes", this.clientesFacade.listarClientes());
-                url = "/gerenciaUsuarios.jsp";  
+            if (action == null || action.isEmpty() || action.equals("list")) {   
+                List<Cliente> clientes =  new ArrayList<Cliente>();
+                clientes = this.clientesFacade.listarClientes();
+                 for(Cliente cliente: clientes){
+                    Atributo p = new Atributo();
+                    Atributo c = new Atributo();
+                    p = this.clientesFacade.getAtributoPorId(cliente.getPreferencias().getIdAtributo());
+                    c = this.clientesFacade.getAtributoPorId(cliente.getCaracteristicas().getIdAtributo());
+                    if (p.getSexo().equals("F")){
+                        p.setSexo("Feminino");
+                    }
+                    else{
+                        p.setSexo("Masculino");
+                    }
+                    if (c.getSexo().equals("F")){
+                        c.setSexo("Feminino");
+                    }
+                    else{
+                        c.setSexo("Masculino");
+                    }
+                    cliente.setCaracteristicas(c);
+                    cliente.setPreferencias(p);
+                    
+                     System.out.println("Sexo: " + cliente.getCaracteristicas().getSexo());
+                }
+                request.setAttribute("clientes", clientes);
+                url = "/gestaoClientes.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }

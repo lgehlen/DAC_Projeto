@@ -36,7 +36,7 @@
 	  		<br>
 	  		<div id="cabe">
 	  			<!--LOGO -->
-	  			<div class="col-sm-1"> <a href="/"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
+	  			<div class="col-sm-1"> <a href="/foreveralone/login"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
 		  		<div class="container">
 					<div class="row">
 		  				<div class="col-sm-2">
@@ -45,7 +45,7 @@
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="festas.html" class="btn btn-primary btn-lg">
+		  					<a href="festas.jsp" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-fire"></span> Festas
 		  					</a>
 		  				</div>
@@ -55,12 +55,12 @@
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="casamento.html" class="btn btn-primary btn-lg">
+		  					<a href="casamento.jsp" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-gift"></span> Casamento
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2" >
-		  					<a href="preferencias.html" class="btn btn-primary btn-lg">
+		  					<a href="preferencias.jsp" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-filter"></span> Preferências
 		  					</a>
 		  				</div>
@@ -71,7 +71,7 @@
 	   							<ul class="dropdown-menu">
 	   								<li><a> <span class="glyphicon glyphicon-user"></span>   User   </a></li>
 	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo:Gabriel   </a></li>
-		      						<li><a href="/">Home</a></li>
+		      						<li><a href="/foreveralone/login">Home</a></li>
 		      						<li class="divider"></li>
 		      						<li><a href="#"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
 	    						</ul>

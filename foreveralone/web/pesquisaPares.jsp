@@ -38,7 +38,7 @@
 	  		<br>
 	  		<div id="cabe">
 	  			<!--LOGO -->
-	  			<div class="col-sm-1"> <a href="/"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
+	  			<div class="col-sm-1"> <a href="/foreveralone/login"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
 		  		<div class="container">
 
 					<div class="row">

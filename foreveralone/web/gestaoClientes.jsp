@@ -38,7 +38,7 @@
 	  		<br>
 	  		<div id="cabe">
 	  			<!--LOGO -->
-	  			<div class="col-sm-1"> <a href="/"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
+	  			<div class="col-sm-1"> <a href="/foreveralone/login"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
 		  		<div class="container">
 					<div class="row">
 		  				<div class="col-sm-1">
@@ -98,12 +98,12 @@
 				<div class="col-sm-9"><h4><c:out value="${x.nome}"/></h4></div>
 				<!--Modal-->
 				<div class="col-sm-1">
-					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#excluifunc">
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#excluifunc${x.id}">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </button>
                         
 					<!-- Modal -->
-	  				<div class="modal fade" id="excluifunc" role="dialog">
+	  				<div class="modal fade" id="excluifunc${x.id}" role="dialog">
 	    				<div class="modal-dialog">
 	      			<!-- Modal content-->
 	      					<div class="modal-content">
@@ -142,14 +142,14 @@
 	  				</div>
 			</div>
 				<div class="col-sm-1">
-					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
+					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal${x.id}   ">
 						<span class="glyphicon glyphicon-info-sign"></span>
 					</button>
                             
                                     
                                     
 					<!-- Modal -->
-	  				div class="modal fade" id="myModal" role="dialog">
+	  				<div class="modal fade" id="myModal${x.id}" role="dialog">
 	    				<div class="modal-dialog">
 	      			<!-- Modal content-->
 	      					<div class="modal-content">
@@ -181,12 +181,43 @@
                                                                                 <div class="col-sm-5">
 											Data de Cadastro<h4><fmt:formatDate value="${x.dataCad}" pattern="dd/MM/yy"/></h4>
 										</div>
-                                                                                <div class="col-sm-5">
-											Id Caracteristica<h4><c:out value="${x.caracteristicas.idAtributo}"/></h4>
+                                                                                <div class="col-sm-10">
+                                                                                    <br>
+                                                                                    <strong> Características </strong>
+                                                                                    <br>
+                                                                                    <br>
 										</div>
                                                                                 <div class="col-sm-5">
-											Id Preferencia<h4><c:out value="${x.preferencias.idAtributo}"/></h4>
+											Cor de Cabelo<h4><c:out value="${x.caracteristicas.corDeCabelo}"/></h4>
 										</div>
+                                                                                <div class="col-sm-5">
+											Cor de Pele<h4><c:out value="${x.caracteristicas.corDePele}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Descrição<h4><c:out value="${x.caracteristicas.descricao}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Sexo<h4><c:out value="${x.caracteristicas.sexo}"/></h4>
+										</div>
+                                                                                <div class="col-sm-10">
+                                                                                    <br>
+                                                                                    <strong> Preferências </strong>
+                                                                                    <br>
+                                                                                    <br>
+										</div>
+                                                                                <div class="col-sm-5">
+											Cor de Cabelo<h4><c:out value="${x.preferencias.corDeCabelo}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Cor de Pele<h4><c:out value="${x.preferencias.corDePele}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Descrição<h4><c:out value="${x.preferencias.descricao}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Sexo<h4><c:out value="${x.preferencias.sexo}"/></h4>
+										</div>
+                                                                                
                                                                                 
 									</div>
 	        					</div>

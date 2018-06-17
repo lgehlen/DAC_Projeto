@@ -108,16 +108,17 @@ public class DefaultAtributoDao implements AtributoDao {
         ResultSet rs = null;
         Atributo atributo = new Atributo();
         try {
-            ps = con.prepareStatement("SELECT * FROM   atributo " +
+            ps = con.prepareStatement("SELECT IdAtributo, corDeCabelo, corDePele, sexo, descricao FROM   atributo " +
                                         " WHERE  IdAtributo = ?");
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             if(rs.next())
             {
                 atributo.setIdAtributo(rs.getInt("IdAtributo"));
                 atributo.setCorDeCabelo(rs.getString("corDeCabelo"));
-                atributo.setCorDeCabelo(rs.getString("corDePele"));
-                atributo.setCorDeCabelo(rs.getString("descricao"));
-                atributo.setCorDeCabelo(rs.getString("sexo"));
+                atributo.setCorDePele(rs.getString("corDePele"));
+                atributo.setDescricao(rs.getString("descricao"));
+                atributo.setSexo(rs.getString("sexo"));
             }
             return atributo;
         } catch (SQLException e) {
