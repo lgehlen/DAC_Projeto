@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Cidade` (
   `idCidade` INT NOT NULL AUTO_INCREMENT,
   `nomeCidade` VARCHAR(100) NOT NULL,
   `Estado_idEstado` INT NOT NULL,
-  PRIMARY KEY (`idCidade`, `Estado_idEstado`),
+  PRIMARY KEY (`idCidade`),
   INDEX `fk_Cidade_Estado1_idx` (`Estado_idEstado` ASC),
   CONSTRAINT `fk_Cidade_Estado1`
     FOREIGN KEY (`Estado_idEstado`)
