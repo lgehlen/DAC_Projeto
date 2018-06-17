@@ -22,21 +22,19 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!--<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> -->
 </head>
 <body>
 	<br>
 	<br>
 	<div class="container" id="container-login">
 		<div class="row">
-			<div class="col-sm-4"><h4> <img id="foto-login" src="./imagens/user.jpg" width="100" height="50"></h4></div>
+                    <div class="col-sm-4"><h4><a href="/foreveralone"><img id="foto-login" src="./imagens/user.jpg" width="100" height="50"></a></h4></div>
 		</div>
 		<div class="row">
 			<form action="login" method="post">
 	    		<div class="input-group">
 	      			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-	      			<input id="email" type="text" class="form-control" name="email" placeholder="Email">
+	      			<input id="email" type="text" class="form-control" name="email" placeholder="Email"/>
 	    		</div>
 	    		<br>
 	    		<div class="input-group">
@@ -60,7 +58,7 @@
 		    <div class="col-sm-6"></div>
 		    	<div class="col-sm-6">
 					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
-						<span class="glyphicon glyphicon-wrench"></span>Esqueci minha Senha
+						<span class="glyphicon glyphicon-wrench"></span> Esqueci minha Senha
 					</button>
 					<!-- Modal -->
 	  				<div class="modal fade" id="myModal" role="dialog">
@@ -89,9 +87,6 @@
 											<div class="col-sm-4"></div>
 										</div>
 	         						</form>
-	        					</div>
-	        					<div class="modal-footer">
-	          						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        					</div>
 	      					</div>
 	    				</div>
