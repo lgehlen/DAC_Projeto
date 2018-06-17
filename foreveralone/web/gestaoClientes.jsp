@@ -98,12 +98,12 @@
 				<div class="col-sm-9"><h4><c:out value="${x.nome}"/></h4></div>
 				<!--Modal-->
 				<div class="col-sm-1">
-					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#excluifunc">
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#excluifunc${x.id}">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </button>
                         
 					<!-- Modal -->
-	  				<div class="modal fade" id="excluifunc" role="dialog">
+	  				<div class="modal fade" id="excluifunc${x.id}" role="dialog">
 	    				<div class="modal-dialog">
 	      			<!-- Modal content-->
 	      					<div class="modal-content">
@@ -142,7 +142,7 @@
 	  				</div>
 			</div>
 				<div class="col-sm-1">
-					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal${x.id}">
+					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal${x.id}   ">
 						<span class="glyphicon glyphicon-info-sign"></span>
 					</button>
                             
