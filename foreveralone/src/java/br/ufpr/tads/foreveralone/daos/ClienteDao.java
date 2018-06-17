@@ -37,4 +37,6 @@ public interface ClienteDao {
     public List<Cliente> listarClientesPorPreferencia(Atributo p);
     
     public Endereco buscarEnderecoPorId(int id);
+    
+    public void alteraEndereco(Endereco e);
 }

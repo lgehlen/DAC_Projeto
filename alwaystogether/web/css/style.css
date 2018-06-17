@@ -1,3 +1,16 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17/06/2018, 15:50:44
+    Author     : thiag
+*/
+
+
+/*Estrutura das páginas Cabeçalho ,Rodapé e estilos em comum em todas as página*/
+
 
 /*Estrutura das páginas Cabeçalho ,Rodapé e estilos em comum em todas as página*/
 
@@ -7,15 +20,15 @@ html, body {
 
 #logo{
 	margin-left: 2%;
-	width:100px;
+	width:120px;
 	height:90px;
 	margin-top: -20%;
 	padding-left:10%;
 }
 
 .home {
-  overflow: hidden;
-  background-color:#B22222;
+  z-index: 0;
+  background-color: #273443;
   padding: -5% 1%;
   color: white;
 }
@@ -30,11 +43,11 @@ html, body {
 }
 
 .dropdown-menu{
-	position: relative;
+	z-index: 0;
 }
 
 .btn-primary.btn-lg {
-	background-color: #B22222;
+	background-color:  #273443;
 	border-width:0px;
     border-right:0px;
     border-top:0px;
@@ -42,13 +55,14 @@ html, body {
     margin-top: 0px;
 }
 #dropdown{
-	background-color: #B22222;
+	background-color:  #273443;
 	border-width:0px;
     border-right:0px;
     border-top:0px;
     border-left:0px;
     margin-top: 0px;
-    margin-left: 10%;
+    margin-left:10%;
+    margin-bottom: 10%;
 }
 
 .row{
@@ -86,10 +100,6 @@ border-radius: 10px;
 	display: none;
 }
 
-#video{
-	display: none;
-}
-
 a{
 	color:black;
 }
@@ -115,18 +125,24 @@ footer {
 
 #dropdown-menu{
 	padding-left: 7%;
-	background-color: #B22222;
+	background-color:  #273443;
+	z-index: 0;
 }
 
 #correcao-menu{
 	padding-left: 4%;
 }
 
+#valor{
+	background: #EEE; 
+    cursor: not-allowed; 
+    color: #777;
+}
 /*Excessão:Página Login*/
 #container-login{
-	margin-top: 100px;
-	padding-top: 100px;
-	padding-left: 20px;
+	margin-top: 10%;
+	padding-top: 1%;
+	padding-left:20px;
 	padding-right:20px;
 	background-color: lightgrey;
 	border-radius: 10px;
@@ -147,208 +163,126 @@ footer {
 
 }
 
-#glypicon-login{
-	margin-left: 20px;
-}
+/*Página Enviar-Orcamento*/
 
-/*Página Cadastro Dados Pessoais - Coleta_dados-Caracteristicas*/
-
-#Cadastro{
-	padding-left:20px;
-	padding-right:20px;
-	background-color: lightgrey;
-	border-radius: 10px;
-}
-
-#nascimento{
-	margin-top: -13px;
-	margin-left: 193px;
-}
-
-#foto-dados-pessoais{
-	background-color: #ddd;
-  	border-radius: 100%;
-  	height: 150px;
-  	object-fit: cover;
- 	width: 150px; 
- 	padding-right: auto;
- 	padding-left: auto;
- }
- 	
-#endereco, #email,#titleescolaridade,#calendario,#titledate{
-	margin-top:33px;
-}
-
-#escolaridade{
-	margin-left: -55px;
-	margin-top:33px;
-}
-
-/*Página Manter Preferencias*/
-
-#container-manter-preferencias{
+#container-enviar-orcamento{
 	padding-left:2%;
 	padding-right:2%;
 	background-color: lightgrey;
 	border-radius: 10px;
-	margin-top: 2%;
-	margin-bottom: 3%;
+	margin-top: 5%;
+	padding-bottom: 1%;
+	margin-bottom: 5%;
 }
 
-#radios{
-	margin-left: -30px;
-}
-
-#glypicon-preferencia{
-	margin-left: 280px;
-}
-
-/*Página encontros*/
-
-#container-encontros{
-	padding-left:2%;
-	padding-right:2%;
-	background-color: lightgrey;
-	border-radius: 10px;
+#container-inputs-orcamento{
 	margin-top: 2%;
 	padding-bottom: 1%;
 	margin-bottom: 3%;
 }
 
-#solicitacoesencontro{
-	border-radius: 10px;
-	border-color: red;
-	background-color:lightgrey;
+/*Página cadastrar-senha*/
+
+#container-nova-senha{
+	margin-top: 10%;
+	background-color: lightgrey;
+	width: 40%;
+	border-radius: 10%;
+	padding-bottom: 2%;
 }
 
-#glypicon-encontro{
-	margin-right:2%; 
-}
+/*Página deletar conta*/
 
-#footerencontro{
-	height:auto;
-	position:absolute;
-	width:100%;
-}
-
-#tabela-encontros1{
-	padding-left: 40px;
-}
-#tabela-encontros2{
-	padding-left: 80px;
-}
-
-/*Página Pesquisa Pares*/
-
-#container-pesquisa-pares{
+#container-deletar-conta{
 	padding-left:2%;
 	padding-right:2%;
 	background-color: lightgrey;
 	border-radius: 10px;
-	margin-top: 2%;
+	margin-top: 10%;
 	padding-bottom: 1%;
-	margin-bottom: 3%;
+	margin-bottom: 5%;
+	width: 40%;
 }
 
-#pesquisa{
-	text-align:center;
+#profissao-deleta-conta{
+	margin-left: -6%;
 }
 
-#colunas-pesquisa{
-	text-align:center;
+/*Página Manter Pedidos*/
+#status{
+ 	border: 1px solid #000;
+ 	border-radius:30px;
+ 	width:25px;
+ 	height:25px;
+ 	text-align:center;
+ 	vertical-align: middle;
+ 	line-height:50px;    
+ 	box-shadow: 2px 2px 5px #999;
+ 	margin-left: 40%;
 }
 
-/*Pagina Pares-Compativeis*/
-
-#glypicon-pares-compativeis{
-	margin-left: -320px;
-}
-
-/*Casamento*/
-
-#container-casamento{
+#container-manter-pedidos{
 	padding-left:2%;
 	padding-right:2%;
 	background-color: lightgrey;
 	border-radius: 10px;
-	margin-top: 2%;
+	margin-top: 5%;
 	padding-bottom: 1%;
-	margin-bottom: 3%;
+	margin-bottom: 5%;
 }
 
-
-#glypicon-casamento{
-	margin-left: 500px;
+/*Página detalhe-orcamento*/
+#container-detalhe-orcamento{
+	padding-left:2%;
+	padding-right:2%;
+	background-color: lightgrey;
+	border-radius: 10px;
+	margin-top: 5%;
+	padding-bottom: 1%;
+	margin-bottom: 5%;
 }
 
-/*Cadastra Funcionário*/
-
-#glypicon-cadastra-funcionario{
-	margin-left: 400px;
+#status-detalhe-orcamento{
+	border: 1px solid #000;
+ 	border-radius:30px;
+ 	width:50px;
+ 	height:50px;
+ 	text-align:center;
+	 vertical-align: middle;
+ 	line-height:50px;    
+ 	box-shadow: 2px 2px 5px #999;
+	margin-left: 40%;
 }
 
-/*Cadastra Funcionário*/
+#correcao-detalhes{
+	margin-left:-30px;
+	margin-bottom: 1%;
+}
+
+/*Página manter-funcionarios*/
+
+#container-manter-funcionario{
+	padding-left:2%;
+	padding-right:2%;
+	background-color: lightgrey;
+	border-radius: 10px;
+	margin-top: 5%;
+	padding-bottom: 1%;
+	margin-bottom: 5%;
+}
 
 #relatorios{
 	border-bottom: 1px solid black;
 	padding-left:1%;
 }
 
-/*Gestão Clientes */
-
-/*Modal*/
-#modal-clientes{
-	border-bottom: 1px solid black;
-}
-
-/*Gestão Funcionarios */
-
-#glypicon-gestaofunc{
-	margin-left: -320px;
-}
-
-#popup-gerenciafuncionarios{
-	padding-top: 2%;
-	text-align: center;
-}
-
-#glypicon-gestaofuncionario{
-	margin-left: 280px;
-}
+/*aqui*/
 
 
-/*Cadastra Evento */
-#container-cadastra-evento{
-	padding-left:2%;
-	padding-right:2%;
-	background-color: lightgrey;
-	border-radius: 10px;
-	margin-top: 2%;
-	padding-bottom: 1%;
-	margin-bottom: 3%;
-}
-
-#glypicon-evento{
-	margin-left: 550px;
-}
 
 
-/*gerencia_usuarios */
 
-#container-gerencia-usuarios{
-	padding-left:2%;
-	padding-right:2%;
-	background-color: lightgrey;
-	border-radius: 10px;
-	margin-top: 2%;
-	margin-bottom: 3%;
-}
 
-#popup-gerenciausuarios{
-	padding-top: 2%;
-	text-align: center;
-}
 
-#glypicon-gerencia-usuarios{
-	margin-left: 650px;
-}
+
+

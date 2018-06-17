@@ -68,6 +68,21 @@ public class DefaultClienteDao implements ClienteDao {
         }
     }
     
+    public void alteraEndereco(Endereco e) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("UPDATE forever.endereco SET rua = ?,CEP = ?,numero = ?,Cidade_idCidade = ? WHERE idEndereco = ?");
+            st.setString(1, e.getRua());
+            st.setString(2, e.getCep());
+            st.setString(3, e.getLogradouro());
+            st.setInt(4, e.getCidade().getId());
+            st.setInt(5, e.getId());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public void deletarCliente(int id) {
