@@ -6,6 +6,7 @@
 package br.ufpr.tads.foreveralone.daos;
 
 import br.ufpr.tads.foreveralone.beans.Cliente;
+import br.ufpr.tads.foreveralone.beans.Endereco;
 import br.ufpr.tads.foreveralone.beans.Login;
 import java.util.List;
 
@@ -29,4 +30,6 @@ public interface ClienteDao {
     public Login getLogin(String email, String sen);
     
     public int buscaProximoIdEndereco();
+    
+    public void criarEndereço(Endereco e);
 }

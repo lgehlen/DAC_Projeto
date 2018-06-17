@@ -51,6 +51,22 @@ public class DefaultClienteDao implements ClienteDao {
         }    
     }
 
+     public void criarEndereço(Endereco e) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("INSERT INTO forever.Endereço (rua,CEP,numero,Cidade_idCidade)"
+                    + " VALUES(?,?,?,?)");
+            st.setString(1, e.getRua());
+            st.setString(2, e.getCep());
+            st.setString(3, e.getLogradouro());
+            st.setInt(4, e.getCidade().getId());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }
+    
     @Override
     public void deletarCliente(int id) {
         PreparedStatement ps = null;
