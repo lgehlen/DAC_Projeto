@@ -114,9 +114,6 @@ public class DefaultClienteDao implements ClienteDao {
                 cliente.setCaracteristicas(caracteristicas);
                 cliente.setPreferencias(preferencias);
                 cliente.setEndereço(endereco);
-                System.out.println("Preferencia: " + cliente.getPreferencias().getIdAtributo());
-                System.out.println("Caracteristica: " + cliente.getCaracteristicas().getIdAtributo());
-                System.out.println("Endereco: " + cliente.getEndereço().getId());
                 list.add(cliente);
             }
             return list;

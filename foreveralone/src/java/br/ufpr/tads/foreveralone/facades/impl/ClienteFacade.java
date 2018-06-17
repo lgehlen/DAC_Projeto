@@ -104,6 +104,10 @@ public class ClienteFacade {
         return getClienteDao().getLogin(email,sen);
     }
     
+     public Atributo getAtributoPorId(int id){
+        return atributoDao.buscaAtributoPorId(id);
+    }
+    
     /**
      * @return the clienteDao
      */
@@ -159,4 +163,6 @@ public class ClienteFacade {
     public static void setAtributoDao(AtributoDao aAtributoDao) {
         atributoDao = aAtributoDao;
     }
+    
+   
 }

@@ -181,12 +181,43 @@
                                                                                 <div class="col-sm-5">
 											Data de Cadastro<h4><fmt:formatDate value="${x.dataCad}" pattern="dd/MM/yy"/></h4>
 										</div>
-                                                                                <div class="col-sm-5">
-											Id Caracteristica<h4><c:out value="${x.caracteristicas.idAtributo}"/></h4>
+                                                                                <div class="col-sm-10">
+                                                                                    <br>
+                                                                                    <strong> Características </strong>
+                                                                                    <br>
+                                                                                    <br>
 										</div>
                                                                                 <div class="col-sm-5">
-											Id Preferencia<h4><c:out value="${x.preferencias.idAtributo}"/></h4>
+											Cor de Cabelo<h4><c:out value="${x.caracteristicas.corDeCabelo}"/></h4>
 										</div>
+                                                                                <div class="col-sm-5">
+											Cor de Pele<h4><c:out value="${x.caracteristicas.corDePele}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Descrição<h4><c:out value="${x.caracteristicas.descricao}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Sexo<h4><c:out value="${x.caracteristicas.sexo}"/></h4>
+										</div>
+                                                                                <div class="col-sm-10">
+                                                                                    <br>
+                                                                                    <strong> Preferências </strong>
+                                                                                    <br>
+                                                                                    <br>
+										</div>
+                                                                                <div class="col-sm-5">
+											Cor de Cabelo<h4><c:out value="${x.preferencias.corDeCabelo}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Cor de Pele<h4><c:out value="${x.preferencias.corDePele}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Descrição<h4><c:out value="${x.preferencias.descricao}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Sexo<h4><c:out value="${x.preferencias.sexo}"/></h4>
+										</div>
+                                                                                
                                                                                 
 									</div>
 	        					</div>
