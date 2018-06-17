@@ -135,7 +135,6 @@ footer {
 #container-login{
 	margin-top: 100px;
 	padding-top: 100px;
-	padding-left:20px;
 	padding-right:20px;
 	background-color: lightgrey;
 	border-radius: 10px;
@@ -184,7 +183,7 @@ footer {
  	padding-left: auto;
  }
  	
-#endereco, #email,#titleescolaridade,#calendario,#titledate{
+#endereco,#titleescolaridade,#calendario,#titledate{
 	margin-top:33px;
 }
 
