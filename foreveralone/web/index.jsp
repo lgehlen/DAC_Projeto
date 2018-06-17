@@ -28,7 +28,7 @@
 	<br>
 	<div class="container" id="container-login">
 		<div class="row">
-			<div class="col-sm-4"><h4> <img id="foto-login" src="./imagens/user.jpg" width="100" height="50"></h4></div>
+                    <div class="col-sm-4"><h4><a href="/foreveralone"><img id="foto-login" src="./imagens/user.jpg" width="100" height="50"></a></h4></div>
 		</div>
 		<div class="row">
 			<form action="login" method="post">
