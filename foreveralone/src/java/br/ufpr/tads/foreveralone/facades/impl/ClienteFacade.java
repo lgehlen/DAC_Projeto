@@ -124,6 +124,11 @@ public class ClienteFacade {
         return clienteDao.buscaProximoIdEndereco();
     }
     
+    public List<Cliente> listarClientesPorPreferencia(Atributo p)
+    {
+        return clienteDao.listarClientesPorPreferencia(p);
+    }
+    
     /**
      * @return the clienteDao
      */

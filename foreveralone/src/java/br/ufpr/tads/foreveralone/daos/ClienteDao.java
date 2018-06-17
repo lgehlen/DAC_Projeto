@@ -5,6 +5,7 @@
  */
 package br.ufpr.tads.foreveralone.daos;
 
+import br.ufpr.tads.foreveralone.beans.Atributo;
 import br.ufpr.tads.foreveralone.beans.Cliente;
 import br.ufpr.tads.foreveralone.beans.Endereco;
 import br.ufpr.tads.foreveralone.beans.Login;
@@ -32,4 +33,6 @@ public interface ClienteDao {
     public int buscaProximoIdEndereco();
     
     public void criarEndereço(Endereco e);
+    
+    public List<Cliente> listarClientesPorPreferencia(Atributo p);
 }

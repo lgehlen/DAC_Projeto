@@ -137,7 +137,44 @@ public class DefaultClienteDao implements ClienteDao {
         }
         return null;
     }
+    
 
+    public List<Cliente> listarClientesPorPreferencia(Atributo p) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM Cliente, Atributo WHERE isRemovido = 0 AND idCliente = idAtributo AND corDeCabelo = ? AND codDePele = ? AND sexo = ?");
+            ps.setString(1,p.getCorDeCabelo());
+            ps.setString(2, p.getCorDePele());
+            ps.setString(3, p.getSexo());
+            rs = ps.executeQuery();
+            List<Cliente> list = new ArrayList<Cliente>();
+            while (rs.next()) {
+                Endereco endereco = new Endereco();
+                Atributo caracteristicas = new Atributo();
+                Atributo preferencias = new Atributo();
+                Cliente cliente = new Cliente();
+                cliente.setId(rs.getInt("IdCliente"));
+                cliente.setCpf(rs.getString("CPF"));
+                cliente.setDataCad(rs.getDate("dataCad"));
+                cliente.setDataNasc(rs.getDate("datanasc"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setEscolaridade(rs.getString("escolaridade"));
+                cliente.setNome(rs.getString("nomeCliente"));
+                caracteristicas.setIdAtributo(rs.getInt("Atributo_IdAtributoAtributo"));
+                preferencias.setIdAtributo(rs.getInt("Atributo_IdAtributoPreferencia"));
+                endereco.setId(rs.getInt("Endereco_idEndereco"));
+                cliente.setCaracteristicas(caracteristicas);
+                cliente.setPreferencias(preferencias);
+                cliente.setEndereço(endereco);
+                list.add(cliente);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     @Override
     public Cliente buscarClientePorId(int id) {
         PreparedStatement ps = null;
