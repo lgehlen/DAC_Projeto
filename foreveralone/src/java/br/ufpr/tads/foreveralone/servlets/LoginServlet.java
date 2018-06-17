@@ -67,7 +67,6 @@ public class LoginServlet extends HttpServlet {
                 RequestDispatcher rd = request.
                                 getRequestDispatcher("/paresCompativeis.jsp");
                         request.setAttribute("login", login);
-                        request.setAttribute("msg", "Deu certo");
                         rd.forward(request, response);    
             }
         }
