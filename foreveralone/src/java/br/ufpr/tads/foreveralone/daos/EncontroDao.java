@@ -23,4 +23,6 @@ public interface EncontroDao {
     List<Encontro> listarEncontros();
     
     Encontro buscarEncontroPorId(int id);
+    
+    public Encontro buscarEncontroPorIdUsuario(int id);
 }

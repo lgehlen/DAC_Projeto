@@ -5,18 +5,15 @@
  */
 package br.ufpr.tads.foreveralone.servlets;
 
-import br.ufpr.tads.foreveralone.beans.Atributo;
-import br.ufpr.tads.foreveralone.beans.Cidade;
-import br.ufpr.tads.foreveralone.beans.Cliente;
-import br.ufpr.tads.foreveralone.beans.Estado;
+import br.ufpr.tads.foreveralone.beans.Encontro;
+import br.ufpr.tads.foreveralone.beans.Endereco;
 import br.ufpr.tads.foreveralone.beans.Funcionario;
 import br.ufpr.tads.foreveralone.beans.Login;
-import br.ufpr.tads.foreveralone.facades.impl.FuncionarioFacade;
+import br.ufpr.tads.foreveralone.facades.impl.EncontroFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -31,9 +28,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author gqueiroz
  */
-@WebServlet(name = "FuncionarioServlet", urlPatterns = {"/FuncionarioServlet"})
-public class FuncionarioServlet extends HttpServlet {
-    private FuncionarioFacade funcionarioFacade;
+@WebServlet(name = "EncontroServlet", urlPatterns = {"/EncontroServlet"})
+public class EncontroServlet extends HttpServlet {
+    private EncontroFacade encontroFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,7 +44,7 @@ public class FuncionarioServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
-        funcionarioFacade = new FuncionarioFacade();
+        encontroFacade = new EncontroFacade();
         
         if (session == null || ((Login) session.getAttribute("login") == null)) {
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
@@ -56,74 +53,80 @@ public class FuncionarioServlet extends HttpServlet {
         }
         
         String action = request.getParameter("action");
-        String url = "/gestaoFuncionarios.jsp";
+        String url = "/encontros.jsp";
         int formType = 0;
         
-            if (action == null || action.isEmpty() || action.equals("list")) {    
-                request.setAttribute("funcionarios", this.FuncionarioFacade().listarFuncionarios());
-                url = "/gestaoFuncionarios.jsp";  
+            if (action == null || action.isEmpty() || action.equals("list")) {
+                final int id = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("encontros", this.encontroFacade.buscarEncontroPorId(id));
+                url = "/encontros.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
             else if (action.equals("show")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Funcionario funcionario = this.FuncionarioFacade().buscarFuncionarioPorId(id);
-                request.setAttribute("funcionario", funcionario);
-                url = "/gestaoFuncionarios.jsp";
+                Encontro encontro = this.encontroFacade.buscarEncontroPorId(id);
+                request.setAttribute("encontro", encontro);
+                url = "/encontros.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
             else if (action.equals("formUpdate")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Funcionario funcionario = this.FuncionarioFacade().buscarFuncionarioPorId(id);
-                request.setAttribute("funcionario", funcionario);
-                url = "/gestaoFuncionarios.jsp";
+                Encontro encontro = this.encontroFacade.buscarEncontroPorId(id);
+                request.setAttribute("encontro", encontro);
+                url = "/encontros.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
             else if (action.equals("remove")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Funcionario funcionario = new Funcionario();
-                funcionario.setId(id);
-                this.FuncionarioFacade().deletarFuncionario(funcionario);
-                response.sendRedirect("gestaoFuncionarios");
+                Encontro encontro = new Encontro();
+                encontro.setId(id);
+                this.encontroFacade.deletarEncontro(encontro);
+                response.sendRedirect("EncontroServlet");
             }
             else if (action.equals("update")){
-                Funcionario funcionario = new Funcionario();
-                funcionario.setCpf(url);
-                funcionario.setEmail(url);
-                funcionario.setNome(url);
-                funcionario.setSenha(url);
-                funcionario.setId(formType);
+                Encontro encontro = new Encontro();
+                
+                encontro.setIdCliente1(formType);
+                encontro.setIdCliente2(formType);
+                Endereco local = null;
+                encontro.setLocal(local);
+                
+                encontro.setHorario(url);
                 
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 try {
-                    funcionario.setDataNasc(formatter.parse(request.getParameter("data")));
+                    encontro.setData(formatter.parse(request.getParameter("data")));
                 } catch (ParseException ex) {
                     Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                this.FuncionarioFacade().criarFuncionario(funcionario);
+                this.encontroFacade.criarEncontro(encontro);
                 
-                response.sendRedirect("funcionarios");
+                response.sendRedirect("EncontroServlet");
             }
             else if (action.equals("new")){
-                Funcionario funcionario = new Funcionario();
-                funcionario.setCpf(url);
-                funcionario.setEmail(url);
-                funcionario.setNome(url);
-                funcionario.setSenha(url);
+                Encontro encontro = new Encontro();
+                encontro.setId(formType);
+                encontro.setIdCliente1(formType);
+                encontro.setIdCliente2(formType);
+                Endereco local = null;
+                encontro.setLocal(local);
+                
+                encontro.setHorario(url);
                 
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 try {
-                    funcionario.setDataNasc(formatter.parse(request.getParameter("data")));
+                    encontro.setData(formatter.parse(request.getParameter("data")));
                 } catch (ParseException ex) {
                     Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                this.FuncionarioFacade().criarFuncionario(funcionario);
+                this.encontroFacade.criarEncontro(encontro);
                 
-                response.sendRedirect("funcionarios");
+                response.sendRedirect("EncontroServlet");
             }
     }
 
@@ -165,9 +168,5 @@ public class FuncionarioServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private FuncionarioFacade FuncionarioFacade() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }
