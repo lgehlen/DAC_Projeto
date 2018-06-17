@@ -198,10 +198,13 @@ public class DefaultClienteDao implements ClienteDao {
                 cliente.setEmail(rs.getString("email"));
                 cliente.setEscolaridade(rs.getString("escolaridade"));
                 cliente.setNome(rs.getString("nomeCliente"));
+                cliente.setSenha(rs.getString("senha"));
                 
                 endereco.setId(rs.getInt("Endereco_idEndereco"));
                 preferencias.setIdAtributo(rs.getInt("Atributo_IdAtributoPreferencia"));
                 caracteristicas.setIdAtributo(rs.getInt("Atributo_IdAtributoAtributo"));
+                System.out.println("Id Pref: " + preferencias.getIdAtributo());
+                System.out.println("Id Carac: " + caracteristicas.getIdAtributo());
                 
                 cliente.setEndereço(endereco);
                 cliente.setCaracteristicas(caracteristicas);
@@ -287,7 +290,6 @@ public class DefaultClienteDao implements ClienteDao {
     public Endereco buscarEnderecoPorId(int id) {
        PreparedStatement ps = null;
         ResultSet rs = null;
-        System.out.println("ID: " + id);
         try {
             ps = con.prepareStatement("SELECT idEndereco, rua, CEP, numero, Cidade_idCidade FROM forever.Endereco where idEndereco = ?");
             ps.setInt(1, id);

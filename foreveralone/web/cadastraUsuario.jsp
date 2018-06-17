@@ -155,13 +155,13 @@
                                         <input class="form-control" name="numero" type="text"  id="input_numero" placeholder="Numero" required>
                                     </div>
                                     <div class="col-sm-6" >
-                                        <input class="form-control" name="senha" type="text"  id="input_senha" placeholder="Senha" required>
+                                        <input class="form-control" name="senha" type="password"  id="input_senha" placeholder="Senha" required>
                                     </div>
                                 </div>
                             <br>
                             <div class="row">
 
-                                    <c:if test="${loginBean.tipo == 'funcionario'}">
+                                    <c:if test="${loginBean.tipo != 'funcionario'}">
 
                                     <div class="col-sm-2">
                                     <select name="sexo" class="form-control" id="sexo" size="1" required> 
@@ -300,7 +300,7 @@
                                         <label>Aniversário</label>
                                     </div>
                                     <div class="col-sm-4">
-                                       <input class="form-control" name="data" type="date" value=<fmt:formatDate value="${cliente.dataNasc}" pattern="dd/MM/yyyy"/> required>
+                                       <input class="form-control" name="data" type="text" value=<fmt:formatDate value="${cliente.dataNasc}" pattern="dd/MM/yyyy"/> required>
                                     </div>
                             </div>
                             <br>
@@ -346,13 +346,13 @@
                                         <input class="form-control" name="numero" type="text"  id="input_numero" placeholder="Numero" value="<c:out value="${cliente.endereço.logradouro}" />" required>
                                     </div>
                                     <div class="col-sm-6" >
-                                        <input class="form-control" name="senha" type="text"  id="input_senha" placeholder="Senha" value="<c:out value="${cliente.senha}" />" required>
+                                        <input class="form-control" name="senha" type="password"  id="input_senha" placeholder="Senha" value="<c:out value="${cliente.senha}" />" required>
                                     </div>
                                 </div>
                             <br>
                             <div class="row">
 
-                                    <c:if test="${loginBean.tipo == 'funcionario'}">
+                                    <c:if test="${loginBean.tipo != 'funcionario'}">
 
                                     <div class="col-sm-2">
                                     <select name="sexo" class="form-control" id="sexo" size="1" required> 

@@ -136,6 +136,9 @@ public class ClientesServlet extends HttpServlet {
             
             c = clientesFacade.getAtributoPorId(cliente.getCaracteristicas().getIdAtributo());
             p = clientesFacade.getAtributoPorId(cliente.getPreferencias().getIdAtributo());
+            System.out.println("Cor do Cabelo: " + c.getCorDeCabelo());
+            System.out.println("Cor do Cabelo: " + p.getCorDeCabelo());
+            
             
             cliente.setCaracteristicas(c);
             cliente.setPreferencias(p);
@@ -158,55 +161,67 @@ public class ClientesServlet extends HttpServlet {
         } else if (action.equals("update")) {
 
             Cliente cliente = new Cliente();
-
+            
+            Cidade cidade = new Cidade();
+            Estado estado = new Estado();
+            Endereco endereco =  new Endereco();
             Atributo preferencias = new Atributo();
             Atributo caracteristicas = new Atributo();
-
-            cliente.getEndereço().setCep(request.getParameter("cep"));
+            
             cliente.setCpf(request.getParameter("cpf"));
             cliente.setEmail(request.getParameter("email"));
             cliente.setNome(request.getParameter("nome"));
-            cliente.setEscolaridade(request.getParameter("escolaridade "));
-            cliente.getEndereço().setRua(request.getParameter("rua"));
-            cliente.getEndereço().setLogradouro(request.getParameter("logradouro"));
+            cliente.setEscolaridade(request.getParameter("escolaridade"));
+            System.out.println("Escolaridade: " + cliente.getEscolaridade());
             cliente.setSenha(request.getParameter("senha"));
-
-            cliente.getEndereço().getCidade().setId(Integer.parseInt(request.getParameter("cidade")));
-            cliente.getEndereço().getCidade().getEstado().setId(Integer.parseInt(request.getParameter("estado")));
-            cliente.setId(Integer.parseInt(request.getParameter("id")));
             
+            
+            cidade = clientesFacade.getCidadePorId(Integer.parseInt(request.getParameter("cidade")));
+            estado = clientesFacade.getEstadoPorId(Integer.parseInt(request.getParameter("estado")));
+            cidade.setEstado(estado);
+            
+            endereco.setRua(request.getParameter("rua"));
+            endereco.setCep(request.getParameter("cep"));
+            endereco.setId(clientesFacade.getProximoIdEndereco());
+            endereco.setLogradouro(request.getParameter("numero"));
+            endereco.setCidade(cidade);
+            
+             this.clientesFacade.criarEndereço(endereco);
+            cliente.setEndereço(endereco);
+            System.out.println("teste "+ cliente.getEndereço().getId());
+            
+            
+            if (!login.getTipo().equals("funcionario")) {
+                preferencias.setCorDeCabelo(request.getParameter("cordocabelo"));
+                preferencias.setCorDePele(request.getParameter("cordapele"));
+                preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
+                preferencias.setSexo(request.getParameter("sexo"));
+                preferencias.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                this.clientesFacade.criaAtributo(preferencias);
+                cliente.setPreferencias(preferencias);
+                
+                caracteristicas.setCorDeCabelo(request.getParameter("pcordocabelo"));
+                caracteristicas.setCorDePele(request.getParameter("pcordapele"));
+                caracteristicas.setDescricao(request.getParameter("descricao"));
+                caracteristicas.setSexo(request.getParameter("psexo"));
+                caracteristicas.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                this.clientesFacade.criaAtributo(caracteristicas);
+                cliente.setCaracteristicas(caracteristicas);
+            }
 
-            //Falta fazer os atributos
-            preferencias.setCorDeCabelo("");
-            preferencias.setCorDePele("");
-            preferencias.setDescricao("");
-            preferencias.setSexo("");
-            preferencias.setIdAtributo(0);
-
-            cliente.setPreferencias(preferencias);
-
-            caracteristicas.setCorDeCabelo("");
-            caracteristicas.setCorDePele("");
-            caracteristicas.setDescricao("");
-            caracteristicas.setSexo("");
-            caracteristicas.setIdAtributo(0);
-
-            cliente.setCaracteristicas(caracteristicas);
-
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
             try {
                 cliente.setDataNasc(formatter.parse(request.getParameter("data")));
             } catch (ParseException ex) {
                 Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            this.clientesFacade.alteraAtributo(caracteristicas);
-            this.clientesFacade.alteraAtributo(preferencias);
-
+            
+            cliente.setDataCad(new Date());
+            
             this.clientesFacade.atualizarCliente(cliente);
 
             response.sendRedirect("clientes");
+            
         } else if (action.equals("formNew")) {
             url = "/cadastraUsuario.jsp";
             formType = 1;
