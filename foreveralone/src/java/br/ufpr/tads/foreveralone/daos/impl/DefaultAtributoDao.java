@@ -47,7 +47,7 @@ public class DefaultAtributoDao implements AtributoDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("INSERT INTO forever.Atributo (corDeCabelo, codDePele, sexo, descricao)"
+            st = con.prepareStatement("INSERT INTO forever.Atributo (corDeCabelo, corDePele, sexo, descricao)"
                                         + " VALUES (?, ?, ?, ?)");
             st.setString(1, atributo.getCorDeCabelo());
             st.setString(2, atributo.getCorDePele());
@@ -108,7 +108,7 @@ public class DefaultAtributoDao implements AtributoDao {
         ResultSet rs = null;
         Atributo atributo = new Atributo();
         try {
-            ps = con.prepareStatement("SELECT IdAtributo, corDeCabelo, corDePele, sexo, descricao FROM   atributo " +
+            ps = con.prepareStatement("SELECT IdAtributo, corDeCabelo, corDePele, sexo, descricao FROM  Atributo " +
                                         " WHERE  IdAtributo = ?");
             ps.setInt(1, id);
             rs = ps.executeQuery();

@@ -106,7 +106,7 @@
 					<input class="form-control" name="cpf" type="text"  id="input_cpf" placeholder="CPF" required>
 				</div>
 				<div class="col-sm-3">
-					<select name="ensino" class="form-control" id="ensino" size="1" required> 
+					<select name="escolaridade" class="form-control" id="ensino" size="1" required> 
 					<option value="">Escolaridade</option>
                                         <option value="Fundamental Incompleto">Fundamental Incompleto</option>
                                         <option value="Fundamental Cursando">Fundamental Cursando</option>

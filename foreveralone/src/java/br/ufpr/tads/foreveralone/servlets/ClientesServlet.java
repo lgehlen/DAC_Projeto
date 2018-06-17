@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -137,6 +138,7 @@ public class ClientesServlet extends HttpServlet {
             cliente.getEndereço().getCidade().setId(Integer.parseInt(request.getParameter("cidade")));
             cliente.getEndereço().getCidade().getEstado().setId(Integer.parseInt(request.getParameter("estado")));
             cliente.setId(Integer.parseInt(request.getParameter("id")));
+            this.clientesFacade.criarEndereço(cliente.getEndereço());
 
             //Falta fazer os atributos
             preferencias.setCorDeCabelo("");
@@ -189,7 +191,8 @@ public class ClientesServlet extends HttpServlet {
             cliente.setCpf(request.getParameter("cpf"));
             cliente.setEmail(request.getParameter("email"));
             cliente.setNome(request.getParameter("nome"));
-            cliente.setEscolaridade(request.getParameter("escolaridade "));
+            cliente.setEscolaridade(request.getParameter("escolaridade"));
+            System.out.println("Escolaridade: " + cliente.getEscolaridade());
             cliente.setSenha(request.getParameter("senha"));
             
             
@@ -204,13 +207,14 @@ public class ClientesServlet extends HttpServlet {
             endereco.setCidade(cidade);
             
             cliente.setEndereço(endereco);
+            System.out.println("teste"+cliente.getEndereço().getId());
 
             if (login.getTipo().equals("funcionario")) {
                 preferencias.setCorDeCabelo("");
                 preferencias.setCorDePele("");
                 preferencias.setDescricao("");
                 preferencias.setSexo("");
-                preferencias.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                preferencias.setIdAtributo(0);
                 this.clientesFacade.criaAtributo(preferencias);
                 cliente.setPreferencias(preferencias);
 
@@ -218,7 +222,7 @@ public class ClientesServlet extends HttpServlet {
                 caracteristicas.setCorDePele("");
                 caracteristicas.setDescricao("");
                 caracteristicas.setSexo("");
-                caracteristicas.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                caracteristicas.setIdAtributo(0);
                 this.clientesFacade.criaAtributo(caracteristicas);
                 cliente.setCaracteristicas(caracteristicas);
             } else {
@@ -239,13 +243,15 @@ public class ClientesServlet extends HttpServlet {
                 cliente.setCaracteristicas(caracteristicas);
             }
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
             try {
                 cliente.setDataNasc(formatter.parse(request.getParameter("data")));
             } catch (ParseException ex) {
                 Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            
+            cliente.setDataCad(new Date());
+            
             this.clientesFacade.criarCliente(cliente);
 
             response.sendRedirect("clientes");

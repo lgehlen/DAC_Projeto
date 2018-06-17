@@ -42,7 +42,7 @@ public class DefaultClienteDao implements ClienteDao {
             st.setString(5, cliente.getEscolaridade());
             st.setDate(6, new java.sql.Date(cliente.getDataCad().getTime()));
             st.setString(7, cliente.getSenha());
-            st.setString(8, null);
+            st.setInt(8, cliente.getEndereço().getId());
             st.setInt(9, cliente.getPreferencias().getIdAtributo());
             st.setInt(10, cliente.getCaracteristicas().getIdAtributo());
             st.executeUpdate();
@@ -51,6 +51,22 @@ public class DefaultClienteDao implements ClienteDao {
         }    
     }
 
+     public void criarEndereço(Endereco e) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("INSERT INTO forever.Endereço (rua,CEP,numero,Cidade_idCidade)"
+                    + " VALUES(?,?,?,?)");
+            st.setString(1, e.getRua());
+            st.setString(2, e.getCep());
+            st.setString(3, e.getLogradouro());
+            st.setInt(4, e.getCidade().getId());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }
+    
     @Override
     public void deletarCliente(int id) {
         PreparedStatement ps = null;
@@ -205,13 +221,14 @@ public class DefaultClienteDao implements ClienteDao {
         ResultSet rs = null;
         try {
             ps = con.prepareStatement("SELECT AUTO_INCREMENT FROM   information_schema.tables " +
-                                        " WHERE  table_name = 'Endereco'" +
+                                        " WHERE  table_name = 'endereco'" +
                                         " AND    table_schema = 'forever'");
             rs = ps.executeQuery();
             if(rs.next())
             {
                 return rs.getInt("AUTO_INCREMENT");
             }
+            
             return -1;
         } catch (SQLException e) {
             e.printStackTrace();

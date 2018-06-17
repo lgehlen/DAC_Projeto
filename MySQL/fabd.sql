@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Endereco` (
   `CEP` VARCHAR(8) NOT NULL,
   `numero` INT NOT NULL,
   `Cidade_idCidade` INT NOT NULL,
-  PRIMARY KEY (`idEndereco`, `Cidade_idCidade`),
+  PRIMARY KEY (`idEndereco`),
   INDEX `fk_Endereco_Cidade_idx` (`Cidade_idCidade` ASC),
   CONSTRAINT `fk_Endereco_Cidade`
     FOREIGN KEY (`Cidade_idCidade`)
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Evento` (
   `local` VARCHAR(50) NOT NULL,
   `Funcionario_idFuncionario` INT NOT NULL,
   `Endereco_idEndereco` INT NOT NULL,
-  PRIMARY KEY (`idEvento`, `Funcionario_idFuncionario`, `Endereco_idEndereco`),
+  PRIMARY KEY (`idEvento`),
   INDEX `fk_Evento_Funcionario1_idx` (`Funcionario_idFuncionario` ASC),
   INDEX `fk_Evento_Endereco1_idx` (`Endereco_idEndereco` ASC),
   CONSTRAINT `fk_Evento_Funcionario1`
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Encontro` (
   `Endereco_idEndereco` INT NOT NULL,
   `Cliente_idCliente` INT NOT NULL,
   `Cliente_idCliente1` INT NOT NULL,
-  PRIMARY KEY (`idEncontro`, `Endereco_idEndereco`, `Cliente_idCliente`, `Cliente_idCliente1`),
+  PRIMARY KEY (`idEncontro`),
   INDEX `fk_Encontro_Endereco1_idx` (`Endereco_idEndereco` ASC),
   INDEX `fk_Encontro_Cliente1_idx` (`Cliente_idCliente` ASC),
   INDEX `fk_Encontro_Cliente2_idx` (`Cliente_idCliente1` ASC),
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Orcamento` (
   `idPedido` INT NOT NULL,
   `Cliente_idCliente` INT NOT NULL,
   `Cliente_idCliente1` INT NOT NULL,
-  PRIMARY KEY (`idOrcamento`, `Cliente_idCliente`, `Cliente_idCliente1`),
+  PRIMARY KEY (`idOrcamento`),
   INDEX `fk_Orcamento_Cliente1_idx` (`Cliente_idCliente` ASC),
   INDEX `fk_Orcamento_Cliente2_idx` (`Cliente_idCliente1` ASC),
   CONSTRAINT `fk_Orcamento_Cliente1`
@@ -247,7 +247,6 @@ CREATE TABLE IF NOT EXISTS `forever`.`ListaConvidados` (
   `Evento_idEvento` INT NOT NULL,
   INDEX `fk_ListaConvidados_Cliente1_idx` (`Cliente_idCliente` ASC),
   INDEX `fk_ListaConvidados_Evento1_idx` (`Evento_idEvento` ASC),
-  PRIMARY KEY (`Cliente_idCliente`, `Evento_idEvento`),
   CONSTRAINT `fk_ListaConvidados_Cliente1`
     FOREIGN KEY (`Cliente_idCliente`)
     REFERENCES `forever`.`Cliente` (`idCliente`)

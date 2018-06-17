@@ -8,6 +8,7 @@ package br.ufpr.tads.foreveralone.facades.impl;
 import br.ufpr.tads.foreveralone.beans.Atributo;
 import br.ufpr.tads.foreveralone.beans.Cidade;
 import br.ufpr.tads.foreveralone.beans.Cliente;
+import br.ufpr.tads.foreveralone.beans.Endereco;
 import br.ufpr.tads.foreveralone.beans.Estado;
 import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.daos.AtributoDao;
@@ -51,6 +52,9 @@ public class ClienteFacade {
         getClienteDao().criarCliente(cliente);
     }
 
+    public void criarEndereço(Endereco e) {
+        getClienteDao().criarEndereço(e);
+    }
     
     public void deletarCliente(int id) {
         getClienteDao().deletarCliente(id);
