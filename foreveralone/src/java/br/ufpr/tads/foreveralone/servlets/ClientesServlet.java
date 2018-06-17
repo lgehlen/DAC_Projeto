@@ -138,6 +138,7 @@ public class ClientesServlet extends HttpServlet {
             cliente.getEndereço().getCidade().setId(Integer.parseInt(request.getParameter("cidade")));
             cliente.getEndereço().getCidade().getEstado().setId(Integer.parseInt(request.getParameter("estado")));
             cliente.setId(Integer.parseInt(request.getParameter("id")));
+            this.clientesFacade.criarEndereço(cliente.getEndereço());
 
             //Falta fazer os atributos
             preferencias.setCorDeCabelo("");
