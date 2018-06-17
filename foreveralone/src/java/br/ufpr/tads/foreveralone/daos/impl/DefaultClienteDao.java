@@ -109,7 +109,7 @@ public class DefaultClienteDao implements ClienteDao {
             st.setString(4, cliente.getEmail());
             st.setString(5, cliente.getEscolaridade());
             st.setString(6, cliente.getSenha());
-            st.setString(7, null);
+            st.setInt(7, (cliente.getEndereço().getId()));
             st.setInt(8, cliente.getPreferencias().getIdAtributo());
             st.setInt(9, cliente.getCaracteristicas().getIdAtributo());
             st.setInt(10, cliente.getId());

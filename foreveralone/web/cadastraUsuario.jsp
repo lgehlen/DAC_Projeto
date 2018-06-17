@@ -267,7 +267,7 @@
                     </form>
                 </c:when>
                 <c:otherwise>
-                    <form name="dadoscliente" action="clientes?action=update" method= "post" >
+                    <form name="dadoscliente" action="clientes?action=update&id=${cliente.id}" method= "post" >
                             <div class="row">
                                     <div class="col-sm-6">
                                             <input class="form-control" name="nome" type="text"  id="input_nome" placeholder="Nome" value="<c:out value="${cliente.nome}" />" required>

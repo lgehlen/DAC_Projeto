@@ -159,8 +159,8 @@ public class ClientesServlet extends HttpServlet {
             this.clientesFacade.deletarCliente(id);
             response.sendRedirect("clientes");
         } else if (action.equals("update")) {
-
-            Cliente cliente = new Cliente();
+            int id = Integer.parseInt(request.getParameter("id"));
+            Cliente cliente = clientesFacade.buscarClientePorId(id);
             
             Cidade cidade = new Cidade();
             Estado estado = new Estado();
@@ -182,7 +182,7 @@ public class ClientesServlet extends HttpServlet {
             
             endereco.setRua(request.getParameter("rua"));
             endereco.setCep(request.getParameter("cep"));
-            endereco.setId(clientesFacade.getProximoIdEndereco());
+            endereco.setId(cliente.getEndereço().getId());
             endereco.setLogradouro(request.getParameter("numero"));
             endereco.setCidade(cidade);
             
@@ -195,7 +195,7 @@ public class ClientesServlet extends HttpServlet {
                 preferencias.setCorDePele(request.getParameter("cordapele"));
                 preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
                 preferencias.setSexo(request.getParameter("sexo"));
-                preferencias.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                preferencias.setIdAtributo(cliente.getPreferencias().getIdAtributo());
                 this.clientesFacade.alteraAtributo(preferencias);
                 
                 cliente.setPreferencias(preferencias);
@@ -204,14 +204,16 @@ public class ClientesServlet extends HttpServlet {
                 caracteristicas.setCorDePele(request.getParameter("pcordapele"));
                 caracteristicas.setDescricao(request.getParameter("descricao"));
                 caracteristicas.setSexo(request.getParameter("psexo"));
-                caracteristicas.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                caracteristicas.setIdAtributo(cliente.getCaracteristicas().getIdAtributo());
                 this.clientesFacade.alteraAtributo(caracteristicas);
                 cliente.setCaracteristicas(caracteristicas);
             }
-
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+            
+            
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
             try {
                 cliente.setDataNasc(formatter.parse(request.getParameter("data")));
+                System.out.println("Data: " + cliente.getDataNasc());
             } catch (ParseException ex) {
                 Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
