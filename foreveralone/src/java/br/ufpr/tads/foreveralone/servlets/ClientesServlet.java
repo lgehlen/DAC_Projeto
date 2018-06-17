@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -189,7 +190,7 @@ public class ClientesServlet extends HttpServlet {
             cliente.setCpf(request.getParameter("cpf"));
             cliente.setEmail(request.getParameter("email"));
             cliente.setNome(request.getParameter("nome"));
-            cliente.setEscolaridade(request.getParameter("escolaridade "));
+            cliente.setEscolaridade(request.getParameter("escolaridade"));
             cliente.setSenha(request.getParameter("senha"));
             
             
@@ -246,8 +247,8 @@ public class ClientesServlet extends HttpServlet {
                 Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            cliente.setDataCad(new DateTime());
-
+            cliente.setDataCad(new Date());
+            
             this.clientesFacade.criarCliente(cliente);
 
             response.sendRedirect("clientes");
