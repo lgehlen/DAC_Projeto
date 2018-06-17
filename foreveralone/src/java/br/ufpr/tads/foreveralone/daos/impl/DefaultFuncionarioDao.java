@@ -154,9 +154,6 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
 
     @Override
     public Login buscarPorLogin(String email, String senha) {
-        System.out.println("email " + email);
-        System.out.println("senha " + senha);
-        System.out.println("T " + con);
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -164,11 +161,8 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
             ps.setString(1, email);
             ps.setString(2, senha);
             rs = ps.executeQuery();
-            System.out.println("teste");
             Login login = new Login();
             while (rs.next()) {
-                System.out.println("NOME " + rs.getString("nomeFuncionario"));
-                System.out.println("ID " + rs.getInt("idFuncionario"));
                 login.setId(rs.getInt("idFuncionario"));
                 login.setNome(rs.getString("nomeFuncionario"));
                 login.setTipo("funcionario");

@@ -101,5 +101,29 @@ public class DefaultAtributoDao implements AtributoDao {
         }
         return -1;
     }
+
+    @Override
+    public Atributo buscaAtributoPorId(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Atributo atributo = new Atributo();
+        try {
+            ps = con.prepareStatement("SELECT * FROM   atributo " +
+                                        " WHERE  IdAtributo = ?");
+            rs = ps.executeQuery();
+            if(rs.next())
+            {
+                atributo.setIdAtributo(rs.getInt("IdAtributo"));
+                atributo.setCorDeCabelo(rs.getString("corDeCabelo"));
+                atributo.setCorDeCabelo(rs.getString("corDePele"));
+                atributo.setCorDeCabelo(rs.getString("descricao"));
+                atributo.setCorDeCabelo(rs.getString("sexo"));
+            }
+            return atributo;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return atributo;
+    }
     
 }

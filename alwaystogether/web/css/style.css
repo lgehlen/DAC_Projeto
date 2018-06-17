@@ -5,14 +5,6 @@ html, body {
     height: 100%;
 }
 
-#btnadcionar{
-    padding: 8px 0 ;
-}
-
-#titleclientes{
-    padding: 10px 0;
-}
-
 #logo{
 	margin-left: 2%;
 	width:100px;
@@ -22,7 +14,7 @@ html, body {
 }
 
 .home {
-  z-index: 0;
+  overflow: hidden;
   background-color:#B22222;
   padding: -5% 1%;
   color: white;
@@ -38,7 +30,7 @@ html, body {
 }
 
 .dropdown-menu{
-	z-index: 0;
+	position: relative;
 }
 
 .btn-primary.btn-lg {
@@ -56,7 +48,7 @@ html, body {
     border-top:0px;
     border-left:0px;
     margin-top: 0px;
-    margin-left:10%;
+    margin-left: 10%;
 }
 
 .row{
@@ -124,7 +116,6 @@ footer {
 #dropdown-menu{
 	padding-left: 7%;
 	background-color: #B22222;
-	z-index: 0;
 }
 
 #correcao-menu{
@@ -135,7 +126,7 @@ footer {
 #container-login{
 	margin-top: 100px;
 	padding-top: 100px;
-	padding-left:20px;
+	padding-left: 20px;
 	padding-right:20px;
 	background-color: lightgrey;
 	border-radius: 10px;
@@ -254,7 +245,7 @@ footer {
 	padding-right:2%;
 	background-color: lightgrey;
 	border-radius: 10px;
-	margin-top: 5%;
+	margin-top: 2%;
 	padding-bottom: 1%;
 	margin-bottom: 3%;
 }
@@ -300,7 +291,7 @@ footer {
 
 #relatorios{
 	border-bottom: 1px solid black;
-	padding-left: 1%;
+	padding-left:1%;
 }
 
 /*Gestão Clientes */

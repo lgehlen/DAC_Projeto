@@ -20,4 +20,6 @@ public interface AtributoDao {
     int buscaProximoIdAtributo();
     
     List<Atributo> listaAtributo();
+    
+    Atributo buscaAtributoPorId(int id);
 }
