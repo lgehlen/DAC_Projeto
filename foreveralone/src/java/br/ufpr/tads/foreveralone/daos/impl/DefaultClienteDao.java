@@ -289,7 +289,7 @@ public class DefaultClienteDao implements ClienteDao {
         ResultSet rs = null;
         System.out.println("ID: " + id);
         try {
-            ps = con.prepareStatement("SELECT idEndereco, rua, CEP, numero, Cidade_idCidade FROM forever.endereco where idEndereco = ?");
+            ps = con.prepareStatement("SELECT idEndereco, rua, CEP, numero, Cidade_idCidade FROM forever.Endereco where idEndereco = ?");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             Endereco endereco = new Endereco();

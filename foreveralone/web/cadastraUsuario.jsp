@@ -334,16 +334,16 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input class="form-control" name="rua" type="text"  id="input_rua" placeholder="Rua" value="<c:out value="${cliente.endereco.rua}" />" required>
+                                        <input class="form-control" name="rua" type="text"  id="input_rua" placeholder="Rua" value="<c:out value="${cliente.endereço.rua}" />" required>
                                     </div>
                             </div>
                                 <div class="row">
                                     <br>
                                     <div class="col-sm-3">
-                                        <input class="form-control" name="cep" type="text"  id="input_cep" placeholder="CEP" value="<c:out value="${cliente.endereco.cep}" />" required>
+                                        <input class="form-control" name="cep" type="text"  id="input_cep" placeholder="CEP" value="<c:out value="${cliente.endereço.cep}" />" required>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input class="form-control" name="numero" type="text"  id="input_numero" placeholder="Numero" value="<c:out value="${cliente.endereco.logradouro}" />" required>
+                                        <input class="form-control" name="numero" type="text"  id="input_numero" placeholder="Numero" value="<c:out value="${cliente.endereço.logradouro}" />" required>
                                     </div>
                                     <div class="col-sm-6" >
                                         <input class="form-control" name="senha" type="text"  id="input_senha" placeholder="Senha" value="<c:out value="${cliente.senha}" />" required>
