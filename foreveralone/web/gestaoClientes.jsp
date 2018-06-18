@@ -66,9 +66,12 @@
 	    						<button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span>
 	    						<span class="caret"></span></button>
 	   							<ul class="dropdown-menu">
-	   								<li><a> <span class="glyphicon glyphicon-user"></span>   ${login.nome}   </a></li>
-	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  ${login.tipo} </a></li>
-		      						<li><a href="/">Home</a></li>
+	   								<li><a> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
+
+	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  ${loginBean.tipo} </a></li>
+                                                                        <li><a href="clientes">Home</a></li>
+
+
 		      						<li class="divider"></li>
 		      						<li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
 	    						</ul>
@@ -95,10 +98,10 @@
                         <c:forEach items="${clientes}" var="x">
 			<div class="row" id="relatorios">
                             <div class="col-sm-1"><h4><c:out value="${x.id}"/></h4></div>
-				<div class="col-sm-9"><h4><c:out value="${x.nome}"/></h4></div>
+				<div class="col-sm-8"><h4><c:out value="${x.nome}"/></h4></div>
 				<!--Modal-->
 				<div class="col-sm-1">
-					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#excluifunc${x.id}">
+					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc${x.id}">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </button>
                         
@@ -141,6 +144,11 @@
 	    				</div>
 	  				</div>
 			</div>
+                                <div class="col-sm-1">
+					<a href="clientes?action=formUpdate&id=${x.id}" class="btn btn-default btn-lg">
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+                                </div>
 				<div class="col-sm-1">
 					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal${x.id}   ">
 						<span class="glyphicon glyphicon-info-sign"></span>
@@ -212,10 +220,28 @@
 											Cor de Pele<h4><c:out value="${x.preferencias.corDePele}"/></h4>
 										</div>
                                                                                 <div class="col-sm-5">
-											Descrição<h4><c:out value="${x.preferencias.descricao}"/></h4>
+											Faixa de Idade<h4><c:out value="${x.preferencias.descricao}"/></h4>
 										</div>
                                                                                 <div class="col-sm-5">
 											Sexo<h4><c:out value="${x.preferencias.sexo}"/></h4>
+										</div>
+                                                                                <div class="col-sm-10">
+                                                                                    <br>
+                                                                                    <strong> Endereço </strong>
+                                                                                    <br>
+                                                                                    <br>
+										</div>
+                                                                                <div class="col-sm-5">
+											Rua<h4><c:out value="${x.endereço.rua}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Numero<h4><c:out value="${x.endereço.logradouro}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Cidade<h4><c:out value="${x.endereço.cidade.nome}"/></h4>
+										</div>
+                                                                                <div class="col-sm-5">
+											Estado<h4><c:out value="${x.endereço.cidade.estado.nome}"/></h4>
 										</div>
                                                                                 
                                                                                 

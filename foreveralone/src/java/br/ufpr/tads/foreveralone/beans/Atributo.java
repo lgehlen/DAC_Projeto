@@ -19,6 +19,10 @@ public class Atributo {
     private String sexo;
     
     private String descricao;
+    
+    private int idadeMin;
+    
+    private int idadeMAx;
 
     /**
      * @return the corDeCabelo
@@ -88,5 +92,21 @@ public class Atributo {
      */
     public void setIdAtributo(int idAtributo) {
         this.idAtributo = idAtributo;
+    }
+
+    public int getIdadeMin() {
+        return idadeMin;
+    }
+
+    public void setIdadeMin(int idadeMin) {
+        this.idadeMin = idadeMin;
+    }
+
+    public int getIdadeMAx() {
+        return idadeMAx;
+    }
+
+    public void setIdadeMAx(int idadeMAx) {
+        this.idadeMAx = idadeMAx;
     }
 }

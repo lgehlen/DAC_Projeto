@@ -53,13 +53,16 @@ public class DefaultCidadeDao implements CidadeDao {
     PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idCidade, nomeCidade FROM forever.Cidade WHERE idCidade = ?");
+            ps = con.prepareStatement("SELECT idCidade, nomeCidade, Estado_idEstado FROM forever.Cidade WHERE idCidade = ?");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             Cidade cidade = new Cidade();
             while (rs.next()) {
                 cidade.setId(rs.getInt("idCidade"));
                 cidade.setNome(rs.getString("nomeCidade"));
+                Estado estado = new Estado();
+                estado.setId(rs.getInt("Estado_idEstado"));
+                cidade.setEstado(estado);
             }
             return cidade;
         } catch (SQLException e) {

@@ -56,6 +56,10 @@ public class ClienteFacade {
         getClienteDao().criarEndereço(e);
     }
     
+    public void alterarEndereco(Endereco e){
+         clienteDao.alteraEndereco(e);
+    }
+    
     public void deletarCliente(int id) {
         getClienteDao().deletarCliente(id);
     }
@@ -109,7 +113,11 @@ public class ClienteFacade {
     }
     
     public Cidade getCidadePorId(int id){
-        return getCidadeDao().buscarCidadePorId(id);
+        return cidadeDao.buscarCidadePorId(id);
+    }
+    
+    public Endereco getEnderecoPorId(int id){
+        return clienteDao.buscarEnderecoPorId(id);
     }
     
     public Estado getEstadoPorId(int id){
@@ -122,6 +130,11 @@ public class ClienteFacade {
      
     public int getProximoIdEndereco(){
         return clienteDao.buscaProximoIdEndereco();
+    }
+    
+    public List<Cliente> listarClientesPorPreferencia(Atributo p)
+    {
+        return clienteDao.listarClientesPorPreferencia(p);
     }
     
     /**
