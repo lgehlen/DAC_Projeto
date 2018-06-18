@@ -72,7 +72,7 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("UPDATE forever.endereco SET rua = ?,CEP = ?,numero = ?,Cidade_idCidade = ? WHERE idEndereco = ?");
+            st = con.prepareStatement("UPDATE forever.Endereco SET rua = ?,CEP = ?,numero = ?,Cidade_idCidade = ? WHERE idEndereco = ?");
             st.setString(1, e.getRua());
             st.setString(2, e.getCep());
             st.setString(3, e.getLogradouro());
@@ -286,7 +286,7 @@ public class DefaultClienteDao implements ClienteDao {
         ResultSet rs = null;
         try {
             ps = con.prepareStatement("SELECT AUTO_INCREMENT FROM   information_schema.tables "
-                    + " WHERE  table_name = 'endereco'"
+                    + " WHERE  table_name = 'Endereco'"
                     + " AND    table_schema = 'forever'");
             rs = ps.executeQuery();
             if (rs.next()) {

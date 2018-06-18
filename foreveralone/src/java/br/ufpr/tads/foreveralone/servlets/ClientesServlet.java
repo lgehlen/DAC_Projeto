@@ -150,6 +150,8 @@ public class ClientesServlet extends HttpServlet {
             List<Estado> estados = this.clientesFacade.buscarEstados();
             List<Cidade> cidades = this.clientesFacade.buscarCidadesPorEstado(cliente.getEndereço().getCidade().getEstado());
             request.setAttribute("estados", estados);
+            request.setAttribute("rangemin", p.getIdadeMin());
+            request.setAttribute("rangemax", p.getIdadeMAx());
             request.setAttribute("cidades", cidades);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             request.setAttribute("formType", formType);
@@ -192,19 +194,19 @@ public class ClientesServlet extends HttpServlet {
             
             
             if (login.getTipo().equals("funcionario")) {
-                preferencias.setCorDeCabelo(request.getParameter("cordocabelo"));
-                preferencias.setCorDePele(request.getParameter("cordapele"));
+                preferencias.setCorDeCabelo(request.getParameter("pcordocabelo"));
+                preferencias.setCorDePele(request.getParameter("pcordapele"));
                 preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
-                preferencias.setSexo(request.getParameter("sexo"));
+                preferencias.setSexo(request.getParameter("psexo"));
                 preferencias.setIdAtributo(cliente.getPreferencias().getIdAtributo());
                 this.clientesFacade.alteraAtributo(preferencias);
                 
                 cliente.setPreferencias(preferencias);
                 
-                caracteristicas.setCorDeCabelo(request.getParameter("pcordocabelo"));
-                caracteristicas.setCorDePele(request.getParameter("pcordapele"));
+                caracteristicas.setCorDeCabelo(request.getParameter("cordocabelo"));
+                caracteristicas.setCorDePele(request.getParameter("cordapele"));
                 caracteristicas.setDescricao(request.getParameter("descricao"));
-                caracteristicas.setSexo(request.getParameter("psexo"));
+                caracteristicas.setSexo(request.getParameter("sexo"));
                 caracteristicas.setIdAtributo(cliente.getCaracteristicas().getIdAtributo());
                 this.clientesFacade.alteraAtributo(caracteristicas);
                 cliente.setCaracteristicas(caracteristicas);
@@ -283,18 +285,18 @@ public class ClientesServlet extends HttpServlet {
                 this.clientesFacade.criaAtributo(caracteristicas);
                 cliente.setCaracteristicas(caracteristicas);
             } else {
-                preferencias.setCorDeCabelo(request.getParameter("cordocabelo"));
-                preferencias.setCorDePele(request.getParameter("cordapele"));
+                preferencias.setCorDeCabelo(request.getParameter("pcordocabelo"));
+                preferencias.setCorDePele(request.getParameter("pcordapele"));
                 preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
-                preferencias.setSexo(request.getParameter("sexo"));
+                preferencias.setSexo(request.getParameter("psexo"));
                 preferencias.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
                 this.clientesFacade.criaAtributo(preferencias);
                 cliente.setPreferencias(preferencias);
                 
-                caracteristicas.setCorDeCabelo(request.getParameter("pcordocabelo"));
-                caracteristicas.setCorDePele(request.getParameter("pcordapele"));
+                caracteristicas.setCorDeCabelo(request.getParameter("cordocabelo"));
+                caracteristicas.setCorDePele(request.getParameter("cordapele"));
                 caracteristicas.setDescricao(request.getParameter("descricao"));
-                caracteristicas.setSexo(request.getParameter("psexo"));
+                caracteristicas.setSexo(request.getParameter("sexo"));
                 caracteristicas.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
                 this.clientesFacade.criaAtributo(caracteristicas);
                 cliente.setCaracteristicas(caracteristicas);

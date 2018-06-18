@@ -400,7 +400,7 @@
                                 <br>
                                     <div class="col-sm-2">
                                         <select name="pcordocabelo" class="form-control" id="cor_cabelo" size="1" required> 
-                                            <option value="<c:out value="${cliente.caracteristicas.corDeCabelo}" />"> <c:out value="${cliente.caracteristicas.corDeCabelo}" /> </option>
+                                            <option value="<c:out value="${cliente.preferencias.corDeCabelo}" />"> <c:out value="${cliente.preferencias.corDeCabelo}" /> </option>
                                             <option value="Loiro">Loiro</option>
                                             <option value="Ruivo">Ruivo</option>
                                             <option value="Castanho">Castanho</option>
@@ -409,7 +409,7 @@
                                     </div>
                                     <div class="col-sm-2">
                                     <select name="pcordapele" class="form-control" id="cor_cabelo" size="1" required> 
-                                            <option value="<c:out value="${cliente.caracteristicas.corDePele}" />"> <c:out value="${cliente.caracteristicas.corDePele}" /></option>
+                                            <option value="<c:out value="${cliente.preferencias.corDePele}" />"> <c:out value="${cliente.preferencias.corDePele}" /></option>
                                             <option value="Branco">Branco</option>
                                             <option value="Negro">Negro</option>
                                             <option value="Amarelo">Amarelo</option>
@@ -417,16 +417,16 @@
                                     </div>
                                     <div class="col-sm-2">
                                     <select name="psexo" class="form-control" id="sexo" size="1" required> 
-                                            <option value="<c:out value="${cliente.caracteristicas.sexo}" />"><c:out value="${cliente.caracteristicas.sexo}" /></option>
+                                            <option value="<c:out value="${cliente.preferencias.sexo}" />"><c:out value="${cliente.preferencias.sexo}" /></option>
                                             <option value="M">Masculino</option>
                                             <option value="F">Feminino</option>
                                     </select>
                                     </div>
                                     <div class="col-sm-2">
-                                            <input class="form-control" name="rangemin" type="number"  id="rangemin" placeholder="Idade Mínima" required>
+                                            <input class="form-control" value="${cliente.preferencias.idadeMin}" name="rangemin" type="number"  id="rangemin" placeholder="Idade Mínima" required>
                                     </div>
                                  <div class="col-sm-2">
-                                            <input class="form-control" name="rangemax" type="number"  id="rangemax" placeholder="Idade Máxima" required>
+                                            <input class="form-control" value="${cliente.preferencias.idadeMAx}" name="rangemax" type="number"  id="rangemax" placeholder="Idade Máxima" required>
                                  </div>
                                 <div class="col-sm-12" ><br> <br></div>
                                     </c:if>

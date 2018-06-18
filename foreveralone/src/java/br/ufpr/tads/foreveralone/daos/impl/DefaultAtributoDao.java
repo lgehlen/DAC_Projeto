@@ -30,7 +30,7 @@ public class DefaultAtributoDao implements AtributoDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("UPDATE forever.Atributo SET corDeCabelo = ?, codDePele = ?, sexo = ?, descricao = ? WHERE idAtributo = ?");
+            st = con.prepareStatement("UPDATE forever.Atributo SET corDeCabelo = ?, corDePele = ?, sexo = ?, descricao = ? WHERE idAtributo = ?");
             st.setString(1, atributo.getCorDeCabelo());
             st.setString(2, atributo.getCorDePele());
             st.setString(3, atributo.getSexo());
@@ -71,8 +71,8 @@ public class DefaultAtributoDao implements AtributoDao {
                 Atributo atributo = new Atributo();
                 atributo.setCorDeCabelo(rs.getString("corDeCabelo"));
                 atributo.setCorDePele(rs.getString("codDePele"));
-                atributo.setDescricao(rs.getString("sexo"));
-                atributo.setSexo(rs.getString("descricao"));
+                atributo.setDescricao(rs.getString("descricao"));
+                atributo.setSexo(rs.getString("sexo"));
                 list.add(atributo);
             }
             return list;
