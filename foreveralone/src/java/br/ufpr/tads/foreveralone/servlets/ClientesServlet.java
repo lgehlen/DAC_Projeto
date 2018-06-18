@@ -164,6 +164,9 @@ public class ClientesServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             System.out.println("Id: " + id);
             Cliente cliente = clientesFacade.buscarClientePorId(id);
+            System.out.println("Pref: " + cliente.getPreferencias().getIdAtributo());
+            System.out.println("Carac: " + cliente.getCaracteristicas().getIdAtributo());
+            
             
             Cidade cidade = new Cidade();
             Estado estado = new Estado();
@@ -195,6 +198,7 @@ public class ClientesServlet extends HttpServlet {
             
             if (login.getTipo().equals("funcionario")) {
                 preferencias.setCorDeCabelo(request.getParameter("pcordocabelo"));
+                
                 preferencias.setCorDePele(request.getParameter("pcordapele"));
                 preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
                 preferencias.setSexo(request.getParameter("psexo"));
@@ -203,6 +207,7 @@ public class ClientesServlet extends HttpServlet {
                 
                 cliente.setPreferencias(preferencias);
                 
+                
                 caracteristicas.setCorDeCabelo(request.getParameter("cordocabelo"));
                 caracteristicas.setCorDePele(request.getParameter("cordapele"));
                 caracteristicas.setDescricao(request.getParameter("descricao"));
@@ -210,6 +215,8 @@ public class ClientesServlet extends HttpServlet {
                 caracteristicas.setIdAtributo(cliente.getCaracteristicas().getIdAtributo());
                 this.clientesFacade.alteraAtributo(caracteristicas);
                 cliente.setCaracteristicas(caracteristicas);
+                
+                
             }
             
             
