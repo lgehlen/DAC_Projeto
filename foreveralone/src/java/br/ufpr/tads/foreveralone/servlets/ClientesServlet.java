@@ -136,12 +136,18 @@ public class ClientesServlet extends HttpServlet {
             
             c = clientesFacade.getAtributoPorId(cliente.getCaracteristicas().getIdAtributo());
             p = clientesFacade.getAtributoPorId(cliente.getPreferencias().getIdAtributo());
-            System.out.println("Cor do Cabelo: " + c.getCorDeCabelo());
-            System.out.println("Cor do Cabelo: " + p.getCorDeCabelo());
             
+            String array[] = new String[2];
+            array = p.getDescricao().split("-");
+            p.setIdadeMin(Integer.parseInt(array[0]));
+            p.setIdadeMax(Integer.parseInt(array[1]));
             
+            System.out.println("Imin: " + p.getIdadeMin());
+            System.out.println("Imax: " + p.getIdadeMax());
             cliente.setCaracteristicas(c);
             cliente.setPreferencias(p);
+            
+            
             
             request.setAttribute("cliente", cliente);
 
@@ -150,8 +156,6 @@ public class ClientesServlet extends HttpServlet {
             List<Estado> estados = this.clientesFacade.buscarEstados();
             List<Cidade> cidades = this.clientesFacade.buscarCidadesPorEstado(cliente.getEndereço().getCidade().getEstado());
             request.setAttribute("estados", estados);
-            request.setAttribute("rangemin", p.getIdadeMin());
-            request.setAttribute("rangemax", p.getIdadeMAx());
             request.setAttribute("cidades", cidades);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             request.setAttribute("formType", formType);

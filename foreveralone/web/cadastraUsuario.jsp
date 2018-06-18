@@ -426,7 +426,7 @@
                                             <input class="form-control" value="${cliente.preferencias.idadeMin}" name="rangemin" type="number"  id="rangemin" placeholder="Idade Mínima" required>
                                     </div>
                                  <div class="col-sm-2">
-                                            <input class="form-control" value="${cliente.preferencias.idadeMAx}" name="rangemax" type="number"  id="rangemax" placeholder="Idade Máxima" required>
+                                            <input class="form-control" value="${cliente.preferencias.idadeMax}" name="rangemax" type="number"  id="rangemax" placeholder="Idade Máxima" required>
                                  </div>
                                 <div class="col-sm-12" ><br> <br></div>
                                     </c:if>
