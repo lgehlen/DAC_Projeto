@@ -352,7 +352,7 @@
                             <br>
                             <div class="row">
 
-                                    <c:if test="${loginBean.tipo != 'funcionario'}">
+                                    <c:if test="${loginBean.tipo == 'funcionario'}">
 
                                     <div class="col-sm-2">
                                     <select name="sexo" class="form-control" id="sexo" size="1" required> 

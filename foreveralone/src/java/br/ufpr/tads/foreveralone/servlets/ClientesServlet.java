@@ -160,6 +160,7 @@ public class ClientesServlet extends HttpServlet {
             response.sendRedirect("clientes");
         } else if (action.equals("update")) {
             int id = Integer.parseInt(request.getParameter("id"));
+            System.out.println("Id: " + id);
             Cliente cliente = clientesFacade.buscarClientePorId(id);
             
             Cidade cidade = new Cidade();
@@ -190,7 +191,7 @@ public class ClientesServlet extends HttpServlet {
             cliente.setEndereço(endereco);
             
             
-            if (!login.getTipo().equals("funcionario")) {
+            if (login.getTipo().equals("funcionario")) {
                 preferencias.setCorDeCabelo(request.getParameter("cordocabelo"));
                 preferencias.setCorDePele(request.getParameter("cordapele"));
                 preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));

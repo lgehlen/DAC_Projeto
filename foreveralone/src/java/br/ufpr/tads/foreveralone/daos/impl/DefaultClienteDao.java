@@ -205,7 +205,7 @@ public class DefaultClienteDao implements ClienteDao {
                 Atributo preferencias = new Atributo();
                 Atributo caracteristicas = new Atributo();
                 
-                cliente.setId(0);
+                cliente.setId(rs.getInt("idCliente"));
                 cliente.setCpf(rs.getString("CPF"));
                 cliente.setDataCad(rs.getDate("dataCad"));
                 cliente.setDataNasc(rs.getDate("datanasc"));
