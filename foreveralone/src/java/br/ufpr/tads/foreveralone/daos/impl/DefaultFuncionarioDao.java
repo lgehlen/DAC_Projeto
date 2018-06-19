@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,7 +54,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("DELETE * FROM forever.Funcionario WHERE idFuncionario = ?");
+            ps = con.prepareStatement("UPDATE forever.Funcionario SET isRemovido = 1 WHERE idFuncionario = ?");
             ps.setInt(1, funcionario.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -84,7 +85,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, senha, idFuncionario FROM forever.Funcionario ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, senha, idFuncionario FROM forever.Funcionario WHERE idFuncionario != 1 AND isRemovido != 1 ");
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
             while (rs.next()) {
@@ -118,6 +119,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
                 funcionario.setNome(rs.getString("nomeFuncionario"));
                 funcionario.setSenha(rs.getString("senha"));
                 funcionario.setDataNasc(rs.getDate("datanasc"));
+                funcionario.setId(id);
                 list.add(funcionario);
             }
             return list;
@@ -132,7 +134,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, idFuncionario, senha FROM forever.Funcionario WHERE email = ? ");
+            ps = con.prepareStatement("SELECT nomeFuncionario, datanasc, email, idFuncionario, senha FROM forever.Funcionario WHERE email = ? && isRemovido != 1");
             ps.setString(1, email);
             rs = ps.executeQuery();
             List<Funcionario> list = new ArrayList<Funcionario>();
@@ -157,7 +159,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idFuncionario, nomeFuncionario FROM forever.Funcionario WHERE email = ? AND senha = ?");
+            ps = con.prepareStatement("SELECT idFuncionario, nomeFuncionario FROM forever.Funcionario WHERE email = ? AND senha = ? AND isRemovido != 1");
             ps.setString(1, email);
             ps.setString(2, senha);
             rs = ps.executeQuery();
