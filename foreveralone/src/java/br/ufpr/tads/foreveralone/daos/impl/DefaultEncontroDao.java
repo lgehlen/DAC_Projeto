@@ -5,7 +5,9 @@
  */
 package br.ufpr.tads.foreveralone.daos.impl;
 
+import br.ufpr.tads.foreveralone.beans.Cliente;
 import br.ufpr.tads.foreveralone.beans.Encontro;
+import br.ufpr.tads.foreveralone.beans.Endereco;
 import br.ufpr.tads.foreveralone.daos.ConnectionFactory;
 import br.ufpr.tads.foreveralone.daos.EncontroDao;
 import java.sql.Connection;
@@ -118,12 +120,20 @@ public class DefaultEncontroDao implements EncontroDao {
             List<Encontro> list = new ArrayList<Encontro>();
             while (rs.next()) {
                 Encontro encontro = new Encontro();
+                Cliente cliente1 = new Cliente();
+                Cliente cliente2 = new Cliente();
+                Endereco local = new Endereco();
+                
                 encontro.setData(rs.getDate("data"));
                 encontro.setHorario(rs.getString("horario"));
                 encontro.setId(rs.getInt("idEncontro"));
-                encontro.getLocal().setId(rs.getInt("Endereco_idEndereco"));
-                encontro.getIdCliente1().setId(rs.getInt("Cliente_idCliente"));
-                encontro.getIdCliente2().setId(rs.getInt("Cliente_idCliente1"));
+                local.setId(rs.getInt("Endereco_idEndereco"));
+                cliente1.setId(rs.getInt("Cliente_idCliente"));
+                cliente2.setId(rs.getInt("Cliente_idCliente1"));
+                
+                encontro.setIdCliente1(cliente1);
+                encontro.setIdCliente2(cliente2);
+                encontro.setLocal(local);
                 list.add(encontro);
             }
             return list;
