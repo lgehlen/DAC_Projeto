@@ -33,6 +33,8 @@ public class Cliente {
     private Atributo caracteristicas;
     
     private Atributo preferencias;
+    
+    private int idade;
 
     /**
      * @return the id
@@ -186,5 +188,13 @@ public class Cliente {
      */
     public void setPreferencias(Atributo preferencias) {
         this.preferencias = preferencias;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 }

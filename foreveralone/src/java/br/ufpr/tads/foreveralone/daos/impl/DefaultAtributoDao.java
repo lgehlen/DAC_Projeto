@@ -29,6 +29,7 @@ public class DefaultAtributoDao implements AtributoDao {
     public void alteraAtributo(Atributo atributo) {
         PreparedStatement st = null;
         ResultSet rs = null;
+        System.out.println("Descricao: " + atributo.getDescricao());
         try {
             st = con.prepareStatement("UPDATE forever.Atributo SET corDeCabelo = ?, corDePele = ?, sexo = ?, descricao = ? WHERE idAtributo = ?");
             st.setString(1, atributo.getCorDeCabelo());
