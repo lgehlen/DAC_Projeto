@@ -149,14 +149,11 @@
 										<div class="col-sm-6">
 											<input name="Nome" id=" " value="${x.nome}" type="text" class="form-control" placeholder="Nome">
 										</div>
-										<div class="col-sm-6">
-											<input name="CPF" id=" " value="${x.cpf}" type="text" class="form-control" placeholder="CPF">
-										</div>
 									</div> 
 									<br>
          							<div class="row">
 										<div class='col-sm-7'>
-           									<h5>Data:<input name="data" type="date"><span class="glyphicon glyphicon-calendar"></span></h5>
+                                                                                    <h5><input class="form-control" name="data" type="date" value=<fmt:formatDate value="${x.dataNasc}" pattern="yyyy-MM-dd"/>>
           								</div>
 									</div> 
 									<br>
@@ -186,7 +183,7 @@
 		<div class="row" id="glypicon-gestaofuncionario">
 		    <div class="col-sm-9"></div>
 		    <div class="col-sm-2">	
-		      	<a href="index.html" class="btn btn-default btn-lg">
+		      	<a href="funcionarioServlet" class="btn btn-default btn-lg">
 		      		<span class="glyphicon glyphicon-chevron-left"></span> Voltar 
 		      	</a>
 		    </div>	

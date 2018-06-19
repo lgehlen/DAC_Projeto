@@ -37,8 +37,8 @@ public class DefaultEncontroDao implements EncontroDao {
             st.setString(2, encontro.getHorario());
             st.setInt(3, encontro.getLocal().getId());
             st.setString(4, encontro.getLocal().getRua());
-            st.setInt(5, encontro.getIdCliente1());
-            st.setInt(6, encontro.getIdCliente2());
+            st.setInt(5, encontro.getIdCliente1().getId());
+            st.setInt(6, encontro.getIdCliente2().getId());
             
             st.executeUpdate();
         } catch (SQLException ex) {
@@ -77,31 +77,7 @@ public class DefaultEncontroDao implements EncontroDao {
         }
     }
 
-    @Override
-    public List<Encontro> listarEncontros() {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            ps = con.prepareStatement("SELECT idEncontro, local, data, horario, Endereco_idEndereco, Endereco_Cidade_idCidade FROM forever.Encontro ");
-            rs = ps.executeQuery();
-            List<Encontro> list = new ArrayList<Encontro>();
-            while (rs.next()) {
-                Encontro encontro = new Encontro();
-                encontro.setData(rs.getDate("data"));
-                encontro.setHorario(rs.getString("horario"));
-                encontro.setId(rs.getInt("idEncontro"));
-                //encontro.setIdCliente1(rs.getInt("Convidado_idPar"));
-                //encontro.setIdCliente2(rs.getInt("idEvento"));
-                //encontro.setLocal(list);
-                list.add(encontro);
-            }
-            return list;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
+    
     @Override
     public Encontro buscarEncontroPorId(int id) {
         PreparedStatement ps = null;
@@ -127,5 +103,33 @@ public class DefaultEncontroDao implements EncontroDao {
         }
         return null;
     }
+
+    @Override
+    public List<Encontro> listarEncontros(int id) {
+         PreparedStatement ps = null;
+        ResultSet rs = null;
+        System.out.println("Id: " + id);
+        try {
+            ps = con.prepareStatement("SELECT idEncontro, local, data, horario, Endereco_idEndereco, Cliente_idCliente, Cliente_idCliente1 FROM forever.Encontro WHERE Cliente_idCliente = ? OR Cliente_idCliente1 = ?");
+            ps.setInt(1, id);
+            ps.setInt(2, id);
+            rs = ps.executeQuery();
+            System.out.println("Endereco: " + rs.getInt("Endereco_idEndereco"));
+            List<Encontro> list = new ArrayList<Encontro>();
+            while (rs.next()) {
+                Encontro encontro = new Encontro();
+                encontro.setData(rs.getDate("data"));
+                encontro.setHorario(rs.getString("horario"));
+                encontro.setId(rs.getInt("idEncontro"));
+                encontro.getLocal().setId(rs.getInt("Endereco_idEndereco"));
+                encontro.getIdCliente1().setId(rs.getInt("Cliente_idCliente"));
+                encontro.getIdCliente2().setId(rs.getInt("Cliente_idCliente1"));
+                list.add(encontro);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;}
     
 }

@@ -51,7 +51,7 @@
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="#" class="btn btn-primary btn-lg">
+		  					<a href="clientes?action=listEncontros" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-heart"></span> Encontros
 		  					</a>
 		  				</div>
@@ -61,7 +61,7 @@
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2" >
-		  					<a href="preferencias.jsp" class="btn btn-primary btn-lg">
+		  					<a href="clientes?action=formUpdate&id=${loginBean.id}" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-filter"></span> Preferências
 		  					</a>
 		  				</div>
@@ -120,6 +120,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <h4><strong>Descrição</strong></h4>
+                                    
                                     <p>${x.caracteristicas.descricao}</p>
                                 </div>
 
@@ -145,20 +146,15 @@
 	        					<div class="modal-body">
                                                             <form action="clientes?action=newEncontro&idusuario=${loginBean.id}&idcrush=${x.id}" method="post">
 	         						<div class="row">     
-                                                                        <script>getCidades2(${x.id})</script>
-                                                                        <div class="col-sm-4">
-                                                                            <select class="form-control" name="cidade" id="cidade${x.id}" required>
-
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" name="cidade" id="cidade" required>
+                                                                                <option value="${usuario.endereço.cidade.id}">Sua cidade: ${usuario.endereço.cidade.nome}</option>
+                                                                                <option value="${x.endereço.cidade.id}">Cidade del@: ${x.endereço.cidade.nome}</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="col-sm-3">
-                                                                            <select class="form-control" name="estado" id="estado${x.id}" required>
-                                                                                <c:forEach items="${estados}" var="x">
-                                                                                        <option value="${x.id}">${x.uf}</option>
-                                                                                </c:forEach>
-                                                                            </select>
-                                                                        </div>
-                                                                        
+                                                                         <div class="col-sm-4">
+                                                                             <input class="form-control" name="cep" type="text" required placeholder="CEP">
+                                                                         </div>
                                                                     </div>
                                                                     <br>
                                                                     <div class="row">

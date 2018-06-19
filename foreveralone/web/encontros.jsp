@@ -91,6 +91,7 @@
 			<div class="col-sm-4"><h4> Encontros Pendentes</h4></div>
 		</div>
 		<br>
+                <c:forEach items="${encontros}" var="x">
 		<div class="panel-group" id="accordion">
 			<div class="panel panel-default">
 			    <div class="panel-heading">
@@ -100,7 +101,10 @@
 			      </div>
 			      <div id="collapse1" class="panel-collapse collapse in">
 			        <div class="panel-body">
-			        	Nome:<p>Luiza Storrer</p>   Data:<p>10/06/2018</p>   Local:<p>Na casa dela</p>
+                                    Nome:<p><c:out value="${x.idCliente1.nome}"/></p> 
+                                    Nome:<p><c:out value="${x.idCliente2.nome}"/></p>  
+                                    Data:<p><fmt:formatDate value="${x.data}" pattern="dd/MM/yy"/></p>   
+                                    Local:<p><c:out value="${x.local.nome}"/></p></p>
 			        </div>
 			      </div>
 			    </div>
@@ -128,82 +132,10 @@
 			        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
 			      </div>
 			    </div>
-  		</div> 
+  		</div>
+                </c:forEach>
 	</div>
-	<div class="container" id="container-encontros">
-		<div class="row">
-			<div class="col-sm-4"><h4> Solicitações Recebidas</h4></div>
-		</div>
-		<br>
-		<form>
-			<table class="table table-striped">
-			  <tbody>
-			    <tr>
-			      <th scope="row">Thiago Drulla</th>
-			      <td><h5><span class="glyphicon glyphicon-calendar"> 09/06/2018</span></h5></td>
-			      <td><h5><span class="glyphicon glyphicon-time"> 17:27</span></h5></td>
-			      <td>
-				  	<button type="button" class="btn btn-default btn-sm">
-	          			<span class="glyphicon glyphicon-ok"></span> 
-	        		</button>
-				    <button type="button" class="btn btn-default btn-sm">
-	         	 		<span class="glyphicon glyphicon-remove"></span>
-	        		</button>
-				    <button type="button" class="btn btn-default btn-sm">
-	          			<span class="glyphicon glyphicon-plus"></span>
-	        		</button>
-			      </td>
-			    </tr>
-			    <tr>
-			      <th scope="row">Thiago Drulla</th>
-			      <td><h5><span class="glyphicon glyphicon-calendar"> 09/06/2018</span></h5></td>
-			      <td><h5><span class="glyphicon glyphicon-time"> 17:27</span></h5></td>
-			      <td>
-			      	<button type="button" class="btn btn-default btn-sm">
-	          			<span class="glyphicon glyphicon-ok"></span> 
-	        		</button>
-				    <button type="button" class="btn btn-default btn-sm">
-	         	 		<span class="glyphicon glyphicon-remove"></span>
-	        		</button>
-				    <button type="button" class="btn btn-default btn-sm">
-	          			<span class="glyphicon glyphicon-plus"></span>
-	        		</button>
-			      </td>
-			    </tr>
-			    </tr>
-			    <tr>
-			      <th scope="row">Thiago Drulla</th>
-			      <td><h5><span class="glyphicon glyphicon-calendar"> 09/06/2018</span></h5></td>
-			      <td><h5><span class="glyphicon glyphicon-time"> 17:27</span></h5></td>
-			      <td>
-			      	<button type="button" class="btn btn-default btn-sm">
-	          			<span class="glyphicon glyphicon-ok"></span> 
-	        		</button>
-				    <button type="button" class="btn btn-default btn-sm">
-	         	 		<span class="glyphicon glyphicon-remove"></span>
-	        		</button>
-				    <button type="button" class="btn btn-default btn-sm">
-	          			<span class="glyphicon glyphicon-plus"></span>
-	        		</button>
-			      </td>
-			    </tr>
-			  </tbody>
-			</table>
-		</form>
-		<div class="row" id="glypicon-encontro">
-	      	<div class="col-sm-9"></div>
-	      	<div class="col-sm-1">	
-	      		<a href="#" class="btn btn-default btn-sm">
-	      			<span class="glyphicon glyphicon-chevron-left"></span> Voltar 
-	      		</a>
-	      	</div>
-	      	<div class="col-sm-2">	
-	      		<a href="pesquisa-pares.html" class="btn btn-default btn-sm">
-	      			<span class="glyphicon glyphicon-plus-sign"></span> Procurar Novos Pares
-	      		</a>
-	      	</div>
-	    </div>
-	</div>
+	
 	<br>
 	<footer class="container-fluid text-center">
         <jsp:useBean id="configuracao" scope="application" class="br.ufpr.tads.foreveralone.beans.ConfigBean" />

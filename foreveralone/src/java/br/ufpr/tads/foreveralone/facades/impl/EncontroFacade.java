@@ -38,8 +38,8 @@ public class EncontroFacade {
     }
 
     
-    public List<Encontro> listarEncontros() {
-        return getEncontroDao().listarEncontros();
+    public List<Encontro> listarEncontros(int id) {
+        return getEncontroDao().listarEncontros(id);
     }
 
     

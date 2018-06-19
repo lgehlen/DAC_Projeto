@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Funcionario` (
   `datanasc` DATE NOT NULL,
   `email` VARCHAR(50) NOT NULL,
   `senha` VARCHAR(50) NOT NULL,
+  `isRemovido` INT DEFAULT 0,
   PRIMARY KEY (`idFuncionario`));
 
 

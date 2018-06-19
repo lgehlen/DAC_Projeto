@@ -77,6 +77,7 @@ public class FuncionarioServlet extends HttpServlet {
             else if (action.equals("formUpdate")){
                 final int id = Integer.parseInt(request.getParameter("id"));
                 Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
+                
                 if(funcionario != null)
                     request.setAttribute("funcionario", funcionario);
                 url = "/gestaoFuncionarios.jsp";

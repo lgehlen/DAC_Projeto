@@ -87,22 +87,6 @@ public class ClientesServlet extends HttpServlet {
                     p = this.clientesFacade.getAtributoPorId(cliente.getPreferencias().getIdAtributo());
                     c = this.clientesFacade.getAtributoPorId(cliente.getCaracteristicas().getIdAtributo());
 
-                    if (p.getSexo().equals("F")) {
-                        p.setSexo("Feminino");
-                    } else if (p.getSexo().equals("M")) {
-                        p.setSexo("Masculino");
-                    } else {
-                        p.setSexo("Não Definido");
-                    }
-
-                    if (c.getSexo().equals("F")) {
-                        c.setSexo("Feminino");
-                    } else if (c.getSexo().equals("M")) {
-                        c.setSexo("Masculino");
-                    } else {
-                        c.setSexo("Não Definido");
-                    }
-
                     cliente.setCaracteristicas(c);
                     cliente.setPreferencias(p);
 
@@ -204,25 +188,28 @@ public class ClientesServlet extends HttpServlet {
             this.clientesFacade.alterarEndereco(endereco);
             cliente.setEndereço(endereco);
 
-            preferencias.setCorDeCabelo(request.getParameter("pcordocabelo"));
+            if (login.getTipo().equals("cliente")) {
+                preferencias.setCorDeCabelo(request.getParameter("pcordocabelo"));
 
-            preferencias.setCorDePele(request.getParameter("pcordapele"));
-            preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
-            preferencias.setSexo(request.getParameter("psexo"));
-            preferencias.setIdAtributo(cliente.getPreferencias().getIdAtributo());
-            this.clientesFacade.alteraAtributo(preferencias);
+                preferencias.setCorDePele(request.getParameter("pcordapele"));
+                preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
+                preferencias.setSexo(request.getParameter("psexo"));
+                preferencias.setIdAtributo(cliente.getPreferencias().getIdAtributo());
+                this.clientesFacade.alteraAtributo(preferencias);
 
-            cliente.setPreferencias(preferencias);
+                cliente.setPreferencias(preferencias);
 
-            caracteristicas.setCorDeCabelo(request.getParameter("cordocabelo"));
-            caracteristicas.setCorDePele(request.getParameter("cordapele"));
-            caracteristicas.setDescricao(request.getParameter("descricao"));
-            caracteristicas.setSexo(request.getParameter("sexo"));
-            caracteristicas.setIdAtributo(cliente.getCaracteristicas().getIdAtributo());
-            this.clientesFacade.alteraAtributo(caracteristicas);
-            cliente.setCaracteristicas(caracteristicas);
+                caracteristicas.setCorDeCabelo(request.getParameter("cordocabelo"));
+                caracteristicas.setCorDePele(request.getParameter("cordapele"));
+                caracteristicas.setDescricao(request.getParameter("descricao"));
+                caracteristicas.setSexo(request.getParameter("sexo"));
+                caracteristicas.setIdAtributo(cliente.getCaracteristicas().getIdAtributo());
+                this.clientesFacade.alteraAtributo(caracteristicas);
+                cliente.setCaracteristicas(caracteristicas);
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            }
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
             try {
                 cliente.setDataNasc(formatter.parse(request.getParameter("data")));
 
@@ -328,8 +315,21 @@ public class ClientesServlet extends HttpServlet {
             if (login.getTipo().equals("funcionario") || login.getTipo().equals("administrador")) {
                 response.sendRedirect("clientes?action=list");
             } else {
+                Cliente usuario = this.clientesFacade.buscarClientePorId(login.getId());
+                Atributo car = new Atributo();
+                Atributo pre = new Atributo();
+                Endereco end = new Endereco();
+                Cidade cid = new Cidade();
+                Estado est = new Estado();
+
+                end = clientesFacade.getEnderecoPorId(usuario.getEndereço().getId());
+                cid = clientesFacade.getCidadePorId(end.getCidade().getId());
+                est = clientesFacade.getEstadoPorId(cid.getEstado().getId());
+                cid.setEstado(est);
+                end.setCidade(cid);
+                usuario.setEndereço(end);
+
                 List<Cliente> clientes = new ArrayList<Cliente>();
-                Cliente usuario = clientesFacade.buscarClientePorId(login.getId());
                 Atributo pref = clientesFacade.getAtributoPorId(usuario.getPreferencias().getIdAtributo());
                 clientes = this.clientesFacade.listarClientesPorPreferencia(pref);
                 for (Cliente cliente : clientes) {
@@ -367,8 +367,6 @@ public class ClientesServlet extends HttpServlet {
                     ci.setEstado(es);
                     en.setCidade(ci);
                     cliente.setEndereço(en);
-
-                    System.out.println("Nome: " + cliente.getNome());
                 }
 
                 List<Estado> estados = this.clientesFacade.buscarEstados();
@@ -376,6 +374,7 @@ public class ClientesServlet extends HttpServlet {
                 url = "/paresCompativeis.jsp";
 
                 if (!response.isCommitted()) {
+                    request.setAttribute("usuario", usuario);
                     request.setAttribute("estados", estados);
                     request.setAttribute("clientes", clientes);
                     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
@@ -388,10 +387,10 @@ public class ClientesServlet extends HttpServlet {
             Endereco endereco = new Endereco();
             Cidade cidade = new Cidade();
             Estado estado = new Estado();
-            
-            encontro.setIdCliente1(Integer.parseInt(request.getParameter("idusuario")));
-            encontro.setIdCliente2(Integer.parseInt(request.getParameter("idcrush")));
-            
+
+            encontro.getIdCliente1().setId(Integer.parseInt(request.getParameter("idusuario")));
+            encontro.getIdCliente2().setId(Integer.parseInt(request.getParameter("idcrush")));
+
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
             try {
                 encontro.setData(formatter.parse(request.getParameter("data")));
@@ -401,11 +400,11 @@ public class ClientesServlet extends HttpServlet {
             encontro.setHorario(request.getParameter("horario"));
 
             cidade = clientesFacade.getCidadePorId(Integer.parseInt(request.getParameter("cidade")));
-            estado = clientesFacade.getEstadoPorId(Integer.parseInt(request.getParameter("estado")));
+            estado = clientesFacade.getEstadoPorId(cidade.getEstado().getId());
             cidade.setEstado(estado);
 
             endereco.setRua(request.getParameter("rua"));
-            endereco.setCep("0");
+            endereco.setCep(request.getParameter("cep"));
             endereco.setId(clientesFacade.getProximoIdEndereco());
             endereco.setLogradouro(request.getParameter("numero"));
             endereco.setCidade(cidade);
@@ -415,10 +414,42 @@ public class ClientesServlet extends HttpServlet {
             encontro.setLocal(endereco);
 
             encontroFacade.criarEncontro(encontro);
-            
+
             url = "clientes";
             response.sendRedirect(url);
+
+        } else if (action.equals("listEncontros")) {
+            List<Encontro> encontros = new ArrayList<Encontro>();
+            encontros = encontroFacade.listarEncontros(login.getId());
+
+            for(Encontro encontro: encontros){
             
+            Endereco en = new Endereco();
+            Cidade ci = new Cidade();
+            Estado es = new Estado();
+
+            en = clientesFacade.getEnderecoPorId(encontro.getLocal().getId());
+            ci = clientesFacade.getCidadePorId(en.getCidade().getId());
+            es = clientesFacade.getEstadoPorId(ci.getEstado().getId());
+            ci.setEstado(es);
+            en.setCidade(ci);
+            encontro.setLocal(en);
+            
+            Cliente cliente1 = new Cliente();
+            Cliente cliente2 = new Cliente();
+            
+            cliente1 = clientesFacade.buscarClientePorId(encontro.getIdCliente1().getId());
+            cliente2 = clientesFacade.buscarClientePorId(encontro.getIdCliente2().getId());
+            
+            encontro.setIdCliente1(cliente1);
+            encontro.setIdCliente2(cliente2);
+            
+            }
+
+            url = "/encontros.jsp";
+            request.setAttribute("encontros", encontros);
+            RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
         }
 
     }

@@ -20,7 +20,7 @@ public interface EncontroDao {
     
     void atualizarEncontro(Encontro encontro);
     
-    List<Encontro> listarEncontros();
+    List<Encontro> listarEncontros(int id);
     
     Encontro buscarEncontroPorId(int id);
 }
