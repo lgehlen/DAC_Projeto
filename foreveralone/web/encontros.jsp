@@ -104,7 +104,7 @@
                                     Nome:<p><c:out value="${x.idCliente1.nome}"/></p> 
                                     Nome:<p><c:out value="${x.idCliente2.nome}"/></p>  
                                     Data:<p><fmt:formatDate value="${x.data}" pattern="dd/MM/yy"/></p>   
-                                    Local:<p><c:out value="${x.local.nome}"/></p></p>
+                                    Local:<p><c:out value="${x.local.rua}"/></p></p>
 			        </div>
 			      </div>
 			    </div>

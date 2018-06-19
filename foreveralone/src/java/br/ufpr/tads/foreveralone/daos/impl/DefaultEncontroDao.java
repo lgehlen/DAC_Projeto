@@ -116,7 +116,6 @@ public class DefaultEncontroDao implements EncontroDao {
             ps.setInt(1, id);
             ps.setInt(2, id);
             rs = ps.executeQuery();
-            System.out.println("Endereco: " + rs.getInt("Endereco_idEndereco"));
             List<Encontro> list = new ArrayList<Encontro>();
             while (rs.next()) {
                 Encontro encontro = new Encontro();
