@@ -159,7 +159,7 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM Cliente, Atributo WHERE isRemovido = 0 AND idCliente = idAtributo AND corDeCabelo = ? AND codDePele = ? AND sexo = ?");
+            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM Cliente, Atributo WHERE isRemovido = 0 AND Atributo_IdAtributoAtributo = idAtributo AND corDeCabelo = ? AND corDePele = ? AND sexo = ?");
             ps.setString(1,p.getCorDeCabelo());
             ps.setString(2, p.getCorDePele());
             ps.setString(3, p.getSexo());
@@ -217,8 +217,6 @@ public class DefaultClienteDao implements ClienteDao {
                 endereco.setId(rs.getInt("Endereco_idEndereco"));
                 preferencias.setIdAtributo(rs.getInt("Atributo_IdAtributoPreferencia"));
                 caracteristicas.setIdAtributo(rs.getInt("Atributo_IdAtributoAtributo"));
-                System.out.println("Id Pref: " + preferencias.getIdAtributo());
-                System.out.println("Id Carac: " + caracteristicas.getIdAtributo());
                 
                 cliente.setEndereço(endereco);
                 cliente.setCaracteristicas(caracteristicas);

@@ -352,7 +352,7 @@
                             <br>
                             <div class="row">
 
-                                    <c:if test="${loginBean.tipo == 'funcionario'}">
+                                    <c:if test="${loginBean.tipo != 'funcionario'}">
 
                                     <div class="col-sm-2">
                                     <select name="sexo" class="form-control" id="sexo" size="1" required> 
@@ -387,9 +387,7 @@
 
                                             <div class="form-group">
                                                     <label for="comment">Breve Descrição:</label>
-                                                    <textarea name="descricao" class="form-control" rows="5" id="comment" value="<c:out value="${cliente.caracteristicas.descricao}" />" required>
-                                                    <c:out value="${cliente.caracteristicas.descricao}" />
-                                                    </textarea>
+                                                    <textarea name="descricao" class="form-control" rows="5" id="comment" value="<c:out value="${cliente.caracteristicas.descricao}" />" required><c:out value="${cliente.caracteristicas.descricao}" /></textarea>
                                             </div>
 
                                     </div>
@@ -435,22 +433,14 @@
                             <div class="row" id="glypicon-cadastra-funcionario">
                                 <div class="col-sm-12"><br><br></div>
                                 <div class="col-sm-7"><br></div>
-                                <c:choose>
-                                    <c:when test="${loginBean.tipo != 'funcionario'}">
+                                
                                         <div class="col-sm-2">	
                                             <a href="/index.jsp" class="btn btn-info btn-lg">
                                                     <span class="glyphicon glyphicon-remove"></span> Cancelar 
                                             </a>
                                         </div><div class="col-sm-1"></div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="col-sm-2">	
-                                            <a href="clientes" class="btn btn-info btn-lg">
-                                                    <span class="glyphicon glyphicon-remove"></span> Cancelar 
-                                            </a>
-                                    </div><div class="col-sm-1"></div>
-                                    </c:otherwise>
-                                </c:choose>
+                                    
+                               
                                     <div class="col-sm-2">	
                                             <button type="submit" class="btn btn-info btn-lg">
                                                     <span class="glyphicon glyphicon-paperclip"></span> Cadastrar

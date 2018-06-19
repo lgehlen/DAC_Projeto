@@ -78,7 +78,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("loginBean", login);
                 RequestDispatcher rd = request.
-                                getRequestDispatcher("/paresCompativeis.jsp");
+                                getRequestDispatcher("clientes");
                         request.setAttribute("login", login);
                         rd.forward(request, response);    
             }
