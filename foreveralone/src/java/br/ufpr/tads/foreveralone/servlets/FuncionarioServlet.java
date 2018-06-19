@@ -49,7 +49,7 @@ public class FuncionarioServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         funcionarioFacade = new FuncionarioFacade();
         
-        if (session == null || ((Login) session.getAttribute("login") == null)) {
+        if (session == null || ((Login) session.getAttribute("loginBean") == null)) {
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema");
             rd.forward(request, response);
@@ -59,15 +59,16 @@ public class FuncionarioServlet extends HttpServlet {
         String url = "/gestaoFuncionarios.jsp";
         int formType = 0;
         
-            if (action == null || action.isEmpty() || action.equals("list")) {    
-                request.setAttribute("funcionarios", this.FuncionarioFacade().listarFuncionarios());
+            if (action == null || action.isEmpty() || action.equals("list")) {
+                List<Funcionario> funcionarios = this.funcionarioFacade.listarFuncionarios();
+                request.setAttribute("funcionarios", funcionarios);
                 url = "/gestaoFuncionarios.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
             else if (action.equals("show")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Funcionario funcionario = this.FuncionarioFacade().buscarFuncionarioPorId(id);
+                Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
                 request.setAttribute("funcionario", funcionario);
                 url = "/gestaoFuncionarios.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -75,8 +76,9 @@ public class FuncionarioServlet extends HttpServlet {
             }
             else if (action.equals("formUpdate")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Funcionario funcionario = this.FuncionarioFacade().buscarFuncionarioPorId(id);
-                request.setAttribute("funcionario", funcionario);
+                Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
+                if(funcionario != null)
+                    request.setAttribute("funcionario", funcionario);
                 url = "/gestaoFuncionarios.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
@@ -85,45 +87,50 @@ public class FuncionarioServlet extends HttpServlet {
                 final int id = Integer.parseInt(request.getParameter("id"));
                 Funcionario funcionario = new Funcionario();
                 funcionario.setId(id);
-                this.FuncionarioFacade().deletarFuncionario(funcionario);
-                response.sendRedirect("gestaoFuncionarios");
+                this.funcionarioFacade.deletarFuncionario(funcionario);
+                response.sendRedirect("/foreveralone/FuncionarioServlet");
             }
             else if (action.equals("update")){
-                Funcionario funcionario = new Funcionario();
-                funcionario.setCpf(url);
-                funcionario.setEmail(url);
-                funcionario.setNome(url);
-                funcionario.setSenha(url);
-                funcionario.setId(formType);
-                
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                final int id = Integer.parseInt(request.getParameter("id"));
+                Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
+                funcionario.setCpf(request.getParameter("CPF"));
+                funcionario.setEmail(request.getParameter("E-mail"));
+                funcionario.setNome(request.getParameter("Nome"));
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
                 try {
+                    if(request.getParameter("data")!= null)
                     funcionario.setDataNasc(formatter.parse(request.getParameter("data")));
                 } catch (ParseException ex) {
                     Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
+                this.funcionarioFacade.atualizarFuncionario(funcionario);
                 
-                this.FuncionarioFacade().criarFuncionario(funcionario);
-                
-                response.sendRedirect("funcionarios");
+                List<Funcionario> funcionarios = this.funcionarioFacade.listarFuncionarios();
+                request.setAttribute("funcionarios", funcionarios);
+                url = "/gestaoFuncionarios.jsp";  
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
             else if (action.equals("new")){
                 Funcionario funcionario = new Funcionario();
-                funcionario.setCpf(url);
-                funcionario.setEmail(url);
-                funcionario.setNome(url);
-                funcionario.setSenha(url);
+                funcionario.setCpf(request.getParameter("CPF"));
+                funcionario.setEmail(request.getParameter("E-mail"));
+                funcionario.setNome(request.getParameter("Nome"));
+                funcionario.setSenha(request.getParameter("Senha"));
                 
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
                 try {
+                    if(request.getParameter("data")!= null)
                     funcionario.setDataNasc(formatter.parse(request.getParameter("data")));
                 } catch (ParseException ex) {
                     Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                this.FuncionarioFacade().criarFuncionario(funcionario);
+                this.funcionarioFacade.criarFuncionario(funcionario);
                 
-                response.sendRedirect("funcionarios");
+                response.sendRedirect("/foreveralone/FuncionarioServlet");
             }
     }
 
@@ -165,9 +172,5 @@ public class FuncionarioServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private FuncionarioFacade FuncionarioFacade() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

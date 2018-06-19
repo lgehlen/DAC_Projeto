@@ -49,13 +49,26 @@ public class LoginServlet extends HttpServlet {
         
         
         if (login.getNome() != null) 
-        {        
+        {   
+            if(login.getId() == 1)
+            {
+                login.setTipo("admin");
+                HttpSession session = request.getSession();
+                session.setAttribute("loginBean", login);
+                RequestDispatcher rd = request.
+                            getRequestDispatcher("/FuncionarioServlet");
+                    request.setAttribute("login", login);
+                    rd.forward(request, response);   
+            }
+            else
+            {
             HttpSession session = request.getSession();
             session.setAttribute("loginBean", login);
             RequestDispatcher rd = request.
                             getRequestDispatcher("/clientes");
                     request.setAttribute("login", login);
                     rd.forward(request, response);    
+            }
         }
         else{
             login = cliente.getLogin(email, sen);
@@ -65,7 +78,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("loginBean", login);
                 RequestDispatcher rd = request.
-                                getRequestDispatcher("/paresCompativeis.jsp");
+                                getRequestDispatcher("clientes");
                         request.setAttribute("login", login);
                         rd.forward(request, response);    
             }

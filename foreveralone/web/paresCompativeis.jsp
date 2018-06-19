@@ -22,6 +22,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="js/custom2.js"> </script>
 </head>
 
 <body >
@@ -69,8 +70,8 @@
 	    						<button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span>
 	    						<span class="caret"></span></button>
 	   							<ul class="dropdown-menu">
-	   								<li><a> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
-	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo: ${loginBean.tipo}   </a></li>
+                                                                    <li><a href="clientes?action=formUpdate&id=${loginBean.id}"> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
+	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo: ${loginBean.tipo} </a></li>
 		      						<li><a href="#">Home</a></li>
 		      						<li class="divider"></li>
 		      						<li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
@@ -83,11 +84,19 @@
 		</nav>
 	</header>
 	<!--Corpo da página-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h1> Pares Compatíveis</h1>
+                </div>
+            </div>
+        </div>
 	<div class="container" id="container-pesquisa-pares">
 		<div class="row">
-			<div class="col-sm-4"><h4>Pares Compativeis</h4></div>
 		</div>
-		<br>
+		<br><br>
+                
+                <c:forEach items="${clientes}" var="x">
 		<div class="row">
 			<div class="col-sm-3">
 				<img class="foto-perfil" src="imagens/user.jpg" alt="" />
@@ -95,29 +104,109 @@
 			<!--Nome do usuário que deu match-->
 			<div class="col-sm-9">
 				<!--Nome do usuário que deu match-->
-				<strong>Primeiro Nome:</strong><h4>Ana</h4>
-				<p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dignissim mattis consequat. Phasellus sit amet enim vitae est consectetur tincidunt quis et diam. Nam et dolor est. Aenean magna nunc, vulputate vel dapibus sed, laoreet et lacus. Phasellus sed urna non dui euismod volutpat quis id leo. Fusce dolor nulla, cursus id massa tempus, volutpat luctus ipsum. Cras in nulla sed augue rhoncus convallis. Donec a rutrum lorem, nec posuere neque. Aenean dui nunc, tempor et porta nec, condimentum eu lacus. Aliquam vitae maximus dui, at interdum tellus. Nulla eleifend faucibus venenatis. Mauris egestas consectetur sapien, et porttitor est ornare id. Aliquam eu lectus eget nulla efficitur tincidunt eu vel ante.
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dignissim mattis consequat. Phasellus sit amet enim vitae est consectetur tincidunt quis et diam. Nam et dolor est. Aenean magna nunc, vulputate vel dapibus sed, laoreet et lacus. Phasellus sed urna non dui euismod volutpat quis id leo. Fusce dolor nulla, cursus id massa tempus, volutpat luctus ipsum. Cras in nulla sed augue rhoncus convallis. Donec a rutrum lorem, nec posuere neque. Aenean dui nunc, tempor et porta nec, condimentum eu lacus. Aliquam vitae maximus dui, at interdum tellus. Nulla eleifend faucibus venenatis. Mauris egestas consectetur sapien, et porttitor est ornare id. Aliquam eu lectus eget nulla efficitur tincidunt eu vel ante.
-				um dolor sit amet, consectetur adipiscing elit. Pellentesque dignissim mattis consequat. Phasellus sit amet enim vitae est consectetur tincidunt quis et diam. Nam et dolor est. Aenean magna nunc, vulputate vel dapibus sed, laoreet et lacus. Phasellus sed urna non dui euismod volutpat quis id leo. Fusce dolor nulla, cursus id massa tempus, volutpat luctus ipsum. Cras in nulla sed augue rhoncus convallis. Donec a rutrum lorem, nec posuere neque. Aenean dui nunc, tempor et porta nec, condimentum eu lacus. Aliquam vitae maximus dui, at interdum tellus. Nulla eleifend faucibus venenatis. Mauris egestas consectetur sapien, et porttitor est ornare id. Aliquam eu lectus eget nulla efficitur tincidunt eu vel ante.
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dignissim mattis consequat. Phasellus sit amet enim vitae est consectetur tincidunt quis e
+                                <div class="col-sm-4">
+                                    <strong><h2>${x.nome}</h2></strong>
+                                    <h4>Idade: </h4>
+                                    <h4>Escolaridade: </h4>${x.escolaridade}
+                                    <h4>Sexo: </h4>${x.caracteristicas.sexo}
+                                </div>
+				
+                                <div class="col-sm-4">
+                                    <h4><strong>Preferências</strong></h4>
+                                    <h4>Cor de Cabelo: </h4>${x.preferencias.corDeCabelo}
+                                    <h4>Cor de Pele: </h4>${x.preferencias.corDePele}
+                                    <h4>Sexo: </h4>${x.preferencias.sexo}
+                                    <h4>Faixa de Idade: </h4>${x.preferencias.descricao}
+                                </div>
+                                <div class="col-sm-4">
+                                    <h4><strong>Descrição</strong></h4>
+                                    <p>${x.caracteristicas.descricao}</p>
+                                </div>
 
-				</p>
 			</div>
 		</div>
 		<div class="row" id="glypicon-pares-compativeis">
-	      	<div class="col-sm-10"></div>
+	      	<div class="col-sm-11"></div>
 	      	<div class="col-sm-1">	
-	      		<a href="#" class="btn btn-default btn-lg">
-         		 <span class="glyphicon glyphicon-heart-empty"></span>Chamar
-        		</a>
+                    <button class="btn btn-default btn-lg" onclick="getCidades2(${x.id})" data-toggle="modal" data-target="#myModal${x.id}">
+         		 <span class="glyphicon glyphicon-heart-empty"></span> Chamar
+        		</button>
+                         <br>
+                        <br>
+                         <div class="modal fade" id="myModal${x.id}" role="dialog">
+	    				<div class="modal-dialog">
+	      			<!-- Modal content-->
+	      					<div class="modal-content">
+                                                    
+	        					<div class="modal-header">
+	          						<button type="button" class="close" data-dismiss="modal">&times;</button>
+	          						<h4 class="modal-title">Detalhes</h4>
+	        					</div>
+	        					<div class="modal-body">
+                                                            <form action="clientes?action=newEncontro&idusuario=${loginBean.id}&idcrush=${x.id}" method="post">
+	         						<div class="row">     
+                                                                        <script>getCidades2(${x.id})</script>
+                                                                        <div class="col-sm-4">
+                                                                            <select class="form-control" name="cidade" id="cidade${x.id}" required>
+
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <select class="form-control" name="estado" id="estado${x.id}" required>
+                                                                                <c:forEach items="${estados}" var="x">
+                                                                                        <option value="${x.id}">${x.uf}</option>
+                                                                                </c:forEach>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-8">
+                                                                            <input class="form-control" name="rua" type="text"  id="rua" placeholder="Rua" required>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <input class="form-control" name="numero" type="text"  id="numero" placeholder="Número" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="row"> 
+                                                                        <div class="col-sm-1">
+                                                                            <label>Data</label>
+                                                                        </div>
+                                                                        <div class="col-sm-5">
+                                                                             <input class="form-control" name="data" type="date" required>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <input class="form-control" name="horario" type="text" placeholder="Horário 00:00" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                      
+                                                                    
+                                                                                
+                                                                                
+									
+	        					</div>
+	        					<div class="modal-footer">
+                                                            <button type="submit" class="btn btn-success">Confirmar</button>
+                                                            </form>  
+	          						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	        					</div>
+                                                        
+	      					</div>
+	    				</div>
+	  				</div>
 	      	</div>
-	      	<div class="col-sm-1">	
-	      		<a href="encontros.html" class="btn btn-default btn-lg">
-	      			<span class="glyphicon glyphicon-chevron-left"></span> Voltar 
-	      		</a>
-	      	</div>
-	    </div>
+                        
+                
+                </div>
+                                                                <br>
+                                                                <br>
+                </c:forEach>
+            
 	</div>
+        
 	<br>
 	<footer class="container-fluid text-center">
         <jsp:useBean id="configuracao" scope="application" class="br.ufpr.tads.foreveralone.beans.ConfigBean" />

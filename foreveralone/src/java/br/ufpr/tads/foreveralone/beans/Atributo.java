@@ -22,7 +22,7 @@ public class Atributo {
     
     private int idadeMin;
     
-    private int idadeMAx;
+    private int idadeMax;
 
     /**
      * @return the corDeCabelo
@@ -102,11 +102,13 @@ public class Atributo {
         this.idadeMin = idadeMin;
     }
 
-    public int getIdadeMAx() {
-        return idadeMAx;
+    public int getIdadeMax() {
+        return idadeMax;
     }
 
-    public void setIdadeMAx(int idadeMAx) {
-        this.idadeMAx = idadeMAx;
+    public void setIdadeMax(int idadeMax) {
+        this.idadeMax = idadeMax;
     }
+
+    
 }
