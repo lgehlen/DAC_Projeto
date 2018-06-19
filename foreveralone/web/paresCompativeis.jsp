@@ -39,14 +39,15 @@
 	  			<!--LOGO -->
 	  			<div class="col-sm-1"> <a href="/foreveralone/login"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
 		  		<div class="container">
+
 					<div class="row">
 		  				<div class="col-sm-2">
-		  					<a href="/" class="btn btn-primary btn-lg">
+		  					<a href="clientes" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-home"></span> Home
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="festas.jsp" class="btn btn-primary btn-lg">
+		  					<a href="festas.html" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-fire"></span> Festas
 		  					</a>
 		  				</div>
@@ -56,7 +57,7 @@
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="casamento.jsp" class="btn btn-primary btn-lg">
+		  					<a href="casamento.html" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-gift"></span> Casamento
 		  					</a>
 		  				</div>
@@ -70,11 +71,12 @@
 	    						<button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span>
 	    						<span class="caret"></span></button>
 	   							<ul class="dropdown-menu">
-                                                                    <li><a href="clientes?action=formUpdate&id=${loginBean.id}"> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
-	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo: ${loginBean.tipo} </a></li>
+
+                                                                   <li><a href="clientes?action=formNew&id=${loginBean.id}"> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
+                                                                   <li><a> <span class="glyphicon glyphicon-flag"> </span>  Tipo: <c:out value="${loginBean.tipo}"/></a></li>
+                                                                        <li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
 		      						<li><a href="#">Home</a></li>
-		      						<li class="divider"></li>
-		      						<li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
+		      						
 	    						</ul>
 	  						</div>
     					</div>

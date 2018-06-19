@@ -46,6 +46,10 @@ public class EncontroFacade {
     public Encontro buscarEncontroPorId(int id) {
         return getEncontroDao().buscarEncontroPorId(id);
     }
+    
+    public void listaNegra(int cliente, int bloqueado){
+        encontroDao.listaNegra(cliente, bloqueado);
+    }
 
     /**
      * @return the encontroDao

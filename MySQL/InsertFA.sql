@@ -5707,6 +5707,28 @@ INSERT INTO `forever`.`cliente` (`nomeCliente`,`CPF`,`datanasc`,`email`,`escolar
 ('Jocelyn Bowman','07896323612','1993-08-02','sit.amet.luctus@et.com','Técnico','2017-07-17','MXQIlkAQdAHKJQCEU8gXFxzelI0MdwGq',19,12,19),
 ('Yuri A. Franklin','06374185220','1972-05-28','placerat@tellusPhasellus.co.uk','superior completo','2019-02-27','9BcPON2ogSRtxf6iRKtJjIblBZmN2701',20,12,20);
 
+INSERT INTO listanegra (cliente) VALUES 
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9),
+(10),
+(11),
+(12),
+(13),
+(14),
+(15),
+(16),
+(17),
+(18),
+(19),
+(20);
+
 INSERT INTO `forever`.`Encontro` (`local`,`data`,`horario`,`Endereco_idEndereco`,`Cliente_idCliente`,`Cliente_idCliente1`) VALUES 
 ('Parana','2018-07-27','22:00',1,1,5),
 ('Parana','2018-07-28','18:00',2,2,6),
