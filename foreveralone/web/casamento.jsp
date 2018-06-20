@@ -163,46 +163,7 @@
 							</div> 
 		  				</form>
 		  				<br>
-    				</div> 
-    				<!--Coleta o nome dos Padrinhos -->
-    				<div class="col-sm-6">
-    					<form name="nomepadrinhos" action="coleta_padrinhos" onsubmit="" method= "post" >
-							<div class="row">
-								<div class="col-sm-12"> <h4>Padrinhos</h4></div>
-				  			</div>
-				  			<br>
-				  			<!--Coleta o nome do Conjugue -->
-							<div class="row">
-								<div class="col-sm-1"><h4><span class="glyphicon glyphicon-king"></span></h4></div>
-								<div class="col-sm-11">
-									<input name="Email" id=" " type="text" class="form-control" placeholder="Padrinho">
-								</div>
-							</div> 
-							<br>
-							<div class="row">
-								<div class="col-sm-1"><h4><span class="glyphicon glyphicon-queen"></span></h4></div>
-								<div class="col-sm-11">
-									<input name="Email" id=" " type="text" class="form-control" placeholder="Madrinha">
-								</div>
-							</div> 
-							<br>
-							<br>
-							<div class="row">
-								<div class="col-sm-1"><h4><span class="glyphicon glyphicon-king"></span></h4></div>
-								<div class="col-sm-11">
-									<input name="Email" id=" " type="text" class="form-control" placeholder="Padrinho">
-								</div>
-							</div> 
-							<br>
-							<div class="row">
-								<div class="col-sm-1"><h4><span class="glyphicon glyphicon-queen"></span></h4></div>
-								<div class="col-sm-11">
-									<input name="Email" id=" " type="text" class="form-control" placeholder="Madrinha">
-								</div>
-							</div> 
-		  				</form>
-		  				<br>
-    				</div> 
+    				</div>
     			</div>
     			<div class="row" id="glypicon-casamento">
 		      		<div class="col-sm-8"></div>

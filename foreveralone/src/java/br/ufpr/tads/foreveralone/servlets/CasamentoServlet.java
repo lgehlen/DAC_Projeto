@@ -101,6 +101,15 @@ public class CasamentoServlet extends HttpServlet {
                 o.setEmailCliente(c.getEmail());
                 o.setStatus("Aberto");
 
+                String email = request.getParameter("Email");
+                String date = request.getParameter("date");
+                String hora = request.getParameter("time");
+                String convidados = request.getParameter("numero");
+                String local = request.getParameter("Local");
+                String padre = request.getParameter("Padre");
+                String mel = request.getParameter("luademel");
+                o.setDetalhamentoStandard("Email: "+email+" Data: "+date+" Hora: "+hora+" Convidados: "+convidados+" Local: "+local+" Padre: "+padre+" Mel: "+mel);
+         
                 this.pedidoFacade.atualizarOrcamento(o);
                 
                 url = "/casamento.jsp";  
@@ -111,7 +120,16 @@ public class CasamentoServlet extends HttpServlet {
                 final int id = Integer.parseInt(request.getParameter("id"));
                 Orcamento o = this.pedidoFacade.buscarOrcamentoPorId(id);
                 Cliente c = this.clienteFacade.buscarClientePorId(login.getId());
-                o.setDetalhamentoStandard("..");
+                
+                String email = request.getParameter("Email");
+                String date = request.getParameter("date");
+                String hora = request.getParameter("time");
+                String convidados = request.getParameter("numero");
+                String local = request.getParameter("Local");
+                String padre = request.getParameter("Padre");
+                String mel = request.getParameter("luademel");
+                
+                o.setDetalhamentoStandard("Email: "+email+" Data: "+date+" Hora: "+hora+" Convidados: "+convidados+" Local: "+local+" Padre: "+padre+" Mel: "+mel);
                 o.setEmailCliente(c.getEmail());
                 o.setStatus("Aberto");
                 
