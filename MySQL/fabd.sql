@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Endereco` (
   `CEP` VARCHAR(8) NOT NULL,
   `numero` INT NOT NULL,
   `Cidade_idCidade` INT NOT NULL,
+  `isRemovido` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idEndereco`),
     FOREIGN KEY (`Cidade_idCidade`)
     REFERENCES `forever`.`Cidade` (`idCidade`)

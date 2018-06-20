@@ -5622,6 +5622,7 @@ insert into endereco (rua, CEP, numero, Cidade_idCidade) values
 ('Rua Vivian Villa', '81170654', '12', 4006);
 
 INSERT INTO `funcionario` (`nomeFuncionario`,`datanasc`,`email`,`senha`) VALUES 
+('Admin','1999-01-01','admin@admin','nimda'),
 ('Wylie Z. Mccall','1985-04-30','varius@urnanec.net','THC74AFP5VJ'),
 ('Ulysses Beck','1980-10-21','ac.mi.eleifend@natoquepenatibus.org','ERJ28IXU1TQ'),
 ('Hedley O. Morin','1987-12-09','ligula.Donec.luctus@eu.ca','KLV03RHA6PO'),
