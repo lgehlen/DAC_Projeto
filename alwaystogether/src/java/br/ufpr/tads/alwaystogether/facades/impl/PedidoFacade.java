@@ -55,11 +55,7 @@ public class PedidoFacade {
     public void criarPedido(Pedido pedido) {
         getPedidoDao().criarPedido(pedido);
     }
-    
-    public void deletarPedido(Pedido pedido) {
-        getPedidoDao().deletarPedido(pedido);
-    }
-    
+
     public void atualizarPedido(Pedido pedido) {
         getPedidoDao().atualizarPedido(pedido);
     }
