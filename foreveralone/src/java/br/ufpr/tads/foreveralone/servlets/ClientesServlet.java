@@ -15,7 +15,10 @@ import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.facades.impl.ClienteFacade;
 import br.ufpr.tads.foreveralone.facades.impl.EncontroFacade;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Files;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,6 +71,7 @@ public class ClientesServlet extends HttpServlet {
         }
 
         Login login = (Login) session.getAttribute("loginBean");
+        MessageDigest md;
 
         // ----------------------------------------------------------------------------------------------------- //
         // -------------------------------------------Funcionários--------------------------------------------- //
@@ -172,9 +176,15 @@ public class ClientesServlet extends HttpServlet {
             cliente.setEmail(request.getParameter("email"));
             cliente.setNome(request.getParameter("nome"));
             cliente.setEscolaridade(request.getParameter("escolaridade"));
-
-            cliente.setSenha(request.getParameter("senha"));
-
+           
+            try {
+                md = MessageDigest.getInstance("MD5");
+                BigInteger hash = new BigInteger(1, md.digest(request.getParameter("senha").getBytes()));
+                cliente.setSenha(hash.toString(16));
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             cidade = clientesFacade.getCidadePorId(Integer.parseInt(request.getParameter("cidade")));
             estado = clientesFacade.getEstadoPorId(Integer.parseInt(request.getParameter("estado")));
             cidade.setEstado(estado);
@@ -244,8 +254,15 @@ public class ClientesServlet extends HttpServlet {
             cliente.setEmail(request.getParameter("email"));
             cliente.setNome(request.getParameter("nome"));
             cliente.setEscolaridade(request.getParameter("escolaridade"));
-            cliente.setSenha(request.getParameter("senha"));
-
+            
+            try {
+                md = MessageDigest.getInstance("MD5");
+                BigInteger hash = new BigInteger(1, md.digest(request.getParameter("senha").getBytes()));
+                cliente.setSenha(hash.toString(16));
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             cidade = clientesFacade.getCidadePorId(Integer.parseInt(request.getParameter("cidade")));
             estado = clientesFacade.getEstadoPorId(Integer.parseInt(request.getParameter("estado")));
             cidade.setEstado(estado);
@@ -387,9 +404,14 @@ public class ClientesServlet extends HttpServlet {
             Endereco endereco = new Endereco();
             Cidade cidade = new Cidade();
             Estado estado = new Estado();
+            Cliente cliente1 = new Cliente();
+            Cliente cliente2 = new Cliente();
 
-            encontro.getIdCliente1().setId(Integer.parseInt(request.getParameter("idusuario")));
-            encontro.getIdCliente2().setId(Integer.parseInt(request.getParameter("idcrush")));
+            cliente1.setId(Integer.parseInt(request.getParameter("idusuario")));
+            cliente2.setId(Integer.parseInt(request.getParameter("idcrush")));
+
+            encontro.setIdCliente1(cliente1);
+            encontro.setIdCliente2(cliente2);
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
             try {
@@ -422,34 +444,41 @@ public class ClientesServlet extends HttpServlet {
             List<Encontro> encontros = new ArrayList<Encontro>();
             encontros = encontroFacade.listarEncontros(login.getId());
 
-            for(Encontro encontro: encontros){
-            
-            Endereco en = new Endereco();
-            Cidade ci = new Cidade();
-            Estado es = new Estado();
+            for (Encontro encontro : encontros) {
 
-            en = clientesFacade.getEnderecoPorId(encontro.getLocal().getId());
-            ci = clientesFacade.getCidadePorId(en.getCidade().getId());
-            es = clientesFacade.getEstadoPorId(ci.getEstado().getId());
-            ci.setEstado(es);
-            en.setCidade(ci);
-            encontro.setLocal(en);
-            
-            Cliente cliente1 = new Cliente();
-            Cliente cliente2 = new Cliente();
-            
-            cliente1 = clientesFacade.buscarClientePorId(encontro.getIdCliente1().getId());
-            cliente2 = clientesFacade.buscarClientePorId(encontro.getIdCliente2().getId());
-            
-            encontro.setIdCliente1(cliente1);
-            encontro.setIdCliente2(cliente2);
-            
+                Endereco en = new Endereco();
+                Cidade ci = new Cidade();
+                Estado es = new Estado();
+
+                en = clientesFacade.getEnderecoPorId(encontro.getLocal().getId());
+                ci = clientesFacade.getCidadePorId(en.getCidade().getId());
+                es = clientesFacade.getEstadoPorId(ci.getEstado().getId());
+                ci.setEstado(es);
+                en.setCidade(ci);
+                encontro.setLocal(en);
+
+                Cliente cliente1 = new Cliente();
+                Cliente cliente2 = new Cliente();
+
+                cliente1 = clientesFacade.buscarClientePorId(encontro.getIdCliente1().getId());
+                cliente2 = clientesFacade.buscarClientePorId(encontro.getIdCliente2().getId());
+
+                encontro.setIdCliente1(cliente1);
+                encontro.setIdCliente2(cliente2);
+
             }
 
             url = "/encontros.jsp";
             request.setAttribute("encontros", encontros);
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward(request, response);
+        } else if (action.equals("listaNegra")) {
+            int cliente = Integer.parseInt(request.getParameter("cliente"));
+            int bloqueado = Integer.parseInt(request.getParameter("bloqueado"));
+            
+            encontroFacade.listaNegra(cliente, bloqueado);
+            url = "clientes?action=listEncontros";
+            response.sendRedirect(url);
         }
 
     }

@@ -27,21 +27,20 @@ public class DefaultEncontroDao implements EncontroDao {
 
     Connection con = new ConnectionFactory().getConnection();
 
-    
     @Override
     public void criarEncontro(Encontro encontro) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             st = con.prepareStatement("INSERT INTO forever.Encontro (data, horario, Endereco_idEndereco, local, Cliente_idCliente, Cliente_idCliente1 )"
-                                        + " VALUES (?, ?, ?, ?, ?, ?)");
+                    + " VALUES (?, ?, ?, ?, ?, ?)");
             st.setDate(1, new java.sql.Date(encontro.getData().getTime()));
             st.setString(2, encontro.getHorario());
             st.setInt(3, encontro.getLocal().getId());
             st.setString(4, encontro.getLocal().getRua());
             st.setInt(5, encontro.getIdCliente1().getId());
             st.setInt(6, encontro.getIdCliente2().getId());
-            
+
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,15 +70,14 @@ public class DefaultEncontroDao implements EncontroDao {
             st.setString(2, encontro.getHorario());
             st.setInt(3, /*encontro.getLocal()*/ 0);
             st.setInt(4, 0);
-            st.setInt(5,encontro.getId());
-            
+            st.setInt(5, encontro.getId());
+
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    
     @Override
     public Encontro buscarEncontroPorId(int id) {
         PreparedStatement ps = null;
@@ -108,7 +106,7 @@ public class DefaultEncontroDao implements EncontroDao {
 
     @Override
     public List<Encontro> listarEncontros(int id) {
-         PreparedStatement ps = null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
         System.out.println("Id: " + id);
         try {
@@ -122,14 +120,14 @@ public class DefaultEncontroDao implements EncontroDao {
                 Cliente cliente1 = new Cliente();
                 Cliente cliente2 = new Cliente();
                 Endereco local = new Endereco();
-                
+
                 encontro.setData(rs.getDate("data"));
                 encontro.setHorario(rs.getString("horario"));
                 encontro.setId(rs.getInt("idEncontro"));
                 local.setId(rs.getInt("Endereco_idEndereco"));
                 cliente1.setId(rs.getInt("Cliente_idCliente"));
                 cliente2.setId(rs.getInt("Cliente_idCliente1"));
-                
+
                 encontro.setIdCliente1(cliente1);
                 encontro.setIdCliente2(cliente2);
                 encontro.setLocal(local);
@@ -139,6 +137,23 @@ public class DefaultEncontroDao implements EncontroDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;}
-    
+        return null;
+    }
+
+    @Override
+    public void listaNegra(int idcliente, int idbloqueado) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("INSERT INTO forever.listanegra (cliente, bloqueado)"
+                    + " VALUES (?, ?)");
+            st.setInt(1, idcliente);
+            st.setInt(2, idbloqueado);
+
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
