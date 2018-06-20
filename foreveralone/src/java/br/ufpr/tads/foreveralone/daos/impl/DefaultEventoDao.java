@@ -172,7 +172,7 @@ public class DefaultEventoDao implements EventoDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT (Cliente_idCliente) FROM listaconvidados WHERE Evento_idEvento = ?");
+            ps = con.prepareStatement("SELECT (Cliente_idCliente) FROM ListaConvidados WHERE Evento_idEvento = ?");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             List<Cliente> list = new ArrayList<Cliente>();
@@ -193,7 +193,7 @@ public class DefaultEventoDao implements EventoDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("INSERT INTO forever.listaconvidados (Evento_idEvento, Cliente_idCliente)"
+            st = con.prepareStatement("INSERT INTO forever.ListaConvidados (Evento_idEvento, Cliente_idCliente)"
                     + " VALUES (?, ?)");
             st.setInt(1, idEvento);
             st.setInt(2, idCliente);

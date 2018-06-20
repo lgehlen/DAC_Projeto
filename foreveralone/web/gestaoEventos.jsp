@@ -142,15 +142,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-1">
-                            <a href="eventos?action=formUpdate&id=${x.id}" class="btn btn-default btn-lg">
+                            <a href="eventos?action=list" class="btn btn-default btn-lg">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
                         </div>
@@ -220,9 +217,6 @@
 
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -236,12 +230,7 @@
 
                 <br>
                 <div class="row" id="glypicon-gerencia-usuarios">
-                    <div class="col-sm-9"></div>
-                    <div class="col-sm-2">	
-                        <a href="clientes" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon-chevron-left"></span> Voltar 
-                        </a>
-                    </div>	
+                    <div class="col-sm-9"></div>	
                 </div>
         </div>
         <br>

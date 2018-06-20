@@ -17,6 +17,7 @@ import br.ufpr.tads.foreveralone.facades.impl.ClienteFacade;
 import br.ufpr.tads.foreveralone.facades.impl.EncontroFacade;
 import br.ufpr.tads.foreveralone.facades.impl.EventoFacade;
 import br.ufpr.tads.foreveralone.facades.impl.FuncionarioFacade;
+import br.ufpr.tads.foreveralone.strategy.EmailUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
@@ -24,8 +25,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -231,8 +234,13 @@ public class EventosServlet extends HttpServlet {
 
             response.sendRedirect("eventos");
         } else if (action.equals("listConvidar")) {
-             List<Cliente> clientes = new ArrayList<Cliente>();
+                List<Cliente> clientes = new ArrayList<Cliente>();
                 clientes = this.clientesFacade.listarClientes();
+                List<Integer> paraRemover = new ArrayList<Integer>();
+                int idEvento = Integer.parseInt(request.getParameter("id"));
+                List<Cliente> convidados = eventoFacade.getListaDeConvidados(idEvento);
+                                int count = 0;
+                                
                 for (Cliente cliente : clientes) {
                     Atributo p = new Atributo();
                     Atributo c = new Atributo();
@@ -252,8 +260,9 @@ public class EventosServlet extends HttpServlet {
                     ci.setEstado(es);
                     en.setCidade(ci);
                     cliente.setEndereço(en);
+                    
                 }
-                int idEvento = Integer.parseInt(request.getParameter("id"));
+                
                 request.setAttribute("idEvento", idEvento);
                 request.setAttribute("clientes", clientes);
                 url = "/convidaClientes.jsp";
@@ -263,7 +272,20 @@ public class EventosServlet extends HttpServlet {
             int idEvento = Integer.parseInt(request.getParameter("idEvento"));
             int idCliente = Integer.parseInt(request.getParameter("idCliente"));
             eventoFacade.convidaCliente(idCliente, idEvento);
-            response.sendRedirect("eventos?action=listConvidar");
+            
+            String smtpHostServer = "smtp.example.com";
+	    String emailID = "email_me@example.com";
+	    
+	    Properties props = System.getProperties();
+
+	    props.put("mail.smtp.host", smtpHostServer);
+
+            Cliente c = this.clientesFacade.buscarClientePorId(idCliente);
+            Session s = Session.getInstance(props, null);
+	    
+	    EmailUtil.sendEmail(s, emailID,"Você foi convidado para um evento!", "Olá "+c.getNome()+", Você foi convidado para um evento!" );
+            
+            response.sendRedirect("eventos");
         }
     }
 

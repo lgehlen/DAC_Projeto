@@ -85,12 +85,6 @@
 		<form>
 			<div class="row">
 				<div id="titleclientes" class="col-sm-2"><h4> Lista de Clientes</h4></div>
-			
-                            <div id="btnadcionar" class="col-sm-4">
-				<a href="clientes?action=formNew" class="btn btn-success btn-lg">
-                                    <span class="glyphicon glyphicon-plus">Adicionar</span>
-                                </a>
-                            </div>
                         </div>
                                 <br>
                         <c:forEach items="${clientes}" var="x">
