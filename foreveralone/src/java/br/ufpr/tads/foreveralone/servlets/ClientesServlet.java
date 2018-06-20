@@ -466,6 +466,7 @@ public class ClientesServlet extends HttpServlet {
                     en.setCidade(ci);
                     cliente.setEndereço(en);
 
+                    if(lista != null)
                     for (Integer l : lista) {
                         if (cliente.getId() == l) {
                             paraRemover.add(count);
