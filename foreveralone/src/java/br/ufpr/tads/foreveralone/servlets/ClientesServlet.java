@@ -14,6 +14,7 @@ import br.ufpr.tads.foreveralone.beans.Estado;
 import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.facades.impl.ClienteFacade;
 import br.ufpr.tads.foreveralone.facades.impl.EncontroFacade;
+import br.ufpr.tads.foreveralone.facades.impl.EventoFacade;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Files;
@@ -44,10 +45,11 @@ public class ClientesServlet extends HttpServlet {
 
     private ClienteFacade clientesFacade;
     private EncontroFacade encontroFacade;
-
+    private EventoFacade eventoFacade;
     public ClientesServlet() {
         this.clientesFacade = new ClienteFacade();
         this.encontroFacade = new EncontroFacade();
+        this.eventoFacade = new EventoFacade();
     }
 
     /**
@@ -608,6 +610,7 @@ public class ClientesServlet extends HttpServlet {
             }
 
             url = "/encontros.jsp";
+            request.setAttribute("eventos", this.eventoFacade.buscarEventosPorCliente(login.getId()));
             request.setAttribute("encontros", encontros);
             request.setAttribute("encontrosMarcados", encontrosMarcados);
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);

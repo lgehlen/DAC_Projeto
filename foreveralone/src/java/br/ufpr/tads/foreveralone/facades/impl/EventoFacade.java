@@ -34,4 +34,8 @@ public class EventoFacade {
     public List<Cliente> getListaDeConvidados(int id){
         return eventoDao.buscarListaDeConvidados(id);
     }
+    
+    public List<Evento> buscarEventosPorCliente(int idCliente) {
+        return eventoDao.buscarEventosPorCliente(idCliente);
+    }
 }
