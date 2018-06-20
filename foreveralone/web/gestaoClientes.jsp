@@ -38,7 +38,7 @@
 	  		<br>
 	  		<div id="cabe">
 	  			<!--LOGO -->
-	  			<div class="col-sm-1"> <a href="/foreveralone/login"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
+	  			<div class="col-sm-1"><img id="logo" src="logo-forever.png" alt="logo"></div>
 		  		<div class="container">
 					<div class="row">
 		  				<div class="col-sm-1">
@@ -69,9 +69,7 @@
 	   								<li><a> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
 
 	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  ${loginBean.tipo} </a></li>
-                                                                        <li><a href="clientes">Home</a></li>
-
-
+                                              
 		      						<li class="divider"></li>
 		      						<li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
 	    						</ul>
@@ -262,14 +260,6 @@
                                     
 		 
 		<br>
-		<div class="row" id="glypicon-gerencia-usuarios">
-		    <div class="col-sm-9"></div>
-		    <div class="col-sm-2">	
-		      	<a href="index.html" class="btn btn-default btn-lg">
-		      		<span class="glyphicon glyphicon-chevron-left"></span> Voltar 
-		      	</a>
-		    </div>	
-		</div>
 	</div>
 	<br>
 	<br>

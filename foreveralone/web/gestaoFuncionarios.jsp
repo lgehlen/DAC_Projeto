@@ -36,21 +36,21 @@
 	  		<br>
 	  		<div id="cabe">
 	  			<!--LOGO -->
-	  			<div class="col-sm-1"> <a href="/foreveralone/login"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
+	  			<div class="col-sm-1"><img id="logo" src="logo-forever.png" alt="logo"></div>
 		  		<div class="container">
 					<div class="row">
-		  				<div class="col-sm-1">
-		  					<a href="index.html" class="btn btn-primary btn-lg">
+		  				<div class="col-sm-2">
+		  					<a href="#" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-home"></span> Home
 		  					</a>
 		  				</div>
-		  				<div class="col-sm-3">
-		  					<a href="gestao_relatoriosA" class="btn btn-primary btn-lg">
-		  						<span class="glyphicon glyphicon-open"></span> Gerenciar Relatórios
+		  				<div class="col-sm-2">
+		  					<a href="gestaoRelatorios.jsp" class="btn btn-primary btn-lg">
+		  						<span class="glyphicon glyphicon-open"></span> Relatórios
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-3">
-		  					<a href="gestao_clientesA" class="btn btn-primary btn-lg">
+		  					<a href="clientes" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-user"></span> Gerenciar Clientes
 		  					</a>
 		  				</div>
@@ -66,7 +66,6 @@
 	   							<ul class="dropdown-menu">
 	   								<li><a> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
 	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo: ${loginBean.tipo} </a></li>
-		      						<li><a href="#">Home</a></li>
 		      						<li class="divider"></li>
 		      						<li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
 	    						</ul>
@@ -182,14 +181,9 @@
 		<br>
 		<div class="row" id="glypicon-gestaofuncionario">
 		    <div class="col-sm-9"></div>
-		    <div class="col-sm-2">	
-		      	<a href="funcionarioServlet" class="btn btn-default btn-lg">
-		      		<span class="glyphicon glyphicon-chevron-left"></span> Voltar 
-		      	</a>
-		    </div>	
 		      	<div class="col-sm-1">
 					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#cadastrafunc">
-						<span class="glyphicon glyphicon-plus-sign"></span>
+						Adicionar Novo <span class="glyphicon glyphicon-plus-sign"></span>
 					</button>
 					<!-- Modal -->
 	  				<div class="modal fade" id="cadastrafunc" role="dialog">
