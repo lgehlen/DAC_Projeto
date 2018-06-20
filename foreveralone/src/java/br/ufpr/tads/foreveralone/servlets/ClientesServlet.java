@@ -15,7 +15,10 @@ import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.facades.impl.ClienteFacade;
 import br.ufpr.tads.foreveralone.facades.impl.EncontroFacade;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Files;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,6 +71,7 @@ public class ClientesServlet extends HttpServlet {
         }
 
         Login login = (Login) session.getAttribute("loginBean");
+        MessageDigest md;
 
         // ----------------------------------------------------------------------------------------------------- //
         // -------------------------------------------Funcionários--------------------------------------------- //
@@ -86,22 +90,6 @@ public class ClientesServlet extends HttpServlet {
                     Atributo c = new Atributo();
                     p = this.clientesFacade.getAtributoPorId(cliente.getPreferencias().getIdAtributo());
                     c = this.clientesFacade.getAtributoPorId(cliente.getCaracteristicas().getIdAtributo());
-
-                    if (p.getSexo().equals("F")) {
-                        p.setSexo("Feminino");
-                    } else if (p.getSexo().equals("M")) {
-                        p.setSexo("Masculino");
-                    } else {
-                        p.setSexo("Não Definido");
-                    }
-
-                    if (c.getSexo().equals("F")) {
-                        c.setSexo("Feminino");
-                    } else if (c.getSexo().equals("M")) {
-                        c.setSexo("Masculino");
-                    } else {
-                        c.setSexo("Não Definido");
-                    }
 
                     cliente.setCaracteristicas(c);
                     cliente.setPreferencias(p);
@@ -188,9 +176,15 @@ public class ClientesServlet extends HttpServlet {
             cliente.setEmail(request.getParameter("email"));
             cliente.setNome(request.getParameter("nome"));
             cliente.setEscolaridade(request.getParameter("escolaridade"));
-
-            cliente.setSenha(request.getParameter("senha"));
-
+           
+            try {
+                md = MessageDigest.getInstance("MD5");
+                BigInteger hash = new BigInteger(1, md.digest(request.getParameter("senha").getBytes()));
+                cliente.setSenha(hash.toString(16));
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             cidade = clientesFacade.getCidadePorId(Integer.parseInt(request.getParameter("cidade")));
             estado = clientesFacade.getEstadoPorId(Integer.parseInt(request.getParameter("estado")));
             cidade.setEstado(estado);
@@ -204,25 +198,28 @@ public class ClientesServlet extends HttpServlet {
             this.clientesFacade.alterarEndereco(endereco);
             cliente.setEndereço(endereco);
 
-            preferencias.setCorDeCabelo(request.getParameter("pcordocabelo"));
+            if (login.getTipo().equals("cliente")) {
+                preferencias.setCorDeCabelo(request.getParameter("pcordocabelo"));
 
-            preferencias.setCorDePele(request.getParameter("pcordapele"));
-            preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
-            preferencias.setSexo(request.getParameter("psexo"));
-            preferencias.setIdAtributo(cliente.getPreferencias().getIdAtributo());
-            this.clientesFacade.alteraAtributo(preferencias);
+                preferencias.setCorDePele(request.getParameter("pcordapele"));
+                preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
+                preferencias.setSexo(request.getParameter("psexo"));
+                preferencias.setIdAtributo(cliente.getPreferencias().getIdAtributo());
+                this.clientesFacade.alteraAtributo(preferencias);
 
-            cliente.setPreferencias(preferencias);
+                cliente.setPreferencias(preferencias);
 
-            caracteristicas.setCorDeCabelo(request.getParameter("cordocabelo"));
-            caracteristicas.setCorDePele(request.getParameter("cordapele"));
-            caracteristicas.setDescricao(request.getParameter("descricao"));
-            caracteristicas.setSexo(request.getParameter("sexo"));
-            caracteristicas.setIdAtributo(cliente.getCaracteristicas().getIdAtributo());
-            this.clientesFacade.alteraAtributo(caracteristicas);
-            cliente.setCaracteristicas(caracteristicas);
+                caracteristicas.setCorDeCabelo(request.getParameter("cordocabelo"));
+                caracteristicas.setCorDePele(request.getParameter("cordapele"));
+                caracteristicas.setDescricao(request.getParameter("descricao"));
+                caracteristicas.setSexo(request.getParameter("sexo"));
+                caracteristicas.setIdAtributo(cliente.getCaracteristicas().getIdAtributo());
+                this.clientesFacade.alteraAtributo(caracteristicas);
+                cliente.setCaracteristicas(caracteristicas);
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            }
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
             try {
                 cliente.setDataNasc(formatter.parse(request.getParameter("data")));
 
@@ -257,8 +254,15 @@ public class ClientesServlet extends HttpServlet {
             cliente.setEmail(request.getParameter("email"));
             cliente.setNome(request.getParameter("nome"));
             cliente.setEscolaridade(request.getParameter("escolaridade"));
-            cliente.setSenha(request.getParameter("senha"));
-
+            
+            try {
+                md = MessageDigest.getInstance("MD5");
+                BigInteger hash = new BigInteger(1, md.digest(request.getParameter("senha").getBytes()));
+                cliente.setSenha(hash.toString(16));
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             cidade = clientesFacade.getCidadePorId(Integer.parseInt(request.getParameter("cidade")));
             estado = clientesFacade.getEstadoPorId(Integer.parseInt(request.getParameter("estado")));
             cidade.setEstado(estado);
@@ -328,10 +332,27 @@ public class ClientesServlet extends HttpServlet {
             if (login.getTipo().equals("funcionario") || login.getTipo().equals("administrador")) {
                 response.sendRedirect("clientes?action=list");
             } else {
+                Cliente usuario = this.clientesFacade.buscarClientePorId(login.getId());
+                Atributo car = new Atributo();
+                Atributo pre = new Atributo();
+                Endereco end = new Endereco();
+                Cidade cid = new Cidade();
+                Estado est = new Estado();
+                List<Integer> lista = encontroFacade.buscaListaNegra(login.getId());
+                List<Integer> paraRemover = new ArrayList<Integer>();
+
+                end = clientesFacade.getEnderecoPorId(usuario.getEndereço().getId());
+                cid = clientesFacade.getCidadePorId(end.getCidade().getId());
+                est = clientesFacade.getEstadoPorId(cid.getEstado().getId());
+                cid.setEstado(est);
+                end.setCidade(cid);
+                usuario.setEndereço(end);
+
                 List<Cliente> clientes = new ArrayList<Cliente>();
-                Cliente usuario = clientesFacade.buscarClientePorId(login.getId());
                 Atributo pref = clientesFacade.getAtributoPorId(usuario.getPreferencias().getIdAtributo());
                 clientes = this.clientesFacade.listarClientesPorPreferencia(pref);
+                int count = 0;
+
                 for (Cliente cliente : clientes) {
                     Atributo p = new Atributo();
                     Atributo c = new Atributo();
@@ -368,7 +389,17 @@ public class ClientesServlet extends HttpServlet {
                     en.setCidade(ci);
                     cliente.setEndereço(en);
 
-                    System.out.println("Nome: " + cliente.getNome());
+                    for (Integer l : lista) {
+                        if (cliente.getId() == l) {
+                            paraRemover.add(count);
+                        }
+                    }
+
+                    count++;
+                }
+
+                for (Integer para : paraRemover) {
+                    clientes.remove(para.intValue());
                 }
 
                 List<Estado> estados = this.clientesFacade.buscarEstados();
@@ -376,6 +407,7 @@ public class ClientesServlet extends HttpServlet {
                 url = "/paresCompativeis.jsp";
 
                 if (!response.isCommitted()) {
+                    request.setAttribute("usuario", usuario);
                     request.setAttribute("estados", estados);
                     request.setAttribute("clientes", clientes);
                     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
@@ -388,10 +420,15 @@ public class ClientesServlet extends HttpServlet {
             Endereco endereco = new Endereco();
             Cidade cidade = new Cidade();
             Estado estado = new Estado();
-            
-            encontro.setIdCliente1(Integer.parseInt(request.getParameter("idusuario")));
-            encontro.setIdCliente2(Integer.parseInt(request.getParameter("idcrush")));
-            
+            Cliente cliente1 = new Cliente();
+            Cliente cliente2 = new Cliente();
+
+            cliente1.setId(Integer.parseInt(request.getParameter("idusuario")));
+            cliente2.setId(Integer.parseInt(request.getParameter("idcrush")));
+
+            encontro.setIdCliente1(cliente1);
+            encontro.setIdCliente2(cliente2);
+
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
             try {
                 encontro.setData(formatter.parse(request.getParameter("data")));
@@ -401,11 +438,11 @@ public class ClientesServlet extends HttpServlet {
             encontro.setHorario(request.getParameter("horario"));
 
             cidade = clientesFacade.getCidadePorId(Integer.parseInt(request.getParameter("cidade")));
-            estado = clientesFacade.getEstadoPorId(Integer.parseInt(request.getParameter("estado")));
+            estado = clientesFacade.getEstadoPorId(cidade.getEstado().getId());
             cidade.setEstado(estado);
 
             endereco.setRua(request.getParameter("rua"));
-            endereco.setCep("0");
+            endereco.setCep(request.getParameter("cep"));
             endereco.setId(clientesFacade.getProximoIdEndereco());
             endereco.setLogradouro(request.getParameter("numero"));
             endereco.setCidade(cidade);
@@ -415,10 +452,98 @@ public class ClientesServlet extends HttpServlet {
             encontro.setLocal(endereco);
 
             encontroFacade.criarEncontro(encontro);
-            
+
             url = "clientes";
             response.sendRedirect(url);
-            
+
+        } else if (action.equals("listEncontros")) {
+            List<Encontro> encontros = new ArrayList<Encontro>();
+            encontros = encontroFacade.listarEncontros(login.getId());
+
+            for (Encontro encontro : encontros) {
+
+                Endereco en = new Endereco();
+                Cidade ci = new Cidade();
+                Estado es = new Estado();
+
+                en = clientesFacade.getEnderecoPorId(encontro.getLocal().getId());
+                ci = clientesFacade.getCidadePorId(en.getCidade().getId());
+                es = clientesFacade.getEstadoPorId(ci.getEstado().getId());
+                ci.setEstado(es);
+                en.setCidade(ci);
+                encontro.setLocal(en);
+
+                Cliente cliente1 = new Cliente();
+                Cliente cliente2 = new Cliente();
+
+                cliente1 = clientesFacade.buscarClientePorId(encontro.getIdCliente1().getId());
+                cliente2 = clientesFacade.buscarClientePorId(encontro.getIdCliente2().getId());
+
+                encontro.setIdCliente1(cliente1);
+                encontro.setIdCliente2(cliente2);
+
+            }
+
+            List<Encontro> encontrosMarcados = new ArrayList<Encontro>();
+            encontrosMarcados = encontroFacade.listarEncontrosMarcados(login.getId());
+            List<Integer> paraRemover = new ArrayList<Integer>();
+            int count = 0;
+
+            for (Encontro encontro : encontrosMarcados) {
+
+                Endereco en = new Endereco();
+                Cidade ci = new Cidade();
+                Estado es = new Estado();
+
+                en = clientesFacade.getEnderecoPorId(encontro.getLocal().getId());
+                ci = clientesFacade.getCidadePorId(en.getCidade().getId());
+                es = clientesFacade.getEstadoPorId(ci.getEstado().getId());
+                ci.setEstado(es);
+                en.setCidade(ci);
+                encontro.setLocal(en);
+
+                Cliente cliente1 = new Cliente();
+                Cliente cliente2 = new Cliente();
+
+                cliente1 = clientesFacade.buscarClientePorId(encontro.getIdCliente1().getId());
+                cliente2 = clientesFacade.buscarClientePorId(encontro.getIdCliente2().getId());
+
+                encontro.setIdCliente1(cliente1);
+                encontro.setIdCliente2(cliente2);
+
+                Date dataAtual = new Date();
+                if (encontro.getData().before(dataAtual)) {
+                    encontroFacade.concluirEncontro(encontro.getId());
+                    paraRemover.add(count);
+                }
+
+                count++;
+            }
+
+            for (Integer l : paraRemover) {
+                encontrosMarcados.remove(l.intValue());
+            }
+
+            url = "/encontros.jsp";
+            request.setAttribute("encontros", encontros);
+            request.setAttribute("encontrosMarcados", encontrosMarcados);
+            RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        } else if (action.equals("listaNegra")) {
+            int cliente = Integer.parseInt(request.getParameter("cliente"));
+            int bloqueado = Integer.parseInt(request.getParameter("bloqueado"));
+            encontroFacade.listaNegra(cliente, bloqueado);
+
+            Encontro encontro = encontroFacade.buscarEncontroPorId(Integer.parseInt(request.getParameter("id")));
+            encontroFacade.deletarEncontro(encontro);
+            url = "clientes?action=listEncontros";
+            response.sendRedirect(url);
+        } else if (action.equals("aceitaEncontro")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            encontroFacade.aceitarEncontro(id);
+
+            url = "clientes?action=listEncontros";
+            response.sendRedirect(url);
         }
 
     }

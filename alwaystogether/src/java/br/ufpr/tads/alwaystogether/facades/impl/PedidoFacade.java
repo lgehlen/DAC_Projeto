@@ -52,23 +52,23 @@ public class PedidoFacade {
         return getOrcamentoDao().buscarOrcamentoPorId(id);
     }
     
-    void criarPedido(Pedido pedido) {
+    public void criarPedido(Pedido pedido) {
         getPedidoDao().criarPedido(pedido);
     }
     
-    void deletarPedido(Pedido pedido) {
+    public void deletarPedido(Pedido pedido) {
         getPedidoDao().deletarPedido(pedido);
     }
     
-    void atualizarPedido(Pedido pedido) {
+    public void atualizarPedido(Pedido pedido) {
         getPedidoDao().atualizarPedido(pedido);
     }
     
-    List<Pedido> listarPedidos() {
+    public List<Pedido> listarPedidos() {
         return getPedidoDao().listarPedidos();
     }
     
-    Pedido buscarPedidoPorId(int id) {
+    public Pedido buscarPedidoPorId(int id) {
         return getPedidoDao().buscarPedidoPorId(id);
     }
 

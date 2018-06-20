@@ -3,25 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.tads.foreveralone.servlets;
+package br.ufpr.tads.alwaystogether.servlets;
 
-import br.ufpr.tads.foreveralone.beans.Atributo;
-import br.ufpr.tads.foreveralone.beans.Cidade;
-import br.ufpr.tads.foreveralone.beans.Cliente;
-import br.ufpr.tads.foreveralone.beans.Estado;
-import br.ufpr.tads.foreveralone.beans.Funcionario;
-import br.ufpr.tads.foreveralone.beans.Login;
-import br.ufpr.tads.foreveralone.facades.impl.FuncionarioFacade;
+import br.ufpr.tads.alwaystogether.beans.Funcionario;
+import br.ufpr.tads.alwaystogether.beans.Login;
+import br.ufpr.tads.alwaystogether.beans.Pedido;
+import br.ufpr.tads.alwaystogether.facades.impl.FuncionarioFacade;
+import br.ufpr.tads.alwaystogether.facades.impl.PedidoFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,9 +25,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author gqueiroz
  */
-@WebServlet(name = "FuncionarioServlet", urlPatterns = {"/FuncionarioServlet"})
-public class FuncionarioServlet extends HttpServlet {
-    private FuncionarioFacade funcionarioFacade;
+@WebServlet(name = "PedidoServlet", urlPatterns = {"/PedidoServlet"})
+public class PedidoServlet extends HttpServlet {
+    static PedidoFacade pedidoFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,8 +41,7 @@ public class FuncionarioServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
-        funcionarioFacade = new FuncionarioFacade();
-        MessageDigest md;
+        pedidoFacade = new PedidoFacade();
         
         if (session == null || ((Login) session.getAttribute("loginBean") == null)) {
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
@@ -60,31 +50,30 @@ public class FuncionarioServlet extends HttpServlet {
         }
         
         String action = request.getParameter("action");
-        String url = "/gestaoFuncionarios.jsp";
+        String url = "/manter-pedidos.jsp";
         int formType = 0;
         
             if (action == null || action.isEmpty() || action.equals("list")) {
-                List<Funcionario> funcionarios = this.funcionarioFacade.listarFuncionarios();
-                request.setAttribute("funcionarios", funcionarios);
-                url = "/gestaoFuncionarios.jsp";  
+                List<Pedido> pedidos = this.pedidoFacade.listarPedidos();
+                request.setAttribute("pedidos", pedidos);
+                url = "/manter-pedidos.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
             else if (action.equals("show")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
-                request.setAttribute("funcionario", funcionario);
-                url = "/gestaoFuncionarios.jsp";
+               //request.setAttribute("funcionario", funcionario);
+               //url = "/manter-pedidos.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
             else if (action.equals("formUpdate")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
+                //Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
                 
-                if(funcionario != null)
-                    request.setAttribute("funcionario", funcionario);
-                url = "/gestaoFuncionarios.jsp";
+                //if(funcionario != null)
+                //    request.setAttribute("funcionario", funcionario);
+                url = "/manter-pedidos.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
@@ -92,57 +81,24 @@ public class FuncionarioServlet extends HttpServlet {
                 final int id = Integer.parseInt(request.getParameter("id"));
                 Funcionario funcionario = new Funcionario();
                 funcionario.setId(id);
-                this.funcionarioFacade.deletarFuncionario(funcionario);
-                response.sendRedirect("/foreveralone/FuncionarioServlet");
+                response.sendRedirect("/alwaystogether/FuncionarioServlet");
             }
             else if (action.equals("update")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
-                funcionario.setCpf(request.getParameter("CPF"));
-                funcionario.setEmail(request.getParameter("E-mail"));
-                funcionario.setNome(request.getParameter("Nome"));
-
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-                try {
-                    if(request.getParameter("data")!= null)
-                    funcionario.setDataNasc(formatter.parse(request.getParameter("data")));
-                } catch (ParseException ex) {
-                    Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                this.funcionarioFacade.atualizarFuncionario(funcionario);
-                
-                List<Funcionario> funcionarios = this.funcionarioFacade.listarFuncionarios();
-                request.setAttribute("funcionarios", funcionarios);
-                url = "/gestaoFuncionarios.jsp";  
+                //request.setAttribute("funcionarios", funcionarios);
+                url = "/manter-pedidos.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
             else if (action.equals("new")){
                 Funcionario funcionario = new Funcionario();
-                funcionario.setCpf(request.getParameter("CPF"));
                 funcionario.setEmail(request.getParameter("E-mail"));
                 funcionario.setNome(request.getParameter("Nome"));
+                funcionario.setSenha(request.getParameter("Senha"));
+                funcionario.setRegra("..");
+                //this.funcionarioFacade.criarFuncionario(funcionario);
                 
-                try {
-                    md = MessageDigest.getInstance("MD5");
-                    BigInteger hash = new BigInteger(1, md.digest(request.getParameter("Senha").getBytes()));
-                    funcionario.setSenha(hash.toString(16));
-                } catch (NoSuchAlgorithmException ex) {
-                    Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-                try {
-                    if(request.getParameter("data")!= null)
-                    funcionario.setDataNasc(formatter.parse(request.getParameter("data")));
-                } catch (ParseException ex) {
-                    Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                this.funcionarioFacade.criarFuncionario(funcionario);
-                
-                response.sendRedirect("/foreveralone/FuncionarioServlet");
+                response.sendRedirect("/alwaystogether/FuncionarioServlet");
             }
     }
 

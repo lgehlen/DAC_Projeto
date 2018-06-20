@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.tads.foreveralone.servlets;
+package br.ufpr.tads.alwaystogether.servlets;
 
-import br.ufpr.tads.foreveralone.beans.Encontro;
-import br.ufpr.tads.foreveralone.beans.Endereco;
-import br.ufpr.tads.foreveralone.beans.Funcionario;
-import br.ufpr.tads.foreveralone.beans.Login;
-import br.ufpr.tads.foreveralone.facades.impl.EncontroFacade;
+import br.ufpr.tads.alwaystogether.beans.Funcionario;
+import br.ufpr.tads.alwaystogether.beans.Login;
+import br.ufpr.tads.alwaystogether.facades.impl.FuncionarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -28,9 +27,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author gqueiroz
  */
-@WebServlet(name = "EncontroServlet", urlPatterns = {"/EncontroServlet"})
-public class EncontroServlet extends HttpServlet {
-    private EncontroFacade encontroFacade;
+@WebServlet(name = "FuncionarioServlet", urlPatterns = {"/FuncionarioServlet"})
+public class FuncionarioServlet extends HttpServlet {
+    private FuncionarioFacade funcionarioFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,89 +43,74 @@ public class EncontroServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
-        encontroFacade = new EncontroFacade();
+        funcionarioFacade = new FuncionarioFacade();
         
-        if (session == null || ((Login) session.getAttribute("login") == null)) {
+        if (session == null || ((Login) session.getAttribute("loginBean") == null)) {
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema");
             rd.forward(request, response);
         }
         
         String action = request.getParameter("action");
-        String url = "/encontros.jsp";
+        String url = "/manter-funcionario.jsp";
         int formType = 0;
         
             if (action == null || action.isEmpty() || action.equals("list")) {
-                final int id = Integer.parseInt(request.getParameter("id"));
-                request.setAttribute("encontros", this.encontroFacade.buscarEncontroPorId(id));
-                url = "/encontros.jsp";  
+                List<Funcionario> funcionarios = this.funcionarioFacade.listarFuncionarios();
+                request.setAttribute("funcionarios", funcionarios);
+                url = "/manter-funcionario.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
             else if (action.equals("show")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Encontro encontro = this.encontroFacade.buscarEncontroPorId(id);
-                request.setAttribute("encontro", encontro);
-                url = "/encontros.jsp";
+                Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
+                request.setAttribute("funcionario", funcionario);
+                url = "/manter-funcionario.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
             else if (action.equals("formUpdate")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Encontro encontro = this.encontroFacade.buscarEncontroPorId(id);
-                request.setAttribute("encontro", encontro);
-                url = "/encontros.jsp";
+                Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
+                
+                if(funcionario != null)
+                    request.setAttribute("funcionario", funcionario);
+                url = "/manter-funcionario.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
             else if (action.equals("remove")){
                 final int id = Integer.parseInt(request.getParameter("id"));
-                Encontro encontro = new Encontro();
-                encontro.setId(id);
-                this.encontroFacade.deletarEncontro(encontro);
-                response.sendRedirect("EncontroServlet");
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(id);
+                this.funcionarioFacade.deletarFuncionario(funcionario);
+                response.sendRedirect("/alwaystogether/FuncionarioServlet");
             }
             else if (action.equals("update")){
-                Encontro encontro = new Encontro();
+                final int id = Integer.parseInt(request.getParameter("id"));
+                Funcionario funcionario = this.funcionarioFacade.buscarFuncionarioPorId(id);
+                funcionario.setRegra("...");
+                funcionario.setEmail(request.getParameter("E-mail"));
+                funcionario.setNome(request.getParameter("Nome"));
+                funcionario.setId(id);
+                this.funcionarioFacade.atualizarFuncionario(funcionario);
                 
-                encontro.setIdCliente1(formType);
-                encontro.setIdCliente2(formType);
-                Endereco local = null;
-                encontro.setLocal(local);
-                
-                encontro.setHorario(url);
-                
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                try {
-                    encontro.setData(formatter.parse(request.getParameter("data")));
-                } catch (ParseException ex) {
-                    Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                this.encontroFacade.criarEncontro(encontro);
-                
-                response.sendRedirect("EncontroServlet");
+                List<Funcionario> funcionarios = this.funcionarioFacade.listarFuncionarios();
+                request.setAttribute("funcionarios", funcionarios);
+                url = "/manter-funcionario.jsp";  
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
             else if (action.equals("new")){
-                Encontro encontro = new Encontro();
-                encontro.setId(formType);
-                encontro.setIdCliente1(formType);
-                encontro.setIdCliente2(formType);
-                Endereco local = null;
-                encontro.setLocal(local);
+                Funcionario funcionario = new Funcionario();
+                funcionario.setEmail(request.getParameter("E-mail"));
+                funcionario.setNome(request.getParameter("Nome"));
+                funcionario.setSenha(request.getParameter("Senha"));
+                funcionario.setRegra("..");
+                this.funcionarioFacade.criarFuncionario(funcionario);
                 
-                encontro.setHorario(url);
-                
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                try {
-                    encontro.setData(formatter.parse(request.getParameter("data")));
-                } catch (ParseException ex) {
-                    Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                this.encontroFacade.criarEncontro(encontro);
-                
-                response.sendRedirect("EncontroServlet");
+                response.sendRedirect("/alwaystogether/FuncionarioServlet");
             }
     }
 

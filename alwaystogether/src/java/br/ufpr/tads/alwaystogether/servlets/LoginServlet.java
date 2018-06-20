@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.tads.foreveralone.servlets;
+package br.ufpr.tads.alwaystogether.servlets;
 
-import br.ufpr.tads.foreveralone.beans.Login;
-import br.ufpr.tads.foreveralone.facades.impl.ClienteFacade;
-import br.ufpr.tads.foreveralone.facades.impl.FuncionarioFacade;
+import br.ufpr.tads.alwaystogether.beans.Login;
+import br.ufpr.tads.alwaystogether.facades.impl.FuncionarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,27 +38,15 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         FuncionarioFacade funcionario = new FuncionarioFacade();
-        ClienteFacade cliente = new ClienteFacade();
         
         String email = request.getParameter("email");
-            
-        String sen = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            BigInteger hash = new BigInteger(1, md.digest(request.getParameter("password").getBytes()));
-            sen = hash.toString(16);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String sen = request.getParameter("password"); 
         
         Login login = new Login();
         login =  funcionario.getLogin(email, sen);
         
-        
-        if (login.getNome() != null) 
-        {   
-            if(login.getId() == 1)
-            {
+        if(login != null && login.getId() == 1)
+        {
                 login.setTipo("admin");
                 HttpSession session = request.getSession();
                 session.setAttribute("loginBean", login);
@@ -72,32 +54,16 @@ public class LoginServlet extends HttpServlet {
                             getRequestDispatcher("/FuncionarioServlet");
                     request.setAttribute("login", login);
                     rd.forward(request, response);   
-            }
-            else
-            {
+        }
+        else if(login.getId() != 1)
+        {
             HttpSession session = request.getSession();
             session.setAttribute("loginBean", login);
             RequestDispatcher rd = request.
-                            getRequestDispatcher("/clientes");
+                            getRequestDispatcher("/PedidoServlet");
                     request.setAttribute("login", login);
                     rd.forward(request, response);    
-            }
-        }
-        else{
-            login = cliente.getLogin(email, sen);
-
-            if (login.getNome() != null) 
-            {       
-                HttpSession session = request.getSession();
-                session.setAttribute("loginBean", login);
-                RequestDispatcher rd = request.
-                                getRequestDispatcher("clientes");
-                        request.setAttribute("login", login);
-                        rd.forward(request, response);    
-            }
-        }
-            
-        if (login.getNome() == null) 
+        }else
         {    
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             request.setAttribute("msg", "Usuário/Senha inválidos.");

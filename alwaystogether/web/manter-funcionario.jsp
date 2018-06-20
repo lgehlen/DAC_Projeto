@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
-	<link type="text/css" rel="stylesheet" href="CSS/style.css" />
+	<link type="text/css" rel="stylesheet" href="css/style.css" />
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -73,20 +73,21 @@
 	</header>
 	<div class="container" id="container-manter-funcionario">
 		<div class="row">
-			<div class="col-sm-4"><h3>Funcionários</h3></div>
-			<div class="col-sm-7"></div>
+			<div class="col-sm-4"><h4> Quadro de Funcionários</h4></div>
 		</div>
-		
+		<br>
+                <c:forEach items="${funcionarios}" var="x">
 		<div class="row" id="relatorios">
-			<div class="col-sm-10"><h4> Gabriel Vieira</h4></div>
+			<div class="col-sm-1"><h4>${x.id}</h4></div>
+			<div class="col-sm-9"><h4>${x.nome}</h4></div>
 			<!--Modal-->
 			<div class="col-sm-1">
-				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc">
+				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc${x.id}">
 					<span class="glyphicon glyphicon-trash"></span>
 				</button>
 
 				<!-- Modal -->
-  				<div class="modal fade" id="excluifunc" role="dialog">
+  				<div class="modal fade" id="excluifunc${x.id}" role="dialog">
     				<div class="modal-dialog">
       			<!-- Modal content-->
       					<div class="modal-content">
@@ -98,39 +99,36 @@
         						<div class="row">
 	        						<div class="col-sm-1"></div>
 	        						<div class="col-sm-9" style="text-align: center;">
-	         							<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
+                                                                    <h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
 	         						</div>
 	         						<div class="col-sm-2"></div>
 	         					</div>
 	         					<div class="row">
 	        						<div class="col-sm-3"></div>
 	        						<div class="col-sm-2" id="popup-gerenciafuncionarios">
-	         							<button  type="button" class="btn btn-default btn-sm">
+                                                                            <a  href="FuncionarioServlet?action=remove&id=${x.id}" class="btn btn-default btn-sm">
 	          								<span class="glyphicon glyphicon-ok"></span>
-	        							</button>
+                                                                            </a>
 	         						</div>
 	         						<div class="col-sm-2"></div>
 	        						<div class="col-sm-2" id="popup-gerenciafuncionarios" >
-	         							<button  type="button" class="btn btn-default btn-sm">
+	         							<button  type="button" data-dismiss="modal" class="btn btn-default btn-sm">
 	          								<span class="glyphicon glyphicon-remove"></span>
 	        							</button>
 	         						</div>
 	         					</div>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
         					</div>
       					</div>
     				</div>
   				</div>
 		</div>
 			<div class="col-sm-1">
-				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#editafunc1">
+				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#editafunc${x.id}">
 					<span class="glyphicon glyphicon-pencil"></span>
 				</button>
 
 				<!-- Modal -->
-  				<div class="modal fade" id="editafunc1" role="dialog">
+  				<div class="modal fade" id="editafunc${x.id}" role="dialog">
     				<div class="modal-dialog">
       			<!-- Modal content-->
       					<div class="modal-content">
@@ -139,266 +137,40 @@
           						<h4 class="modal-title">Editar Dados</h4>
         					</div>
         					<div class="modal-body">
-         						<form name="editadados" action="edita_dados" onsubmit="" method= "post" >
+         						<form name="editadados" action="FuncionarioServlet?action=update&id=${x.id}" onsubmit="" method= "post" >
          							<div class="row">
 										<div class="col-sm-6">
-											<input name="Nome" id=" " type="text" class="form-control" placeholder="Nome">
+											<input name="Nome" id=" " value="${x.nome}" type="text" class="form-control" placeholder="Nome">
 										</div>
-										<div class="col-sm-6">
-											<input name="CPF" id=" " type="text" class="form-control" placeholder="Email">
-										</div>
-									</div> 
-									<br>
-         							<div class="row">
-										<div class='col-sm-7'>
-           									<h5>Nascimento:<input type="date"><span class="glyphicon glyphicon-calendar"></span></h5>
-          								</div>
 									</div> 
 									<br>
 									<div class="row">
-										<div class="col-sm-5">
-											<input name="E-mail" id=" " type="text" class="form-control" placeholder="Senha">
-										</div>
-										<div class="col-sm-5">
-											<input name="E-mail" id=" " type="text" class="form-control" placeholder="Confirme sua Senha">
+										<div class="col-sm-8">
+											<input name="E-mail"  value="${x.email}" id=" " type="text" class="form-control" placeholder="Email">
 										</div>
 									</div>
 									<br>
 									<div class="row" id="glypicon-gestaofunc">
 							      		<div class="col-sm-10"></div>
 							      		<div class="col-sm-2">	
-							      			<button  type="button" class="btn btn-default btn-lg">
+							      			<button  type="submit" class="btn btn-default btn-lg">
 	          									<span class="glyphicon glyphicon-refresh"></span> Atualizar
 	        								</button>
 							      		</div>
 	      							</div>
          						</form>
         					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        					</div>
       					</div>
     				</div>
   				</div>
 			</div>
 		</div>
-		<br>
-		<div class="row" id="relatorios">
-			<div class="col-sm-10"><h4> Gabriel Vieira</h4></div>
-			<!--Modal-->
-			<div class="col-sm-1">
-				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc1">
-					<span class="glyphicon glyphicon-trash"></span>
-				</button>
-
-				<!-- Modal -->
-  				<div class="modal fade" id="excluifunc1" role="dialog">
-    				<div class="modal-dialog">
-      			<!-- Modal content-->
-      					<div class="modal-content">
-        					<div class="modal-header">
-          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">Aviso do Sistema!</h4>
-        					</div>
-        					<div class="modal-body">
-        						<div class="row">
-	        						<div class="col-sm-1"></div>
-	        						<div class="col-sm-9" style="text-align: center;">
-	         							<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
-	         						</div>
-	         						<div class="col-sm-2"></div>
-	         					</div>
-	         					<div class="row">
-	        						<div class="col-sm-3"></div>
-	        						<div class="col-sm-2" id="popup-gerenciafuncionarios">
-	         							<button  type="button" class="btn btn-default btn-sm">
-	          								<span class="glyphicon glyphicon-ok"></span>
-	        							</button>
-	         						</div>
-	         						<div class="col-sm-2"></div>
-	        						<div class="col-sm-2" id="popup-gerenciafuncionarios">
-	         							<button  type="button" class="btn btn-default btn-sm">
-	          								<span class="glyphicon glyphicon-remove"></span>
-	        							</button>
-	         						</div>
-	         					</div>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        					</div>
-      					</div>
-    				</div>
-  				</div>
-			</div>
-			<div class="col-sm-1">
-				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#editafunc2">
-					<span class="glyphicon glyphicon-pencil"></span>
-				</button>
-
-				<!-- Modal -->
-  				<div class="modal fade" id="editafunc2" role="dialog">
-    				<div class="modal-dialog">
-      			<!-- Modal content-->
-      					<div class="modal-content">
-        					<div class="modal-header">
-          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">Editar Dados</h4>
-        					</div>
-        					<div class="modal-body">
-         						<form name="editadados" action="edita_dados" onsubmit="" method= "post" >
-         							<div class="row">
-										<div class="col-sm-6">
-											<input name="Nome" id=" " type="text" class="form-control" placeholder="Nome">
-										</div>
-										<div class="col-sm-6">
-											<input name="CPF" id=" " type="text" class="form-control" placeholder="Email">
-										</div>
-									</div> 
-									<br>
-         							<div class="row">
-										<div class='col-sm-7'>
-           									<h5>Nascimento:<input type="date"><span class="glyphicon glyphicon-calendar"></span></h5>
-          								</div>
-									</div> 
-									<br>
-									<div class="row">
-										<div class="col-sm-5">
-											<input name="E-mail" id=" " type="text" class="form-control" placeholder="Senha">
-										</div>
-										<div class="col-sm-5">
-											<input name="E-mail" id=" " type="text" class="form-control" placeholder="Confirme sua Senha">
-										</div>
-									</div>
-									<br>
-									<div class="row" id="glypicon-gestaofunc">
-							      		<div class="col-sm-10"></div>
-							      		<div class="col-sm-2">	
-							      			<button  type="button" class="btn btn-default btn-lg">
-	          									<span class="glyphicon glyphicon-refresh"></span> Atualizar
-	        								</button>
-							      		</div>
-	      							</div>
-         						</form>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        					</div>
-      					</div>
-    				</div>
-  				</div>
-			</div>
-		</div>
-		<br>
-		<div class="row" id="relatorios">
-			<div class="col-sm-10"><h4> Gabriel Vieira</h4></div>
-			<!--Modal-->
-			<div class="col-sm-1">
-				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc2">
-					<span class="glyphicon glyphicon-trash"></span>
-				</button>
-
-				<!-- Modal -->
-  				<div class="modal fade" id="excluifunc2" role="dialog">
-    				<div class="modal-dialog">
-      			<!-- Modal content-->
-      					<div class="modal-content">
-        					<div class="modal-header">
-          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">Aviso do Sistema!</h4>
-        					</div>
-        					<div class="modal-body">
-        						<div class="row">
-	        						<div class="col-sm-1"></div>
-	        						<div class="col-sm-9" style="text-align: center;">
-	         							<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
-	         						</div>
-	         						<div class="col-sm-2"></div>
-	         					</div>
-	         					<div class="row">
-	        						<div class="col-sm-3"></div>
-	        						<div class="col-sm-2" id="popup-gerenciafuncionarios">
-	         							<button  type="button" class="btn btn-default btn-sm">
-	          								<span class="glyphicon glyphicon-ok"></span>
-	        							</button>
-	         						</div>
-	         						<div class="col-sm-2"></div>
-	        						<div class="col-sm-2" id="popup-gerenciafuncionarios">
-	         							<button  type="button" class="btn btn-default btn-sm">
-	          								<span class="glyphicon glyphicon-remove"></span>
-	        							</button>
-	         						</div>
-	         					</div>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        					</div>
-      					</div>
-    				</div>
-  				</div>
-			</div>
-			<div class="col-sm-1">
-				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#editafunc3">
-					<span class="glyphicon glyphicon-pencil"></span>
-				</button>
-
-				<!-- Modal -->
-  				<div class="modal fade" id="editafunc3" role="dialog">
-    				<div class="modal-dialog">
-      			<!-- Modal content-->
-      					<div class="modal-content">
-        					<div class="modal-header">
-          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-          						<h4 class="modal-title">Editar Dados</h4>
-        					</div>
-        					<div class="modal-body">
-         						<form name="editadados" action="edita_dados" onsubmit="" method= "post" >
-         							<div class="row">
-										<div class="col-sm-6">
-											<input name="Nome" id=" " type="text" class="form-control" placeholder="Nome">
-										</div>
-										<div class="col-sm-6">
-											<input name="CPF" id=" " type="text" class="form-control" placeholder="Email">
-										</div>
-									</div> 
-									<br>
-         							<div class="row">
-										<div class='col-sm-7'>
-           									<h5>Data:<input type="date"><span class="glyphicon glyphicon-calendar"></span></h5>
-          								</div>
-									</div> 
-									<br>
-									<div class="row">
-										<div class="col-sm-5">
-											<input name="E-mail" id=" " type="text" class="form-control" placeholder="Senha">
-										</div>
-										<div class="col-sm-5">
-											<input name="E-mail" id=" " type="text" class="form-control" placeholder="Confirme sua Senha">
-										</div>
-									</div>
-									<br>
-									<div class="row" id="glypicon-gestaofunc">
-							      		<div class="col-sm-10"></div>
-							      		<div class="col-sm-2">	
-							      			<button  type="button" class="btn btn-default btn-lg">
-							      				<span class="glyphicon glyphicon-refresh"></span> Atualizar
-							      			</button>
-							      		</div>
-	      							</div>
-         						</form>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        					</div>
-      					</div>
-    				</div>
-  				</div>
-			</div>
-		</div>
+                </c:forEach>
 		<br>
 		<div class="row" id="glypicon-gestaofuncionario">
 		    <div class="col-sm-9"></div>
 		    <div class="col-sm-2">	
-		      	<a href="index.html" class="btn btn-default btn-lg">
+		      	<a href="funcionarioServlet" class="btn btn-default btn-lg">
 		      		<span class="glyphicon glyphicon-chevron-left"></span> Voltar 
 		      	</a>
 		    </div>	
@@ -416,43 +188,38 @@
           						<h4 class="modal-title">Cadastro de Funcionário</h4>
         					</div>
         					<div class="modal-body">
-         						<form name="editadados" action="edita_dados" onsubmit="" method= "post" >
+         						<form name="cadastraDados" action="FuncionarioServlet?action=new" onsubmit="" method= "post" >
          							<div class="row">
-										<div class="col-sm-6">
+										<div class="col-sm-5">
 											<input name="Nome" id=" " type="text" class="form-control" placeholder="Nome">
 										</div>
-										<div class="col-sm-6">
-											<input name="CPF" id=" " type="text" class="form-control" placeholder="Email">
+										<div class="col-sm-5">
+											<input name="CPF" id=" " type="text" class="form-control" placeholder="CPF">
 										</div>
 									</div> 
 									<br>
-         							<div class="row">
-										<div class='col-sm-7'>
-           									<h5>Nascimento:<input type="date"><span class="glyphicon glyphicon-calendar"></span></h5>
-          								</div>
-									</div> 
 									<br>
 									<div class="row">
 										<div class="col-sm-5">
-											<input name="E-mail" id=" " type="text" class="form-control" placeholder="Senha">
-										</div>
-										<div class="col-sm-5">
-											<input name="E-mail" id=" " type="text" class="form-control" placeholder="Confirme sua Senha">
+											<input name="E-mail" id=" " type="text" class="form-control" placeholder="Email">
 										</div>
 									</div>
+                                                                        <br>
+                                                                        <div class="row">
+                                                                            	<div class='col-sm-7'>
+											<input name="Senha" id=" " type="password" class="form-control" placeholder="Senha">
+                                                                                </div>
+                                                                        </div>
 									<br>
 									<div class="row" id="glypicon-gestaofunc">
 							      		<div class="col-sm-10"></div>
 							      		<div class="col-sm-2">	
-							      			<button  type="button" class="btn btn-default btn-lg">
-							      				<span class="glyphicon glyphicon-plus-sign"></span> Cadastrar
-							      			</button>
-							      		</div>
+                                                                        <button type="submit" class="btn btn-info btn-lg">
+                                                                                <span class="glyphicon glyphicon-paperclip"></span> Cadastrar
+                                                                        </button>							      		
+                                                                        </div>
 	      							</div>
          						</form>
-        					</div>
-        					<div class="modal-footer">
-          						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         					</div>
       					</div>
     					</div>

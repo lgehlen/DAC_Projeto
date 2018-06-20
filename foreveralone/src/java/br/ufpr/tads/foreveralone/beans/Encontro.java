@@ -14,9 +14,9 @@ import java.util.Date;
 public class Encontro {
     private int id;
     
-    private int idCliente1;
+    private Cliente idCliente1;
     
-    private int idCliente2;
+    private Cliente idCliente2;
     
     private Endereco local;
     
@@ -38,33 +38,7 @@ public class Encontro {
         this.id = id;
     }
 
-    /**
-     * @return the idCliente1
-     */
-    public int getIdCliente1() {
-        return idCliente1;
-    }
-
-    /**
-     * @param idCliente1 the idCliente1 to set
-     */
-    public void setIdCliente1(int idCliente1) {
-        this.idCliente1 = idCliente1;
-    }
-
-    /**
-     * @return the idCliente2
-     */
-    public int getIdCliente2() {
-        return idCliente2;
-    }
-
-    /**
-     * @param idCliente2 the idCliente2 to set
-     */
-    public void setIdCliente2(int idCliente2) {
-        this.idCliente2 = idCliente2;
-    }
+    
 
     /**
      * @return the local
@@ -106,5 +80,21 @@ public class Encontro {
      */
     public void setHorario(String horario) {
         this.horario = horario;
+    }
+
+    public Cliente getIdCliente1() {
+        return idCliente1;
+    }
+
+    public void setIdCliente1(Cliente idCliente1) {
+        this.idCliente1 = idCliente1;
+    }
+
+    public Cliente getIdCliente2() {
+        return idCliente2;
+    }
+
+    public void setIdCliente2(Cliente idCliente2) {
+        this.idCliente2 = idCliente2;
     }
 }

@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Funcionario` (
   `datanasc` DATE NOT NULL,
   `email` VARCHAR(50) NOT NULL,
   `senha` VARCHAR(50) NOT NULL,
+  `isRemovido` INT DEFAULT 0,
   PRIMARY KEY (`idFuncionario`));
 
 
@@ -120,6 +121,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Encontro` (
   `local` VARCHAR(45) NOT NULL,
   `data` DATE NOT NULL,
   `horario` TIME NOT NULL,
+  `isAceito` INT NULL,
   `Endereco_idEndereco` INT NOT NULL,
   `Cliente_idCliente` INT NOT NULL,
   `Cliente_idCliente1` INT NOT NULL,
@@ -181,3 +183,15 @@ CREATE TABLE IF NOT EXISTS `forever`.`ListaConvidados` (
     FOREIGN KEY (`Evento_idEvento`)
     REFERENCES `forever`.`Evento` (`idEvento`)
     );
+
+-- -----------------------------------------------------
+-- Table `forever`.`ListaNegra`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `forever`.`listanegra` (
+  `cliente` INT NOT NULL,
+  `bloqueado` INT NULL,
+    FOREIGN KEY (`cliente`)
+    REFERENCES `forever`.`Cliente` (`idCliente`),
+    FOREIGN KEY (`bloqueado`)
+    REFERENCES `forever`.`Cliente` (`idCliente`)
+);

@@ -39,29 +39,30 @@
 	  			<!--LOGO -->
 	  			<div class="col-sm-1"> <a href="/foreveralone/login"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
 		  		<div class="container">
+
 					<div class="row">
 		  				<div class="col-sm-2">
-		  					<a href="/" class="btn btn-primary btn-lg">
+		  					<a href="clientes" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-home"></span> Home
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="festas.jsp" class="btn btn-primary btn-lg">
+		  					<a href="festas.html" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-fire"></span> Festas
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="encontros.jsp" class="btn btn-primary btn-lg">
+		  					<a href="clientes?action=listEncontros" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-heart"></span> Encontros
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="casamento.jsp" class="btn btn-primary btn-lg">
+		  					<a href="casamento.html" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-gift"></span> Casamento
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2" >
-		  					<a href="preferencias.jsp" class="btn btn-primary btn-lg">
+		  					<a href="clientes?action=formUpdate&id=${loginBean.id}" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-filter"></span> Preferências
 		  					</a>
 		  				</div>
@@ -70,11 +71,12 @@
 	    						<button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span>
 	    						<span class="caret"></span></button>
 	   							<ul class="dropdown-menu">
-                                                                    <li><a href="clientes?action=formUpdate&id=${loginBean.id}"> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
-	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo: ${loginBean.tipo} </a></li>
+
+                                                                   <li><a href="clientes?action=formUpdate&id=${loginBean.id}"> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
+                                                                   <li><a> <span class="glyphicon glyphicon-flag"> </span>  Tipo: <c:out value="${loginBean.tipo}"/></a></li>
+                                                                        <li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
 		      						<li><a href="#">Home</a></li>
-		      						<li class="divider"></li>
-		      						<li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
+		      						
 	    						</ul>
 	  						</div>
     					</div>
@@ -120,6 +122,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <h4><strong>Descrição</strong></h4>
+                                    
                                     <p>${x.caracteristicas.descricao}</p>
                                 </div>
 
@@ -145,20 +148,15 @@
 	        					<div class="modal-body">
                                                             <form action="clientes?action=newEncontro&idusuario=${loginBean.id}&idcrush=${x.id}" method="post">
 	         						<div class="row">     
-                                                                        <script>getCidades2(${x.id})</script>
-                                                                        <div class="col-sm-4">
-                                                                            <select class="form-control" name="cidade" id="cidade${x.id}" required>
-
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" name="cidade" id="cidade" required>
+                                                                                <option value="${usuario.endereço.cidade.id}">Sua cidade: ${usuario.endereço.cidade.nome}</option>
+                                                                                <option value="${x.endereço.cidade.id}">Cidade del@: ${x.endereço.cidade.nome}</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="col-sm-3">
-                                                                            <select class="form-control" name="estado" id="estado${x.id}" required>
-                                                                                <c:forEach items="${estados}" var="x">
-                                                                                        <option value="${x.id}">${x.uf}</option>
-                                                                                </c:forEach>
-                                                                            </select>
-                                                                        </div>
-                                                                        
+                                                                         <div class="col-sm-4">
+                                                                             <input class="form-control" name="cep" type="text" required placeholder="CEP">
+                                                                         </div>
                                                                     </div>
                                                                     <br>
                                                                     <div class="row">

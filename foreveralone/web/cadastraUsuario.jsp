@@ -300,7 +300,7 @@
                                         <label>Aniversário</label>
                                     </div>
                                     <div class="col-sm-4">
-                                       <input class="form-control" name="data" type="text" value=<fmt:formatDate value="${cliente.dataNasc}" pattern="dd/MM/yyyy"/> required>
+                                       <input class="form-control" name="data" type="date" required value=<fmt:formatDate value="${cliente.dataNasc}" pattern="yyyy-MM-dd"/> >
                                     </div>
                             </div>
                             <br>
