@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Funcionario` (
   `nomeFuncionario` VARCHAR(50) NOT NULL,
   `datanasc` DATE NOT NULL,
   `email` VARCHAR(50) NOT NULL,
-  `senha` VARCHAR(50) NOT NULL,
+  `senha` VARCHAR(100) NOT NULL,
   `isRemovido` INT DEFAULT 0,
   PRIMARY KEY (`idFuncionario`));
 
@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Endereco` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `forever`.`Evento` (
   `idEvento` INT NOT NULL AUTO_INCREMENT,
+  `tema` VARCHAR(100) NOT NULL,
   `data` DATE NOT NULL,
   `horario` TIME NOT NULL,
   `local` VARCHAR(50) NOT NULL,
@@ -94,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Cliente` (
   `email` VARCHAR(45) NOT NULL,
   `escolaridade` VARCHAR(50) NOT NULL,
   `dataCad` DATE NOT NULL,
-  `senha` VARCHAR(50) NOT NULL,
+  `senha` VARCHAR(100) NOT NULL,
   `Endereco_idEndereco` INT NOT NULL,
   `Atributo_IdAtributoPreferencia` INT NULL,
   `Atributo_IdAtributoAtributo` INT NULL,

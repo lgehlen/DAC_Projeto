@@ -22,6 +22,10 @@ public class Evento {
     private String horario;
     
     private Endereco local;
+    
+    private Funcionario funcionario;
+    
+    private String tema;
 
     /**
      * @return the id
@@ -91,5 +95,21 @@ public class Evento {
      */
     public void setLocal(Endereco local) {
         this.local = local;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public String getTema() {
+        return tema;
+    }
+
+    public void setTema(String tema) {
+        this.tema = tema;
     }
 }

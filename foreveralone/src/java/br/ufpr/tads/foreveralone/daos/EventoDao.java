@@ -5,6 +5,7 @@
  */
 package br.ufpr.tads.foreveralone.daos;
 
+import br.ufpr.tads.foreveralone.beans.Cliente;
 import br.ufpr.tads.foreveralone.beans.Evento;
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface EventoDao {
     Evento buscarEventoPorId(int id);
     
     List<Evento> buscarEventosPorCliente(int idCliente);
+    
+    List<Cliente> buscarListaDeConvidados(int id);
 }

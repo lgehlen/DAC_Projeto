@@ -5737,12 +5737,12 @@ INSERT INTO `forever`.`Encontro` (`local`,`data`,`horario`,`Endereco_idEndereco`
 ('Parana','2019-03-14','22:08',5,5,9);
 
 
-INSERT INTO `forever`.`evento` (`data`,`horario`,`local`,`Funcionario_idFuncionario`,`Endereco_idEndereco`) VALUES
-('2018-10-14','19:30:00','Monarch',2,7),
-('2018-10-14','12:00:00','Imperial Palace',3,8),
-('2018-10-14','15:00:00','KO e Games',4,9),
-('2018-09-12','22:30:00','Manorb',5,10),
-('2018-09-22','18:40:00','Vicente Machado Restaurante',6,11);
+INSERT INTO `forever`.`evento` (`data`,`horario`,`local`,`Funcionario_idFuncionario`,`Endereco_idEndereco`, `tema`) VALUES
+('2018-10-14','19:30:00','Monarch',2,7,'Natal'),
+('2018-10-14','12:00:00','Imperial Palace',3,8,'Carnaval'),
+('2018-10-14','15:00:00','KO e Games',4,9,'Indie'),
+('2018-09-12','22:30:00','Manorb',5,10,'Rock'),
+('2018-09-22','18:40:00','Vicente Machado Restaurante',6,11,'Filmes');
 
 INSERT INTO `forever`.`ListaConvidados` ( `Cliente_idCliente`,`Evento_idEvento`) VALUES
 (12,1),

@@ -5,8 +5,11 @@
  */
 package br.ufpr.tads.foreveralone.daos.impl;
 
+import br.ufpr.tads.foreveralone.beans.Cliente;
 import br.ufpr.tads.foreveralone.beans.Encontro;
+import br.ufpr.tads.foreveralone.beans.Endereco;
 import br.ufpr.tads.foreveralone.beans.Evento;
+import br.ufpr.tads.foreveralone.beans.Funcionario;
 import br.ufpr.tads.foreveralone.daos.ConnectionFactory;
 import br.ufpr.tads.foreveralone.daos.EventoDao;
 import java.sql.Connection;
@@ -82,15 +85,23 @@ public class DefaultEventoDao implements EventoDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idEvento, data, horario, local, Convidado_idPar, Funcioario_idFuncionario, Endereco_idEndereco, Endereco_cidade_idCidade FROM forever.Evento ");
+            ps = con.prepareStatement("SELECT idEvento, data, horario, local, Funcionario_idFuncionario, Endereco_idEndereco, tema FROM forever.Evento ");
             rs = ps.executeQuery();
             List<Evento> list = new ArrayList<Evento>();
             while (rs.next()) {
+                Endereco local = new Endereco();
+                Funcionario funcionario = new Funcionario();
+                
                 Evento evento = new Evento();
                 evento.setData(rs.getDate("data"));
                 evento.setHorario(rs.getString("horario"));
                 evento.setId(rs.getInt("idEvento"));
-                //evento.setLocal(list);
+                local.setId(rs.getInt("Endereco_idEndereco"));
+                evento.setLocal(local);
+                funcionario.setId(rs.getInt("Funcionario_idFuncionario"));
+                evento.setFuncionario(funcionario);
+                evento.setTema(rs.getString("tema"));
+                
                 //evento.setConvidados(convidados);
                 list.add(evento);
             }
@@ -142,6 +153,27 @@ public class DefaultEventoDao implements EventoDao {
                 //evento.setLocal(list);
                 //evento.setConvidados(convidados);
                 list.add(evento);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Cliente> buscarListaDeConvidados(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT (Cliente_idCliente) FROM listaconvidados WHERE Evento_idEvento = ?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            List<Cliente> list = new ArrayList<Cliente>();
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId(rs.getInt("Cliente_idCliente"));
+                list.add(cliente);
             }
             return list;
         } catch (SQLException e) {

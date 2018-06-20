@@ -42,8 +42,8 @@
 		  		<div class="container">
 					<div class="row">
 		  				<div class="col-sm-1">
-		  					<a href="clientes" class="btn btn-primary btn-lg">
-		  						<span class="glyphicon glyphicon-home"></span> Home
+		  					<a href="eventos" class="btn btn-primary btn-lg">
+		  						<span class="glyphicon glyphicon-home"></span> Eventos
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-3" id="correcao-menu">
