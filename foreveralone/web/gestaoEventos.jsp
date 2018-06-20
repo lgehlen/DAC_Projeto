@@ -98,8 +98,13 @@
                 <c:forEach items="${eventos}" var="x">
                     <div class="row" id="relatorios">
                         <div class="col-sm-1"><h4><c:out value="${x.id}"/></h4></div>
-                        <div class="col-sm-8"><h4><c:out value="${x.tema}"/></h4></div>
+                        <div class="col-sm-7"><h4><c:out value="${x.tema}"/></h4></div>
                         <!--Modal-->
+                        <div class="col-sm-1">
+                            <a href="eventos?action=listConvidar&id=${x.id}" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                        </div>
                         <div class="col-sm-1">
                             <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc${x.id}">
                                 <span class="glyphicon glyphicon-trash"></span>
@@ -233,7 +238,7 @@
                 <div class="row" id="glypicon-gerencia-usuarios">
                     <div class="col-sm-9"></div>
                     <div class="col-sm-2">	
-                        <a href="index.html" class="btn btn-default btn-lg">
+                        <a href="clientes" class="btn btn-default btn-lg">
                             <span class="glyphicon glyphicon-chevron-left"></span> Voltar 
                         </a>
                     </div>	

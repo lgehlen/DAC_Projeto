@@ -35,14 +35,14 @@ public class DefaultEventoDao implements EventoDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("INSERT INTO forever.Atributo (data, horario, Convidado_idPar, Funcioario_idFuncionario, Endereco_idEndereco, Endereco_cidade_idCidade, idEvento) "
+            st = con.prepareStatement("INSERT INTO forever.Evento (data, horario, Funcionario_idFuncionario, Endereco_idEndereco, tema, local) "
                     + " VALUES(?,?,?,?,?,?)");
             st.setDate(1, new java.sql.Date(evento.getData().getTime()));
             st.setString(2, evento.getHorario());
-            st.setInt(3, 1);
-            st.setInt(4, 1);
-            st.setInt(5, 1);
-            st.setInt(6, evento.getId());
+            st.setInt(3, evento.getFuncionario().getId());
+            st.setInt(4, evento.getLocal().getId());
+            st.setString(5, evento.getTema());
+            st.setString(6, evento.getLocal().getRua());
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,12 +67,12 @@ public class DefaultEventoDao implements EventoDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("UPDATE forever.Atributo SET data = ? , horario = ?, Funcioario_idFuncionario = ?, Endereco_idEndereco = ?, Endereco_cidade_idCidade = ? WHERE idEvento = ? ");
+            st = con.prepareStatement("UPDATE forever.Evento SET data = ? , horario = ?, Endereco_idEndereco = ?, local = ?, tema = ? WHERE idEvento = ? ");
             st.setDate(1, new java.sql.Date(evento.getData().getTime()));
             st.setString(2, evento.getHorario());
-            st.setInt(3, 1);
-            st.setInt(4, 1);
-            st.setInt(5, 1);
+            st.setInt(3, evento.getLocal().getId());
+            st.setString(4, evento.getLocal().getRua());
+            st.setString(5, evento.getTema());
             st.setInt(6, evento.getId());
             st.executeUpdate();
         } catch (SQLException ex) {
@@ -117,16 +117,22 @@ public class DefaultEventoDao implements EventoDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT data, horario, local, Convidado_idPar, Funcioario_idFuncionario, Endereco_idEndereco, Endereco_cidade_idCidade FROM forever.Evento WHERE idEvento = ? ");
+            ps = con.prepareStatement("SELECT idEvento, tema, data, horario, local, Funcionario_idFuncionario, Endereco_idEndereco FROM forever.Evento WHERE idEvento = ? ");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             List<Evento> list = new ArrayList<Evento>();
             while (rs.next()) {
+                Funcionario funcionario = new Funcionario();
+                Endereco local = new Endereco();
+                
                 Evento evento = new Evento();
                 evento.setData(rs.getDate("data"));
                 evento.setHorario(rs.getString("horario"));
-                //evento.setLocal(list);
-                //evento.setConvidados(convidados);
+                evento.setTema(rs.getString("tema"));
+                funcionario.setId(rs.getInt("Funcionario_idFuncionario"));
+                evento.setFuncionario(funcionario);
+                local.setId(rs.getInt("Endereco_idEndereco"));
+                evento.setLocal(local);
                 list.add(evento);
             }
             return list.get(0);
@@ -180,6 +186,22 @@ public class DefaultEventoDao implements EventoDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void convidaCliente(int idCliente, int idEvento) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("INSERT INTO forever.listaconvidados (Evento_idEvento, Cliente_idCliente)"
+                    + " VALUES (?, ?)");
+            st.setInt(1, idEvento);
+            st.setInt(2, idCliente);
+
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

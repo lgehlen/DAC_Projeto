@@ -27,4 +27,6 @@ public interface EventoDao {
     List<Evento> buscarEventosPorCliente(int idCliente);
     
     List<Cliente> buscarListaDeConvidados(int id);
+    
+    void convidaCliente(int idCliente, int idEvento);
 }

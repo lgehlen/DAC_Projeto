@@ -3,7 +3,6 @@ function popupfuncionario() {
      }
   
 $(document).ready(function() {
-                getCidades();
                 $( "#estado" ).change(function() {
                   getCidades();
                    

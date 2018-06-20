@@ -34,4 +34,20 @@ public class EventoFacade {
     public List<Cliente> getListaDeConvidados(int id){
         return eventoDao.buscarListaDeConvidados(id);
     }
+    
+    public void criarEvento(Evento evento){
+        eventoDao.criarEvento(evento);
+    }
+    
+    public Evento buscaEventoPorId(int id){
+        return eventoDao.buscarEventoPorId(id);
+    }
+    
+    public void atulizaEvento(Evento evento){
+        eventoDao.atualizarEvento(evento);
+    }
+    
+    public void convidaCliente(int idCliente, int idEvento){
+        eventoDao.convidaCliente(idCliente, idEvento);
+    }
 }
