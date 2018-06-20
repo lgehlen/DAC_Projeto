@@ -38,7 +38,7 @@
                 <br>
                 <div id="cabe">
                     <!--LOGO -->
-                    <div class="col-sm-1"> <a href="/foreveralone/login"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
+                    <div class="col-sm-1"><img id="logo" src="logo-forever.png" alt="logo"></div>
                     <div class="container">
 
                         <div class="row">
@@ -48,15 +48,15 @@
                                 </a>
                             </div>
                             <div class="col-sm-2">
-                                <a href="festas.html" class="btn btn-primary btn-lg">
-                                    <span class="glyphicon glyphicon-fire"></span> Festas
+                                <a href="clientes?action=pares" class="btn btn-primary btn-lg">
+                                    <span class="glyphicon glyphicon-user"></span> Pares
                                 </a>
                             </div>
-                            <div class="col-sm-2">
-                                <a href="clientes?action=listEncontros" class="btn btn-primary btn-lg">
-                                    <span class="glyphicon glyphicon-heart"></span> Encontros
-                                </a>
-                            </div>
+                            	  				<div class="col-sm-2">
+		  					<a href="festas.html" class="btn btn-primary btn-lg">
+		  						<span class="glyphicon glyphicon-fire"></span> Festas
+		  					</a>
+		  				</div>
                             <div class="col-sm-2">
                                 <a href="casamento.html" class="btn btn-primary btn-lg">
                                     <span class="glyphicon glyphicon-gift"></span> Casamento
@@ -138,6 +138,9 @@
                     </div>
                 </div>
             </c:forEach>
+            <c:if test="${empty encontros}">
+                <h5>Você não possui encontros pendentes</h5>
+            </c:if>
         </div>
         
         <div class="container" id="container-encontros">
@@ -175,6 +178,43 @@
                     </div>
                 </div>
             </c:forEach>
+            <c:if test="${empty encontrosMarcados}">
+                <h5>Você não possui encontros marcados</h5>
+            </c:if>
+        </div>
+        
+        <div class="container" id="container-encontros">
+            <div class="row">
+                <div class="col-sm-4"><h4> Festas </h4></div>
+            </div>
+            <br>
+            <c:forEach items="${eventos}" var="x" varStatus="i">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-parent="#accordion" data-toggle="collapse" href="#collapse<c:out value="${x.id}"/>">Encontro com&nbsp;<c:out value="${nome}"/></a>
+                            </h4>
+                        </div>
+                        <div id="collapse<c:out value="${x.id}"/>" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <div class="col-sm-6" >Nome:<p><c:out value="${x.tema}"/></p> </div>
+                                <div class="col-sm-6" ><p>&nbsp;<br><br></p></div> 
+                                <div class="col-sm-6" >Data:<p><fmt:formatDate value="${x.data}" pattern="dd/MM/yy"/></p></div>  
+                                <div class="col-sm-6" >Local:<p><c:out value="${x.local.rua}"/></p></p></div>
+                                <div class="col-sm-12">&nbsp;</div>
+                                <div class="col-sm-6"></div>
+                                <div class="col-sm-2"></div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+            <c:if test="${empty eventos}">
+                <h5>Você não possui convite de festas</h5>
+            </c:if>
         </div>
 
         <br>

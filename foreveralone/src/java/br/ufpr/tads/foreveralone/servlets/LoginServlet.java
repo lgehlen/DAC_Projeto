@@ -91,7 +91,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("loginBean", login);
                 RequestDispatcher rd = request.
-                                getRequestDispatcher("clientes");
+                                getRequestDispatcher("/clientes?action=listEncontros");
                         request.setAttribute("login", login);
                         rd.forward(request, response);    
             }

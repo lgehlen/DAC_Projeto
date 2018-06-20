@@ -82,6 +82,13 @@
 	</header>
 	<!--Corpo da página-->
 	<div class="container" id="container-pesquisa-pares">
+               <form name="dadoscliente" action="clientes?action=list" method= "post" >
+                        <div>
+                          <input type="search" id="search" name="search"
+                           placeholder="Procurar por cpf ou nome...">
+                          <button type="submit" class="btn btn-info btn-lg">Procurar</button>
+                        </div>
+                      </form>
 		<form>
 			<div class="row">
 				<div id="titleclientes" class="col-sm-2"><h4> Lista de Clientes</h4></div>

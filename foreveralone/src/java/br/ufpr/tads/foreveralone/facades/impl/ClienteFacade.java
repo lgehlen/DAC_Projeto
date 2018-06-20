@@ -112,6 +112,10 @@ public class ClienteFacade {
         return getClienteDao().getLogin(email,sen);
     }
     
+    public List<Cliente> listarClientesPorCpfOrName(String CPF){
+        return getClienteDao().listarClientesPorCpfOrName(CPF);
+    }
+    
     public Cidade getCidadePorId(int id){
         return cidadeDao.buscarCidadePorId(id);
     }

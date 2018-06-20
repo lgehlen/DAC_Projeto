@@ -37,12 +37,12 @@
 	  		<br>
 	  		<div id="cabe">
 	  			<!--LOGO -->
-	  			<div class="col-sm-1"> <a href="/foreveralone/login"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
+	  			<div class="col-sm-1"><img id="logo" src="logo-forever.png" alt="logo"></div>
 		  		<div class="container">
 
 					<div class="row">
 		  				<div class="col-sm-2">
-		  					<a href="clientes" class="btn btn-primary btn-lg">
+		  					<a href="#" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-home"></span> Home
 		  					</a>
 		  				</div>
@@ -57,7 +57,7 @@
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="casamento.html" class="btn btn-primary btn-lg">
+		  					<a href="casamento.jsp" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-gift"></span> Casamento
 		  					</a>
 		  				</div>
@@ -75,8 +75,6 @@
                                                                    <li><a href="clientes?action=formUpdate&id=${loginBean.id}"> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
                                                                    <li><a> <span class="glyphicon glyphicon-flag"> </span>  Tipo: <c:out value="${loginBean.tipo}"/></a></li>
                                                                         <li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
-		      						<li><a href="#">Home</a></li>
-		      						
 	    						</ul>
 	  						</div>
     					</div>
