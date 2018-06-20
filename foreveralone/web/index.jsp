@@ -43,21 +43,28 @@
 	    		</div>
 	    		<br>
 	 	 	
-		</div>	
-		<div class="row" id="glypicon-login">
-		    <div class="col-sm-4"></div>
-		    <div class="col-sm-2">	
-		      	<button type="submit" class="btn btn-info btn-lg">
-		      		<span class="glyphicon glyphicon-play-circle"></span> Entrar
-		      	</button>
-                        </form>
+				</div>	
+				<div class="row" id="glypicon-login">
+				    <div class="col-sm-4"></div>
+				    <div class="col-sm-12">	
+				      	<button type="submit" class="btn btn btn-primary btn-block">
+				      		<span class="glyphicon glyphicon-play-circle"></span> Entrar
+				      	</button>
+            </form>
 		    </div>
 	     </div>
 	     <br>
 	     <div class="row" id="glypicon-login">
-		    <div class="col-sm-6"></div>
-		    	<div class="col-sm-6">
-					<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
+		    <div class="col-sm-12">
+		    	<a type="button" class="btn btn-success btn-block" data-toggle="modal" href="clientes?action=formNew">
+					<span class="glyphicon glyphicon-pencil"></span> Cadastrar novo
+				</a>
+			</div>
+		</div>
+		<div class="row" id="glypicon-login">
+				<div class="col-sm-4"></div>
+		    	<div class="col-sm-12">
+					<button type="button" class="btn btn-danger btn-block btn-block" data-toggle="modal" data-target="#myModal">
 						<span class="glyphicon glyphicon-wrench"></span> Esqueci minha Senha
 					</button>
 					<!-- Modal -->

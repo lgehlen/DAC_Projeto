@@ -51,34 +51,36 @@
 		  						<span class="glyphicon glyphicon-home"></span> Home
 		  					</a>
 		  				</div>
-		  				<div class="col-sm-3">
-		  					<a href="#" class="btn btn-primary btn-lg">
-		  						<span class="glyphicon glyphicon-pencil"></span> Cadastrar Usuário
-		  					</a>
-		  				</div>
-		  				<div class="col-sm-3">
-		  					<a href="atualiza-dados.html" class="btn btn-primary btn-lg">
-		  						<span class="glyphicon glyphicon-refresh"></span> Atualizar Dados
-		  					</a>
-		  				</div>
-		  				<div class="col-sm-3">
-		  					<a href="gerenciar-perfis.html" class="btn btn-primary btn-lg">
-		  						<span class="glyphicon glyphicon-wrench"></span> Gerenciar Perfis
-		  					</a>
-		  				</div>
-		  				<div class="col-sm-1"> 
-	    					<div class="dropdown">
-	    						<button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span>
-	    						<span class="caret"></span></button>
-	   							<ul class="dropdown-menu">
-	   								<li><a> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
-	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo: ${loginBean.tipo} </a></li>
-		      						<li><a href="#">Home</a></li>
-		      						<li class="divider"></li>
-		      						<li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
-	    						</ul>
-	  						</div>
-    					</div>
+		  				<c:if test="${loginBean != null}">
+			  				<div class="col-sm-3">
+			  					<a href="#" class="btn btn-primary btn-lg">
+			  						<span class="glyphicon glyphicon-pencil"></span> Cadastrar Usuário
+			  					</a>
+			  				</div>
+			  				<div class="col-sm-3">
+			  					<a href="atualiza-dados.html" class="btn btn-primary btn-lg">
+			  						<span class="glyphicon glyphicon-refresh"></span> Atualizar Dados
+			  					</a>
+			  				</div>
+			  				<div class="col-sm-3">
+			  					<a href="gerenciar-perfis.html" class="btn btn-primary btn-lg">
+			  						<span class="glyphicon glyphicon-wrench"></span> Gerenciar Perfis
+			  					</a>
+			  				</div>
+			  				<div class="col-sm-1"> 	
+		    					<div class="dropdown">
+		    						<button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span>
+		    						<span class="caret"></span></button>
+		   							<ul class="dropdown-menu">
+		   								<li><a> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
+		   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo: ${loginBean.tipo} </a></li>
+			      						<li><a href="#">Home</a></li>
+			      						<li class="divider"></li>
+			      						<li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
+		    						</ul>
+		  						</div>
+	    					</div>
+	    				</c:if>	
 		  			</div>
 		  		</div>
 		  	</div>
