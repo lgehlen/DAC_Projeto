@@ -65,6 +65,83 @@ public class ClientesServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if (session == null || ((Login) session.getAttribute("loginBean") == null)) {
+            if(request.getParameter("action")!=null){
+                String action = request.getParameter("action");
+                if (action.equals("formNew")) {
+                    String url = "/cadastraUsuario.jsp";
+                    int formType = 1;
+                    List<Estado> estados = this.clientesFacade.buscarEstados();
+                    request.setAttribute("estados", estados);
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    request.setAttribute("formType", formType);
+                    rd.forward(request, response);
+                }else if (action.equals("new")) {
+                    Cliente cliente = new Cliente();
+
+                    Cidade cidade = new Cidade();
+                    Estado estado = new Estado();
+                    Endereco endereco = new Endereco();
+                    Atributo preferencias = new Atributo();
+                    Atributo caracteristicas = new Atributo();
+
+                    cliente.setCpf(request.getParameter("cpf"));
+                    cliente.setEmail(request.getParameter("email"));
+                    cliente.setNome(request.getParameter("nome"));
+                    cliente.setEscolaridade(request.getParameter("escolaridade"));
+
+                    try {
+                        MessageDigest md = MessageDigest.getInstance("MD5");
+                        BigInteger hash = new BigInteger(1, md.digest(request.getParameter("senha").getBytes()));
+                        cliente.setSenha(hash.toString(16));
+                    } catch (NoSuchAlgorithmException ex) {
+                        Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    cidade = clientesFacade.getCidadePorId(Integer.parseInt(request.getParameter("cidade")));
+                    estado = clientesFacade.getEstadoPorId(Integer.parseInt(request.getParameter("estado")));
+                    cidade.setEstado(estado);
+
+                    endereco.setRua(request.getParameter("rua"));
+                    endereco.setCep(request.getParameter("cep"));
+                    endereco.setId(clientesFacade.getProximoIdEndereco());
+                    endereco.setLogradouro(request.getParameter("numero"));
+                    endereco.setCidade(cidade);
+
+                    this.clientesFacade.criarEndereço(endereco);
+                    cliente.setEndereço(endereco);
+
+                    preferencias.setCorDeCabelo(request.getParameter("pcordocabelo"));
+                    preferencias.setCorDePele(request.getParameter("pcordapele"));
+                    preferencias.setDescricao(request.getParameter("rangemin") + "-" + request.getParameter("rangemax"));
+                    preferencias.setSexo(request.getParameter("psexo"));
+                    preferencias.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                    this.clientesFacade.criaAtributo(preferencias);
+                    cliente.setPreferencias(preferencias);
+
+                    caracteristicas.setCorDeCabelo(request.getParameter("cordocabelo"));
+                    caracteristicas.setCorDePele(request.getParameter("cordapele"));
+                    caracteristicas.setDescricao(request.getParameter("descricao"));
+                    caracteristicas.setSexo(request.getParameter("sexo"));
+                    caracteristicas.setIdAtributo(this.clientesFacade.buscaProximoIdAtributo());
+                    this.clientesFacade.criaAtributo(caracteristicas);
+                    cliente.setCaracteristicas(caracteristicas);
+
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+                    try {
+                        cliente.setDataNasc(formatter.parse(request.getParameter("data")));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    cliente.setDataCad(new Date());
+
+                    this.clientesFacade.criarCliente(cliente);
+
+                    RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+                    request.setAttribute("msg", "Usuário cadastrado");
+                    rd.forward(request, response);
+                }
+            }
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema");
             rd.forward(request, response);
