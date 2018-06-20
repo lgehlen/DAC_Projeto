@@ -29,7 +29,7 @@
 		<br>
 			<p id="frase">Você está em busca da sua metade da laranja? </p>
 			<p id="frase">Aqui no forever alone você encontra isso e muito mais </p>
-		<a id="botao-popup" class="btn btn-info" role="button" href="#container-login">Localizar cara Metade <span  style="color:red"  class="glyphicon glyphicon-heart"></span></a>
+		<a id="botao-popup" class="btn btn-info" role="button" href="#container-login">Localizar sua cara Metade <span  style="color:red"  class="glyphicon glyphicon-heart"></span></a>
 	</div>
 	<br><br><br><br>
 	<div class="container" id="container-login">
@@ -106,7 +106,7 @@
 	  				</div>
 				</div>
 	     </div>
-	</div>				
+	</div>	<br><br>				
 </body>
 	
 </html>
