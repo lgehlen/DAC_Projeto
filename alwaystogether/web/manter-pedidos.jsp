@@ -74,13 +74,12 @@
 	</header>
 	<div class="container" id="container-manter-pedidos">
 		<div class="row">
-			<div class="col-sm-4"><h4>Pedidos</h4></div>
+			<div class="col-sm-4"><h2>Pedidos</h2></div>
 		</div>
 		<table class="table table-striped" style="text-align:center;">
 			<thead>
    				<tr>
 			      <th id="colunas-pesquisa" scope="col">Clientes</th>
-			      <th id="colunas-pesquisa" scope="col"></th>
 			      <th id="colunas-pesquisa" scope="col">Status</th>
 			       <th id="colunas-pesquisa" scope="col">Opções</th>
 
@@ -90,8 +89,7 @@
                    <c:forEach items="${pedidos}" var="p">
 		    <tr>
 		      <th id="colunas-pesquisa" scope="row"><h4>${p}</h4></th>
-		      <td> </td>
-		      <td> <h4>${p.statusOrcamento}</h4></td> 	
+		      <td><h4>${p.statusOrcamento}</h4></td> 	
 		      <td>
 		      	<!-- Todos os modais lá embaixo -->
 		      	<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc1">

@@ -32,7 +32,7 @@ public class DefaultPedidoDao implements PedidoDao {
         try {
             st = con.prepareStatement("INSERT INTO always.Pedido (statusOrcanento, Orcamento_idOrcamento)"
                                         + " VALUES (?, ?)");
-            st.setInt(1, pedido.getStatusOrcamento());
+            st.setString(1, pedido.getStatusOrcamento());
             st.setInt(2, pedido.getIdOrcamento());
             
             st.executeUpdate();
@@ -56,13 +56,13 @@ public class DefaultPedidoDao implements PedidoDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idPedido, statusOrcanento, Orcamento_idOrcamento FROM always.Pedido");
+            ps = con.prepareStatement("SELECT idPedido, statusOrcamento, Orcamento_idOrcamento FROM always.Pedido");
             rs = ps.executeQuery();
             List<Pedido> list = new ArrayList<Pedido>();
             while (rs.next()) {
                 Pedido pedido = new Pedido();
-                pedido.setEmailCliente(rs.getString("email"));
-                pedido.setIdOrcamento(rs.getInt("id"));
+                pedido.setStatusOrcamento(rs.getString("statusOrcamento"));
+                pedido.setIdOrcamento(rs.getInt("idPedido"));
                 
                 list.add(pedido);
             }
@@ -84,8 +84,8 @@ public class DefaultPedidoDao implements PedidoDao {
             List<Pedido> list = new ArrayList<Pedido>();
             while (rs.next()) {
                 Pedido pedido = new Pedido();
-                pedido.setEmailCliente(rs.getString("email"));
-                pedido.setIdOrcamento(rs.getInt("id"));
+                pedido.setStatusOrcamento(rs.getString("statusOrcamento"));
+                pedido.setIdOrcamento(rs.getInt("idPedido"));
                 
                 list.add(pedido);
             }

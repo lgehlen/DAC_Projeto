@@ -14,9 +14,7 @@ public class Pedido {
     
     private int idOrcamento;
     
-    private String emailCliente;
-    
-    private int statusOrcamento;
+    private String statusOrcamento;
 
     /**
      * @return the idPedido
@@ -47,30 +45,16 @@ public class Pedido {
     }
 
     /**
-     * @return the emailCliente
-     */
-    public String getEmailCliente() {
-        return emailCliente;
-    }
-
-    /**
-     * @param emailCliente the emailCliente to set
-     */
-    public void setEmailCliente(String emailCliente) {
-        this.emailCliente = emailCliente;
-    }
-
-    /**
      * @return the statusOrcamento
      */
-    public int getStatusOrcamento() {
+    public String getStatusOrcamento() {
         return statusOrcamento;
     }
 
     /**
      * @param statusOrcamento the statusOrcamento to set
      */
-    public void setStatusOrcamento(int statusOrcamento) {
+    public void setStatusOrcamento(String statusOrcamento) {
         this.statusOrcamento = statusOrcamento;
     }
 }
