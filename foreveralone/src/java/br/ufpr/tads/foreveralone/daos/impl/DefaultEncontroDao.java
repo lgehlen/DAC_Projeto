@@ -83,18 +83,25 @@ public class DefaultEncontroDao implements EncontroDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idEncontro, local, data, horario, Endereco_idEndereco, Endereco_Cidade_idCidade FROM forever.Encontro WHERE idEncontro = ?  ");
+            ps = con.prepareStatement("SELECT idEncontro, local, data, horario, Endereco_idEndereco, Cliente_idCliente, Cliente_idCliente1 FROM forever.Encontro WHERE idEncontro = ?  ");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             List<Encontro> list = new ArrayList<Encontro>();
             while (rs.next()) {
                 Encontro encontro = new Encontro();
+                Cliente cliente1 = new Cliente();
+                Cliente cliente2 = new Cliente();
+                Endereco local = new Endereco();
                 encontro.setData(rs.getDate("data"));
                 encontro.setHorario(rs.getString("horario"));
                 encontro.setId(rs.getInt("idEncontro"));
-                //encontro.setIdCliente1(rs.getInt("Convidado_idPar"));
-                //encontro.setIdCliente2(rs.getInt("idEvento"));
-                //encontro.setLocal(list);
+                local.setId(rs.getInt("Endereco_idEndereco"));
+                cliente1.setId(rs.getInt("Cliente_idCliente"));
+                cliente2.setId(rs.getInt("Cliente_idCliente1"));
+
+                encontro.setIdCliente1(cliente1);
+                encontro.setIdCliente2(cliente2);
+                encontro.setLocal(local);
                 list.add(encontro);
             }
             return list.get(0);
@@ -108,9 +115,8 @@ public class DefaultEncontroDao implements EncontroDao {
     public List<Encontro> listarEncontros(int id) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        System.out.println("Id: " + id);
         try {
-            ps = con.prepareStatement("SELECT idEncontro, local, data, horario, Endereco_idEndereco, Cliente_idCliente, Cliente_idCliente1 FROM forever.Encontro WHERE Cliente_idCliente = ? OR Cliente_idCliente1 = ?");
+            ps = con.prepareStatement("SELECT idEncontro, local, data, horario, Endereco_idEndereco, Cliente_idCliente, Cliente_idCliente1 FROM forever.Encontro WHERE isAceito = 0 AND ( Cliente_idCliente = ? OR Cliente_idCliente1 = ? )");
             ps.setInt(1, id);
             ps.setInt(2, id);
             rs = ps.executeQuery();
@@ -156,4 +162,87 @@ public class DefaultEncontroDao implements EncontroDao {
         }
     }
 
+    @Override
+    public List<Integer> buscaListaNegra(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT bloqueado FROM listanegra WHERE cliente = ?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            List<Integer> list = new ArrayList<Integer>();
+            while (rs.next()) {
+                list.add(rs.getInt("bloqueado"));
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;    
+    }
+
+    @Override
+    public void aceitarEncontro(int id) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("UPDATE forever.Encontro set isAceito = 1 WHERE idEncontro = ?");
+            st.setInt(1, id);
+
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public List<Encontro> listarEncontrosMarcados(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idEncontro, local, data, horario, Endereco_idEndereco, Cliente_idCliente, Cliente_idCliente1 FROM forever.Encontro WHERE isAceito = 1 AND ( Cliente_idCliente = ? OR Cliente_idCliente1 = ? )");
+            ps.setInt(1, id);
+            ps.setInt(2, id);
+            rs = ps.executeQuery();
+            List<Encontro> list = new ArrayList<Encontro>();
+            while (rs.next()) {
+                Encontro encontro = new Encontro();
+                Cliente cliente1 = new Cliente();
+                Cliente cliente2 = new Cliente();
+                Endereco local = new Endereco();
+
+                encontro.setData(rs.getDate("data"));
+                encontro.setHorario(rs.getString("horario"));
+                encontro.setId(rs.getInt("idEncontro"));
+                local.setId(rs.getInt("Endereco_idEndereco"));
+                cliente1.setId(rs.getInt("Cliente_idCliente"));
+                cliente2.setId(rs.getInt("Cliente_idCliente1"));
+
+                encontro.setIdCliente1(cliente1);
+                encontro.setIdCliente2(cliente2);
+                encontro.setLocal(local);
+                list.add(encontro);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void concluirEncontro(int id) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("UPDATE forever.Encontro set isAceito = 2 WHERE idEncontro = ?");
+            st.setInt(1, id);
+
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultAtributoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
 }

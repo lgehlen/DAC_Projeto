@@ -321,6 +321,8 @@ public class ClientesServlet extends HttpServlet {
                 Endereco end = new Endereco();
                 Cidade cid = new Cidade();
                 Estado est = new Estado();
+                List<Integer> lista = encontroFacade.buscaListaNegra(login.getId());
+                List<Integer> paraRemover = new ArrayList<Integer>();
 
                 end = clientesFacade.getEnderecoPorId(usuario.getEndereço().getId());
                 cid = clientesFacade.getCidadePorId(end.getCidade().getId());
@@ -332,6 +334,8 @@ public class ClientesServlet extends HttpServlet {
                 List<Cliente> clientes = new ArrayList<Cliente>();
                 Atributo pref = clientesFacade.getAtributoPorId(usuario.getPreferencias().getIdAtributo());
                 clientes = this.clientesFacade.listarClientesPorPreferencia(pref);
+                int count = 0;
+
                 for (Cliente cliente : clientes) {
                     Atributo p = new Atributo();
                     Atributo c = new Atributo();
@@ -367,6 +371,18 @@ public class ClientesServlet extends HttpServlet {
                     ci.setEstado(es);
                     en.setCidade(ci);
                     cliente.setEndereço(en);
+
+                    for (Integer l : lista) {
+                        if (cliente.getId() == l) {
+                            paraRemover.add(count);
+                        }
+                    }
+
+                    count++;
+                }
+
+                for (Integer para : paraRemover) {
+                    clientes.remove(para.intValue());
                 }
 
                 List<Estado> estados = this.clientesFacade.buscarEstados();
@@ -451,15 +467,64 @@ public class ClientesServlet extends HttpServlet {
 
             }
 
+            List<Encontro> encontrosMarcados = new ArrayList<Encontro>();
+            encontrosMarcados = encontroFacade.listarEncontrosMarcados(login.getId());
+            List<Integer> paraRemover = new ArrayList<Integer>();
+            int count = 0;
+
+            for (Encontro encontro : encontrosMarcados) {
+
+                Endereco en = new Endereco();
+                Cidade ci = new Cidade();
+                Estado es = new Estado();
+
+                en = clientesFacade.getEnderecoPorId(encontro.getLocal().getId());
+                ci = clientesFacade.getCidadePorId(en.getCidade().getId());
+                es = clientesFacade.getEstadoPorId(ci.getEstado().getId());
+                ci.setEstado(es);
+                en.setCidade(ci);
+                encontro.setLocal(en);
+
+                Cliente cliente1 = new Cliente();
+                Cliente cliente2 = new Cliente();
+
+                cliente1 = clientesFacade.buscarClientePorId(encontro.getIdCliente1().getId());
+                cliente2 = clientesFacade.buscarClientePorId(encontro.getIdCliente2().getId());
+
+                encontro.setIdCliente1(cliente1);
+                encontro.setIdCliente2(cliente2);
+
+                Date dataAtual = new Date();
+                if (encontro.getData().before(dataAtual)) {
+                    encontroFacade.concluirEncontro(encontro.getId());
+                    paraRemover.add(count);
+                }
+
+                count++;
+            }
+
+            for (Integer l : paraRemover) {
+                encontrosMarcados.remove(l.intValue());
+            }
+
             url = "/encontros.jsp";
             request.setAttribute("encontros", encontros);
+            request.setAttribute("encontrosMarcados", encontrosMarcados);
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward(request, response);
         } else if (action.equals("listaNegra")) {
             int cliente = Integer.parseInt(request.getParameter("cliente"));
             int bloqueado = Integer.parseInt(request.getParameter("bloqueado"));
-            
             encontroFacade.listaNegra(cliente, bloqueado);
+
+            Encontro encontro = encontroFacade.buscarEncontroPorId(Integer.parseInt(request.getParameter("id")));
+            encontroFacade.deletarEncontro(encontro);
+            url = "clientes?action=listEncontros";
+            response.sendRedirect(url);
+        } else if (action.equals("aceitaEncontro")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            encontroFacade.aceitarEncontro(id);
+
             url = "clientes?action=listEncontros";
             response.sendRedirect(url);
         }

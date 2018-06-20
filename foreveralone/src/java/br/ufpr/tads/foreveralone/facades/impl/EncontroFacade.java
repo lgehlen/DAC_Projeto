@@ -41,6 +41,10 @@ public class EncontroFacade {
     public List<Encontro> listarEncontros(int id) {
         return getEncontroDao().listarEncontros(id);
     }
+    
+    public List<Encontro> listarEncontrosMarcados(int id) {
+        return getEncontroDao().listarEncontrosMarcados(id);
+    }
 
     
     public Encontro buscarEncontroPorId(int id) {
@@ -50,7 +54,19 @@ public class EncontroFacade {
     public void listaNegra(int cliente, int bloqueado){
         encontroDao.listaNegra(cliente, bloqueado);
     }
+    
+    public List<Integer> buscaListaNegra(int id){
+        return encontroDao.buscaListaNegra(id);
+    }
 
+    public void aceitarEncontro(int id){
+        encontroDao.aceitarEncontro(id);
+    }
+    
+    public void concluirEncontro(int id){
+        encontroDao.concluirEncontro(id);
+    }
+    
     /**
      * @return the encontroDao
      */
