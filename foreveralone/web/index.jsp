@@ -63,7 +63,7 @@
 	     <div class="row" id="glypicon-login">
 		    <div class="col-sm-12">
 		    	<a type="button" class="btn btn-success btn-block" data-toggle="modal" href="clientes?action=formNew">
-					<span class="glyphicon glyphicon-pencil"></span> Cadastrar novo
+					<span class="glyphicon glyphicon-pencil"></span> Registar-se
 				</a>
 			</div>
 		</div>
