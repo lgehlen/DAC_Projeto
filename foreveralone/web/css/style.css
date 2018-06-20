@@ -360,3 +360,23 @@ footer {
 #glypicon-gerencia-usuarios{
 	margin-left: 650px;
 }
+
+#popup{
+	background-image: url(planofundo-forever.png);
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-size: 30pt;
+	color: #ffffff;
+	padding-top: 17%;
+}
+
+#botao-popup{
+	background-color: black;
+	border: 0px;
+	font-size: 14pt;
+}
+
+#frase{
+	font-size: 18pt;
+}

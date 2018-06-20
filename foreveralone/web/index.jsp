@@ -24,8 +24,14 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<br>
-	<br>
+    	<div id="popup">
+		<strong id="cor-titulo">Bem vindo ao Forever Alone :) </strong>
+		<br>
+			<p id="frase">Você está em busca da sua metade da laranja? </p>
+			<p id="frase">Aqui no forever alone você encontra isso e muito mais </p>
+		<a id="botao-popup" class="btn btn-info" role="button" href="#container-login">Localizar cara Metade <span  style="color:red"  class="glyphicon glyphicon-heart"></span></a>
+	</div>
+	<br><br><br><br>
 	<div class="container" id="container-login">
 		<div class="row">
                     <div class="col-sm-4"><h4><a href="/foreveralone"><img id="foto-login" src="./imagens/user.jpg" width="100" height="50"></a></h4></div>
