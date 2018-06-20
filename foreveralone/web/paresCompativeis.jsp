@@ -57,7 +57,7 @@
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="casamento.jsp" class="btn btn-primary btn-lg">
+		  					<a href="CasamentoServlet" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-gift"></span> Casamento
 		  					</a>
 		  				</div>

@@ -37,12 +37,6 @@ public class PedidoFacade {
         getOrcamentoDao().atualizarOrcamento(orcamento);
     }
 
-    
-    public List<Orcamento> buscarOrcamentos() {
-        return getOrcamentoDao().buscarOrcamentos();
-    }
-
-    
     public Orcamento buscarOrcamentoPorId(int id) {
         return getOrcamentoDao().buscarOrcamentoPorId(id);
     }
@@ -59,5 +53,9 @@ public class PedidoFacade {
      */
     public static void setOrcamentoDao(OrcamentoDao aOrcamentoDao) {
         orcamentoDao = aOrcamentoDao;
+    }
+
+    public List<Orcamento> buscarOrcamentos(int id) {
+        return getOrcamentoDao().buscarOrcamentos(id);
     }
 }

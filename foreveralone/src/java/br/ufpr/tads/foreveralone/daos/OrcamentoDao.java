@@ -22,4 +22,6 @@ public interface OrcamentoDao {
     List<Orcamento> buscarOrcamentos();
     
     Orcamento buscarOrcamentoPorId(int id);
+
+    public List<Orcamento> buscarOrcamentos(int id);
 }

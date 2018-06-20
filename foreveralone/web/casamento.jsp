@@ -44,22 +44,22 @@
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="festas.html" class="btn btn-primary btn-lg">
+		  					<a href="encontros.jsp" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-fire"></span> Festas
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="#" class="btn btn-primary btn-lg">
+		  					<a href="encontros.jsp" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-heart"></span> Encontros
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="casamento.html" class="btn btn-primary btn-lg">
+		  					<a href="CasamentoServlet" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-gift"></span> Casamento
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2" >
-		  					<a href="preferencias.html" class="btn btn-primary btn-lg">
+		  					<a href="preferencias.jsp" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-filter"></span> Preferências
 		  					</a>
 		  				</div>

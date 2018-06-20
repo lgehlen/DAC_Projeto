@@ -53,5 +53,10 @@ public class DefaultOrcamentoDao implements OrcamentoDao {
     public Orcamento buscarOrcamentoPorId(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Orcamento> buscarOrcamentos(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

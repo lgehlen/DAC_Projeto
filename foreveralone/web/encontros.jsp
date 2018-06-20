@@ -52,18 +52,13 @@
                                     <span class="glyphicon glyphicon-user"></span> Pares
                                 </a>
                             </div>
-                            	  				<div class="col-sm-2">
-		  					<a href="festas.html" class="btn btn-primary btn-lg">
-		  						<span class="glyphicon glyphicon-fire"></span> Festas
-		  					</a>
-		  				</div>
                             <div class="col-sm-2">
-                                <a href="casamento.html" class="btn btn-primary btn-lg">
+                                <a href="CasamentoServlet" class="btn btn-primary btn-lg">
                                     <span class="glyphicon glyphicon-gift"></span> Casamento
                                 </a>
                             </div>
                             <div class="col-sm-2" >
-                                <a href="clientes?action=formNew&id=${loginBean.id}" class="btn btn-primary btn-lg">
+                                <a href="clientes?action=formUpdate&id=${loginBean.id}" class="btn btn-primary btn-lg">
                                     <span class="glyphicon glyphicon-filter"></span> Preferências
                                 </a>
                             </div>
