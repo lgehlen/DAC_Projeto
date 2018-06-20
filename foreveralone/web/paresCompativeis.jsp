@@ -75,8 +75,6 @@
                                                                    <li><a href="clientes?action=formUpdate&id=${loginBean.id}"> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
                                                                    <li><a> <span class="glyphicon glyphicon-flag"> </span>  Tipo: <c:out value="${loginBean.tipo}"/></a></li>
                                                                         <li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
-		      						<li><a href="#">Home</a></li>
-		      						
 	    						</ul>
 	  						</div>
     					</div>

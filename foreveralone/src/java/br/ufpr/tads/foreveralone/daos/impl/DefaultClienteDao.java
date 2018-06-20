@@ -154,6 +154,41 @@ public class DefaultClienteDao implements ClienteDao {
         return null;
     }
     
+    public List<Cliente> listarClientesPorCpfOrName(String CPF) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idCliente, nomeCliente, CPF, datanasc, email, escolaridade, dataCad, senha, Endereco_idEndereco, Atributo_IdAtributoPreferencia, Atributo_IdAtributoAtributo FROM Cliente WHERE isRemovido = 0 AND CPF LIKE ? OR isRemovido = 0 AND nomeCliente LIKE ? ");
+            ps.setString(1, "%"+CPF+"%");
+            ps.setString(2, "%"+CPF+"%");
+            rs = ps.executeQuery();
+            List<Cliente> list = new ArrayList<Cliente>();
+            while (rs.next()) {
+                Endereco endereco = new Endereco();
+                Atributo caracteristicas = new Atributo();
+                Atributo preferencias = new Atributo();
+                Cliente cliente = new Cliente();
+                cliente.setId(rs.getInt("IdCliente"));
+                cliente.setCpf(rs.getString("CPF"));
+                cliente.setDataCad(rs.getDate("dataCad"));
+                cliente.setDataNasc(rs.getDate("datanasc"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setEscolaridade(rs.getString("escolaridade"));
+                cliente.setNome(rs.getString("nomeCliente"));
+                caracteristicas.setIdAtributo(rs.getInt("Atributo_IdAtributoAtributo"));
+                preferencias.setIdAtributo(rs.getInt("Atributo_IdAtributoPreferencia"));
+                endereco.setId(rs.getInt("Endereco_idEndereco"));
+                cliente.setCaracteristicas(caracteristicas);
+                cliente.setPreferencias(preferencias);
+                cliente.setEndereço(endereco);
+                list.add(cliente);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public List<Cliente> listarClientesPorPreferencia(Atributo p) {
         PreparedStatement ps = null;

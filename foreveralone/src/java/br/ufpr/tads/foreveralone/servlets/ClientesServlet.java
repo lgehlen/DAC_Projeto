@@ -161,7 +161,12 @@ public class ClientesServlet extends HttpServlet {
                 response.sendRedirect("clientes?action=pares");
             } else {
                 List<Cliente> clientes = new ArrayList<Cliente>();
+                
                 clientes = this.clientesFacade.listarClientes();
+                
+                if(request.getParameter("search") != null)
+                    clientes = this.clientesFacade.listarClientesPorCpfOrName(request.getParameter("search"));
+                
                 for (Cliente cliente : clientes) {
                     Atributo p = new Atributo();
                     Atributo c = new Atributo();

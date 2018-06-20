@@ -39,4 +39,6 @@ public interface ClienteDao {
     public Endereco buscarEnderecoPorId(int id);
     
     public void alteraEndereco(Endereco e);
+    
+    public List<Cliente> listarClientesPorCpfOrName(String CPF);
 }
