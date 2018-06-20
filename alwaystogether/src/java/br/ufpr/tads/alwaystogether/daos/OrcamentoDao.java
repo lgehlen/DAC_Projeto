@@ -15,8 +15,6 @@ import java.util.List;
 public interface OrcamentoDao {
     void criarOrcamento(Orcamento orcamento);
     
-    void deletarOrcamento(int id);
-    
     void atualizarOrcamento(Orcamento orcamento);
     
     List<Orcamento> buscarOrcamentos();
