@@ -56,7 +56,7 @@ public class DefaultClienteDao implements ClienteDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("INSERT INTO forever.endereco (rua,CEP,numero,Cidade_idCidade)"
+            st = con.prepareStatement("INSERT INTO forever.Endereco (rua,CEP,numero,Cidade_idCidade)"
                     + " VALUES(?,?,?,?)");
             st.setString(1, e.getRua());
             st.setString(2, e.getCep());

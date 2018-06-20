@@ -14,6 +14,9 @@ import br.ufpr.tads.foreveralone.beans.Login;
 import br.ufpr.tads.foreveralone.facades.impl.FuncionarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -48,6 +51,7 @@ public class FuncionarioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
         funcionarioFacade = new FuncionarioFacade();
+        MessageDigest md;
         
         if (session == null || ((Login) session.getAttribute("loginBean") == null)) {
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
@@ -119,7 +123,14 @@ public class FuncionarioServlet extends HttpServlet {
                 funcionario.setCpf(request.getParameter("CPF"));
                 funcionario.setEmail(request.getParameter("E-mail"));
                 funcionario.setNome(request.getParameter("Nome"));
-                funcionario.setSenha(request.getParameter("Senha"));
+                
+                try {
+                    md = MessageDigest.getInstance("MD5");
+                    BigInteger hash = new BigInteger(1, md.digest(request.getParameter("Senha").getBytes()));
+                    funcionario.setSenha(hash.toString(16));
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
                 try {

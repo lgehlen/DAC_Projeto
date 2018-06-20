@@ -37,7 +37,7 @@ public class DefaultFuncionarioDao implements FuncionarioDao {
         ResultSet rs = null;
         try {
             st = con.prepareStatement("INSERT INTO forever.Funcionario (nomeFuncionario, datanasc, email, senha)"
-                                        + " VALUES (?, ?, ?, ?)");
+                                        + " VALUES (?, ?, ?, MD5('?')");
             st.setString(1, funcionario.getNome());
             st.setDate(2, new java.sql.Date(funcionario.getDataNasc().getTime()));
             st.setString(3, funcionario.getEmail());

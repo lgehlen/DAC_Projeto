@@ -10,6 +10,11 @@ import br.ufpr.tads.foreveralone.facades.impl.ClienteFacade;
 import br.ufpr.tads.foreveralone.facades.impl.FuncionarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +47,15 @@ public class LoginServlet extends HttpServlet {
         ClienteFacade cliente = new ClienteFacade();
         
         String email = request.getParameter("email");
-        String sen = request.getParameter("password"); 
+            
+        String sen = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            BigInteger hash = new BigInteger(1, md.digest(request.getParameter("password").getBytes()));
+            sen = hash.toString(16);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         Login login = new Login();
         login =  funcionario.getLogin(email, sen);
