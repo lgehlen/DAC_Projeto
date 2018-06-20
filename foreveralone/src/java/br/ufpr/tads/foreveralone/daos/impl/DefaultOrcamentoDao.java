@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,7 +47,29 @@ public class DefaultOrcamentoDao implements OrcamentoDao {
 
     @Override
     public List<Orcamento> buscarOrcamentos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idOrcamento, Status, detalhamentoStd, detalhamentoPrm, emailFuncionario, emailCliente1, emailCliente2, valorPremium, valorStandard FROM forever.Orcamento");
+            rs = ps.executeQuery();
+            List<Orcamento> list = new ArrayList<Orcamento>();
+            while (rs.next()) {
+                Orcamento o = new Orcamento();
+                o.setDetalhamentoPremium(rs.getString("detalhamentoPrm"));
+                o.setDetalhamentoStandard(rs.getString("detalhamentoStd"));
+                o.setEmailCliente(rs.getString("emailCliente1"));
+                o.setEmailFuncionario(rs.getString("emailFuncionario"));
+                o.setId(rs.getInt("idOrcamento"));
+                o.setStatus(rs.getString("Status"));
+                o.setValorPremium(rs.getFloat("valorPremium"));
+                o.setValorStandard(rs.getFloat("valorStandard"));
+                list.add(o);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -56,7 +79,30 @@ public class DefaultOrcamentoDao implements OrcamentoDao {
 
     @Override
     public List<Orcamento> buscarOrcamentos(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idOrcamento, Status, detalhamentoStd, detalhamentoPrm, emailFuncionario, emailCliente1, emailCliente2, valorPremium, valorStandard FROM forever.Orcamento");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            List<Orcamento> list = new ArrayList<Orcamento>();
+            while (rs.next()) {
+                Orcamento o = new Orcamento();
+                o.setDetalhamentoPremium(rs.getString("detalhamentoPrm"));
+                o.setDetalhamentoStandard(rs.getString("detalhamentoStd"));
+                o.setEmailCliente(rs.getString("emailCliente1"));
+                o.setEmailFuncionario(rs.getString("emailFuncionario"));
+                o.setId(rs.getInt("idOrcamento"));
+                o.setStatus(rs.getString("Status"));
+                o.setValorPremium(rs.getFloat("valorPremium"));
+                o.setValorStandard(rs.getFloat("valorStandard"));
+                list.add(o);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     
 }

@@ -90,44 +90,23 @@
     	<!--Aba Orçamento-->
     	<div class="tab-content">
     		<div class="tab-pane active in" id="first-tab">
-    			<div class="panel-group" id="accordion">
+                                <c:forEach items="${orcamentos}" var="x" varStatus="i">
+                                <div class="panel-group" id="accordion">
 					<div class="panel panel-default">
 					    <div class="panel-heading">
 					        <h4 class="panel-title">
-					          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Orçamento 1</a>
+					          <a data-toggle="collapse" data-parent="#accordion" href="#collapse${i}">Orçamento ${i}</a>
 					        </h4>
 					    </div>
-					      <div id="collapse1" class="panel-collapse collapse in">
-					        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-					        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+					      <div id="collapse${i}" class="panel-collapse collapse in">
+					        <div class="panel-body">${x.detalhamentoStandard}</div>
 					      </div>
 				    </div>
-				    <div class="panel panel-default">
-				      <div class="panel-heading">
-				        <h4 class="panel-title">
-				          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Orçamento 2</a>
-				        </h4>
-				      </div>
-				      <div id="collapse2" class="panel-collapse collapse">
-				        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-				        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-				      </div>
-				    </div>
-				    <div class="panel panel-default">
-				      <div class="panel-heading">
-				        <h4 class="panel-title">
-				          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Orçamento 3</a>
-				        </h4>
-				      </div>
-				      <div id="collapse3" class="panel-collapse collapse">
-				        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-				        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-				      </div>
-				    </div>
-  				</div> 
+  				</div>
+                                </c:forEach>
+                                <c:if test="${empty orcamentos}">
+                                    <h5>Você não possui pedidos de casamento</h5>
+                                </c:if>
     		</div>
     		<!--Aba solicitar-->
     		<div class="tab-pane" id="second-tab">
@@ -159,12 +138,7 @@
 								<!--Coleta o numero de Convidados  -->
 								<div class="col-sm-3"> <h4>Convidados:</h4></div>
 								<div class="col-sm-5">
-									<select name="teste"  class="form-control"  size="1"  onchange="" >
-				    				<option value="*">Escolha uma Opção</option>
-			    					<option value=" ">1</option>
-			    					<option value=" ">2</option>
-			   						<option value=" ">3</option>
-								</select>
+                                                                    <input class="form-control" name="numero" type="text"  id="input_numero" placeholder="Numero" required>
 								</div>
 							</div> 
 							<br>
