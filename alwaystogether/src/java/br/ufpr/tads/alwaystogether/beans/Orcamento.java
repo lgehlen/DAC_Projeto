@@ -26,6 +26,8 @@ public class Orcamento {
     
     private String emailCliente;
     
+    private String emailCliente2;
+    
     private int idUltimoFucnionario;
     
     private int idPedido;
@@ -168,5 +170,19 @@ public class Orcamento {
      */
     public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
+    }
+
+    /**
+     * @return the emailCliente2
+     */
+    public String getEmailCliente2() {
+        return emailCliente2;
+    }
+
+    /**
+     * @param emailCliente2 the emailCliente2 to set
+     */
+    public void setEmailCliente2(String emailCliente2) {
+        this.emailCliente2 = emailCliente2;
     }
 }
