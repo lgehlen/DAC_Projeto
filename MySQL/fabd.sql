@@ -120,6 +120,7 @@ CREATE TABLE IF NOT EXISTS `forever`.`Encontro` (
   `local` VARCHAR(45) NOT NULL,
   `data` DATE NOT NULL,
   `horario` TIME NOT NULL,
+  `isAceito` INT NULL,
   `Endereco_idEndereco` INT NOT NULL,
   `Cliente_idCliente` INT NOT NULL,
   `Cliente_idCliente1` INT NOT NULL,

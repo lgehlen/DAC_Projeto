@@ -22,7 +22,15 @@ public interface EncontroDao {
     
     List<Encontro> listarEncontros(int id);
     
+    List<Encontro> listarEncontrosMarcados(int id);
+    
     Encontro buscarEncontroPorId(int id);
     
     void listaNegra(int idcliente, int idbloqueado);
+    
+    List<Integer> buscaListaNegra(int id);
+    
+    void aceitarEncontro(int id);
+    
+    void concluirEncontro(int id);
 }
