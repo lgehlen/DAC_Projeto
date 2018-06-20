@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("loginBean", login);
             RequestDispatcher rd = request.
-                            getRequestDispatcher("/manter-pedidos.jsp");
+                            getRequestDispatcher("/PedidoServlet");
                     request.setAttribute("login", login);
                     rd.forward(request, response);    
         }else
