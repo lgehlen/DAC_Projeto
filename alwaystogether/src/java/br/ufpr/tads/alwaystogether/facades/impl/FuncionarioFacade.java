@@ -6,6 +6,7 @@
 package br.ufpr.tads.alwaystogether.facades.impl;
 
 import br.ufpr.tads.alwaystogether.beans.Funcionario;
+import br.ufpr.tads.alwaystogether.beans.Login;
 import br.ufpr.tads.alwaystogether.daos.FuncionarioDao;
 import br.ufpr.tads.alwaystogether.daos.impl.DefaultFuncionarioDao;
 import java.util.List;
@@ -64,6 +65,11 @@ return getFuncionarioDao().listarFuncionarios();
      */
     public static void setFuncionarioDao(FuncionarioDao aFuncionarioDao) {
         funcionarioDao = aFuncionarioDao;
+    }
+    
+        
+    public Login getLogin(String email, String senha) {
+         return funcionarioDao.buscarPorLogin(email, senha);
     }
 
 }

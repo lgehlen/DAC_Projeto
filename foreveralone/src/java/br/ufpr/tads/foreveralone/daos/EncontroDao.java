@@ -23,4 +23,6 @@ public interface EncontroDao {
     List<Encontro> listarEncontros(int id);
     
     Encontro buscarEncontroPorId(int id);
+    
+    void listaNegra(int idcliente, int idbloqueado);
 }

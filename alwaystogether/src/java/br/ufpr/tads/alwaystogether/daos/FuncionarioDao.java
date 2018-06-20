@@ -6,6 +6,7 @@
 package br.ufpr.tads.alwaystogether.daos;
 
 import br.ufpr.tads.alwaystogether.beans.Funcionario;
+import br.ufpr.tads.alwaystogether.beans.Login;
 import java.util.List;
 
 /**
@@ -24,4 +25,6 @@ public interface FuncionarioDao {
     Funcionario buscarFuncionariosPorId(int id);
     
     Funcionario buscarPorEmail(String email);
+
+    public Login buscarPorLogin(String email, String senha);
 }
