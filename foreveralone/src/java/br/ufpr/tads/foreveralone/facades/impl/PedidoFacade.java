@@ -59,7 +59,7 @@ public class PedidoFacade {
         orcamentoDao = aOrcamentoDao;
     }
 
-    public List<Orcamento> buscarOrcamentos(int id) {
+    public List<Orcamento> buscarOrcamentos(String id) {
         return getOrcamentoDao().buscarOrcamentos(id);
     }
 }

@@ -35,7 +35,7 @@
 	  		<br>
 	  		<div id="cabe">
 	  			<!--LOGO -->
-	  			<div class="col-sm-1"> <a href="/foreveralone/logine"><img id="logo" src="logo-forever.png" alt="logo"></a></div>
+	  			<div class="col-sm-1"><img id="logo" src="logo-forever.png" alt="logo"></div>
 		  		<div class="container">
 					<div class="row">
 		  				<div class="col-sm-2">
@@ -70,7 +70,6 @@
 	   							<ul class="dropdown-menu">
 	   								<li><a> <span class="glyphicon glyphicon-user"></span>   ${loginBean.nome}   </a></li>
 	   								<li><a> <span class=" glyphicon glyphicon-flag"></span>  Tipo: ${loginBean.tipo}  </a></li>
-		      						<li><a href="#">Home</a></li>
 		      						<li class="divider"></li>
 		      						<li><a href="logout"><span class="glyphicon glyphicon-share"></span> Sair</a></li> 
 	    						</ul>

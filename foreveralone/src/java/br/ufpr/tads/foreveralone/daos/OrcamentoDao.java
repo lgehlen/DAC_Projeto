@@ -26,4 +26,5 @@ public interface OrcamentoDao {
     public List<Orcamento> buscarOrcamentos(int id);
     
     public List<Orcamento> buscaOrcamentos();
+    public List<Orcamento> buscarOrcamentos(String email);
 }

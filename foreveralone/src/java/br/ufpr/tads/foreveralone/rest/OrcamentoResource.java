@@ -28,7 +28,7 @@ import javax.ws.rs.core.Response;
  *
  * @author lgehlen
  */
-@Path("orcamento")
+@Path("orcamentoresource")
 public class OrcamentoResource {
     
     @Context
@@ -55,19 +55,15 @@ public class OrcamentoResource {
         .build(); 
     }
     
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getOrcamentos() {
-        List<Orcamento> orcamentos = pedidoFacade.buscaOrcamentos();
-            
-        GenericEntity<List<Orcamento>> lista =
-        new GenericEntity<List<Orcamento>>(orcamentos) {};
+    @POST
+    @Path("/update")  
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updtOrcamento(Orcamento orcamento) {
+        this.pedidoFacade.atualizarOrcamento(orcamento);
         return Response
         .ok(Response.Status.OK)
-        .entity(lista)
-        .build();
+        .build(); 
     }
-    
 
 }   
 

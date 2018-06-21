@@ -119,12 +119,13 @@ public class DefaultOrcamentoDao implements OrcamentoDao {
     }
 
     @Override
-    public List<Orcamento> buscarOrcamentos(int id) {
+    public List<Orcamento> buscarOrcamentos(String id) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idOrcamento, Status, detalhamentoStd, detalhamentoPrm, emailFuncionario, emailCliente1, emailCliente2, valorPremium, valorStandard FROM forever.Orcamento");
-            ps.setInt(1, id);
+            ps = con.prepareStatement("SELECT idOrcamento, Status, detalhamentoStd, detalhamentoPrm, emailFuncionario, emailCliente1, emailCliente2, valorPremium, valorStandard FROM forever.Orcamento WHERE emailCliente1 = ? OR emailCliente2 = ? ");
+            ps.setString(1, id);
+            ps.setString(2, id);
             rs = ps.executeQuery();
             List<Orcamento> list = new ArrayList<Orcamento>();
             while (rs.next()) {
@@ -172,6 +173,11 @@ public class DefaultOrcamentoDao implements OrcamentoDao {
         }
         return null;
     
+    }
+
+    @Override
+    public List<Orcamento> buscarOrcamentos(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
