@@ -33,11 +33,6 @@ public class PedidoFacade {
     }
 
     
-    public void deletarOrcamento(int id) {
-        getOrcamentoDao().deletarOrcamento(id);
-    }
-
-    
     public void atualizarOrcamento(Orcamento orcamento) {
         getOrcamentoDao().atualizarOrcamento(orcamento);
     }
