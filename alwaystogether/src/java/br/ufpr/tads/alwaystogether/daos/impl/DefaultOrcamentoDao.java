@@ -100,10 +100,11 @@ public class DefaultOrcamentoDao implements OrcamentoDao {
 
     @Override
     public Orcamento buscarOrcamentoPorId(int id) {
+        System.out.println("Id: " + id);
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = con.prepareStatement("SELECT idOrcamento, Status, detalhamentoStd, detalhamentoPrm, emailFuncionario, emailCliente1, emailCliente2 FROM always.Orcamento WHERE idOrcamento = ?");
+            ps = con.prepareStatement("SELECT idOrcamento, Status, detalhamentoStd, detalhamentoPrm, emailFuncionario, emailCliente1, emailCliente2, valorPremium, valorStandard FROM always.Orcamento WHERE idOrcamento = ?");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             List<Orcamento> list = new ArrayList<Orcamento>();
@@ -111,13 +112,13 @@ public class DefaultOrcamentoDao implements OrcamentoDao {
                 Orcamento o = new Orcamento();
                 o.setDetalhamentoPremium(rs.getString("detalhamentoPrm"));
                 o.setDetalhamentoStandard(rs.getString("detalhamentoStd"));
-                o.setEmailCliente(rs.getString("emailCliente"));
+                o.setEmailCliente(rs.getString("emailCliente1"));
                 o.setEmailCliente2(rs.getString("emailCliente2"));
                 o.setEmailFuncionario(rs.getString("emailFuncionario"));
                 o.setId(rs.getInt("idOrcamento"));
                 o.setStatus(rs.getString("Status"));
-                o.setValorPremium(rs.getDouble("emailCliente2"));
-                o.setValorStandard(rs.getDouble("emailCliente2"));
+                o.setValorPremium(rs.getDouble("valorPremium"));
+                o.setValorStandard(rs.getDouble("valorStandard"));
                 list.add(o);
             }
             return list.get(0);

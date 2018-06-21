@@ -5,6 +5,7 @@
  */
 package br.ufpr.tads.alwaystogether.daos.impl;
 
+import br.ufpr.tads.alwaystogether.beans.Orcamento;
 import br.ufpr.tads.alwaystogether.beans.Pedido;
 import br.ufpr.tads.alwaystogether.daos.ConnectionFactory;
 import br.ufpr.tads.alwaystogether.daos.PedidoDao;
@@ -33,7 +34,7 @@ public class DefaultPedidoDao implements PedidoDao {
             st = con.prepareStatement("INSERT INTO always.Pedido (statusOrcanento, Orcamento_idOrcamento)"
                                         + " VALUES (?, ?)");
             st.setString(1, pedido.getStatusOrcamento());
-            st.setInt(2, pedido.getIdOrcamento());
+            st.setInt(2, pedido.getIdOrcamento().getId());
             
             st.executeUpdate();
         } catch (SQLException ex) {
@@ -48,7 +49,7 @@ public class DefaultPedidoDao implements PedidoDao {
         try {
             st = con.prepareStatement("UPDATE always.Pedido SET statusOrcanento = ?, Orcamento_idOrcamento =  ? WHERE idPedido = ?");
             st.setString(1, pedido.getStatusOrcamento());
-            st.setInt(2, pedido.getIdOrcamento());
+            st.setInt(2, pedido.getIdOrcamento().getId());
             st.setInt(3, pedido.getIdPedido());
             st.executeUpdate();
         } catch (SQLException ex) {
@@ -66,8 +67,11 @@ public class DefaultPedidoDao implements PedidoDao {
             List<Pedido> list = new ArrayList<Pedido>();
             while (rs.next()) {
                 Pedido pedido = new Pedido();
+                Orcamento orcamento = new Orcamento();
+                orcamento.setId(rs.getInt("Orcamento_idOrcamento"));
                 pedido.setStatusOrcamento(rs.getString("statusOrcamento"));
-                pedido.setIdOrcamento(rs.getInt("idPedido"));
+                pedido.setIdOrcamento(orcamento);
+                pedido.setIdPedido(rs.getInt("idPedido"));
                 
                 list.add(pedido);
             }
@@ -89,9 +93,10 @@ public class DefaultPedidoDao implements PedidoDao {
             List<Pedido> list = new ArrayList<Pedido>();
             while (rs.next()) {
                 Pedido pedido = new Pedido();
+                Orcamento orcamento = new Orcamento();
+                orcamento.setId(rs.getInt("idPedido"));
                 pedido.setStatusOrcamento(rs.getString("statusOrcamento"));
-                pedido.setIdOrcamento(rs.getInt("idPedido"));
-                
+                pedido.setIdOrcamento(orcamento);
                 list.add(pedido);
             }
             return list.get(0);

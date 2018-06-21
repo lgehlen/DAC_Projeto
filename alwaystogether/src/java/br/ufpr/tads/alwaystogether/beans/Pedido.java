@@ -12,7 +12,7 @@ package br.ufpr.tads.alwaystogether.beans;
 public class Pedido {
     private int idPedido;
     
-    private int idOrcamento;
+    private Orcamento idOrcamento;
     
     private String statusOrcamento;
 
@@ -33,16 +33,6 @@ public class Pedido {
     /**
      * @return the idOrcamento
      */
-    public int getIdOrcamento() {
-        return idOrcamento;
-    }
-
-    /**
-     * @param idOrcamento the idOrcamento to set
-     */
-    public void setIdOrcamento(int idOrcamento) {
-        this.idOrcamento = idOrcamento;
-    }
 
     /**
      * @return the statusOrcamento
@@ -56,5 +46,13 @@ public class Pedido {
      */
     public void setStatusOrcamento(String statusOrcamento) {
         this.statusOrcamento = statusOrcamento;
+    }
+
+    public Orcamento getIdOrcamento() {
+        return idOrcamento;
+    }
+
+    public void setIdOrcamento(Orcamento idOrcamento) {
+        this.idOrcamento = idOrcamento;
     }
 }

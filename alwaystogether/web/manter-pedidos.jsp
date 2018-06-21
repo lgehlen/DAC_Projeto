@@ -74,7 +74,7 @@
 	</header>
 	<div class="container" id="container-manter-pedidos">
 		<div class="row">
-			<div class="col-sm-4"><h2>Pedidos</h2></div>
+			<div class="col-sm-4"><h2>Pedidos Abertos</h2></div>
 		</div>
 		<table class="table table-striped" style="text-align:center;">
 			<thead>
@@ -86,143 +86,329 @@
     			</tr>
   			</thead>
 		  <tbody>
-                   <c:forEach items="${pedidos}" var="p">
+                   <c:forEach items="${pedidosAbertos}" var="p">
 		    <tr>
-		      <th id="colunas-pesquisa" scope="row"><h4>${p}</h4></th>
+                        <th id="colunas-pesquisa" scope="row"><h4>${p.idOrcamento.emailCliente}</h4> e <h4>${p.idOrcamento.emailCliente2}</h4></th>
 		      <td><h4>${p.statusOrcamento}</h4></td> 	
 		      <td>
 		      	<!-- Todos os modais lá embaixo -->
-		      	<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#excluifunc1">
-					<span class="glyphicon glyphicon-trash"></span>
-				</button>
-		      	<a href="detalhe-orcamento.html" type="button" class="btn btn-default btn-lg">
-	          		<span class="glyphicon glyphicon-info-sign"></span></a>
-	        	</a>
-	        	<button  type="button" class="btn btn-default btn-lg">
-	          		<span class="glyphicon glyphicon-cloud-download"></span>
+		      	
+		      	<button type="button" data-toggle="modal" data-target="#myModal${p.idPedido}" class="btn btn-default btn-lg">
+	          		<span class="glyphicon glyphicon-info-sign"></span>
 	        	</button>
+                        
+                        <div class="modal fade" id="myModal${p.idPedido}" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Detalhes</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <h4>Email cliente 1</h4>
+                                                    ${p.idOrcamento.emailCliente}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Email cliente 2</h4>
+                                                    ${p.idOrcamento.emailCliente2}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Detalhamento Standard</h4>
+                                                    ${p.idOrcamento.detalhamentoStandard}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Detalhamento Premium</h4>
+                                                    ${p.idOrcamento.detalhamentoPremium}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Valor Standard</h4>
+                                                    ${p.idOrcamento.valorStandard}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Valor Premium</h4>
+                                                    ${p.idOrcamento.valorPremium}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Email Funcionario</h4>
+                                                    ${p.idOrcamento.emailFuncionario}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Status</h4>
+                                                    ${p.idOrcamento.status}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+	        	<a href="PedidoServlet?action=formNew&id=${p.idPedido}" type="button" class="btn btn-default btn-lg">
+	          		<span class="glyphicon glyphicon-plus-sign"></span>
+	        	</a>
 		      </td>
 		    </tr>
                    </c:forEach>
 		  </tbody>
 		</table>
-		<div class="row" id="glypicon-encontro">
-	      	<div class="col-sm-11"></div>
-	    </div>
-	    <!-- Modais de Exclusão -->
-	    	<!-- Cada Modal possui um ID PrÓPRIO!!! -->
-	  				<div class="modal fade" id="excluifunc1" role="dialog">
-	    				<div class="modal-dialog">
-	      			<!-- Modal content-->
-	      					<div class="modal-content">
-	        					<div class="modal-header">
-	          						<button type="button" class="close" data-dismiss="modal">&times;</button>
-	          						<h4 class="modal-title">Aviso do Sistema!</h4>
-	        					</div>
-	        					<div class="modal-body">
-	        						<div class="row">
-		        						<div class="col-sm-1"></div>
-		        						<div class="col-sm-9" style="text-align: center;">
-		         							<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
-		         						</div>
-		         						<div class="col-sm-2"></div>
-		         					</div>
-		         					<div class="row">
-		        						<div class="col-sm-3"></div>
-		        						<div class="col-sm-2" id="popup-gerenciausuarios">
-		         							<button  type="button" class="btn btn-default btn-sm">
-	          									<span class="glyphicon glyphicon-ok"></span>
-	        								</button>
-		         						</div>
-		         						<div class="col-sm-2"></div>
-		        						<div class="col-sm-2" id="popup-gerenciausuarios">
-		         							<button  type="button" class="btn btn-default btn-sm">
-	          									<span class="glyphicon glyphicon-remove"></span>
-	        								</button>
-		         						</div>
-		         					</div>
-	        					</div>
-	        					<div class="modal-footer">
-	          						<button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
-	        					</div>
-	      					</div>
-	    				</div>
-	  				</div>
-					<div class="modal fade" id="excluifunc2" role="dialog">
-		    			<div class="modal-dialog">
-		      			<!-- Modal content-->
-		      				<div class="modal-content">
-		        				<div class="modal-header">
-		          					<button type="button" class="close" data-dismiss="modal">&times;</button>
-		          					<h4 class="modal-title">Aviso do Sistema!</h4>
-		        				</div>
-		        				<div class="modal-body">
-		        					<div class="row">
-			        					<div class="col-sm-1"></div>
-			        					<div class="col-sm-9" style="text-align: center;">
-			         						<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
-			         					</div>
-			         					<div class="col-sm-2"></div>
-			         				</div>
-			         				<div class="row">
-			        					<div class="col-sm-3"></div>
-			        					<div class="col-sm-2" id="popup-gerenciausuarios">
-			         						<button  type="button" class="btn btn-default btn-sm">
-		          								<span class="glyphicon glyphicon-ok"></span>
-		        							</button>
-			         					</div>
-			         					<div class="col-sm-2"></div>
-			        					<div class="col-sm-2" id="popup-gerenciausuarios">
-			         						<button  type="button" class="btn btn-default btn-sm">
-		          								<span class="glyphicon glyphicon-remove"></span>
-		        							</button>
-			         					</div>
-			         				</div>
-		        				</div>
-		        					<div class="modal-footer">
-		          						<button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
-		        					</div>
-		      					</div>
-		    			</div>
-		  			</div>
-		  			<div class="modal fade" id="excluifunc3" role="dialog">
-		    			<div class="modal-dialog">
-		      			<!-- Modal content-->
-		      				<div class="modal-content">
-		        				<div class="modal-header">
-		          					<button type="button" class="close" data-dismiss="modal">&times;</button>
-		          					<h4 class="modal-title">Aviso do Sistema!</h4>
-		        				</div>
-		        				<div class="modal-body">
-		        					<div class="row">
-			        					<div class="col-sm-1"></div>
-			        					<div class="col-sm-9" style="text-align: center;">
-			         						<h3><span class="glyphicon glyphicon-alert"> Excluir Funcionário?</span></h3>
-			         					</div>
-			         					<div class="col-sm-2"></div>
-			         				</div>
-			         				<div class="row">
-			        					<div class="col-sm-3"></div>
-			        					<div class="col-sm-2" id="popup-gerenciausuarios">
-			         						<button  type="button" class="btn btn-default btn-sm">
-		          								<span class="glyphicon glyphicon-ok"></span>
-		        							</button>
-			         					</div>
-			         					<div class="col-sm-2"></div>
-			        					<div class="col-sm-2" id="popup-gerenciausuarios">
-			         						<button  type="button" class="btn btn-default btn-sm">
-		          								<span class="glyphicon glyphicon-remove"></span>
-		        							</button>
-			         					</div>
-			         				</div>
-		        				</div>
-		        					<div class="modal-footer">
-		          						<button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
-		        					</div>
-		      					</div>
-		    			</div>
-		  			</div>
-				</div>
+		
+		  			
+	</div>
+        
+        <div class="container" id="container-manter-pedidos">
+		<div class="row">
+			<div class="col-sm-4"><h2>Pedidos Orçados</h2></div>
+		</div>
+		<table class="table table-striped" style="text-align:center;">
+			<thead>
+   				<tr>
+			      <th id="colunas-pesquisa" scope="col">Clientes</th>
+			      <th id="colunas-pesquisa" scope="col">Status</th>
+			      <th id="colunas-pesquisa" scope="col">Opções</th>
+
+    			</tr>
+  			</thead>
+		  <tbody>
+                   <c:forEach items="${pedidosOrcados}" var="p">
+		    <tr>
+		      <th id="colunas-pesquisa" scope="row"><h4>${p.idOrcamento.emailCliente}</h4> e <h4>${p.idOrcamento.emailCliente2}</h4></th>
+                      <td><h4>${p.statusOrcamento}</h4></td> 	
+		      <td>
+		      	<!-- Todos os modais lá embaixo -->
+		      	
+		      	<button type="button" data-toggle="modal" data-target="#myModal${p.idPedido}" class="btn btn-default btn-lg">
+	          		<span class="glyphicon glyphicon-info-sign"></span>
+	        	</button>
+                        
+                        <div class="modal fade" id="myModal${p.idPedido}" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Detalhes</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <h4>Email cliente 1</h4>
+                                                    ${p.idOrcamento.emailCliente}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Email cliente 2</h4>
+                                                    ${p.idOrcamento.emailCliente2}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Detalhamento Standard</h4>
+                                                    ${p.idOrcamento.detalhamentoStandard}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Detalhamento Premium</h4>
+                                                    ${p.idOrcamento.detalhamentoPremium}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Valor Standard</h4>
+                                                    ${p.idOrcamento.valorStandard}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Valor Premium</h4>
+                                                    ${p.idOrcamento.valorPremium}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Email Funcionario</h4>
+                                                    ${p.idOrcamento.emailFuncionario}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Status</h4>
+                                                    ${p.idOrcamento.status}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+		      </td>
+		    </tr>
+                   </c:forEach>
+		  </tbody>
+		</table>
+		
+		  			
+	</div>
+        
+        <div class="container" id="container-manter-pedidos">
+		<div class="row">
+			<div class="col-sm-4"><h2>Pedidos Rejeitados</h2></div>
+		</div>
+		<table class="table table-striped" style="text-align:center;">
+			<thead>
+   				<tr>
+			      <th id="colunas-pesquisa" scope="col">Clientes</th>
+			      <th id="colunas-pesquisa" scope="col">Status</th>
+			      <th id="colunas-pesquisa" scope="col">Opções</th>
+
+    			</tr>
+  			</thead>
+		  <tbody>
+                   <c:forEach items="${pedidosRejeitados}" var="p">
+		    <tr>
+		      <th id="colunas-pesquisa" scope="row"><h4>${p.idOrcamento.emailCliente}</h4> e <h4>${p.idOrcamento.emailCliente2}</h4></th>
+		      <td><h4>${p.statusOrcamento}</h4></td> 	
+		      <td>
+		      	<!-- Todos os modais lá embaixo -->
+		      	
+		      	<button type="button" data-toggle="modal" data-target="#myModal${p.idPedido}" class="btn btn-default btn-lg">
+	          		<span class="glyphicon glyphicon-info-sign"></span>
+	        	</button>
+                        
+                        <div class="modal fade" id="myModal${p.idPedido}" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Detalhes</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <h4>Email cliente 1</h4>
+                                                    ${p.idOrcamento.emailCliente}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Email cliente 2</h4>
+                                                    ${p.idOrcamento.emailCliente2}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Detalhamento Standard</h4>
+                                                    ${p.idOrcamento.detalhamentoStandard}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Detalhamento Premium</h4>
+                                                    ${p.idOrcamento.detalhamentoPremium}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Valor Standard</h4>
+                                                    ${p.idOrcamento.valorStandard}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Valor Premium</h4>
+                                                    ${p.idOrcamento.valorPremium}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Email Funcionario</h4>
+                                                    ${p.idOrcamento.emailFuncionario}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Status</h4>
+                                                    ${p.idOrcamento.status}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+		      </td>
+		    </tr>
+                   </c:forEach>
+		  </tbody>
+		</table>
+		
+		  			
+	</div>
+        
+        <div class="container" id="container-manter-pedidos">
+		<div class="row">
+			<div class="col-sm-4"><h2>Pedidos Aceitos</h2></div>
+		</div>
+		<table class="table table-striped" style="text-align:center;">
+			<thead>
+   				<tr>
+			      <th id="colunas-pesquisa" scope="col">Clientes</th>
+			      <th id="colunas-pesquisa" scope="col">Status</th>
+			      <th id="colunas-pesquisa" scope="col">Opções</th>
+
+    			</tr>
+  			</thead>
+		  <tbody>
+                   <c:forEach items="${pedidosAceitos}" var="p">
+		    <tr>
+		      <th id="colunas-pesquisa" scope="row"><h4>${p.idOrcamento.emailCliente}</h4> e <h4>${p.idOrcamento.emailCliente2}</h4></th>
+		      <td><h4>${p.statusOrcamento}</h4></td> 	
+		      <td>
+		      	<!-- Todos os modais lá embaixo -->
+		      	
+		      	<button type="button" data-toggle="modal" data-target="#myModal${p.idPedido}" class="btn btn-default btn-lg">
+	          		<span class="glyphicon glyphicon-info-sign"></span>
+	        	</button>
+                        
+                        <div class="modal fade" id="myModal${p.idPedido}" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Detalhes</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <h4>Email cliente 1</h4>
+                                                    ${p.idOrcamento.emailCliente}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Email cliente 2</h4>
+                                                    ${p.idOrcamento.emailCliente2}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Detalhamento Standard</h4>
+                                                    ${p.idOrcamento.detalhamentoStandard}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Detalhamento Premium</h4>
+                                                    ${p.idOrcamento.detalhamentoPremium}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Valor Standard</h4>
+                                                    ${p.idOrcamento.valorStandard}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Valor Premium</h4>
+                                                    ${p.idOrcamento.valorPremium}
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-5">
+                                                    <h4>Email Funcionario</h4>
+                                                    ${p.idOrcamento.emailFuncionario}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <h4>Status</h4>
+                                                    ${p.idOrcamento.status}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+		      </td>
+		    </tr>
+                   </c:forEach>
+		  </tbody>
+		</table>
+		
+		  			
 	</div>
 	<br>
 	<footer class="container-fluid text-center">

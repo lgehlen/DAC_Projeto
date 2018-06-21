@@ -81,6 +81,14 @@ INSERT INTO Pedido(idPedido, statusOrcamento, Orcamento_idOrcamento) values
 (1111,'Rejeitado',2),
 (4545,'Aprovado',3);
 
+INSERT INTO Orcamento(`Status`, `detalhamentoStd`, `detalhamentoPrm`, `emailFuncionario`, `emailCliente1`, `emailCliente2`,`valorPremium`,`valorStandard`) values
+('Aberto','Dados do orçamento Standard','Dados do orçamento Premium','ronaldPow@gmail.com','tadeu.rocha@gmail.com','mirian.goncalves@gmail.com',50.000, 42.000),
+('Orcado','O padrão está de acordo com o o convecional','Com o premium há cotagem de preços mais adequadas ao seu bolso','ronaldPow@gmail.com','wagner.mendoca@gmail.com','mara.deg@gmail.com',50.000, 42.000);
+
+INSERT INTO Pedido(idPedido, statusOrcamento, Orcamento_idOrcamento) values
+(1232,'Aberto',4),
+(1141,'Orcado',5);
+
 INSERT INTO Orcamento_Funcionario(Orcamento_idOrcamento, Funcionario_idFuncionario) values
 (1, 140455),
 (2, 140455),

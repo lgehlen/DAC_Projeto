@@ -12,6 +12,7 @@ import br.ufpr.tads.alwaystogether.facades.impl.FuncionarioFacade;
 import br.ufpr.tads.alwaystogether.facades.impl.PedidoFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,7 +56,30 @@ public class PedidoServlet extends HttpServlet {
         
             if (action == null || action.isEmpty() || action.equals("list")) {
                 List<Pedido> pedidos = this.pedidoFacade.listarPedidos();
-                request.setAttribute("pedidos", pedidos);
+                List<Pedido> pedidosOrcados = new ArrayList<>();
+                List<Pedido> pedidosAbertos = new ArrayList<>();
+                List<Pedido> pedidosRejeitados = new ArrayList<>();
+                List<Pedido> pedidosAceitos = new ArrayList<>();
+                
+                for(Pedido pedido : pedidos){
+                    Pedido p = new Pedido();
+                    p = pedido;
+                    p.setIdOrcamento(pedidoFacade.buscarOrcamentoPorId(pedido.getIdOrcamento().getId()));
+                    if(p.getStatusOrcamento().equals("Aberto")){
+                        pedidosAbertos.add(p);
+                    }else if(p.getStatusOrcamento().equals("Orcado")){
+                        pedidosOrcados.add(p);
+                    }else if(p.getStatusOrcamento().equals("Rejeitado")){
+                        pedidosRejeitados.add(p);
+                    }else if(p.getStatusOrcamento().equals("Aprovado")){
+                        pedidosAceitos.add(p);
+                    }
+                }
+                
+                request.setAttribute("pedidosAbertos", pedidosAbertos);
+                request.setAttribute("pedidosOrcados", pedidosOrcados);
+                request.setAttribute("pedidosRejeitados", pedidosRejeitados);
+                request.setAttribute("pedidosAceitos", pedidosAceitos);
                 url = "/manter-pedidos.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
@@ -99,6 +123,14 @@ public class PedidoServlet extends HttpServlet {
                 //this.funcionarioFacade.criarFuncionario(funcionario);
                 
                 response.sendRedirect("/alwaystogether/FuncionarioServlet");
+            }
+            else if (action.equals("formNew")){
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                url = "/enviar-orcamento.jsp";  
+                request.setAttribute("idPedido", id);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
     }
 
