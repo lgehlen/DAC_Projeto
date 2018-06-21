@@ -14,20 +14,34 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cadastrp de Usuarios</title>
-        
+	<title>Cadastro de Usuarios</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
-        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="js/custom.js"> </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 
-
+<script>
+    $(document).ready(function ($) { 
+        var $mascaracpf = $("#input_cpf");
+        $mascaracpf.mask('000.000.000-00', {reverse: true});
+    });
+    
+    $(document).ready(function ($) { 
+        var $cep = $("#input_cep");
+        $cep.mask('00000-000', {reverse: true});
+    });
+    
+    $(document).ready(function ($) { 
+        var $cep = $("#input_numero");
+        $cep.mask('00000', {reverse: true});
+    });
+  
+</script>
 	
 </head>
 

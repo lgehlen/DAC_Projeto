@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+		<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +22,13 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+<script>
+    $(document).ready(function ($) { 
+        var $mascaracpf = $("#input_cpf");
+        $mascaracpf.mask('000.000.000-00', {reverse: true});
+    });
+</script>
 </head>
 
 <body >
