@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.tads.foreveralone.rest;
+package br.ufpr.tads.alwaystogether.rest;
 
-import br.ufpr.tads.foreveralone.beans.Orcamento;
-import br.ufpr.tads.foreveralone.facades.impl.ClienteFacade;
-import br.ufpr.tads.foreveralone.facades.impl.PedidoFacade;
+import br.ufpr.tads.alwaystogether.beans.Orcamento;
+import br.ufpr.tads.alwaystogether.facades.impl.PedidoFacade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +37,9 @@ public class OrcamentoResource {
      * Creates a new instance of AtendimentoResource
      */
     private PedidoFacade pedidoFacade;
-    private ClienteFacade clienteFacade;
     
     public OrcamentoResource() {
         this.pedidoFacade = new PedidoFacade();
-        this.clienteFacade = new ClienteFacade();
     }
     
     @POST
@@ -50,6 +47,16 @@ public class OrcamentoResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response setOrcamento(Orcamento orcamento) {
         this.pedidoFacade.criarOrcamento(orcamento);
+        return Response
+        .ok(Response.Status.OK)
+        .build(); 
+    }
+    
+    @POST
+    @Path("/atualizar")  
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updtOrcamento(Orcamento orcamento) {
+        this.pedidoFacade.atualizarOrcamento(orcamento);
         return Response
         .ok(Response.Status.OK)
         .build(); 
