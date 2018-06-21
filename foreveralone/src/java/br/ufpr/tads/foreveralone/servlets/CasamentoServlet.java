@@ -30,6 +30,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -69,7 +73,8 @@ public class CasamentoServlet extends HttpServlet {
         int formType = 0;
         
             if (action == null || action.isEmpty() || action.equals("list")) {
-                List<Orcamento> o = this.pedidoFacade.buscarOrcamentos(login.getId());
+                Cliente c = this.clienteFacade.buscarClientePorId(login.getId());
+                List<Orcamento> o = this.pedidoFacade.buscarOrcamentos(c.getEmail());
                 request.setAttribute("orcamentos", o);
                 url = "/casamento.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -117,8 +122,7 @@ public class CasamentoServlet extends HttpServlet {
                 rd.forward(request, response);
             }
             else if (action.equals("new")){
-                final int id = Integer.parseInt(request.getParameter("id"));
-                Orcamento o = this.pedidoFacade.buscarOrcamentoPorId(id);
+                Orcamento o = new Orcamento();
                 Cliente c = this.clienteFacade.buscarClientePorId(login.getId());
                 
                 String email = request.getParameter("Email");
@@ -132,6 +136,15 @@ public class CasamentoServlet extends HttpServlet {
                 o.setDetalhamentoStandard("Email: "+email+" Data: "+date+" Hora: "+hora+" Convidados: "+convidados+" Local: "+local+" Padre: "+padre+" Mel: "+mel);
                 o.setEmailCliente(c.getEmail());
                 o.setStatus("Aberto");
+                                
+                Client client = ClientBuilder.newClient();
+                client
+                    .target(
+                    "http://localhost:8080/alwaystogether/webresources/orcamentoresource/inserir")
+                    .request(MediaType.APPLICATION_JSON)
+                    .post(Entity.json(o));
+                
+                response.sendRedirect("orcamento");
                 
                 this.pedidoFacade.criarOrcamento(o);
                 

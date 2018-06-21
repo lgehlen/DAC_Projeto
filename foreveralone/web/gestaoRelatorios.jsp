@@ -9,11 +9,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gestão de Relatorios</title>
+	<title>gestão_de_relatorios</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
@@ -105,39 +105,12 @@
 		    </div>
 	     </div>
 	</div>
-	<br>
-	<footer id="footer">
-		<div id="estilorodape">
-	
-			<div class="row">
-				<div class="col-sm-6" id="controdape"><h5 >Conteudo X </h5>
-					<h5><a id="linksrodape" href="#"> Rasckspace</a></h5>
-					<h5><a id="linksrodape" href="#"> Rasckspace</a></h5>
-				</div>
-				<div class="col-sm-6" id="controdape"><h5 >EMPRESA</h5>
-					<h5> <a id="linksrodape" href="https://www.liguesite.com.br/sobre-nos/">Sobre</a></h5>
-					<h5> <a id="linksrodape" href="https://www.liguesite.com.br/blog/">Blog</a></h5>
-				</div>
-			</div>
-			<div class="rodapef">
-				<div class="row">
-					<div class="col-sm-2" ></div>
-					<div class="col-sm-2" >
-						<h4> 2018 © ForeverAlone Inc.</h4>
-					</div>
-					<div class="col-sm-2" >
-						<h5> <a id="linksrodape" href="#">Termos de Compromisso</a></h5>
-					</div>
-					<div class="col-sm-2" >
-						<h5>SAC:sac@forever.com.br</h5>
-					</div>
-				</div>
-				<br>
-			</div>
-		</div>
+		<br>
+	<footer class="container-fluid text-center">
+        <jsp:useBean id="configuracao" scope="application" class="br.ufpr.tads.foreveralone.beans.ConfigBean" />
+        <p>Em caso de problemas contactar o administrador: 
+            <jsp:getProperty name="configuracao" property="adminEmail" /> </p>
 	</footer>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -19,9 +19,26 @@
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 </head>
-
+<script>
+    $(document).ready(function ($) { 
+        var $mascaracpf = $("#input_cpf");
+        $mascaracpf.mask('000.000.000-00', {reverse: true});
+    });
+    
+    $(document).ready(function ($) { 
+        var $cep = $("#input_cep");
+        $cep.mask('00000-000', {reverse: true});
+    });
+    
+    $(document).ready(function ($) { 
+        var $numero = $("#input_numero");
+        $numero.mask('00000', {reverse: true});
+    });
+  
+</script>
 <body>
 	<br>
 	<br>
