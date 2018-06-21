@@ -65,7 +65,7 @@ public class PedidoServlet extends HttpServlet {
         if (action == null || action.isEmpty() || action.equals("list")) {
             Client client = ClientBuilder.newClient();
             Response resp = client
-                    .target("http://localhost:8080/foreveralone/webresources/orcamento")
+                    .target("http://localhost:8080/foreveralone/webresources/orcamentoresource")
                     .request(MediaType.APPLICATION_JSON)
                     .get();
             List<Orcamento> orcamentos
