@@ -27,7 +27,7 @@ import javax.ws.rs.core.Response;
  *
  * @author lgehlen
  */
-@Path("orcamento")
+@Path("orcamentoresource")
 public class OrcamentoResource {
     
     @Context
