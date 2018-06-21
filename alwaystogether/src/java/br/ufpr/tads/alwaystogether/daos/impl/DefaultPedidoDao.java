@@ -42,13 +42,18 @@ public class DefaultPedidoDao implements PedidoDao {
     }
 
     @Override
-    public void deletarPedido(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void atualizarPedido(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("UPDATE always.Pedido SET statusOrcanento = ?, Orcamento_idOrcamento =  ? WHERE idPedido = ?");
+            st.setString(1, pedido.getStatusOrcamento());
+            st.setInt(2, pedido.getIdOrcamento());
+            st.setInt(3, pedido.getIdPedido());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
+	}  
     }
 
     @Override

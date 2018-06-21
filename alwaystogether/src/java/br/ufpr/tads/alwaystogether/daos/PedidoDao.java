@@ -14,9 +14,7 @@ import java.util.List;
  */
 public interface PedidoDao {
     void criarPedido(Pedido pedido);
-    
-    void deletarPedido(Pedido pedido);
-    
+        
     void atualizarPedido(Pedido pedido);
     
     List<Pedido> listarPedidos();
