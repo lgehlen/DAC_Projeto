@@ -145,5 +145,33 @@ public class DefaultOrcamentoDao implements OrcamentoDao {
         }
         return null;
     }
+
+    @Override
+    public List<Orcamento> buscaOrcamentos() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement("SELECT idOrcamento, status, detalhamentoStd, detalhamentoPrm, valorStd, valorPrm, emailFuncionario, emailCliente, idUltimoFuncionario, idPedido, Cliente_idCliente, Cliente_idCliente1 FROM forever.Orcamento");
+            rs = ps.executeQuery();
+            List<Orcamento> list = new ArrayList<Orcamento>();
+            while (rs.next()) {
+                Orcamento o = new Orcamento();
+                o.setDetalhamentoPremium(rs.getString("detalhamentoPrm"));
+                o.setDetalhamentoStandard(rs.getString("detalhamentoStd"));
+                o.setEmailCliente(rs.getString("emailCliente"));
+                o.setEmailFuncionario(rs.getString("emailFuncionario"));
+                o.setId(rs.getInt("idOrcamento"));
+                o.setStatus(rs.getString("Status"));
+                o.setValorPremium(rs.getFloat("valorPrm"));
+                o.setValorStandard(rs.getFloat("valorStd"));
+                list.add(o);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    
+    }
     
 }

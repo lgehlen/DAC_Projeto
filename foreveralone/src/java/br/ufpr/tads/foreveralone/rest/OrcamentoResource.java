@@ -54,6 +54,20 @@ public class OrcamentoResource {
         .ok(Response.Status.OK)
         .build(); 
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOrcamentos() {
+        List<Orcamento> orcamentos = pedidoFacade.buscaOrcamentos();
+            
+        GenericEntity<List<Orcamento>> lista =
+        new GenericEntity<List<Orcamento>>(orcamentos) {};
+        return Response
+        .ok(Response.Status.OK)
+        .entity(lista)
+        .build();
+    }
+    
 
 }   
 

@@ -31,6 +31,10 @@ public class PedidoFacade {
     public void criarOrcamento(Orcamento orcamento) {
         getOrcamentoDao().criarOrcamento(orcamento);
     }
+    
+    public void criaOrcamento(Orcamento orcamento) {
+        getOrcamentoDao().criaOrcamento(orcamento);
+    }
 
     
     public void atualizarOrcamento(Orcamento orcamento) {

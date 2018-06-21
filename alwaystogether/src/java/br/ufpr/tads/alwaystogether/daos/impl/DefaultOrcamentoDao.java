@@ -127,5 +127,27 @@ public class DefaultOrcamentoDao implements OrcamentoDao {
         }
         return null;
     }
+
+    @Override
+    public void criaOrcamento(Orcamento orcamento) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("INSERT INTO always.Orcamento (Status, detalhamentoStd, detalhamentoPrm, emailFuncionario, emailCliente1, emailCliente2, valorPremium, valorStandard, idOrcamento)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?)");
+            st.setString(1, orcamento.getStatus());
+            st.setString(2, orcamento.getDetalhamentoStandard());
+            st.setString(3, orcamento.getDetalhamentoPremium());
+            st.setString(4, orcamento.getEmailFuncionario());
+            st.setString(5, orcamento.getEmailCliente());
+            st.setString(6, "Email");
+            st.setDouble(7, orcamento.getValorPremium());
+            st.setDouble(8, orcamento.getValorStandard());
+            st.setInt(9, orcamento.getId());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DefaultOrcamentoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

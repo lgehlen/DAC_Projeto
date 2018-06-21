@@ -40,6 +40,10 @@ public class PedidoFacade {
     public Orcamento buscarOrcamentoPorId(int id) {
         return getOrcamentoDao().buscarOrcamentoPorId(id);
     }
+    
+    public List<Orcamento> buscaOrcamentos(){
+        return orcamentoDao.buscaOrcamentos();
+    }
 
     /**
      * @return the orcamentoDao
