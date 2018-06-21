@@ -69,7 +69,8 @@ public class CasamentoServlet extends HttpServlet {
         int formType = 0;
         
             if (action == null || action.isEmpty() || action.equals("list")) {
-                List<Orcamento> o = this.pedidoFacade.buscarOrcamentos(login.getId());
+                Cliente c = this.clienteFacade.buscarClientePorId(login.getId());
+                List<Orcamento> o = this.pedidoFacade.buscarOrcamentos(c.getEmail());
                 request.setAttribute("orcamentos", o);
                 url = "/casamento.jsp";  
                 RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -117,8 +118,7 @@ public class CasamentoServlet extends HttpServlet {
                 rd.forward(request, response);
             }
             else if (action.equals("new")){
-                final int id = Integer.parseInt(request.getParameter("id"));
-                Orcamento o = this.pedidoFacade.buscarOrcamentoPorId(id);
+                Orcamento o = new Orcamento();
                 Cliente c = this.clienteFacade.buscarClientePorId(login.getId());
                 
                 String email = request.getParameter("Email");
