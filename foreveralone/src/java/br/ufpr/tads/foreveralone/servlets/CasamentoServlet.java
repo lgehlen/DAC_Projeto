@@ -30,6 +30,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -132,6 +136,15 @@ public class CasamentoServlet extends HttpServlet {
                 o.setDetalhamentoStandard("Email: "+email+" Data: "+date+" Hora: "+hora+" Convidados: "+convidados+" Local: "+local+" Padre: "+padre+" Mel: "+mel);
                 o.setEmailCliente(c.getEmail());
                 o.setStatus("Aberto");
+                                
+                Client client = ClientBuilder.newClient();
+                client
+                    .target(
+                    "http://localhost:8080/alwaystogether/webresources/orcamentoresource/inserir")
+                    .request(MediaType.APPLICATION_JSON)
+                    .post(Entity.json(o));
+                
+                response.sendRedirect("orcamento");
                 
                 this.pedidoFacade.criarOrcamento(o);
                 
