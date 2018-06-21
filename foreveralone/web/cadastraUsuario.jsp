@@ -107,17 +107,17 @@
                     <form name="dadoscliente" action="clientes?action=new" method= "post" >
                             <div class="row">
                                     <div class="col-sm-6">
-                                            <input class="form-control" name="nome" type="text"  id="input_nome" placeholder="Nome" required>
+                                            <input class="form-control" name="nome" type="text"  id="input_nome" placeholder="Nome"  maxlength="50" required>
                                     </div>
                                     <div class="col-sm-6">
-                                            <input class="form-control" name="email" type="text"  id="input_email" placeholder="Email" required>
+                                            <input class="form-control" name="email" type="text"  id="input_email" placeholder="Email"  maxlength="50" required>
                                     </div>
 
                             </div>
                             <br>
                             <div class="row">
                                     <div class="col-sm-4">
-                                            <input class="form-control" name="cpf" type="text"  id="input_cpf" placeholder="CPF" required>
+                                            <input class="form-control" name="cpf" type="text"  id="input_cpf" placeholder="CPF"  maxlength="11" required>
                                     </div>
                                     <div class="col-sm-3">
                                             <select name="escolaridade" class="form-control" id="ensino" size="1" required> 
@@ -155,7 +155,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input class="form-control" name="rua" type="text"  id="input_rua" placeholder="Rua" required>
+                                        <input class="form-control" name="rua" type="text"  id="input_rua" placeholder="Rua"  maxlength="50" required>
                                     </div>
                             </div>
                                 <div class="row">
