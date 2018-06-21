@@ -54,6 +54,16 @@ public class OrcamentoResource {
         .ok(Response.Status.OK)
         .build(); 
     }
+    
+    @POST
+    @Path("/update")  
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updtOrcamento(Orcamento orcamento) {
+        this.pedidoFacade.atualizarOrcamento(orcamento);
+        return Response
+        .ok(Response.Status.OK)
+        .build(); 
+    }
 
 }   
 
