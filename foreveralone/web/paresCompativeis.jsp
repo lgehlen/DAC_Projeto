@@ -62,7 +62,7 @@
 		  					</a>
 		  				</div>
 		  				<div class="col-sm-2">
-		  					<a href="festas.html" class="btn btn-primary btn-lg">
+		  					<a href="eventos" class="btn btn-primary btn-lg">
 		  						<span class="glyphicon glyphicon-fire"></span> Festas
 		  					</a>
 		  				</div>

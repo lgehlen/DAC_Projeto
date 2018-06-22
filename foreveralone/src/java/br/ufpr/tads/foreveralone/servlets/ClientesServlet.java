@@ -610,7 +610,7 @@ public class ClientesServlet extends HttpServlet {
             }
 
             url = "/encontros.jsp";
-            request.setAttribute("eventos", this.eventoFacade.buscarEventosPorCliente(login.getId()));
+            //request.setAttribute("eventos", this.eventoFacade.buscarEventosPorCliente(login.getId()));
             request.setAttribute("encontros", encontros);
             request.setAttribute("encontrosMarcados", encontrosMarcados);
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);

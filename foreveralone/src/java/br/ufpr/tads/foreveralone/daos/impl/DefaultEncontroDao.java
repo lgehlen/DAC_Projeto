@@ -32,14 +32,15 @@ public class DefaultEncontroDao implements EncontroDao {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = con.prepareStatement("INSERT INTO forever.Encontro (data, horario, Endereco_idEndereco, local, Cliente_idCliente, Cliente_idCliente1 )"
-                    + " VALUES (?, ?, ?, ?, ?, ?)");
+            st = con.prepareStatement("INSERT INTO forever.Encontro (data, horario, Endereco_idEndereco, local, Cliente_idCliente, Cliente_idCliente1, isAceito )"
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?)");
             st.setDate(1, new java.sql.Date(encontro.getData().getTime()));
             st.setString(2, encontro.getHorario());
             st.setInt(3, encontro.getLocal().getId());
             st.setString(4, encontro.getLocal().getRua());
             st.setInt(5, encontro.getIdCliente1().getId());
             st.setInt(6, encontro.getIdCliente2().getId());
+            st.setInt(7, 0);
 
             st.executeUpdate();
         } catch (SQLException ex) {
